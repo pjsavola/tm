@@ -5,9 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,7 +17,6 @@ public class Game extends JPanel {
 	private ActionHandler actionHandler = new ActionHandler(this);
 	private Player currentPlayer = new Player();
 	private Planet planet = new Planet();
-	private int round = 1;
 
 	public Game() {
 		setPreferredSize(new Dimension(700, 700));
