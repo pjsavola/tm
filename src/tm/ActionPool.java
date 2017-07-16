@@ -1,11 +1,16 @@
 package tm;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ActionPool {
+	private final static Font font = new Font("Arial", Font.BOLD, 12);
 	private final Game game;
 	
 	public ActionPool(final Game game) {
@@ -40,5 +45,27 @@ public class ActionPool {
 		       .filter(action -> action.check())
 		       .forEach(action -> actionMap.put(action.getKey(), action));
 		return actionMap;
+	}
+	
+	public void render(final Graphics g) {
+    	final Color oldColor = g.getColor();
+		g.setFont(font);
+		renderText(g, "(e)nergy", 9);
+		renderText(g, "(m)eteorite", 8);
+		renderText(g, "(w)ater", 7);
+		renderText(g, "(g)reenery", 6);
+		renderText(g, "(c)ity", 5);
+		renderText(g, "(p)ass", 4);
+		renderText(g, "(u)ndo", 2);
+		renderText(g, "(r)edo", 1);
+		g.setColor(oldColor);
+	}
+	
+	private static void renderText(final Graphics g, final String text, final int i) {
+		g.setColor(new Color(0xFFFFFF));
+		final FontMetrics metrics = g.getFontMetrics();
+		int w = metrics.stringWidth(text);
+        int h = metrics.getHeight();
+        g.drawString(text, 698 - w, 698 - h * i);
 	}
 }

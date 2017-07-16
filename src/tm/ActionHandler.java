@@ -93,6 +93,7 @@ public class ActionHandler {
     	if (currentAction != null) {
     		currentAction.paint(g);
     	}
+    	pool.render(g);
 	}
 	
 	public KeyListener getKeyListener() {
