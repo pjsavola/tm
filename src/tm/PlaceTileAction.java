@@ -57,7 +57,7 @@ public class PlaceTileAction implements Action {
 					}
 				}
 				if (type == Tile.Type.GREENERY) {
-					final Set<Tile> freeAdjacentTiles = game.getFreeAdjacentTiles();
+					final Set<Tile> freeAdjacentTiles = game.getCurrentPlayer().getFreeAdjacentTiles();
 					if (!freeAdjacentTiles.isEmpty() && !freeAdjacentTiles.contains(targetTile)) {
 						System.err.println("Greenery not adjacent to your other tiles");
 						return;

@@ -76,18 +76,6 @@ public class Game extends JPanel {
     	round += delta;
     }
     
-    public Set<Tile> getFreeAdjacentTiles() {
-    	final Set<Tile> freeAdjacentTiles = new HashSet<>();
-    	grid.values()
-    	    .stream()
-    	    .filter(tile -> tile.getOwner() == currentPlayer)
-    	    .forEach(tile -> tile.getNeighbors()
-    	    		             .stream()
-    	    		             .filter(neighborTile -> neighborTile.getOwner() == null)
-    	    		             .forEach(neighborTile -> freeAdjacentTiles.add(neighborTile)));
-    	return freeAdjacentTiles; 
-    }
-    
 	public static void main(String[] args) {
         JFrame f = new JFrame();
         Game g = new Game();

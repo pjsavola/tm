@@ -76,7 +76,13 @@ public class Tile {
 	}
 	
 	public void setOwner(final Player player) {
-		this.owner = player;
+		if (player == null && owner != null) {
+			owner.ownedTiles.remove(this);
+		}
+		owner = player;
+		if (player != null) {
+			player.ownedTiles.add(this);
+		}
 	}
 	
 	public Player getOwner() {

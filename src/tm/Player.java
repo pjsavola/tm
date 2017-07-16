@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Player {
 	private final static Font font = new Font("Arial", Font.BOLD, 12);
@@ -11,6 +14,7 @@ public class Player {
 	private Resources income = new Resources(0);
 	private int rating = 20;
 	private final Color color = new Color(0xFF0000);
+	final Set<Tile> ownedTiles = new HashSet<>();
 	
 	public Color getColor() {
 		return color;
@@ -35,6 +39,35 @@ public class Player {
 	public Resources getIncome() {
 		return income.combine(new Resources(rating));
 	}
+
+	public int getPoints() {
+		final AtomicLong total = new AtomicLong(rating);
+		ownedTiles
+			.stream()
+			.filter(tile -> tile.getType() == Tile.Type.CITY)
+			.forEach(tile -> {
+				total.addAndGet(tile
+					.getNeighbors()
+					.stream()
+					.filter(neighborTile -> neighborTile.getType() == Tile.Type.GREENERY)
+					.count());
+			});
+		total.addAndGet(ownedTiles
+			.stream()
+			.filter(tile -> tile.getType() == Tile.Type.GREENERY)
+			.count());
+		return total.intValue();
+	}
+	
+    public Set<Tile> getFreeAdjacentTiles() {
+    	final Set<Tile> freeAdjacentTiles = new HashSet<>();
+    	ownedTiles.forEach(tile -> tile
+    		.getNeighbors()
+    	    .stream()
+    	    .filter(neighborTile -> neighborTile.getOwner() == null)
+    	    .forEach(neighborTile -> freeAdjacentTiles.add(neighborTile)));
+    	return freeAdjacentTiles; 
+    }
 	
 	public void render(final Graphics g) {
 		final Color oldColor = g.getColor();
@@ -46,7 +79,7 @@ public class Player {
 		renderText(g, "Energy", resources.energy, income.energy, 5, 0x6600FF);
 		renderText(g, "Heat", resources.heat, income.heat, 6, 0xFF9900);
 		renderText(g, "Rating", rating, 0, 7, 0x0000FF);
-		renderText(g, "Points", rating, 0, 8, 0x00FFFF);
+		renderText(g, "Points", getPoints(), 0, 8, 0x00FFFF);
         g.setColor(oldColor);
 	}
 	
