@@ -15,6 +15,9 @@ public class ActionPool {
 	public Map<Character, Action> getActionMap() {
 		final Map<Character, Action> actionMap = new HashMap<>();
 		List<Action> actions = new ArrayList<>();
+		actions.add(new ActionChain('e',
+			new ResourceDeltaAction(new Resources(-11), game),
+			new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0), game)));
 		actions.add(new ActionChain('m',
 			new ResourceDeltaAction(new Resources(-14), game),
 			new AddTemperatureAction(game)));

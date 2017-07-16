@@ -16,16 +16,16 @@ public class SwitchRoundAction extends InstantAction {
 
 	@Override
 	public void complete() {
-		game.adjustRound(1);
+		game.getPlanet().adjustRound(1);
 	}
 
 	@Override
 	public void undo() {
-		game.adjustRound(-1);
+		game.getPlanet().adjustRound(-1);
 	}
 
 	@Override
 	public void redo() {
-		game.adjustRound(1);
+		game.getPlanet().adjustRound(1);
 	}
 }

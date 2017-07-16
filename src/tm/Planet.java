@@ -10,6 +10,7 @@ public class Planet {
 	private int waterCount = 9;
 	private int temperature = -30;
 	private int oxygen = 0;
+	private int round = 1;
 	
 	public int getWaterCount() {
 		return waterCount;
@@ -39,12 +40,17 @@ public class Planet {
 		return temperature - temperatureBeforeAdjusting;
 	}
 	
+    public void adjustRound(final int delta) {
+    	round += delta;
+    }
+	
 	public void render(final Graphics g) {
     	final Color oldColor = g.getColor();
 		g.setFont(font);
-		renderText(g, "Temperature", temperature, 1, getColor(-30, temperature, 8, new Color(0x6666FF), new Color(0xFF3300)));
-		renderText(g, "Oxygen", oxygen, 2, getColor(0, oxygen, 14, new Color(0x8B4513), new Color(0xBBBBFF)));
-		renderText(g, "Water left", waterCount, 3, new Color(0x0000FF));
+		renderText(g, "Round", round, 1, new Color(0xFFFFFF));
+		renderText(g, "Temperature", temperature, 2, getColor(-30, temperature, 8, new Color(0x6666FF), new Color(0xFF3300)));
+		renderText(g, "Oxygen", oxygen, 3, getColor(0, oxygen, 14, new Color(0x8B4513), new Color(0xBBBBFF)));
+		renderText(g, "Water left", waterCount, 4, new Color(0x0000FF));
 		g.setColor(oldColor);
 	}
 	

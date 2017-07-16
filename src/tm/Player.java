@@ -37,7 +37,8 @@ public class Player {
 	}
 	
 	public Resources getIncome() {
-		return income.combine(new Resources(rating));
+		final int leftOverEnergy = resources.energy;
+		return income.combine(new Resources(rating, 0, 0, 0, -leftOverEnergy, leftOverEnergy));
 	}
 
 	public int getPoints() {

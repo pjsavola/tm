@@ -72,10 +72,6 @@ public class Game extends JPanel {
     	return planet;
     }
     
-    public void adjustRound(final int delta) {
-    	round += delta;
-    }
-    
 	public static void main(String[] args) {
         JFrame f = new JFrame();
         Game g = new Game();
