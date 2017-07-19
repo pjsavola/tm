@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 public class AddTemperatureAction implements Action {
 
+	private static final long serialVersionUID = 1L;
 	private final Game game;
 	private final Planet planet;
 	private final Player player;

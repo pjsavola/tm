@@ -13,6 +13,7 @@ import java.util.Set;
 
 public class PlaceTileAction implements Action {
 
+	private static final long serialVersionUID = 1L;
 	final Game game;
 	final Tile.Type type;
 	Point customCursorLocation;

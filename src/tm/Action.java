@@ -1,8 +1,9 @@
 package tm;
 
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public interface Action {
+public interface Action extends Serializable {
 	char getKey();
 	boolean check();
 	void begin();

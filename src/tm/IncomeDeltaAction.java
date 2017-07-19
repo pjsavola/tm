@@ -2,6 +2,7 @@ package tm;
 
 public class IncomeDeltaAction extends InstantAction {
 	
+	private static final long serialVersionUID = 1L;
 	final Resources delta;
 	private final Player player;
 	

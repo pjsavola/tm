@@ -5,6 +5,8 @@ import java.util.List;
 
 public class DrawAndKeepAction extends SelectCardsAction {
 
+	private static final long serialVersionUID = 1L;
+
     public DrawAndKeepAction(int amount, final Game game) {
         super(drawCards(amount, game), game);
     }

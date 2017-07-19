@@ -27,13 +27,13 @@ public class Card {
         final int h = metrics.getHeight();
         final int w = metrics.stringWidth(getTitle());
 
-        // Draw border
-        g.setColor(getBorderColor());
-        g.drawRect(x, y, WIDTH, TITLE_HEIGHT);
-
         // Draw background
         g.setColor(BG_COLOR);
         g.fillRect(x, y, WIDTH, TITLE_HEIGHT);
+        
+        // Draw border
+        g.setColor(getBorderColor());
+        g.drawRect(x, y, WIDTH, TITLE_HEIGHT);
 
         // Draw text
         g.setColor(TEXT_COLOR);

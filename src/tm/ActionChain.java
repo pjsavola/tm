@@ -6,12 +6,19 @@ import java.util.List;
 
 public class ActionChain implements Action {
 
+	private static final long serialVersionUID = 1L;
 	final char key;
+	final String description;
 	final Action[] actions;
 	final List<Action> finishedActions = new ArrayList<>();
 	
-	public ActionChain(final char key, final Action ... actions) {
+	public ActionChain(final Action ... actions) {
+		this(' ', "", actions);
+	}
+	
+	public ActionChain(final char key, final String description, final Action ... actions) {
 		this.key = key;
+		this.description = description;
 		this.actions = actions;
 	}
 	
@@ -23,6 +30,10 @@ public class ActionChain implements Action {
 	@Override
 	public char getKey() {
 		return key;
+	}
+	
+	public String getDescription() {
+		return description;
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package tm;
 
 public class AddWaterAction extends InstantAction {
 	
+	private static final long serialVersionUID = 1L;
 	private final Planet planet;
 	private final Player player;
 	

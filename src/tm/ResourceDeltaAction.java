@@ -2,6 +2,7 @@ package tm;
 
 public class ResourceDeltaAction extends InstantAction {
 
+	private static final long serialVersionUID = 1L;
 	final Resources delta;
 	final Player player;
 	

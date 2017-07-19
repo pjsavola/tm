@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 public abstract class InstantAction implements Action {
 	
+	private static final long serialVersionUID = 1L;
 	private final Game game;
 	
 	protected InstantAction(final Game game) {

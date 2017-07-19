@@ -16,6 +16,7 @@ public class ActionHandler {
 	private final ActionPool pool;
 	private Action currentAction;
 	private Game game;
+	private boolean cancelEnabled = true;
 	
 	public ActionHandler(final Game game) {
 		this.game = game;
@@ -23,8 +24,12 @@ public class ActionHandler {
 	}
 
 	public void actionFinished(final Action action) {
+		boolean undoable = true;
 		if (currentAction == action ||
 			(currentAction instanceof ActionChain && ((ActionChain) currentAction).complete(action))) {
+			if (action instanceof DrawAndKeepAction) {
+				undoable = false;
+			}
 			currentAction.complete();
 			undoStack.push(currentAction);
 			redoStack.clear();
@@ -37,7 +42,7 @@ public class ActionHandler {
 					while (pendingActionCount > 0) {
 						actions[--pendingActionCount] = undoStack.pop();
 					}
-					undoStack.push(new ActionChain(' ', actions));
+					undoStack.push(new ActionChain(actions));
 					pendingActions = null;
 					currentAction = null;
 				} else {
@@ -45,6 +50,9 @@ public class ActionHandler {
 					currentAction.begin();
 				}
 			}
+		}
+		if (!undoable) {
+			undoStack.clear();
 		}
 	}
 	
@@ -54,6 +62,18 @@ public class ActionHandler {
 			pendingActionCount = 0;
 		}
 		pendingActions.add(action);
+	}
+	
+	public void setCancelEnabled(final boolean flag) {
+		cancelEnabled = flag;
+	}
+
+	public boolean canUndo() {
+		return !undoStack.isEmpty() || (cancelEnabled && currentAction != null);
+	}
+	
+	public boolean canRedo() {
+		return !redoStack.isEmpty();
 	}
 	
 	public void undo() {
@@ -76,7 +96,10 @@ public class ActionHandler {
 		}
 	}
 	
-	public void cancel() {
+	public boolean cancel() {
+		if (!cancelEnabled) {
+			return false;
+		}
 		if (currentAction != null) {
 			currentAction.cancel();
 			currentAction = null;
@@ -87,6 +110,7 @@ public class ActionHandler {
 				pendingActions = null;
 			}
 		}
+		return true;
 	}
 	
 	public void render(final Graphics g) {
@@ -114,10 +138,11 @@ public class ActionHandler {
 				} else if (arg0.getKeyChar() == 'r') {
 					redo();
 				} else {
-					cancel();
-					currentAction = pool.getActionMap().get(arg0.getKeyChar());
-					if (currentAction != null) {
-						currentAction.begin();
+					if (cancel()) {
+						currentAction = pool.getAction(arg0.getKeyChar());
+						if (currentAction != null) {
+							currentAction.begin();
+						}
 					}
 				}
 				game.repaint();

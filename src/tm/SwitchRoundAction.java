@@ -2,6 +2,7 @@ package tm;
 
 public class SwitchRoundAction extends InstantAction {
 
+	private static final long serialVersionUID = 1L;
 	private final Game game;
 	
 	protected SwitchRoundAction(final Game game) {

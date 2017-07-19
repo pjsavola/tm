@@ -2,6 +2,7 @@ package tm;
 
 public class AddOxygenAction extends InstantAction {
 
+	private static final long serialVersionUID = 1L;
 	private int ratingIncrease;
 	private final Planet planet;
 	private final Player player;

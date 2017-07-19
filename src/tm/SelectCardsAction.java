@@ -10,9 +10,12 @@ import java.util.Set;
 
 public abstract class SelectCardsAction implements Action {
 
+	private static final long serialVersionUID = 1L;
+
     final Game game;
     final List<Card> selection;
     final Set<Card> selectedCards = new HashSet<>();
+    final boolean allowMultiple = false;
     Card cardToRender;
 
     final MouseListener mouseListener = new MouseListener() {
@@ -35,12 +38,18 @@ public abstract class SelectCardsAction implements Action {
             for (int i = 0; i < selection.size(); i++) {
                 if (x >= LEFT_MARGIN && x <= LEFT_MARGIN + Card.WIDTH && y >= TOP_MARGIN + CARD_HEIGHT * (i + 1) && y <= TOP_MARGIN + CARD_HEIGHT * (i + 2)) {
                     cardToRender = selection.get(i);
+                    if (!allowMultiple && !selectedCards.isEmpty() && !selectedCards.contains(cardToRender)) {
+                    	selectedCards.clear();
+                    }
                     if (!selectedCards.add(cardToRender)) {
                         selectedCards.remove(cardToRender);
                         cardToRender = null;
                     }
                     game.repaint();
                     break;
+                }
+                if (x >= LEFT_MARGIN && x <= LEFT_MARGIN + Card.WIDTH && y >= TOP_MARGIN + CARD_HEIGHT * (selection.size() + 2) && y <= TOP_MARGIN + CARD_HEIGHT * (selection.size() + 3)) {
+                	game.getActionHandler().actionFinished(SelectCardsAction.this);
                 }
             }
         }
@@ -63,21 +72,25 @@ public abstract class SelectCardsAction implements Action {
 
     @Override
     public void begin() {
+    	game.getActionHandler().setCancelEnabled(false);
         game.addMouseListener(mouseListener);
     }
 
     @Override
     public void cancel() {
-        game.removeMouseListener(mouseListener);
+    	throw new UnsupportedOperationException();
     }
 
     @Override
     public void complete() {
+    	game.getActionHandler().setCancelEnabled(true);
+    	game.removeMouseListener(mouseListener);
+    	game.repaint();
     }
 
     @Override
     public void undo() {
-
+    	
     }
 
     @Override
@@ -97,6 +110,8 @@ public abstract class SelectCardsAction implements Action {
             }
             selection.get(i).renderTitle(g, LEFT_MARGIN, TOP_MARGIN + CARD_HEIGHT * (i + 1));
         }
+        g.setColor(TITLE_COLOR);
+        g.drawString("Confirm", LEFT_MARGIN, TOP_MARGIN + CARD_HEIGHT * (selection.size() + 2) + 12);
         if (cardToRender != null) {
             cardToRender.renderTitle(g, LEFT_MARGIN + Card.WIDTH + VISIBLE_SPACING, TOP_MARGIN + CARD_HEIGHT);
         }
