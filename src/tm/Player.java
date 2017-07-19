@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -15,7 +17,8 @@ public class Player {
 	private int rating = 20;
 	private final Color color = new Color(0xFF0000);
 	final Set<Tile> ownedTiles = new HashSet<>();
-	
+	final List<Card> cards = new ArrayList<>();
+
 	public Color getColor() {
 		return color;
 	}
@@ -35,7 +38,11 @@ public class Player {
 	public void adjustIncome(final Resources delta) {
 		income.adjust(delta);
 	}
-	
+
+	public List<Card> getCards() {
+		return cards;
+	}
+
 	public Resources getIncome() {
 		final int leftOverEnergy = resources.energy;
 		return income.combine(new Resources(rating, 0, 0, 0, -leftOverEnergy, leftOverEnergy));

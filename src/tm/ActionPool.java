@@ -41,6 +41,7 @@ public class ActionPool {
 		actions.add(new ActionChain('p',
 			new ResourceDeltaAction(game.getCurrentPlayer().getIncome(), game),
 			new SwitchRoundAction(game)));
+		actions.add(new DrawAndKeepAction(10, game));
 		actions.stream()
 		       .filter(action -> action.check())
 		       .forEach(action -> actionMap.put(action.getKey(), action));
