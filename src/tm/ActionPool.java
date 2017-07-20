@@ -57,14 +57,13 @@ public class ActionPool {
 			renderText(g, action.getKey() + ": " + action.getDescription(), i--);
 		}
 		g.setColor(game.getActionHandler().canUndo() ? ENABLED_COLOR : DISABLED_COLOR);
-		if (game.getActionHandler().canUndo()) renderText(g, "u: Undo", 2);
+		renderText(g, "u: Undo", 2);
 		g.setColor(game.getActionHandler().canRedo() ? ENABLED_COLOR : DISABLED_COLOR);
-		if (game.getActionHandler().canRedo()) renderText(g, "r: Redo", 1);
+		renderText(g, "r: Redo", 1);
 		g.setColor(oldColor);
 	}
 	
 	private static void renderText(final Graphics g, final String text, final int i) {
-		g.setColor(new Color(0xFFFFFF));
 		final FontMetrics metrics = g.getFontMetrics();
 		int w = metrics.stringWidth(text);
         int h = metrics.getHeight();
