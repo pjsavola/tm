@@ -1,32 +1,37 @@
 package tm;
 
-public class SwitchRoundAction extends InstantAction {
-
-	private static final long serialVersionUID = 1L;
-	private final Game game;
-	
-	protected SwitchRoundAction(final Game game) {
-		super(game);
-		this.game = game;
-	}
+public class SwitchRoundAction implements Action {
 
 	@Override
-	public boolean check() {
+	public char getKey() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public boolean check(final Game game) {
 		return true;
 	}
 
 	@Override
-	public void complete() {
-		game.getPlanet().adjustRound(1);
-	}
+	public Completable begin(final Game game) {
+		return new InstantCompletable(game) {
+			@Override
+			public void complete() {
+				game.getCurrentPlayer().adjustResources(game.getCurrentPlayer().getIncome());
+				game.getPlanet().adjustRound(1);
+			}
 
-	@Override
-	public void undo() {
-		game.getPlanet().adjustRound(-1);
-	}
+			@Override
+			public void undo() {
+				game.getCurrentPlayer().adjustResources(game.getCurrentPlayer().getIncome().negate());
+				game.getPlanet().adjustRound(-1);
+			}
 
-	@Override
-	public void redo() {
-		game.getPlanet().adjustRound(1);
+			@Override
+			public void redo() {
+				game.getCurrentPlayer().adjustResources(game.getCurrentPlayer().getIncome());
+				game.getPlanet().adjustRound(1);
+			}
+		};
 	}
 }

@@ -1,34 +1,40 @@
 package tm;
 
-public class IncomeDeltaAction extends InstantAction {
+public class IncomeDeltaAction implements Action {
 	
-	private static final long serialVersionUID = 1L;
 	final Resources delta;
-	private final Player player;
 	
-	public IncomeDeltaAction(final Resources delta, final Game game) {
-		super(game);
+	public IncomeDeltaAction(final Resources delta) {
 		this.delta = delta;
-		player = game.getCurrentPlayer();
 	}
-
+	
 	@Override
-	public boolean check() {
+	public char getKey() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public boolean check(final Game game) {
 		return true;
 	}
 
 	@Override
-	public void complete() {
-		player.adjustIncome(delta);
-	}
+	public Completable begin(final Game game) {
+		return new InstantCompletable(game) {
+			@Override
+			public void complete() {
+				game.getCurrentPlayer().adjustIncome(delta);
+			}
 
-	@Override
-	public void undo() {
-		player.adjustIncome(delta.negate());
-	}
+			@Override
+			public void undo() {
+				game.getCurrentPlayer().adjustIncome(delta.negate());
+			}
 
-	@Override
-	public void redo() {
-		player.adjustIncome(delta);
+			@Override
+			public void redo() {
+				game.getCurrentPlayer().adjustIncome(delta);
+			}
+		};
 	}
 }

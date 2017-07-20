@@ -1,6 +1,10 @@
 package tm;
 
-public class Resources {
+import java.io.Serializable;
+
+public class Resources implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	int money;
 	int aluminum;
 	int titanium;

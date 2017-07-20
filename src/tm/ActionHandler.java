@@ -6,49 +6,63 @@ import java.awt.event.KeyListener;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ActionHandler {
-	private final Deque<Action> undoStack = new ArrayDeque<>();
-	private final Deque<Action> redoStack = new ArrayDeque<>();
+	private final Deque<Completable> undoStack = new ArrayDeque<>();
+	private final Deque<Completable> redoStack = new ArrayDeque<>();
 	private int pendingActionCount = 0;
 	private List<Action> pendingActions;
 	private final ActionPool pool;
-	private Action currentAction;
+	private Completable current;
 	private Game game;
 	private boolean cancelEnabled = true;
+	private Set<Completable> completedActions = new HashSet<>();
 	
 	public ActionHandler(final Game game) {
 		this.game = game;
 		this.pool = new ActionPool(game);
 	}
 
-	public void actionFinished(final Action action) {
-		boolean undoable = true;
-		if (currentAction == action ||
-			(currentAction instanceof ActionChain && ((ActionChain) currentAction).complete(action))) {
-			if (action instanceof DrawAndKeepAction) {
-				undoable = false;
+	public void completed(final Completable action) {
+		completedActions.add(action);
+		if (current != null) {
+			if (current.remove(completedActions)) {
+				onCompletion();
 			}
-			currentAction.complete();
-			undoStack.push(currentAction);
-			redoStack.clear();
-			if (pendingActions == null) {
-				currentAction = null;
-			} else {
-				pendingActionCount++;
-				if (pendingActions.isEmpty()) {
-					final Action[] actions = new Action[pendingActionCount];
-					while (pendingActionCount > 0) {
-						actions[--pendingActionCount] = undoStack.pop();
-					}
-					undoStack.push(new ActionChain(actions));
-					pendingActions = null;
-					currentAction = null;
-				} else {
-					currentAction = pendingActions.remove(0);
-					currentAction.begin();
+		}
+	}
+	
+	private void process(final Completable completable) {
+		if (completable != null) {
+			current = completable;
+			if (current.remove(completedActions)) {
+				onCompletion();
+			}
+		}
+	}
+	
+	private void onCompletion() {
+		boolean undoable = true;
+		current.complete();
+		undoStack.push(current);
+		redoStack.clear();
+		if (pendingActions == null) {
+			current = null;
+		} else {
+			pendingActionCount++;
+			if (pendingActions.isEmpty()) {
+				final Completable[] completables = new Completable[pendingActionCount];
+				while (pendingActionCount > 0) {
+					completables[--pendingActionCount] = undoStack.pop();
 				}
+				undoStack.push(new CompletableChain(game, completables));
+				pendingActions = null;
+				current = null;
+			} else {
+				process(pendingActions.remove(0).begin(game));
 			}
 		}
 		if (!undoable) {
@@ -69,7 +83,7 @@ public class ActionHandler {
 	}
 
 	public boolean canUndo() {
-		return !undoStack.isEmpty() || (cancelEnabled && currentAction != null);
+		return !undoStack.isEmpty() || (cancelEnabled && current != null);
 	}
 	
 	public boolean canRedo() {
@@ -77,19 +91,19 @@ public class ActionHandler {
 	}
 	
 	public void undo() {
-		if (currentAction != null) {
+		if (current != null) {
 			cancel();
 		} else if (!undoStack.isEmpty()) {
-			final Action lastAction = undoStack.pop();
+			final Completable lastAction = undoStack.pop();
 			lastAction.undo();
 			redoStack.push(lastAction);
 		}
 	}
 	
 	public void redo() {
-		if (currentAction == null) {
+		if (current == null) {
 			if (!redoStack.isEmpty()) {
-				final Action lastAction = redoStack.pop();
+				final Completable lastAction = redoStack.pop();
 				lastAction.redo();
 				undoStack.push(lastAction);
 			}
@@ -100,9 +114,9 @@ public class ActionHandler {
 		if (!cancelEnabled) {
 			return false;
 		}
-		if (currentAction != null) {
-			currentAction.cancel();
-			currentAction = null;
+		if (current != null) {
+			current.cancel();
+			current = null;
 			if (pendingActions != null) {
 				while (pendingActionCount-- > 0) {
 					undoStack.pop().undo();
@@ -114,8 +128,8 @@ public class ActionHandler {
 	}
 	
 	public void render(final Graphics g) {
-    	if (currentAction != null) {
-    		currentAction.paint(g);
+    	if (current != null) {
+    		current.paint(g);
     	}
     	pool.render(g);
 	}
@@ -139,10 +153,7 @@ public class ActionHandler {
 					redo();
 				} else {
 					if (cancel()) {
-						currentAction = pool.getAction(arg0.getKeyChar());
-						if (currentAction != null) {
-							currentAction.begin();
-						}
+						process(pool.getCompletable(arg0.getKeyChar()));
 					}
 				}
 				game.repaint();

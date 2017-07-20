@@ -3,7 +3,7 @@ package tm;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrawAndKeepAction extends SelectCardsAction {
+public class DrawAndKeepAction { /*extends SelectCardsAction {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,5 +23,5 @@ public class DrawAndKeepAction extends SelectCardsAction {
             selection.add(game.drawCard());
         }
         return selection;
-    }
+    }*/
 }

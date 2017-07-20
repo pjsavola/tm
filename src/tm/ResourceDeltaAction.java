@@ -1,34 +1,40 @@
 package tm;
 
-public class ResourceDeltaAction extends InstantAction {
+public class ResourceDeltaAction implements Action {
 
-	private static final long serialVersionUID = 1L;
 	final Resources delta;
-	final Player player;
 	
-	public ResourceDeltaAction(final Resources delta, final Game game) {
-		super(game);
+	public ResourceDeltaAction(final Resources delta) {
 		this.delta = delta;
-		this.player = game.getCurrentPlayer();
 	}
 	
 	@Override
-	public boolean check() {
-		return player.canAdjustResources(delta);
+	public char getKey() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public boolean check(final Game game) {
+		return game.getCurrentPlayer().canAdjustResources(delta);
 	}
 
 	@Override
-	public void complete() {
-		player.adjustResources(delta);
-	}
+	public Completable begin(final Game game) {
+		return new InstantCompletable(game) {
+			@Override
+			public void complete() {
+				game.getCurrentPlayer().adjustResources(delta);
+			}
 
-	@Override
-	public void undo() {
-		player.adjustResources(delta.negate());
-	}
+			@Override
+			public void undo() {
+				game.getCurrentPlayer().adjustResources(delta.negate());
+			}
 
-	@Override
-	public void redo() {
-		player.adjustResources(delta);
+			@Override
+			public void redo() {
+				game.getCurrentPlayer().adjustResources(delta);
+			}
+		};
 	}
 }

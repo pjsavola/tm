@@ -19,7 +19,7 @@ public class Game extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private final Map<Point, Tile> grid = new HashMap<>();
-	private ActionHandler actionHandler = new ActionHandler(this);
+	private final ActionHandler actionHandler;
 	private Player currentPlayer = new Player();
 	private Planet planet = new Planet();
 	private Deque<Card> deck = new ArrayDeque<>();
@@ -42,6 +42,7 @@ public class Game extends JPanel {
 		// Temporary bogus cards
 		for (int i = 0; i < 100; i++)
 			deck.add(new Card());
+		actionHandler = new ActionHandler(this);
 	}
 	
     public Tile getClosestTile(final int x, final int y) {

@@ -1,49 +1,43 @@
 package tm;
 
-public class AddOxygenAction extends InstantAction {
-
-	private static final long serialVersionUID = 1L;
-	private int ratingIncrease;
-	private final Planet planet;
-	private final Player player;
-	private boolean bonusTemperature;
+public class AddOxygenAction implements Action {
 	
-	public AddOxygenAction(final Game game) {
-		super(game);
-		planet = game.getPlanet();
-		player = game.getCurrentPlayer();
+	@Override
+	public char getKey() {
+		throw new UnsupportedOperationException();
 	}
 	
 	@Override
-	public boolean check() {
-		return true;
+	public boolean check(final Game game) {
+		return game.getPlanet().getOxygen() < 14;
 	}
 
 	@Override
-	public void complete() {
-		bonusTemperature = planet.getOxygen() == 7 && planet.getTemperature() < 8; 
-		ratingIncrease = planet.adjustOxygen(1);
-		if (bonusTemperature) {
-			ratingIncrease += planet.adjustTemperature(2) / 2;
-		}
-		player.adjustRating(ratingIncrease);
-	}
-
-	@Override
-	public void undo() {
-		planet.adjustOxygen(-ratingIncrease);
-		player.adjustRating(-ratingIncrease);
-		if (bonusTemperature) {
-			planet.adjustTemperature(-2);
-		}
-	}
-
-	@Override
-	public void redo() {
-		planet.adjustOxygen(ratingIncrease);
-		player.adjustRating(ratingIncrease);
-		if (bonusTemperature) {
-			planet.adjustTemperature(2);
-		}
+	public Completable begin(final Game game) {
+		return new InstantCompletable(game) {
+			@Override
+			public void complete() {
+				game.getPlanet().adjustOxygen(1);
+				game.getCurrentPlayer().adjustRating(1);
+				if (game.getPlanet().getOxygen() == 8) {
+					final Action bonusAction = new AddTemperatureAction();
+					if (bonusAction.check(game)) {
+						game.getActionHandler().addPendingAction(bonusAction);
+					}
+				}
+			}
+			
+			@Override
+			public void undo() {
+				game.getPlanet().adjustOxygen(-1);
+				game.getCurrentPlayer().adjustRating(-1);
+			}
+			
+			@Override
+			public void redo() {
+				game.getPlanet().adjustOxygen(1);
+				game.getCurrentPlayer().adjustRating(1);
+			}
+		};
 	}
 }

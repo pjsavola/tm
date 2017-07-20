@@ -1,77 +1,50 @@
 package tm;
 
-import java.awt.Graphics;
-
 public class AddTemperatureAction implements Action {
-
-	private static final long serialVersionUID = 1L;
-	private final Game game;
-	private final Planet planet;
-	private final Player player;
-	private int temperatureDelta;
-	private int ratingIncrease;
-	private boolean bonusHeat;
 	
-	public AddTemperatureAction(final Game game) {
-		this.game = game;
-		planet = game.getPlanet();
-		player = game.getCurrentPlayer();
-	}
-	
-	@Override
-	public boolean check() {
-		return true;
-	}
-
-	@Override
-	public void complete() {
-		final boolean bonusWater = planet.getTemperature() == -2 && planet.getWaterCount() > 0;
-		bonusHeat = planet.getTemperature() == -26 || planet.getTemperature() == -22;
-		temperatureDelta = planet.adjustTemperature(2);
-		ratingIncrease = temperatureDelta / 2;
-		if (bonusWater) {
-			game.getActionHandler().addPendingAction(new PlaceTileAction(Tile.Type.WATER, game));
-			ratingIncrease++;
-		}
-		player.adjustRating(ratingIncrease);
-		if (bonusHeat) {
-			player.adjustIncome(new Resources(0, 0, 0, 0, 0, 1));
-		}
-	}
-
-	@Override
-	public void undo() {
-		planet.adjustTemperature(-temperatureDelta);
-		player.adjustRating(-ratingIncrease);
-		if (bonusHeat) {
-			player.adjustIncome(new Resources(0, 0, 0, 0, 0, -1));
-		}
-	}
-
-	@Override
-	public void redo() {
-		planet.adjustTemperature(temperatureDelta);
-		player.adjustRating(ratingIncrease);
-		if (bonusHeat) {
-			player.adjustIncome(new Resources(0, 0, 0, 0, 0, 1));
-		}
-	}
-
 	@Override
 	public char getKey() {
 		throw new UnsupportedOperationException();
 	}
-
+	
 	@Override
-	public void begin() {
-		game.getActionHandler().actionFinished(this);		
+	public boolean check(final Game game) {
+		return game.getPlanet().getTemperature() < 8;
 	}
-
+	
 	@Override
-	public void cancel() {
-	}
+	public Completable begin(final Game game) {
+		return new InstantCompletable(game) {
+			@Override
+			public void complete() {
+				game.getPlanet().adjustTemperature(2);
+				game.getCurrentPlayer().adjustRating(1);
+				if (game.getPlanet().getTemperature() == -26 || game.getPlanet().getTemperature() == -22) {
+					final Action bonusAction = new IncomeDeltaAction(new Resources(0, 0, 0, 0, 0, 1));
+					if (bonusAction.check(game)) {
+						game.getActionHandler().addPendingAction(bonusAction);	
+					}
+				}
+				if (game.getPlanet().getTemperature() == 0) {
+					final Action bonusAction = new ActionChain(
+						new AddWaterAction(), new PlaceTileAction(Tile.Type.WATER));
+					if (bonusAction.check(game)) {
+						game.getActionHandler().addPendingAction(bonusAction);
+					}
+				}
+			}
 
-	@Override
-	public void paint(Graphics g) {
+			@Override
+			public void undo() {
+				game.getPlanet().adjustTemperature(-2);
+				game.getCurrentPlayer().adjustRating(-1);
+			}
+
+			@Override
+			public void redo() {
+				game.getPlanet().adjustTemperature(2);
+				game.getCurrentPlayer().adjustRating(1);
+			}
+		};
 	}
 }

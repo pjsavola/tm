@@ -10,8 +10,6 @@ import java.util.Set;
 
 public abstract class SelectCardsAction implements Action {
 
-	private static final long serialVersionUID = 1L;
-
     final Game game;
     final List<Card> selection;
     final Set<Card> selectedCards = new HashSet<>();
@@ -49,7 +47,7 @@ public abstract class SelectCardsAction implements Action {
                     break;
                 }
                 if (x >= LEFT_MARGIN && x <= LEFT_MARGIN + Card.WIDTH && y >= TOP_MARGIN + CARD_HEIGHT * (selection.size() + 2) && y <= TOP_MARGIN + CARD_HEIGHT * (selection.size() + 3)) {
-                	game.getActionHandler().actionFinished(SelectCardsAction.this);
+                	game.getActionHandler().completed(SelectCardsAction.this);
                 }
             }
         }
