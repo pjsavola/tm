@@ -1,4 +1,9 @@
-package tm;
+package tm.action;
+
+import tm.completable.Completable;
+import tm.Game;
+import tm.completable.InstantCompletable;
+import tm.Resources;
 
 public class ResourceDeltaAction implements Action {
 
@@ -7,12 +12,7 @@ public class ResourceDeltaAction implements Action {
 	public ResourceDeltaAction(final Resources delta) {
 		this.delta = delta;
 	}
-	
-	@Override
-	public char getKey() {
-		throw new UnsupportedOperationException();
-	}
-	
+
 	@Override
 	public boolean check(final Game game) {
 		return game.getCurrentPlayer().canAdjustResources(delta);

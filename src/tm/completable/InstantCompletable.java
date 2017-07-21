@@ -1,7 +1,9 @@
-package tm;
+package tm.completable;
 
 import java.awt.Graphics;
 import java.util.Set;
+
+import tm.Game;
 
 public abstract class InstantCompletable implements Completable {
 	

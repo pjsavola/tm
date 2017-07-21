@@ -1,4 +1,9 @@
-package tm;
+package tm.action;
+
+import tm.completable.Completable;
+import tm.Game;
+import tm.completable.InstantCompletable;
+import tm.Resources;
 
 public class IncomeDeltaAction implements Action {
 	
@@ -6,16 +11,6 @@ public class IncomeDeltaAction implements Action {
 	
 	public IncomeDeltaAction(final Resources delta) {
 		this.delta = delta;
-	}
-	
-	@Override
-	public char getKey() {
-		throw new UnsupportedOperationException();
-	}
-	
-	@Override
-	public boolean check(final Game game) {
-		return true;
 	}
 
 	@Override

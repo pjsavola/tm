@@ -5,22 +5,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TileProperties {
-	final int aluminum;
-	final int titanium;
-	final int plants;
-	final int cards;
-	final boolean isWater;
-	final boolean isNoctis;
+	private final Resources resources;
+	private final int cards;
+	private final boolean isWater;
+	private final boolean isNoctis;
 	
-	public TileProperties(final int aluminum, final int titanium, final int plants, final int cards, final boolean isWater, final boolean isNoctis) {
-		this.aluminum = aluminum;
-		this.titanium = titanium;
-		this.plants = plants;
+	public TileProperties(final int steel, final int titanium, final int plants, final int cards, final boolean isWater, final boolean isNoctis) {
+		resources = new Resources(0, steel, titanium, plants, 0, 0);
 		this.cards = cards;
 		this.isWater = isWater;
 		this.isNoctis = isNoctis;
 	}
-	
+
+	public Resources getResources() {
+		return resources;
+	}
+
+	public boolean isWater() {
+		return isWater;
+	}
+
+	public boolean isNoctis() {
+		return isNoctis;
+	}
+
 	public static final Map<Point, TileProperties> tilePropertiesMap = initMap(); 
 	
 	private static Map<Point, TileProperties> initMap() {

@@ -1,12 +1,13 @@
-package tm;
+package tm.action;
+
+import tm.completable.Completable;
+import tm.Game;
+import tm.completable.InstantCompletable;
+import tm.Resources;
+import tm.Tile;
 
 public class AddTemperatureAction implements Action {
-	
-	@Override
-	public char getKey() {
-		throw new UnsupportedOperationException();
-	}
-	
+
 	@Override
 	public boolean check(final Game game) {
 		return game.getPlanet().getTemperature() < 8;

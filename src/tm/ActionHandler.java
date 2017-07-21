@@ -10,6 +10,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import tm.action.Action;
+import tm.completable.Completable;
+import tm.completable.CompletableChain;
+
 public class ActionHandler {
 	private final Deque<Completable> undoStack = new ArrayDeque<>();
 	private final Deque<Completable> redoStack = new ArrayDeque<>();
@@ -125,6 +129,10 @@ public class ActionHandler {
 			}
 		}
 		return true;
+	}
+
+	public void clearUndoStack() {
+		undoStack.clear();
 	}
 	
 	public void render(final Graphics g) {

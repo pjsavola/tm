@@ -1,12 +1,11 @@
-package tm;
+package tm.action;
+
+import tm.completable.Completable;
+import tm.Game;
+import tm.completable.InstantCompletable;
 
 public class AddWaterAction implements Action {
-	
-	@Override
-	public char getKey() {
-		throw new UnsupportedOperationException();
-	}
-	
+
 	@Override
 	public boolean check(final Game game) {
 		return game.getPlanet().getWaterCount() > 0;

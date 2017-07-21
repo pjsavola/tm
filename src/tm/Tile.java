@@ -27,7 +27,7 @@ public class Tile {
 	
 	// private final static Font font = new Font("Arial", Font.BOLD, 12);
 	final Point coords;
-	final TileProperties properties;
+	private final TileProperties properties;
 	private final List<Tile> neighbors = new ArrayList<>();
 	private Type type;
 	private Player owner;
@@ -87,6 +87,10 @@ public class Tile {
 	
 	public Player getOwner() {
 		return owner;
+	}
+
+	public TileProperties getProperties() {
+		return properties;
 	}
 	
 	public void draw(final Graphics g) {

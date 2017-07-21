@@ -1,12 +1,11 @@
-package tm;
+package tm.action;
+
+import tm.completable.Completable;
+import tm.Game;
+import tm.completable.InstantCompletable;
 
 public class AddOxygenAction implements Action {
-	
-	@Override
-	public char getKey() {
-		throw new UnsupportedOperationException();
-	}
-	
+
 	@Override
 	public boolean check(final Game game) {
 		return game.getPlanet().getOxygen() < 14;
@@ -39,5 +38,10 @@ public class AddOxygenAction implements Action {
 				game.getCurrentPlayer().adjustRating(1);
 			}
 		};
+	}
+
+	@Override
+	public boolean isOptional() {
+		return true;
 	}
 }

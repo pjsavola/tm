@@ -1,4 +1,4 @@
-package tm;
+package tm.action;
 
 import java.awt.Cursor;
 import java.awt.Graphics;
@@ -10,6 +10,12 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.Set;
+
+import tm.completable.Completable;
+import tm.Game;
+import tm.Resources;
+import tm.Tile;
+import tm.TileProperties;
 
 public class PlaceTileAction implements Action {
 
@@ -40,7 +46,6 @@ public class PlaceTileAction implements Action {
 		final Game game;
 		Point customCursorLocation;
 		Tile targetTile;
-		Resources bonusResources;
 
 		final MouseListener mouseListener = new MouseListener() {
 			@Override
@@ -59,7 +64,7 @@ public class PlaceTileAction implements Action {
 			public void mouseClicked(MouseEvent arg0) {
 				targetTile = game.getClosestTile(arg0.getX(), arg0.getY());
 				if (targetTile != null) {
-					final boolean isWater = targetTile.properties != null && targetTile.properties.isWater;
+					final boolean isWater = targetTile.getProperties() != null && targetTile.getProperties().isWater();
 					if (isWater && type != Tile.Type.WATER) {
 						System.err.println("Reserved for water");
 						return;
@@ -68,7 +73,7 @@ public class PlaceTileAction implements Action {
 						System.err.println("Not for water");
 						return;
 					}
-					final boolean isNoctis = targetTile.properties != null && targetTile.properties.isNoctis;
+					final boolean isNoctis = targetTile.getProperties() != null && targetTile.getProperties().isNoctis();
 					if (isNoctis) {
 						System.err.println("Reserved for Noctis City");
 						return;
@@ -136,13 +141,13 @@ public class PlaceTileAction implements Action {
 					sum += 2;
 				}
 			}
-			final TileProperties p = targetTile.properties;
-			if (p != null) {
-				bonusResources = new Resources(sum, p.aluminum, p.titanium, p.plants, 0, 0);
-			} else {
-				bonusResources = new Resources(sum);
+			final TileProperties p = targetTile.getProperties();
+			if (sum > 0 || p != null) {
+				final Action bonusAction = new ResourceDeltaAction(p.getResources().combine(new Resources(sum)));
+				if (bonusAction.check(game)) {
+					game.getActionHandler().addPendingAction(bonusAction);
+				}
 			}
-			game.getCurrentPlayer().adjustResources(bonusResources);
 			cancel();
 		}
 		
@@ -151,7 +156,6 @@ public class PlaceTileAction implements Action {
 		public void undo() {
 			targetTile.setType(null);
 			targetTile.setOwner(null);
-			game.getCurrentPlayer().adjustResources(bonusResources.negate());
 			game.repaint();
 		}
 
@@ -161,7 +165,6 @@ public class PlaceTileAction implements Action {
 			if (type != Tile.Type.WATER) {
 				targetTile.setOwner(game.getCurrentPlayer());
 			}
-			game.getCurrentPlayer().adjustResources(bonusResources);
 			game.repaint();
 		}
 		

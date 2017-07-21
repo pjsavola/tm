@@ -1,5 +1,12 @@
-package tm;
+package tm.action;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import tm.Game;
+import tm.completable.Completable;
+import tm.completable.CompletableChain;
 
 public class ActionChain implements Action {
 
@@ -30,7 +37,9 @@ public class ActionChain implements Action {
 	public boolean check(final Game game) {
 		for (final Action action : actions) {
 			if (!action.check(game)) {
-				return false;
+				if (!action.isOptional()) {
+					return false;
+				}
 			}
 		}
 		return true;
@@ -38,10 +47,12 @@ public class ActionChain implements Action {
 	
 	@Override
 	public Completable begin(final Game game) {
-		final Completable[] completables = new Completable[actions.length];
-		for (int i = 0; i < actions.length; i++) {
-			completables[i] = actions[i].begin(game);
+		final List<Completable> completables = new ArrayList<>();
+		for (final Action action : actions) {
+			if (!action.isOptional() || action.check(game)) {
+				completables.add(action.begin(game));
+			}
 		}
-		return new CompletableChain(game, completables);
+		return new CompletableChain(game, completables.toArray(new Completable[completables.size()]));
 	}
 }

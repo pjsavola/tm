@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Player {
-	private final static Font font = new Font("Arial", Font.BOLD, 12);
+	private static final Font font = new Font("Arial", Font.BOLD, 12);
 	private Resources resources = new Resources(60);
 	private Resources income = new Resources(0);
 	private int rating = 20;
@@ -81,13 +81,14 @@ public class Player {
 		final Color oldColor = g.getColor();
 		g.setFont(font);
 		renderText(g, "Money", resources.money, income.money, 1, 0xFFFF00);
-		renderText(g, "Aluminum", resources.aluminum, income.aluminum, 2, 0x8B4513);
+		renderText(g, "Steel", resources.steel, income.steel, 2, 0x8B4513);
 		renderText(g, "Titanium", resources.titanium, income.titanium, 3, 0x888888);
 		renderText(g, "Plants", resources.plants, income.plants, 4, 0x00FF00);
 		renderText(g, "Energy", resources.energy, income.energy, 5, 0x6600FF);
 		renderText(g, "Heat", resources.heat, income.heat, 6, 0xFF9900);
 		renderText(g, "Rating", rating, 0, 7, 0x0000FF);
 		renderText(g, "Points", getPoints(), 0, 8, 0x00FFFF);
+		renderText(g, "Cards", getCards().size(), 0, 9, 0xCCCCCC);
         g.setColor(oldColor);
 	}
 	

@@ -6,7 +6,7 @@ public class Resources implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	int money;
-	int aluminum;
+	int steel;
 	int titanium;
 	int plants;
 	int energy;
@@ -16,9 +16,9 @@ public class Resources implements Serializable {
 		this.money = money;
 	}
 	
-	public Resources(int money, int aluminum, int titanium, int plants, int energy, int heat) {
+	public Resources(int money, int steel, int titanium, int plants, int energy, int heat) {
 		this.money = money;
-		this.aluminum = aluminum;
+		this.steel = steel;
 		this.titanium = titanium;
 		this.plants = plants;
 		this.energy = energy;
@@ -27,7 +27,7 @@ public class Resources implements Serializable {
 	
 	public void adjust(final Resources delta) {
 		money += delta.money;
-		aluminum += delta.aluminum;
+		steel += delta.steel;
 		titanium += delta.titanium;
 		plants += delta.plants;
 		energy += delta.energy;
@@ -37,7 +37,7 @@ public class Resources implements Serializable {
 	public boolean canAdjust(final Resources delta) {
 		return
 			money + delta.money >= 0 &&
-			aluminum + delta.aluminum >= 0 &&
+			steel + delta.steel >= 0 &&
 			titanium + delta.titanium >= 0 &&
 			plants + delta.plants >= 0 &&
 			energy + delta.energy >= 0 &&
@@ -45,11 +45,11 @@ public class Resources implements Serializable {
 	}
 	
 	public Resources negate() {
-		return new Resources(-money, -aluminum, -titanium, -plants, -energy, -heat);
+		return new Resources(-money, -steel, -titanium, -plants, -energy, -heat);
 	}
 	
 	public Resources combine(final Resources resources) {
-		return new Resources(money + resources.money, aluminum + resources.aluminum, titanium + resources.titanium,
+		return new Resources(money + resources.money, steel + resources.steel, titanium + resources.titanium,
 				             plants + resources.plants, energy + resources.energy, heat + resources.heat);
 	}
 }
