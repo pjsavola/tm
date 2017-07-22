@@ -19,7 +19,7 @@ public class ActionHandler {
 	private final Deque<Completable> redoStack = new ArrayDeque<>();
 	private int pendingActionCount;
 	private List<Action> pendingActions;
-	private List<Action> pendingIrreversibleActions = new ArrayList<>();
+	private List<Action> pendingIrreversibleActions;
 	private final ActionPool pool;
 	private Completable current;
 	private Game game;
@@ -40,7 +40,7 @@ public class ActionHandler {
 		}
 	}
 	
-	public void process(final Completable completable) {
+	private void process(final Completable completable) {
 		if (completable != null) {
 			current = completable;
 			if (current.remove(completedActions)) {
@@ -69,9 +69,15 @@ public class ActionHandler {
 				process(pendingActions.remove(0).begin(game));
 			}
 		}
-		if (!pendingIrreversibleActions.isEmpty()) {
-			undoStack.clear();
-			process(pendingIrreversibleActions.remove(0).begin(game));
+		if (current == null && pendingIrreversibleActions != null) {
+			if (pendingIrreversibleActions.isEmpty()) {
+				cancelEnabled = true;
+				pendingIrreversibleActions = null;
+			} else {
+				undoStack.clear();
+				cancelEnabled = false;
+				process(pendingIrreversibleActions.remove(0).begin(game));
+			}
 		}
 	}
 	
@@ -84,11 +90,16 @@ public class ActionHandler {
 	}
 
 	public void addPendingIrreversibleAction(final Action action) {
+		if (pendingIrreversibleActions == null) {
+			pendingIrreversibleActions = new ArrayList<>();
+		}
 		pendingIrreversibleActions.add(action);
 	}
 
-	public void setCancelEnabled(final boolean flag) {
-		cancelEnabled = flag;
+	public void reprocess(final Completable completable) {
+		cancelEnabled = false;
+		pendingIrreversibleActions = new ArrayList<>(0);
+		process(completable);
 	}
 
 	public boolean canUndo() {
@@ -98,7 +109,11 @@ public class ActionHandler {
 	public boolean canRedo() {
 		return current == null && !redoStack.isEmpty();
 	}
-	
+
+	public boolean canAct() {
+		return current == null || cancelEnabled;
+	}
+
 	public void undo() {
 		if (current != null) {
 			cancel();

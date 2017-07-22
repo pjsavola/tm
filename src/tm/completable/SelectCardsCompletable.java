@@ -120,7 +120,6 @@ public class SelectCardsCompletable implements Completable {
 
     @Override
     public void cancel() {
-        game.getActionHandler().setCancelEnabled(true);
         game.removeMouseListener(mouseListener);
         game.repaint();
     }
@@ -140,13 +139,11 @@ public class SelectCardsCompletable implements Completable {
     @Override
     public void undo() {
         if (type == Type.DRAW) {
-            game.getActionHandler().setCancelEnabled(false);
             game.getCurrentPlayer().getCards().removeAll(selectedCards);
-            game.getActionHandler().process(this);
+            game.getActionHandler().reprocess(this);
         } else if (type == Type.DRAW_AND_KEEP) {
-            game.getActionHandler().setCancelEnabled(false);
             game.getCurrentPlayer().getCards().removeAll(selection);
-            game.getActionHandler().process(this);
+            game.getActionHandler().reprocess(this);
         } else {
             game.getCurrentPlayer().getCards().clear();
             game.getCurrentPlayer().getCards().addAll(hand);

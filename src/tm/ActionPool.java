@@ -72,10 +72,11 @@ public class ActionPool {
 	
 	public void render(final Graphics g) {
     	final Color oldColor = g.getColor();
+    	final boolean canAct = game.getActionHandler().canAct();
 		g.setFont(font);
 		int i = 11;
 		for (final ActionChain action : standardActions) {
-			g.setColor(action.check(game) ? ENABLED_COLOR : DISABLED_COLOR);
+			g.setColor(canAct && action.check(game) ? ENABLED_COLOR : DISABLED_COLOR);
 			renderText(g, action.getKey() + ": " + action.getDescription(), i--);
 		}
 		g.setColor(game.getActionHandler().canUndo() ? ENABLED_COLOR : DISABLED_COLOR);

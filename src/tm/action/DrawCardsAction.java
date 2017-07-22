@@ -24,7 +24,6 @@ public class DrawCardsAction implements Action {
         while (drawnCards.size() < amount) {
             drawnCards.add(game.drawCard());
         }
-        game.getActionHandler().setCancelEnabled(false);
         return new SelectCardsCompletable(game, drawnCards, choice ? SelectCardsCompletable.Type.DRAW : SelectCardsCompletable.Type.DRAW_AND_KEEP);
     }
 }
