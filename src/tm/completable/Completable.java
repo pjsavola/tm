@@ -4,10 +4,20 @@ import java.awt.Graphics;
 import java.util.Set;
 
 public interface Completable {
-	boolean remove(final Set<Completable> completedSet);
-	void cancel();
+
+	default boolean remove(final Set<Completable> completedSet) {
+		return completedSet.remove(this);
+	}
+
+	default void cancel() {
+	}
+
 	void complete();
+
 	void undo();
+
 	void redo();
-	void paint(Graphics g);
+
+	default void paint(final Graphics g) {
+	}
 }

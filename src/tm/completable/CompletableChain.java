@@ -42,8 +42,8 @@ public class CompletableChain implements Completable {
 
 	@Override
 	public void undo() {
-		for (final Completable completable : completables) {
-			completable.undo();
+		for (int i = completables.length - 1; i >= 0; i--) {
+			completables[i].undo();
 		}
 	}
 

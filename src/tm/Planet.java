@@ -43,6 +43,10 @@ public class Planet {
     public void adjustRound(final int delta) {
     	round += delta;
     }
+
+    public int getRound() {
+		return round;
+	}
 	
 	public void render(final Graphics g) {
     	final Color oldColor = g.getColor();
@@ -76,5 +80,4 @@ public class Planet {
         int h = metrics.getHeight();
         g.drawString(text, 698 - w, (h + 1) * i);
 	}
-
 }

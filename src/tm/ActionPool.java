@@ -13,7 +13,6 @@ import tm.action.AddOxygenAction;
 import tm.action.AddTemperatureAction;
 import tm.action.AddWaterAction;
 import tm.action.DiscardAction;
-import tm.action.DrawCardsAction;
 import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.action.PlayCardAction;
@@ -52,8 +51,7 @@ public class ActionPool {
 			new PlaceTileAction(Tile.Type.CITY),
 			new IncomeDeltaAction(new Resources(1))));
 		standardActions.add(new ActionChain('p', "Pass",
-			new SwitchRoundAction(),
-			new DrawCardsAction(4)));
+			new SwitchRoundAction()));
 		standardActions.add(new ActionChain('x', "Play card",
 			new PlayCardAction()));
 	}

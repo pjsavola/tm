@@ -130,7 +130,6 @@ public class PlaceTileAction implements Action {
 
 		@Override
 		public void complete() {
-			// TODO: Bonus cards
 			targetTile.setType(type);
 			if (type != Tile.Type.WATER) {
 				targetTile.setOwner(game.getCurrentPlayer());
@@ -143,9 +142,14 @@ public class PlaceTileAction implements Action {
 			}
 			final TileProperties p = targetTile.getProperties();
 			if (sum > 0 || p != null) {
-				final Action bonusAction = new ResourceDeltaAction(p.getResources().combine(new Resources(sum)));
+				final Resources money = new Resources(sum);
+				final Resources resources = p == null ? money : p.getResources().combine(money);
+				final Action bonusAction = new ResourceDeltaAction(resources);
 				if (bonusAction.check(game)) {
 					game.getActionHandler().addPendingAction(bonusAction);
+				}
+				if (p != null && p.getCards() > 0) {
+					game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(p.getCards(), false));
 				}
 			}
 			cancel();

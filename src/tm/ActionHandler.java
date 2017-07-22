@@ -17,14 +17,15 @@ import tm.completable.CompletableChain;
 public class ActionHandler {
 	private final Deque<Completable> undoStack = new ArrayDeque<>();
 	private final Deque<Completable> redoStack = new ArrayDeque<>();
-	private int pendingActionCount = 0;
+	private int pendingActionCount;
 	private List<Action> pendingActions;
+	private List<Action> pendingIrreversibleActions = new ArrayList<>();
 	private final ActionPool pool;
 	private Completable current;
 	private Game game;
 	private boolean cancelEnabled = true;
 	private Set<Completable> completedActions = new HashSet<>();
-	
+
 	public ActionHandler(final Game game) {
 		this.game = game;
 		this.pool = new ActionPool(game);
@@ -39,7 +40,7 @@ public class ActionHandler {
 		}
 	}
 	
-	private void process(final Completable completable) {
+	public void process(final Completable completable) {
 		if (completable != null) {
 			current = completable;
 			if (current.remove(completedActions)) {
@@ -49,7 +50,6 @@ public class ActionHandler {
 	}
 	
 	private void onCompletion() {
-		boolean undoable = true;
 		current.complete();
 		undoStack.push(current);
 		redoStack.clear();
@@ -69,8 +69,9 @@ public class ActionHandler {
 				process(pendingActions.remove(0).begin(game));
 			}
 		}
-		if (!undoable) {
+		if (!pendingIrreversibleActions.isEmpty()) {
 			undoStack.clear();
+			process(pendingIrreversibleActions.remove(0).begin(game));
 		}
 	}
 	
@@ -81,7 +82,11 @@ public class ActionHandler {
 		}
 		pendingActions.add(action);
 	}
-	
+
+	public void addPendingIrreversibleAction(final Action action) {
+		pendingIrreversibleActions.add(action);
+	}
+
 	public void setCancelEnabled(final boolean flag) {
 		cancelEnabled = flag;
 	}
@@ -91,7 +96,7 @@ public class ActionHandler {
 	}
 	
 	public boolean canRedo() {
-		return !redoStack.isEmpty();
+		return current == null && !redoStack.isEmpty();
 	}
 	
 	public void undo() {
@@ -129,10 +134,6 @@ public class ActionHandler {
 			}
 		}
 		return true;
-	}
-
-	public void clearUndoStack() {
-		undoStack.clear();
 	}
 	
 	public void render(final Graphics g) {

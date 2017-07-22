@@ -29,6 +29,8 @@ public class TileProperties {
 		return isNoctis;
 	}
 
+	public int getCards() { return cards; }
+
 	public static final Map<Point, TileProperties> tilePropertiesMap = initMap(); 
 	
 	private static Map<Point, TileProperties> initMap() {

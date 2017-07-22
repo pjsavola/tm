@@ -17,7 +17,7 @@ import tm.action.ResourceDeltaAction;
 
 public class SelectCardsCompletable implements Completable {
 
-    public enum Type { PLAY, DRAW, DISCARD };
+    public enum Type { PLAY, DRAW, DISCARD, DRAW_AND_KEEP };
 
     private static final int TOP_MARGIN = 80;
     private static final int LEFT_MARGIN = 100;
@@ -57,51 +57,54 @@ public class SelectCardsCompletable implements Completable {
             for (int i = 0; i < selection.size(); i++) {
                 if (x >= LEFT_MARGIN && x <= LEFT_MARGIN + Card.WIDTH && y >= TOP_MARGIN + CARD_HEIGHT * (i + 1) && y <= TOP_MARGIN + CARD_HEIGHT * (i + 2)) {
                     cardToRender = selection.get(i);
-                    if (type == Type.PLAY && !selectedCards.isEmpty() && !selectedCards.contains(cardToRender)) {
-                        selectedCards.clear();
-                    }
-                    if (!selectedCards.add(cardToRender)) {
-                        selectedCards.remove(cardToRender);
-                        cardToRender = null;
+                    if (type != Type.DRAW_AND_KEEP) {
+                        if (type == Type.PLAY && !selectedCards.isEmpty() && !selectedCards.contains(cardToRender)) {
+                            selectedCards.clear();
+                        }
+                        if (!selectedCards.add(cardToRender)) {
+                            selectedCards.remove(cardToRender);
+                            cardToRender = null;
+                        }
                     }
                     game.repaint();
                     break;
                 }
-                if (x >= LEFT_MARGIN && x <= LEFT_MARGIN + Card.WIDTH && y >= TOP_MARGIN + CARD_HEIGHT * (selection.size() + 2) && y <= TOP_MARGIN + CARD_HEIGHT * (selection.size() + 3)) {
-                    switch (type) {
-                    case PLAY:
-                        if (selectedCards.isEmpty()) {
-                            System.err.println ("You must select a card to play it");
-                            return;
-                        }
-                        final int cost = selectedCards.iterator().next().getCost();
-                        final Action paymentAction = new ResourceDeltaAction(new Resources(-cost));
-                        if (paymentAction.check(game)) {
-                            game.getActionHandler().addPendingAction(paymentAction);
-                            game.getActionHandler().completed(SelectCardsCompletable.this);
-                        } else {
-                            System.err.println("Not enough moeny to pay for the card");
-                        }
-                        break;
-                    case DRAW:
-                        final Action action = new ResourceDeltaAction(new Resources(-3 * selectedCards.size()));
-                        if (action.check(game)) {
-                            game.getActionHandler().addPendingAction(action);
-                            game.getActionHandler().completed(SelectCardsCompletable.this);
-                        } else {
-                            System.err.println("Not enough money to keep the cards");
-                        }
-                        break;
-                    case DISCARD:
-                        if (selectedCards.isEmpty()) {
-                            System.err.println ("You must discard at least one card");
-                            return;
-                        }
-                        game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(selectedCards.size())));
-                        game.getActionHandler().completed(SelectCardsCompletable.this);
-                        break;
+            }
+            if (x >= LEFT_MARGIN && x <= LEFT_MARGIN + Card.WIDTH && y >= TOP_MARGIN + CARD_HEIGHT * (selection.size() + 2) && y <= TOP_MARGIN + CARD_HEIGHT * (selection.size() + 3)) {
+                switch (type) {
+                case PLAY:
+                    if (selectedCards.isEmpty()) {
+                        System.err.println ("You must select a card to play it");
+                        return;
                     }
+                    final int cost = selectedCards.iterator().next().getCost();
+                    final Action paymentAction = new ResourceDeltaAction(new Resources(-cost));
+                    if (paymentAction.check(game)) {
+                        game.getActionHandler().addPendingAction(paymentAction);
+                    } else {
+                        System.err.println("Not enough moeny to pay for the card");
+                        return;
+                    }
+                    break;
+                case DRAW:
+                    final Action action = new ResourceDeltaAction(new Resources(-3 * selectedCards.size()));
+                    if (action.check(game)) {
+                        game.getActionHandler().addPendingAction(action);
+                    } else {
+                        System.err.println("Not enough money to keep the cards");
+                    }
+                    break;
+                case DISCARD:
+                    if (selectedCards.isEmpty()) {
+                        System.err.println ("You must discard at least one card");
+                        return;
+                    }
+                    game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(selectedCards.size())));
+                    break;
+                case DRAW_AND_KEEP:
+                    break;
                 }
+                game.getActionHandler().completed(SelectCardsCompletable.this);
             }
         }
     };
@@ -116,11 +119,6 @@ public class SelectCardsCompletable implements Completable {
     }
 
     @Override
-    public boolean remove(final Set<Completable> completedSet) {
-        return completedSet.remove(this);
-    }
-
-    @Override
     public void cancel() {
         game.getActionHandler().setCancelEnabled(true);
         game.removeMouseListener(mouseListener);
@@ -131,6 +129,8 @@ public class SelectCardsCompletable implements Completable {
     public void complete() {
         if (type == Type.DRAW) {
             game.getCurrentPlayer().getCards().addAll(selectedCards);
+        } else if (type == Type.DRAW_AND_KEEP) {
+            game.getCurrentPlayer().getCards().addAll(selection);
         } else {
             game.getCurrentPlayer().getCards().removeAll(selectedCards);
         }
@@ -142,6 +142,11 @@ public class SelectCardsCompletable implements Completable {
         if (type == Type.DRAW) {
             game.getActionHandler().setCancelEnabled(false);
             game.getCurrentPlayer().getCards().removeAll(selectedCards);
+            game.getActionHandler().process(this);
+        } else if (type == Type.DRAW_AND_KEEP) {
+            game.getActionHandler().setCancelEnabled(false);
+            game.getCurrentPlayer().getCards().removeAll(selection);
+            game.getActionHandler().process(this);
         } else {
             game.getCurrentPlayer().getCards().clear();
             game.getCurrentPlayer().getCards().addAll(hand);
@@ -154,6 +159,8 @@ public class SelectCardsCompletable implements Completable {
     public void redo() {
         if (type == Type.DRAW) {
             game.getCurrentPlayer().getCards().addAll(selectedCards);
+        } else if (type == Type.DRAW_AND_KEEP) {
+            game.getCurrentPlayer().getCards().addAll(selection);
         } else {
             game.getCurrentPlayer().getCards().removeAll(selectedCards);
         }
@@ -174,6 +181,9 @@ public class SelectCardsCompletable implements Completable {
             break;
         case DRAW:
             title = "Select cards to keep";
+            break;
+        case DRAW_AND_KEEP:
+            title = "You got these new cards";
             break;
         default:
             title = "";
