@@ -12,6 +12,11 @@ public class Card {
     private static final Color TEXT_COLOR = new Color(0xFFFFFF);
     private static final Color BG_COLOR = new Color(0x000000);
     private static final Font FONT = new Font("Arial", Font.BOLD, 12);
+    private final Tags tags;
+
+    public Card(final Tags tags) {
+        this.tags = tags;
+    }
 
     public Color getBorderColor() {
         return new Color(0xFF0000);
