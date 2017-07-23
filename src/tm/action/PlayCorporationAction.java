@@ -32,7 +32,7 @@ public class PlayCorporationAction implements Action {
                     return false;
                 }
                 corporation = (Corporation) selectedCards.iterator().next();
-                if (!game.getCurrentPlayer().canAdjustResources(corporation.getInitialResources())) {
+                if (!corporation.start(game)) {
                     System.err.println("Not enough money to pay for the initial cards");
                     return false;
                 }
@@ -41,7 +41,6 @@ public class PlayCorporationAction implements Action {
 
             @Override
             public void complete() {
-                game.getActionHandler().addPendingAction(new ResourceDeltaAction(corporation.getInitialResources()));
                 game.getCurrentPlayer().setCorporation(corporation);
                 cancel();
             }

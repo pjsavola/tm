@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import tm.corporation.InterplanetaryCinematics;
+import tm.corporation.Inventrix;
 import tm.corporation.Phoblog;
 
 public class Game extends JPanel {
@@ -47,6 +48,7 @@ public class Game extends JPanel {
 		for (int i = 0; i < 100; i++)
 			deck.add(new Card(new Tags()));
 		corporationDeck.add(new InterplanetaryCinematics());
+        corporationDeck.add(new Inventrix());
 		corporationDeck.add(new Phoblog());
 		actionHandler = new ActionHandler(this);
 	}

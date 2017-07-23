@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 
+import tm.action.Action;
+
 public abstract class Corporation extends Card {
 
     public static final int WIDTH = 200;
@@ -27,7 +29,16 @@ public abstract class Corporation extends Card {
         throw new UnsupportedOperationException();
     }
 
-    public abstract Resources getInitialResources();
+    public boolean start(final Game game) {
+        final Action action = getInitialAction();
+        if (action.check(game)) {
+            game.getActionHandler().addPendingAction(action);
+            return true;
+        }
+        return false;
+    }
+
+    protected abstract Action getInitialAction();
 
     @Override
     public void renderTitle(final Graphics g, final int x, final int y) {
