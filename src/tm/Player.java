@@ -12,12 +12,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Player {
 	private static final Font font = new Font("Arial", Font.BOLD, 12);
-	private Resources resources = new Resources(60);
+	private Resources resources = new Resources(0);
 	private Resources income = new Resources(0);
 	private int rating = 20;
 	private final Color color = new Color(0xFF0000);
 	final Set<Tile> ownedTiles = new HashSet<>();
 	final List<Card> cards = new ArrayList<>();
+	Corporation corporation;
 
 	public Color getColor() {
 		return color;
@@ -37,6 +38,10 @@ public class Player {
 	
 	public void adjustIncome(final Resources delta) {
 		income.adjust(delta);
+	}
+
+	public void setCorporation(final Corporation corporation) {
+		this.corporation = corporation;
 	}
 
 	public List<Card> getCards() {

@@ -14,7 +14,6 @@ import tm.action.Action;
 import tm.action.DrawCardsAction;
 import tm.completable.Completable;
 import tm.completable.CompletableChain;
-import tm.completable.SelectCardsCompletable;
 
 public class ActionHandler {
 	private final Deque<Completable> undoStack = new ArrayDeque<>();
@@ -27,15 +26,12 @@ public class ActionHandler {
 	private Game game;
 	private boolean cancelEnabled = true;
 	private Set<Completable> completedActions = new HashSet<>();
-	private final SelectCardsCompletable initialDrawCompletable;
 
 	public ActionHandler(final Game game) {
 		this.game = game;
 		this.pool = new ActionPool(game);
-		final Action initialDraw = new DrawCardsAction(10, true);
-		initialDrawCompletable = (SelectCardsCompletable) initialDraw.begin(game);
-		initialDrawCompletable.drawCorps = true;
-		reprocess(initialDrawCompletable);
+		final Action initialDraw = new DrawCardsAction(10, true, true);
+		reprocess(initialDraw.begin(game));
 	}
 
 	public void completed(final Completable action) {

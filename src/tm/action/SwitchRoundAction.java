@@ -13,7 +13,7 @@ public class SwitchRoundAction implements Action {
 			public void complete() {
 				game.getCurrentPlayer().adjustResources(game.getCurrentPlayer().getIncome());
 				game.getPlanet().adjustRound(1);
-				game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(4, true));
+				game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(4, true, false));
 			}
 
 			@Override
