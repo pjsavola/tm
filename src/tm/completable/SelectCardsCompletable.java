@@ -13,6 +13,7 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.action.Action;
+import tm.action.PlayCorporationAction;
 import tm.action.ResourceDeltaAction;
 
 public class SelectCardsCompletable implements Completable {
@@ -31,6 +32,7 @@ public class SelectCardsCompletable implements Completable {
     final List<Card> selection;
     final List<Card> hand;
     Card cardToRender;
+    public boolean drawCorps;
     private final Type type;
 
     final MouseListener mouseListener = new MouseListener() {
@@ -134,6 +136,9 @@ public class SelectCardsCompletable implements Completable {
             game.getCurrentPlayer().getCards().removeAll(selectedCards);
         }
         cancel();
+        if (drawCorps) {
+            game.getActionHandler().addPendingAction(new PlayCorporationAction());
+        }
     }
 
     @Override

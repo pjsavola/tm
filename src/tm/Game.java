@@ -24,6 +24,7 @@ public class Game extends JPanel {
 	private Planet planet = new Planet();
 	private Deque<Card> deck = new ArrayDeque<>();
 	private List<Card> discard = new ArrayList<>();
+	private Deque<Corporation> corporationDeck = new ArrayDeque<>();
 	private static final Random r = new Random();
 
 	public Game() {
@@ -42,6 +43,9 @@ public class Game extends JPanel {
 		// Temporary bogus cards
 		for (int i = 0; i < 100; i++)
 			deck.add(new Card());
+		for (int i = 0; i < 12; i++) {
+			corporationDeck.add(new Corporation());
+		}
 		actionHandler = new ActionHandler(this);
 	}
 	
@@ -90,6 +94,10 @@ public class Game extends JPanel {
 			}
 		}
 		return deck.pop();
+	}
+
+	public Corporation drawCorporation() {
+		return corporationDeck.pop();
 	}
 
 	public void discardCard(final Card card) {

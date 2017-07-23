@@ -73,7 +73,7 @@ public class Player {
     		.getNeighbors()
     	    .stream()
     	    .filter(neighborTile -> neighborTile.getOwner() == null)
-    	    .forEach(neighborTile -> freeAdjacentTiles.add(neighborTile)));
+    	    .forEach(freeAdjacentTiles::add));
     	return freeAdjacentTiles; 
     }
 	
