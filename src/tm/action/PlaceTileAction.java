@@ -64,6 +64,10 @@ public class PlaceTileAction implements Action {
 			public void mouseClicked(MouseEvent arg0) {
 				targetTile = game.getClosestTile(arg0.getX(), arg0.getY());
 				if (targetTile != null) {
+					if (targetTile.getType() != null) {
+						System.err.println("There's already a tile");
+						return;
+					}
 					final boolean isWater = targetTile.getProperties() != null && targetTile.getProperties().isWater();
 					if (isWater && type != Tile.Type.WATER) {
 						System.err.println("Reserved for water");

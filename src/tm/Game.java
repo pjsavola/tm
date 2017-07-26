@@ -50,6 +50,33 @@ public class Game extends JPanel {
 		corporationDeck.add(new InterplanetaryCinematics());
         corporationDeck.add(new Inventrix());
 		corporationDeck.add(new Phoblog());
+		
+		// Initial tiles
+		int cityCount = 2;
+		final Tile[] tiles = grid.values().toArray(new Tile[grid.values().size()]);
+		while (cityCount > 0) {
+			final Tile randomTile = tiles[r.nextInt(tiles.length)];
+			TileProperties properties = randomTile.getProperties();
+			if (properties != null && (properties.isWater() || properties.isNoctis())) {
+				continue;
+			}
+			cityCount--;
+			randomTile.setType(Tile.Type.CITY);
+			final List<Tile> neighbors = randomTile.getNeighbors();
+			while (true) {
+				final Tile randomNeighbor = neighbors.get(r.nextInt(neighbors.size()));
+				if (randomNeighbor.getType() != null) {
+					continue;
+				}
+				properties = randomNeighbor.getProperties();
+				if (properties != null && (properties.isWater() || properties.isNoctis())) {
+					continue;
+				}
+				randomNeighbor.setType(Tile.Type.GREENERY);
+				break;
+			}
+		}
+		
 		actionHandler = new ActionHandler(this);
 	}
 	
