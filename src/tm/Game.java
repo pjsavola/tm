@@ -52,31 +52,8 @@ public class Game extends JPanel {
 		corporationDeck.add(new Phoblog());
 		
 		// Initial tiles
-		int cityCount = 2;
-		final Tile[] tiles = grid.values().toArray(new Tile[grid.values().size()]);
-		while (cityCount > 0) {
-			final Tile randomTile = tiles[r.nextInt(tiles.length)];
-			TileProperties properties = randomTile.getProperties();
-			if (properties != null && (properties.isWater() || properties.isNoctis())) {
-				continue;
-			}
-			cityCount--;
-			randomTile.setType(Tile.Type.CITY);
-			final List<Tile> neighbors = randomTile.getNeighbors();
-			while (true) {
-				final Tile randomNeighbor = neighbors.get(r.nextInt(neighbors.size()));
-				if (randomNeighbor.getType() != null) {
-					continue;
-				}
-				properties = randomNeighbor.getProperties();
-				if (properties != null && (properties.isWater() || properties.isNoctis())) {
-					continue;
-				}
-				randomNeighbor.setType(Tile.Type.GREENERY);
-				break;
-			}
-		}
-		
+		placeInitialTiles();
+
 		actionHandler = new ActionHandler(this);
 	}
 	
@@ -134,7 +111,36 @@ public class Game extends JPanel {
 	public void discardCard(final Card card) {
 		discard.add(card);
 	}
-    
+
+	// This is different from game rules, due to not needing card costs for randomization.
+	private void placeInitialTiles() {
+		int cityCount = 2;
+		final Tile[] tiles = grid.values().toArray(new Tile[grid.values().size()]);
+		while (cityCount > 0) {
+			final Tile randomTile = tiles[r.nextInt(tiles.length)];
+			if (isSuitable(randomTile)) {
+				cityCount--;
+				randomTile.setType(Tile.Type.CITY);
+				final List<Tile> neighbors = randomTile.getNeighbors();
+				while (true) {
+					final Tile randomNeighbor = neighbors.get(r.nextInt(neighbors.size()));
+					if (isSuitable(randomNeighbor)) {
+						randomNeighbor.setType(Tile.Type.GREENERY);
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	private static boolean isSuitable(final Tile tile) {
+		if (tile.getType() != null) {
+			return false;
+		}
+		final TileProperties properties = tile.getProperties();
+		return properties == null || (!properties.isWater() && !properties.isNoctis());
+	}
+
 	public static void main(String[] args) {
         JFrame f = new JFrame();
         Game g = new Game();
