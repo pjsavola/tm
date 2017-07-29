@@ -15,9 +15,18 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import tm.corporation.Credicor;
+import tm.corporation.Ecoline;
+import tm.corporation.Helion;
 import tm.corporation.InterplanetaryCinematics;
 import tm.corporation.Inventrix;
+import tm.corporation.MiningGuild;
 import tm.corporation.Phoblog;
+import tm.corporation.SaturnSystems;
+import tm.corporation.Teractor;
+import tm.corporation.TharsisRepublic;
+import tm.corporation.Thorgate;
+import tm.corporation.UnitedNationsMarsInitiative;
 
 public class Game extends JPanel {
 
@@ -47,9 +56,18 @@ public class Game extends JPanel {
 		// Temporary bogus cards
 		for (int i = 0; i < 100; i++)
 			deck.add(new Card(new Tags()));
+		corporationDeck.add(new TharsisRepublic());
 		corporationDeck.add(new InterplanetaryCinematics());
         corporationDeck.add(new Inventrix());
 		corporationDeck.add(new Phoblog());
+		corporationDeck.add(new Credicor());
+		corporationDeck.add(new Ecoline());
+		corporationDeck.add(new Helion());
+		corporationDeck.add(new MiningGuild());
+		corporationDeck.add(new SaturnSystems());
+		corporationDeck.add(new Thorgate());
+		corporationDeck.add(new Teractor());
+		corporationDeck.add(new UnitedNationsMarsInitiative());
 		
 		// Initial tiles
 		placeInitialTiles();
