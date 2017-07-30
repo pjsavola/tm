@@ -94,6 +94,12 @@ public class Player {
 		renderText(g, "Rating", rating, 0, 7, 0x0000FF);
 		renderText(g, "Points", getPoints(), 0, 8, 0x00FFFF);
 		renderText(g, "Cards", getCards().size(), 0, 9, 0xCCCCCC);
+		if (corporation != null) {
+			final String name = corporation.getTitle();
+			final int w = g.getFontMetrics().stringWidth(name);
+			g.setColor(new Color(0xFFFFFF));
+			g.drawString(corporation.getTitle(), 350 - w / 2, 12);
+		}
         g.setColor(oldColor);
 	}
 	
