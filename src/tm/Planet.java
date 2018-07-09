@@ -6,7 +6,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 public class Planet {
-	private final static Font font = new Font("Arial", Font.BOLD, 12);
+	private static final Font font = new Font("Arial", Font.BOLD, 12);
 	private int waterCount = 9;
 	private int temperature = -30;
 	private int oxygen = 0;
@@ -24,17 +24,17 @@ public class Planet {
 		return temperature;
 	}
 	
-	public void adjustWaterCount(final int delta) {
+	public void adjustWaterCount(int delta) {
 		waterCount += delta;
 	}
 	
-	public int adjustOxygen(final int delta) {
+	public int adjustOxygen(int delta) {
 		int oxygenBeforeAdjusting = oxygen;
 		oxygen = Math.min(14, oxygen + delta);
 		return oxygen - oxygenBeforeAdjusting;
 	}
 	
-	public int adjustTemperature(final int delta) {
+	public int adjustTemperature(int delta) {
 		int temperatureBeforeAdjusting = temperature;
 		temperature = Math.min(8, temperature + delta);
 		return temperature - temperatureBeforeAdjusting;
@@ -48,7 +48,7 @@ public class Planet {
 		return round;
 	}
 	
-	public void render(final Graphics g) {
+	public void render(Graphics g) {
     	final Color oldColor = g.getColor();
 		g.setFont(font);
 		renderText(g, "Round", round, 1, new Color(0xFFFFFF));
@@ -58,7 +58,7 @@ public class Planet {
 		g.setColor(oldColor);
 	}
 	
-    private Color getColor(int min, double now, int max, Color color1, Color color2) {
+    private static Color getColor(int min, double now, int max, Color color1, Color color2) {
     	int r1 = color1.getRed();
     	int g1 = color1.getGreen();
     	int b1 = color1.getBlue();
@@ -72,12 +72,12 @@ public class Planet {
     			         (int) (coeff1 * b1 + coeff2 * b2));
     }
     
-	private static void renderText(final Graphics g, final String name, final int amount, final int i, final Color color) {
+	private static void renderText(Graphics g, String name, int amount, int i, Color color) {
 		g.setColor(color);
 		final String text = name + ": " + amount;
 		final FontMetrics metrics = g.getFontMetrics();
-		int w = metrics.stringWidth(text);
-        int h = metrics.getHeight();
+		final int w = metrics.stringWidth(text);
+        final int h = metrics.getHeight();
         g.drawString(text, 698 - w, (h + 1) * i);
 	}
 }

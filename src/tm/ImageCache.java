@@ -28,9 +28,9 @@ public abstract class ImageCache {
 	}
 
 	private static <T> BufferedImage updateCache(BufferedImage image, T key, Map<T, BufferedImage> cache) {
-		image = toCompatibleImage(image);
-		cache.put(key, image);
-		return image;
+		final BufferedImage compatibleImage = toCompatibleImage(image);
+		cache.put(key, compatibleImage);
+		return compatibleImage;
 	}
 
 	private static BufferedImage toCompatibleImage(BufferedImage image) { 

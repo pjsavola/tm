@@ -174,13 +174,14 @@ public class ActionHandler {
 			}
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				if (arg0.getKeyChar() == 'u') {
-					undo();
-				} else if (arg0.getKeyChar() == 'r') {
-					redo();
-				} else {
-					if (cancel()) {
-						process(pool.getCompletable(arg0.getKeyChar()));
+				final char c = arg0.getKeyChar();
+				if (current == null || !current.pressKey(c)) {
+					if (c == 'u') {
+						undo();
+					} else if (c == 'r') {
+						redo();
+					} else if (cancel()) {
+						process(pool.getCompletable(c));
 					}
 				}
 				game.repaint();

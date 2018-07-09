@@ -53,6 +53,14 @@ public class Player {
 		return income.combine(new Resources(rating, 0, 0, 0, -leftOverEnergy, leftOverEnergy));
 	}
 
+	public int getSteel() {
+		return resources.steel;
+	}
+
+	public int getTitanium() {
+		return resources.titanium;
+	}
+
 	public int getPoints() {
 		final AtomicLong total = new AtomicLong(rating);
 		ownedTiles

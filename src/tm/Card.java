@@ -28,6 +28,10 @@ public class Card {
 
     public int getCost() { return 5; }
 
+    public Tags getTags() {
+        return tags.space();
+    }
+
     public void renderTitle(final Graphics g, final int x, final int y) {
         g.setFont(FONT);
         final FontMetrics metrics = g.getFontMetrics();

@@ -68,4 +68,12 @@ public class Tags {
 		microbe++;
 		return this;
 	}
+
+	public boolean hasBuilding() {
+		return building > 0;
+	}
+
+	public boolean hasSpace() {
+		return space > 0;
+	}
 }

@@ -56,10 +56,10 @@ public class Game extends JPanel {
 		// Temporary bogus cards
 		for (int i = 0; i < 100; i++)
 			deck.add(new Card(new Tags()));
+		corporationDeck.add(new Phoblog());
 		corporationDeck.add(new TharsisRepublic());
 		corporationDeck.add(new InterplanetaryCinematics());
         corporationDeck.add(new Inventrix());
-		corporationDeck.add(new Phoblog());
 		corporationDeck.add(new Credicor());
 		corporationDeck.add(new Ecoline());
 		corporationDeck.add(new Helion());

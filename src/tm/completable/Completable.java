@@ -5,7 +5,7 @@ import java.util.Set;
 
 public interface Completable {
 
-	default boolean remove(final Set<Completable> completedSet) {
+	default boolean remove(Set<Completable> completedSet) {
 		return completedSet.remove(this);
 	}
 
@@ -18,6 +18,10 @@ public interface Completable {
 
 	void redo();
 
-	default void paint(final Graphics g) {
+	default boolean pressKey(char c) {
+		return false;
+	}
+
+	default void paint(Graphics g) {
 	}
 }

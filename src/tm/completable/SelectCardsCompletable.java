@@ -13,11 +13,11 @@ import tm.Game;
 
 public abstract class SelectCardsCompletable implements Completable {
 
-    private static final int TOP_MARGIN = 80;
-    private static final int LEFT_MARGIN = 100;
-    private static final int CARD_SPACING = 4;
-    private static final int CARD_HEIGHT = Card.TITLE_HEIGHT + CARD_SPACING;
-    private static final int VISIBLE_SPACING = 100;
+    protected static final int TOP_MARGIN = 80;
+    protected static final int LEFT_MARGIN = 100;
+    protected static final int CARD_SPACING = 4;
+    protected static final int CARD_HEIGHT = Card.TITLE_HEIGHT + CARD_SPACING;
+    protected static final int VISIBLE_SPACING = 100;
     private static final Color TITLE_COLOR = new Color(0xFFFFFF);
     private static final Color HIGHLIGHT_COLOR = new Color(0xFFFF00);
     private final Game game;
@@ -59,6 +59,7 @@ public abstract class SelectCardsCompletable implements Completable {
                             cardToRender = null;
                         }
                     }
+                    selectionChanged();
                     game.repaint();
                     break;
                 }
@@ -71,11 +72,14 @@ public abstract class SelectCardsCompletable implements Completable {
         }
     };
 
-    protected SelectCardsCompletable(final Game game, final List<Card> selection) {
+    protected SelectCardsCompletable(Game game, List<Card> selection) {
         this.game = game;
         this.selection = selection;
         game.addMouseListener(mouseListener);
         game.repaint();
+    }
+
+    protected void selectionChanged() {
     }
 
     public int maxSelection() {

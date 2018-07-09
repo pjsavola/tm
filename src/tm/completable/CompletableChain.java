@@ -14,13 +14,13 @@ public class CompletableChain implements Completable {
 	}
 	
 	@Override
-	public boolean remove(final Set<Completable> completedSet) {
-		for (final Completable completable : completables) {
+	public boolean remove(Set<Completable> completedSet) {
+		for (Completable completable : completables) {
 			if (!completedSet.contains(completable)) {
 				return false;
 			}
 		}
-		for (final Completable completable : completables) {
+		for (Completable completable : completables) {
 			completedSet.remove(completable);	
 		}
 		return true;
@@ -28,14 +28,14 @@ public class CompletableChain implements Completable {
 	
 	@Override
 	public void cancel() {
-		for (final Completable completable : completables) {
+		for (Completable completable : completables) {
 			completable.cancel();
 		}
 	}
 
 	@Override
 	public void complete() {
-		for (final Completable completable : completables) {
+		for (Completable completable : completables) {
 			completable.complete();
 		}
 	}
@@ -49,15 +49,25 @@ public class CompletableChain implements Completable {
 
 	@Override
 	public void redo() {
-		for (final Completable completable : completables) {
+		for (Completable completable : completables) {
 			completable.redo();
 		}
 	}
 
 	@Override
 	public void paint(final Graphics g) {
-		for (final Completable completable : completables) {
+		for (Completable completable : completables) {
 			completable.paint(g);
 		}
+	}
+
+	@Override
+	public boolean pressKey(char c) {
+		for (Completable completable : completables) {
+			if (completable.pressKey(c)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
