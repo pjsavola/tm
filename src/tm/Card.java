@@ -10,12 +10,12 @@ public class Card {
     public static final int WIDTH = 200;
     public static final int TITLE_HEIGHT = 16;
     private static final Color TEXT_COLOR = new Color(0xFFFFFF);
-    private static final Color BG_COLOR = new Color(0x000000);
+    private static final Color BG_COLOR = new Color(0x333333);
     private static final Font FONT = new Font("Arial", Font.BOLD, 12);
     private final Tags tags;
 
     public Card(final Tags tags) {
-        this.tags = tags;
+        this.tags = tags.space().event();
     }
 
     public Color getBorderColor() {
@@ -26,10 +26,10 @@ public class Card {
         return "Card";
     }
 
-    public int getCost() { return 5; }
+    public int getCost() { return 25; }
 
     public Tags getTags() {
-        return tags.space();
+        return tags;
     }
 
     public void renderTitle(final Graphics g, final int x, final int y) {
@@ -49,5 +49,15 @@ public class Card {
         // Draw text
         g.setColor(TEXT_COLOR);
         g.drawString(getTitle(), x + (WIDTH - w) / 2, y + 12);
+
+        // Draw cost
+        final String cost = Integer.toString(getCost());
+        final int costWidth = metrics.stringWidth(cost);
+        g.drawImage(ImageCache.getImage("images/icon_money.png"), x, y, null);
+        g.setColor(Color.BLACK);
+        g.drawString(cost, x + (16 - costWidth) / 2, y + 12);
+
+        // Draw tags
+        tags.render(g, x + WIDTH, y);
     }
 }

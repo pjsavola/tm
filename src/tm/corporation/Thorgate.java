@@ -8,11 +8,11 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 
-// TODO: -3 cost for energy symbols
+// TODO: -3 cost for power symbols
 public class Thorgate extends Corporation {
 
     public Thorgate() {
-        super(new Tags().energy());
+        super(new Tags().power());
     }
 
     @Override

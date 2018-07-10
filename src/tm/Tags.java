@@ -1,5 +1,7 @@
 package tm;
 
+import java.awt.Graphics;
+
 public class Tags {
 
 	private int event;
@@ -9,7 +11,7 @@ public class Tags {
 	private int earth;
 	private int jovian;
 	private int science;
-	private int energy;
+	private int power;
 	private int plant;
 	private int animal;
 	private int microbe;
@@ -49,8 +51,8 @@ public class Tags {
 		return this;
 	}
 
-	public Tags energy() {
-		energy++;
+	public Tags power() {
+		power++;
 		return this;
 	}
 
@@ -75,5 +77,29 @@ public class Tags {
 
 	public boolean hasSpace() {
 		return space > 0;
+	}
+
+	public void render(Graphics g, int x, int y) {
+		int offset = x - 17;
+		offset = drawTags(g, "images/tag_event.png", event, offset, y);
+		offset = drawTags(g, "images/tag_building.png", building, offset, y);
+		offset = drawTags(g, "images/tag_city.png", city, offset, y);
+		offset = drawTags(g, "images/tag_space.png", space, offset, y);
+		offset = drawTags(g, "images/tag_earth.png", earth, offset, y);
+		offset = drawTags(g, "images/tag_jovian.png", jovian, offset, y);
+		offset = drawTags(g, "images/tag_science.png", science, offset, y);
+		offset = drawTags(g, "images/tag_power.png", power, offset, y);
+		offset = drawTags(g, "images/tag_plant.png", plant, offset, y);
+		offset = drawTags(g, "images/tag_animal.png", animal, offset, y);
+		drawTags(g, "images/tag_microbe.png", microbe, offset, y);
+	}
+
+	private static int drawTags(Graphics g, String path, int count, int x, int y) {
+		int actualX = x;
+		for (int i = 0; i < count; i++) {
+			g.drawImage(ImageCache.getImage(path), actualX, y, null);
+			actualX -= 17;
+		}
+		return actualX;
 	}
 }
