@@ -22,7 +22,7 @@ public class Resources {
 		this.heat = heat;
 	}
 	
-	public void adjust(final Resources delta) {
+	public void adjust(Resources delta) {
 		money += delta.money;
 		steel += delta.steel;
 		titanium += delta.titanium;
@@ -31,7 +31,7 @@ public class Resources {
 		heat += delta.heat;
 	}
 	
-	public boolean canAdjust(final Resources delta) {
+	public boolean canAdjust(Resources delta) {
 		return
 			money + delta.money >= 0 &&
 			steel + delta.steel >= 0 &&
@@ -45,7 +45,7 @@ public class Resources {
 		return new Resources(-money, -steel, -titanium, -plants, -energy, -heat);
 	}
 	
-	public Resources combine(final Resources resources) {
+	public Resources combine(Resources resources) {
 		return new Resources(money + resources.money, steel + resources.steel, titanium + resources.titanium,
 				             plants + resources.plants, energy + resources.energy, heat + resources.heat);
 	}

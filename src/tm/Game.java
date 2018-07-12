@@ -15,6 +15,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.sun.istack.internal.Nullable;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
 import tm.corporation.Helion;
@@ -107,6 +108,15 @@ public class Game extends JPanel {
     public Player getCurrentPlayer() {
     	return currentPlayer;
     }
+
+    @Nullable
+    public Player getPlayer(Class<? extends Corporation> corporation) {
+	    if (currentPlayer.getCorporation().getClass().equals(corporation)) {
+	        return currentPlayer;
+        } else {
+	        return null;
+        }
+    }
     
     public Planet getPlanet() {
     	return planet;
@@ -126,7 +136,7 @@ public class Game extends JPanel {
 	    return corporationDeck;
 	}
 
-	public void discardCard(final Card card) {
+	public void discardCard(Card card) {
 		discard.add(card);
 	}
 
@@ -151,7 +161,7 @@ public class Game extends JPanel {
 		}
 	}
 
-	private static boolean isSuitable(final Tile tile) {
+	private static boolean isSuitable(Tile tile) {
 		if (tile.getType() != null) {
 			return false;
 		}

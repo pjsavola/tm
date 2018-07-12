@@ -6,7 +6,6 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.ResourceDeltaAction;
 
-// TODO: +2 money for each event
 public class InterplanetaryCinematics extends Corporation {
 
     public InterplanetaryCinematics() {

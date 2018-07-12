@@ -27,14 +27,14 @@ public class ActionHandler {
 	private boolean cancelEnabled = true;
 	private Set<Completable> completedActions = new HashSet<>();
 
-	public ActionHandler(final Game game) {
+	public ActionHandler(Game game) {
 		this.game = game;
 		this.pool = new ActionPool(game);
 		final Action initialDraw = new DrawCardsAction(10, true, true);
 		reprocess(initialDraw.begin(game));
 	}
 
-	public void completed(final Completable action) {
+	public void completed(Completable action) {
 		completedActions.add(action);
 		if (current != null) {
 			if (current.remove(completedActions)) {
@@ -43,7 +43,7 @@ public class ActionHandler {
 		}
 	}
 	
-	private void process(final Completable completable) {
+	private void process(Completable completable) {
 		if (completable != null) {
 			current = completable;
 			if (current.remove(completedActions)) {
@@ -84,7 +84,7 @@ public class ActionHandler {
 		}
 	}
 	
-	public void addPendingAction(final Action action) {
+	public void addPendingAction(Action action) {
 		if (pendingActions == null) {
 			pendingActions = new ArrayList<>();
 			pendingActionCount = 0;
@@ -92,14 +92,14 @@ public class ActionHandler {
 		pendingActions.add(action);
 	}
 
-	public void addPendingIrreversibleAction(final Action action) {
+	public void addPendingIrreversibleAction(Action action) {
 		if (pendingIrreversibleActions == null) {
 			pendingIrreversibleActions = new ArrayList<>();
 		}
 		pendingIrreversibleActions.add(action);
 	}
 
-	public void reprocess(final Completable completable) {
+	public void reprocess(Completable completable) {
 		cancelEnabled = false;
 		pendingIrreversibleActions = new ArrayList<>(0);
 		process(completable);
@@ -153,8 +153,8 @@ public class ActionHandler {
 		}
 		return true;
 	}
-	
-	public void render(final Graphics g) {
+
+	public void render(Graphics g) {
     	if (current != null) {
     		current.paint(g);
     	}

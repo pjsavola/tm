@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
+import tm.corporation.Phoblog;
+import tm.corporation.Teractor;
+import tm.corporation.Thorgate;
+
 public class Player {
 	private static final Font font = new Font("Arial", Font.BOLD, 12);
 	private Resources resources = new Resources(0);
@@ -69,6 +73,27 @@ public class Player {
 	public int getTitanium() {
 		return resources.titanium;
 	}
+
+	public int getSteelValue() {
+	    return 2;
+    }
+
+    public int getTitaniumValue() {
+	    if (corporation instanceof Phoblog) {
+	        return 4;
+        }
+	    return 3;
+    }
+
+    public int getDiscount(Card card) {
+	    if (card.getTags().hasPower() && corporation instanceof Thorgate) {
+            return 3;
+        }
+        if (card.getTags().hasEvent() && corporation instanceof Teractor) {
+	        return 3;
+        }
+	    return 0;
+    }
 
 	public int getPoints() {
 		final AtomicLong total = new AtomicLong(rating);

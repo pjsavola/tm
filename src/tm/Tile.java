@@ -16,7 +16,7 @@ public class Tile {
 		
 		private final BufferedImage image;
 		
-		private Type(final String imagePath) {
+		private Type(String imagePath) {
 			image = ImageCache.getImage(imagePath);
 		}
 		
@@ -32,7 +32,7 @@ public class Tile {
 	private Type type;
 	private Player owner;
 	
-	public Tile(final int x, final int y, final Map<Point, Tile> tiles) {
+	public Tile(int x, int y, Map<Point, Tile> tiles) {
 		coords = new Point(x, y);
 		Tile current = tiles.get(new Point(x - 1, y));
 		current = markAdjacent(tiles.get(new Point(x - 1, y + 1)), current);
@@ -49,15 +49,15 @@ public class Tile {
 		return neighbors;
 	}
 	
-	public int getX(final int x, final double radius) {
+	public int getX(int x, double radius) {
 		return (int) (x + coords.y * Math.sqrt(3) / 2 * radius + coords.x * Math.sqrt(3) * radius);
 	}
 	
-	public int getY(final int y, final double radius) {
+	public int getY(int y, double radius) {
 		return (int) (y - coords.y * 1.5 * radius);
 	}
 	
-	private Tile markAdjacent(final Tile tile, final Tile prev) {
+	private Tile markAdjacent(Tile tile, Tile prev) {
 		if (tile != null) {
 			neighbors.add(tile);
 			tile.neighbors.add(this);
@@ -65,7 +65,7 @@ public class Tile {
 		return tile;
 	}
 	
-	public boolean setType(final Type type) {
+	public boolean setType(Type type) {
 		if (this.type != null && type != null) return false;
 		this.type = type;
 		return true;
@@ -75,7 +75,7 @@ public class Tile {
 		return type;
 	}
 	
-	public void setOwner(final Player player) {
+	public void setOwner(Player player) {
 		if (player == null && owner != null) {
 			owner.ownedTiles.remove(this);
 		}
@@ -93,7 +93,7 @@ public class Tile {
 		return properties;
 	}
 	
-	public void draw(final Graphics g) {
+	public void draw(Graphics g) {
 		final int px = getX(347, 43.5);
 		final int py = getY(350, 43.5);
 		

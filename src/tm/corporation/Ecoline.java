@@ -8,7 +8,6 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 
-// TODO: 7 plants instead of 8 for a greenery
 public class Ecoline extends Corporation {
 
     public Ecoline() {

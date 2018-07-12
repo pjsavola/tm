@@ -34,21 +34,21 @@ public abstract class ImageCache {
 	}
 
 	private static BufferedImage toCompatibleImage(BufferedImage image) { 
-        GraphicsConfiguration gc = getConfiguration(); 
+        final GraphicsConfiguration gc = getConfiguration();
         if (image.getColorModel().equals(gc.getColorModel())) { 
             return image; 
         } 
-        BufferedImage compatibleImage = gc.createCompatibleImage( 
-                image.getWidth(), image.getHeight(), 
-                image.getTransparency()); 
-        Graphics g = compatibleImage.getGraphics(); 
+        final BufferedImage compatibleImage = gc.createCompatibleImage(
+            image.getWidth(), image.getHeight(),
+            image.getTransparency()
+        );
+        final Graphics g = compatibleImage.getGraphics();
         g.drawImage(image, 0, 0, null); 
         g.dispose(); 
         return compatibleImage; 
     }
 
     private static GraphicsConfiguration getConfiguration() { 
-        return GraphicsEnvironment.getLocalGraphicsEnvironment(). 
-                getDefaultScreenDevice().getDefaultConfiguration(); 
+        return GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
     }
 }

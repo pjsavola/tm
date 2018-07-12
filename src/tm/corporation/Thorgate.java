@@ -8,7 +8,6 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 
-// TODO: -3 cost for power symbols
 public class Thorgate extends Corporation {
 
     public Thorgate() {

@@ -10,7 +10,7 @@ public class TileProperties {
 	private final boolean isWater;
 	private final boolean isNoctis;
 	
-	public TileProperties(final int steel, final int titanium, final int plants, final int cards, final boolean isWater, final boolean isNoctis) {
+	public TileProperties(int steel, int titanium, int plants, int cards, boolean isWater, boolean isNoctis) {
 		resources = new Resources(0, steel, titanium, plants, 0, 0);
 		this.cards = cards;
 		this.isWater = isWater;

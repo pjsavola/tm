@@ -8,7 +8,6 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 
-// TODO: +1 income per jovian tag
 public class SaturnSystems extends Corporation {
 
     public SaturnSystems() {

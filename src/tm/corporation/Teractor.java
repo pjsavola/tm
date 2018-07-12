@@ -6,7 +6,6 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.ResourceDeltaAction;
 
-// TODO: -3 discount for earth tag
 public class Teractor extends Corporation {
 
     public Teractor() {

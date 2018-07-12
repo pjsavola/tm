@@ -83,6 +83,18 @@ public class Tags {
 		return space > 0;
 	}
 
+	public boolean hasEarth() {
+	    return earth > 0;
+    }
+
+	public boolean hasJovian() {
+		return jovian > 0;
+	}
+
+	public boolean hasPower() {
+	    return power > 0;
+    }
+
 	public void render(Graphics g, int x, int y) {
 		int offset = x - 17;
 		offset = drawTags(g, "images/tag_event.png", event, offset, y);

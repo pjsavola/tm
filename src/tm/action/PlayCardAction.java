@@ -13,8 +13,16 @@ import tm.Tags;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
 import tm.corporation.Credicor;
+import tm.corporation.InterplanetaryCinematics;
+import tm.corporation.SaturnSystems;
 
 public class PlayCardAction implements Action {
+
+    final Player player;
+
+    public PlayCardAction(Player player) {
+        this.player = player;
+    }
 
     @Override
     public char getKey() {
@@ -23,16 +31,16 @@ public class PlayCardAction implements Action {
 
     @Override
     public boolean check(Game game) {
-        return !game.getCurrentPlayer().getCards().isEmpty();
+        return !player.getCards().isEmpty();
     }
 
     @Override
     public Completable begin(Game game) {
-        final List<Card> hand = new ArrayList<>(game.getCurrentPlayer().getCards());
+        final List<Card> hand = new ArrayList<>(player.getCards());
         return new PlayCardCompletable(game, hand);
     }
 
-    private static class PlayCardCompletable extends SelectCardsCompletable {
+    private class PlayCardCompletable extends SelectCardsCompletable {
 
         private final Game game;
         private final List<Card> hand;
@@ -41,7 +49,7 @@ public class PlayCardAction implements Action {
         private int materialValue;
 
         public PlayCardCompletable(Game game, List<Card> hand) {
-            super(game, game.getCurrentPlayer().getCards());
+            super(game, player.getCards());
             this.game = game;
             this.hand = hand;
         }
@@ -58,7 +66,7 @@ public class PlayCardAction implements Action {
                 return false;
             }
             final Card card = selectedCards.iterator().next();
-            final int cost = Math.max(0, card.getCost() - materialsUsed * materialValue);
+            final int cost = Math.max(0, card.getCost() - player.getDiscount(card) - materialsUsed * materialValue);
             final Resources payment;
             if (card.getTags().hasBuilding()) {
                 payment = new Resources(-cost, -materialsUsed, 0, 0, 0, 0);
@@ -68,8 +76,17 @@ public class PlayCardAction implements Action {
             final Action paymentAction = new ResourceDeltaAction(payment);
             if (paymentAction.check(game)) {
                 game.getActionHandler().addPendingAction(paymentAction);
-                if (card.getCost() >= 20 && game.getCurrentPlayer().getCorporation() instanceof Credicor) {
+                if (card.getCost() >= 20 && player.getCorporation() instanceof Credicor) {
                     game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(4)));
+                }
+                if (card.getTags().hasEvent() && player.getCorporation() instanceof InterplanetaryCinematics) {
+                    game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
+                }
+                if (card.getTags().hasJovian()) {
+                    final Player saturnSystemPlayer = game.getPlayer(SaturnSystems.class);
+                    if (saturnSystemPlayer != null) {
+                        game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(1), saturnSystemPlayer));
+                    }
                 }
                 return true;
             } else {
@@ -80,20 +97,20 @@ public class PlayCardAction implements Action {
 
         @Override
         public void complete() {
-            game.getCurrentPlayer().getCards().removeAll(selectedCards);
+            player.getCards().removeAll(selectedCards);
             cancel();
         }
 
         @Override
         public void undo() {
-            game.getCurrentPlayer().getCards().clear();
-            game.getCurrentPlayer().getCards().addAll(hand);
+            player.getCards().clear();
+            player.getCards().addAll(hand);
             game.repaint();
         }
 
         @Override
         public void redo() {
-            game.getCurrentPlayer().getCards().removeAll(selectedCards);
+            player.getCards().removeAll(selectedCards);
             game.repaint();
         }
 
@@ -132,19 +149,16 @@ public class PlayCardAction implements Action {
             if (!selectedCards.isEmpty()) {
                 final Card card = selectedCards.iterator().next();
                 final Tags tags = card.getTags();
-                final Player player = game.getCurrentPlayer();
                 if (tags.hasBuilding()) {
-                    // TODO: Steel value
-                    materialValue = 2;
-                    materialsUsed = Math.min(player.getSteel(), card.getCost() / materialValue);
+                    materialValue = player.getSteelValue();
+                    materialsUsed = Math.min(player.getSteel(), (card.getCost() - player.getDiscount(card)) / materialValue);
                     materialMax = materialsUsed;
                     if (player.getSteel() > materialsUsed && card.getCost() % materialValue != 0) {
                         materialMax++;
                     }
                 } else if (tags.hasSpace()) {
-                    // TODO: Titanium value
-                    materialValue = 3;
-                    materialsUsed = Math.min(player.getTitanium(), card.getCost() / materialValue);
+                    materialValue = player.getTitaniumValue();
+                    materialsUsed = Math.min(player.getTitanium(), (card.getCost() - player.getDiscount(card)) / materialValue);
                     materialMax = materialsUsed;
                     if (player.getTitanium() > materialsUsed && card.getCost() % materialValue != 0) {
                         materialMax++;

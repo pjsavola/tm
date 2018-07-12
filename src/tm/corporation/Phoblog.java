@@ -6,7 +6,6 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.ResourceDeltaAction;
 
-// TODO: +1 value for titanium
 public class Phoblog extends Corporation {
 
     public Phoblog() {

@@ -13,12 +13,15 @@ import tm.action.AddOxygenAction;
 import tm.action.AddTemperatureAction;
 import tm.action.AddWaterAction;
 import tm.action.DiscardAction;
+import tm.action.DiscountAction;
 import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.action.PlayCardAction;
 import tm.action.ResourceDeltaAction;
 import tm.action.SwitchRoundAction;
 import tm.completable.Completable;
+import tm.corporation.Ecoline;
+import tm.corporation.Thorgate;
 
 public class ActionPool {
 	private static final Font font = new Font("Arial", Font.BOLD, 12);
@@ -33,6 +36,7 @@ public class ActionPool {
 		standardActions.add(new ActionChain('d', "Discard",
 			new DiscardAction()));
 		standardActions.add(new ActionChain('e', "Energy income",
+			new DiscountAction(new Resources(3), Thorgate.class),
 			new ResourceDeltaAction(new Resources(-11)),
 			new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0))));
 		standardActions.add(new ActionChain('m', "Temperature",
@@ -51,6 +55,7 @@ public class ActionPool {
 			new PlaceTileAction(Tile.Type.CITY),
 			new IncomeDeltaAction(new Resources(1))));
 		standardActions.add(new ActionChain('p', "Plant",
+			new DiscountAction(new Resources(0, 0, 0, 1, 0, 0), Ecoline.class),
 			new ResourceDeltaAction(new Resources(0, 0, 0, -8, 0, 0)),
 			new PlaceTileAction(Tile.Type.GREENERY),
 			new AddOxygenAction()));
@@ -60,7 +65,7 @@ public class ActionPool {
 		standardActions.add(new ActionChain('p', "Pass",
 			new SwitchRoundAction()));
 		standardActions.add(new ActionChain('x', "Play card",
-			new PlayCardAction()));
+			new PlayCardAction(game.getCurrentPlayer())));
 	}
 	
 	public Completable getCompletable(char c) {
