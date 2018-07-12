@@ -10,7 +10,6 @@ import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.action.ResourceDeltaAction;
 
-// TODO: +1 income and 3 money per city
 public class TharsisRepublic extends Corporation {
 
     public TharsisRepublic() {
@@ -20,8 +19,8 @@ public class TharsisRepublic extends Corporation {
     @Override
     protected Action getInitialAction() {
         return new ActionChain(
-            new ResourceDeltaAction(new Resources(43)),
-            new IncomeDeltaAction(new Resources(3)),
+            new ResourceDeltaAction(new Resources(40)),
+            new IncomeDeltaAction(new Resources(2)), // Initial cities in solo game
             new PlaceTileAction(Tile.Type.CITY));
     }
 }

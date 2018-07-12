@@ -11,11 +11,14 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.Set;
 
-import tm.completable.Completable;
 import tm.Game;
+import tm.Player;
 import tm.Resources;
 import tm.Tile;
 import tm.TileProperties;
+import tm.completable.Completable;
+import tm.corporation.MiningGuild;
+import tm.corporation.TharsisRepublic;
 
 public class PlaceTileAction implements Action {
 
@@ -144,6 +147,15 @@ public class PlaceTileAction implements Action {
 					sum += 2;
 				}
 			}
+			if (type == Tile.Type.CITY) {
+			    final Player tharsisRepublicPlayer = game.getPlayer(TharsisRepublic.class);
+			    if (tharsisRepublicPlayer != null) {
+			        game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(1), tharsisRepublicPlayer));
+                }
+                if (tharsisRepublicPlayer == game.getCurrentPlayer()) {
+			        game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(3)));
+                }
+            }
 			final TileProperties p = targetTile.getProperties();
 			if (sum > 0 || p != null) {
 				final Resources money = new Resources(sum);
@@ -152,6 +164,9 @@ public class PlaceTileAction implements Action {
 				if (bonusAction.check(game)) {
 					game.getActionHandler().addPendingAction(bonusAction);
 				}
+				if (game.getCurrentPlayer().getCorporation() instanceof MiningGuild && (resources.steel > 0 || resources.titanium > 0)) {
+                    game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(0, 1, 0, 0, 0, 0)));
+                }
 				if (p != null && p.getCards() > 0) {
 					game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(p.getCards(), false, false));
 				}

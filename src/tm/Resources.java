@@ -3,8 +3,8 @@ package tm;
 public class Resources {
 
 	int money;
-	int steel;
-	int titanium;
+	public int steel;
+	public int titanium;
 	int plants;
 	int energy;
 	int heat;

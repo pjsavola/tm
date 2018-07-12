@@ -8,7 +8,6 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 
-// TODO: When placing on top of titanium or steel, gain 1 steel prod
 public class MiningGuild extends Corporation {
 
     public MiningGuild() {

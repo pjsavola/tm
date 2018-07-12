@@ -62,10 +62,14 @@ public class PlayCardAction implements Action {
         @Override
         public boolean check() {
             if (selectedCards.isEmpty()) {
-                System.err.println ("You must select a card to play it");
+                System.err.println("You must select a card to play it");
                 return false;
             }
             final Card card = selectedCards.iterator().next();
+            if (!player.fulfillsRequirements(card, game.getPlanet())) {
+                System.err.println("Card requirements not fulfilled");
+                return false;
+            }
             final int cost = Math.max(0, card.getCost() - player.getDiscount(card) - materialsUsed * materialValue);
             final Resources payment;
             if (card.getTags().hasBuilding()) {

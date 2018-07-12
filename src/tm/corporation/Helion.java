@@ -8,7 +8,6 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 
-// TODO: Using heat as money
 public class Helion extends Corporation {
 
     public Helion() {

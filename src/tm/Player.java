@@ -10,15 +10,28 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
+import tm.action.Action;
+import tm.action.ActionChain;
+import tm.action.AddOxygenAction;
+import tm.action.IncomeDeltaAction;
+import tm.action.PlaceTileAction;
+import tm.action.ResourceDeltaAction;
+import tm.completable.Completable;
+import tm.completable.InstantCompletable;
+import tm.corporation.Credicor;
+import tm.corporation.Ecoline;
+import tm.corporation.Helion;
 import tm.corporation.Phoblog;
 import tm.corporation.Teractor;
 import tm.corporation.Thorgate;
+import tm.corporation.UnitedNationsMarsInitiative;
 
 public class Player {
 	private static final Font font = new Font("Arial", Font.BOLD, 12);
 	private Resources resources = new Resources(0);
 	private Resources income = new Resources(0);
 	private int rating = 20;
+	private int savedRating = 20;
 	private final Color color = new Color(0xFF0000);
 	final Set<Tile> ownedTiles = new HashSet<>();
 	final List<Card> cards = new ArrayList<>();
@@ -44,6 +57,14 @@ public class Player {
 	public void adjustRating(int delta) {
 		rating += delta;
 	}
+
+	public void saveRating() {
+	    savedRating = rating;
+    }
+
+    private boolean hasIncreasedRating() {
+	    return rating > savedRating;
+    }
 	
 	public void adjustIncome(Resources delta) {
 		income.adjust(delta);
@@ -93,6 +114,74 @@ public class Player {
 	        return 3;
         }
 	    return 0;
+    }
+
+    public boolean fulfillsRequirements(Card card, Planet planet) {
+	    return true;
+    }
+
+    public List<Action> getActions() {
+        final List<Action> actions = new ArrayList<>();
+        if (corporation instanceof Credicor) {
+            actions.add(new ActionChain('g', "Greenery",
+                new ResourceDeltaAction(new Resources(-23)),
+                new PlaceTileAction(Tile.Type.GREENERY),
+                new AddOxygenAction(),
+                new ResourceDeltaAction(new Resources(4))
+            ));
+            actions.add(new ActionChain('c', "City",
+                new ResourceDeltaAction(new Resources(-25)),
+                new PlaceTileAction(Tile.Type.CITY),
+                new IncomeDeltaAction(new Resources(1)),
+                new ResourceDeltaAction(new Resources(4))
+            ));
+        } else if (corporation instanceof Ecoline) {
+            actions.add(new ActionChain('p', "Plant",
+                new ResourceDeltaAction(new Resources(0, 0, 0, -7, 0, 0)),
+                new PlaceTileAction(Tile.Type.GREENERY),
+                new AddOxygenAction()
+            ));
+        } else if (corporation instanceof Helion) {
+            actions.add(new ActionChain('m', "Heat to money",
+                new ResourceDeltaAction(new Resources(1, 0, 0, 0, 0, -1))
+            ));
+        } else if (corporation instanceof Thorgate) {
+            actions.add(new ActionChain('e', "Energy income",
+                new ResourceDeltaAction(new Resources(-8)),
+                new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0))
+            ));
+        } else if (corporation instanceof UnitedNationsMarsInitiative) {
+            actions.add(new ActionChain('t', "Increase TR",
+                new ResourceDeltaAction(new Resources(-3)),
+                new Action() {
+                    @Override
+                    public boolean check(Game game) {
+                        return hasIncreasedRating();
+                    }
+
+                    @Override
+                    public Completable begin(Game game) {
+                        return new InstantCompletable(game) {
+                            @Override
+                            public void complete() {
+                                game.getCurrentPlayer().adjustRating(1);
+                            }
+
+                            @Override
+                            public void undo() {
+                                game.getCurrentPlayer().adjustRating(-1);
+                            }
+
+                            @Override
+                            public void redo() {
+                                game.getCurrentPlayer().adjustRating(1);
+                            }
+                        };
+                    }
+                }
+            ));
+        }
+        return actions;
     }
 
 	public int getPoints() {
