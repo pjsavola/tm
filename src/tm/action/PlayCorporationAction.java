@@ -14,7 +14,7 @@ public class PlayCorporationAction implements Action {
     private Corporation corporation;
 
     @Override
-    public Completable begin(final Game game) {
+    public Completable begin(Game game) {
         final List<Card> corporations = new ArrayList<>(2);
         corporations.add(game.getCorporationDeck().pop());
         corporations.add(game.getCorporationDeck().pop());

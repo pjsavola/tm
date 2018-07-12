@@ -1,34 +1,50 @@
 package tm.action;
 
-import tm.completable.Completable;
+import com.sun.istack.internal.Nullable;
 import tm.Game;
-import tm.completable.InstantCompletable;
+import tm.Player;
 import tm.Resources;
+import tm.completable.Completable;
+import tm.completable.InstantCompletable;
 
 public class IncomeDeltaAction implements Action {
 	
 	final Resources delta;
+	@Nullable
+	final Player player;
 	
-	public IncomeDeltaAction(final Resources delta) {
-		this.delta = delta;
+	public IncomeDeltaAction(Resources delta) {
+		this(delta, null);
 	}
 
+	public IncomeDeltaAction(Resources delta, @Nullable Player player) {
+		this.delta = delta;
+		this.player = player;
+	}
+
+    @Override
+    public boolean check(Game game) {
+        final Player targetPlayer = player == null ? game.getCurrentPlayer() : player;
+        return targetPlayer.canAdjustIncome(delta);
+    }
+
 	@Override
-	public Completable begin(final Game game) {
+	public Completable begin(Game game) {
+		final Player targetPlayer = player == null ? game.getCurrentPlayer() : player;
 		return new InstantCompletable(game) {
 			@Override
 			public void complete() {
-				game.getCurrentPlayer().adjustIncome(delta);
+				targetPlayer.adjustIncome(delta);
 			}
 
 			@Override
 			public void undo() {
-				game.getCurrentPlayer().adjustIncome(delta.negate());
+				targetPlayer.adjustIncome(delta.negate());
 			}
 
 			@Override
 			public void redo() {
-				game.getCurrentPlayer().adjustIncome(delta);
+				targetPlayer.adjustIncome(delta);
 			}
 		};
 	}

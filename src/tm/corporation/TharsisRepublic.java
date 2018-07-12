@@ -14,7 +14,7 @@ import tm.action.ResourceDeltaAction;
 public class TharsisRepublic extends Corporation {
 
     public TharsisRepublic() {
-        super(new Tags().building());
+        super("Tharsis Republic", new Tags().building());
     }
 
     @Override
@@ -23,10 +23,5 @@ public class TharsisRepublic extends Corporation {
             new ResourceDeltaAction(new Resources(43)),
             new IncomeDeltaAction(new Resources(3)),
             new PlaceTileAction(Tile.Type.CITY));
-    }
-
-    @Override
-    public String getTitle() {
-        return "Tharsis Republic";
     }
 }

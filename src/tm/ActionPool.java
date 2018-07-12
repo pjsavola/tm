@@ -28,7 +28,7 @@ public class ActionPool {
 	private static final Color ENABLED_COLOR = new Color(0xFFFFFF);
 	private static final Color DISABLED_COLOR = new Color(0x666666);
 	
-	public ActionPool(final Game game) {
+	public ActionPool(Game game) {
 		this.game = game;
 		standardActions.add(new ActionChain('d', "Discard",
 			new DiscardAction()));
@@ -50,13 +50,20 @@ public class ActionPool {
 			new ResourceDeltaAction(new Resources(-25)),
 			new PlaceTileAction(Tile.Type.CITY),
 			new IncomeDeltaAction(new Resources(1))));
+		standardActions.add(new ActionChain('p', "Plant",
+			new ResourceDeltaAction(new Resources(0, 0, 0, -8, 0, 0)),
+			new PlaceTileAction(Tile.Type.GREENERY),
+			new AddOxygenAction()));
+		standardActions.add(new ActionChain('h', "Heat",
+			new ResourceDeltaAction(new Resources(0, 0, 0, 0, 0, -8)),
+			new AddTemperatureAction()));
 		standardActions.add(new ActionChain('p', "Pass",
 			new SwitchRoundAction()));
 		standardActions.add(new ActionChain('x', "Play card",
 			new PlayCardAction()));
 	}
 	
-	public Completable getCompletable(final char c) {
+	public Completable getCompletable(char c) {
 		for (final Action action : standardActions) {
 			if (action.getKey() == c && action.check(game)) {
 				return action.begin(game);
@@ -70,11 +77,11 @@ public class ActionPool {
 		return null;
 	}
 	
-	public void render(final Graphics g) {
+	public void render(Graphics g) {
     	final Color oldColor = g.getColor();
     	final boolean canAct = game.getActionHandler().canAct();
 		g.setFont(font);
-		int i = 11;
+		int i = 13;
 		for (final ActionChain action : standardActions) {
 			g.setColor(canAct && action.check(game) ? ENABLED_COLOR : DISABLED_COLOR);
 			renderText(g, action.getKey() + ": " + action.getDescription(), i--);
@@ -86,7 +93,7 @@ public class ActionPool {
 		g.setColor(oldColor);
 	}
 	
-	private static void renderText(final Graphics g, final String text, final int i) {
+	private static void renderText(Graphics g, String text, int i) {
 		final FontMetrics metrics = g.getFontMetrics();
 		int w = metrics.stringWidth(text);
         int h = metrics.getHeight();

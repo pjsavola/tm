@@ -14,11 +14,11 @@ public class ActionChain implements Action {
 	final String description;
 	final Action[] actions;
 	
-	public ActionChain(final Action ... actions) {
+	public ActionChain(Action ... actions) {
 		this(' ', "", actions);
 	}
 	
-	public ActionChain(final char key, final String description, final Action ... actions) {
+	public ActionChain(char key, String description, Action ... actions) {
 		this.key = key;
 		this.description = description;
 		this.actions = actions;
@@ -34,8 +34,8 @@ public class ActionChain implements Action {
 	}
 	
 	@Override
-	public boolean check(final Game game) {
-		for (final Action action : actions) {
+	public boolean check(Game game) {
+		for (Action action : actions) {
 			if (!action.check(game)) {
 				if (!action.isOptional()) {
 					return false;
@@ -46,9 +46,9 @@ public class ActionChain implements Action {
 	}
 	
 	@Override
-	public Completable begin(final Game game) {
+	public Completable begin(Game game) {
 		final List<Completable> completables = new ArrayList<>();
-		for (final Action action : actions) {
+		for (Action action : actions) {
 			if (!action.isOptional() || action.check(game)) {
 				completables.add(action.begin(game));
 			}

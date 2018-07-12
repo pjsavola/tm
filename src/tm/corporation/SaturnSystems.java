@@ -12,7 +12,7 @@ import tm.action.ResourceDeltaAction;
 public class SaturnSystems extends Corporation {
 
     public SaturnSystems() {
-        super(new Tags().jovian());
+        super("Saturn Systems", new Tags().jovian());
     }
 
     @Override
@@ -20,10 +20,5 @@ public class SaturnSystems extends Corporation {
         return new ActionChain(
         	new ResourceDeltaAction(new Resources(42)),
         	new IncomeDeltaAction(new Resources(1, 0, 1, 0, 0, 0)));
-    }
-
-    @Override
-    public String getTitle() {
-        return "Saturn Systems";
     }
 }

@@ -9,12 +9,12 @@ import tm.Tile;
 public class AddTemperatureAction implements Action {
 
 	@Override
-	public boolean check(final Game game) {
+	public boolean check(Game game) {
 		return game.getPlanet().getTemperature() < 8;
 	}
 	
 	@Override
-	public Completable begin(final Game game) {
+	public Completable begin(Game game) {
 		return new InstantCompletable(game) {
 			@Override
 			public void complete() {
@@ -47,5 +47,10 @@ public class AddTemperatureAction implements Action {
 				game.getCurrentPlayer().adjustRating(1);
 			}
 		};
+	}
+
+	@Override
+	public boolean isOptional() {
+		return true;
 	}
 }

@@ -12,7 +12,7 @@ import tm.action.ResourceDeltaAction;
 public class Inventrix extends Corporation {
 
     public Inventrix() {
-        super(new Tags().science());
+        super("Inventrix", new Tags().science());
     }
 
     @Override
@@ -27,10 +27,5 @@ public class Inventrix extends Corporation {
     @Override
     protected Action getInitialAction() {
         return new ResourceDeltaAction(new Resources(45));
-    }
-
-    @Override
-    public String getTitle() {
-        return "Inventrix";
     }
 }

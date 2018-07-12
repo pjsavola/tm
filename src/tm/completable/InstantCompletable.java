@@ -4,7 +4,7 @@ import tm.Game;
 
 public abstract class InstantCompletable implements Completable {
 	
-	public InstantCompletable(final Game game) {
+	public InstantCompletable(Game game) {
 		game.getActionHandler().completed(this);
 	}
 }

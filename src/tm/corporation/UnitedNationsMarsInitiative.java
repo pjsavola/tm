@@ -10,16 +10,11 @@ import tm.action.ResourceDeltaAction;
 public class UnitedNationsMarsInitiative extends Corporation {
 
     public UnitedNationsMarsInitiative() {
-        super(new Tags().plant());
+        super("United Nations Mars Initiative", new Tags().plant());
     }
 
     @Override
     protected Action getInitialAction() {
        	return new ResourceDeltaAction(new Resources(40));
-    }
-
-    @Override
-    public String getTitle() {
-        return "United Nations Mars Initiative";
     }
 }

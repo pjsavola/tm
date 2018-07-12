@@ -9,7 +9,7 @@ public class CompletableChain implements Completable {
 	
 	private final Completable[] completables;
 	
-	public CompletableChain(final Game game, final Completable[] completables) {
+	public CompletableChain(Game game, Completable[] completables) {
 		this.completables = completables;
 	}
 	
@@ -55,7 +55,7 @@ public class CompletableChain implements Completable {
 	}
 
 	@Override
-	public void paint(final Graphics g) {
+	public void paint(Graphics g) {
 		for (Completable completable : completables) {
 			completable.paint(g);
 		}

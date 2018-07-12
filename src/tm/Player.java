@@ -24,25 +24,34 @@ public class Player {
 		return color;
 	}
 	
-	public void adjustResources(final Resources delta) {
+	public void adjustResources(Resources delta) {
 		resources.adjust(delta);
 	}
 	
-	public boolean canAdjustResources(final Resources delta) {
+	public boolean canAdjustResources(Resources delta) {
 		return resources.canAdjust(delta);
 	}
-	
-	public void adjustRating(final int delta) {
+
+	public boolean canAdjustIncome(Resources delta) {
+	    final Resources newIncome = income.combine(delta);
+	    return newIncome.steel >= 0 && newIncome.titanium >= 0 && newIncome.plants >= 0 && newIncome.energy >= 0 && newIncome.heat >= 0;
+	}
+
+	public void adjustRating(int delta) {
 		rating += delta;
 	}
 	
-	public void adjustIncome(final Resources delta) {
+	public void adjustIncome(Resources delta) {
 		income.adjust(delta);
 	}
 
-	public void setCorporation(final Corporation corporation) {
+	public void setCorporation(Corporation corporation) {
 		this.corporation = corporation;
 	}
+
+	public Corporation getCorporation() {
+	    return corporation;
+    }
 
 	public List<Card> getCards() {
 		return cards;
@@ -90,7 +99,7 @@ public class Player {
     	return freeAdjacentTiles; 
     }
 	
-	public void render(final Graphics g) {
+	public void render(Graphics g) {
 		final Color oldColor = g.getColor();
 		g.setFont(font);
 		renderText(g, "Money", resources.money, income.money, 1, 0xFFFF00);
@@ -103,15 +112,15 @@ public class Player {
 		renderText(g, "Points", getPoints(), 0, 8, 0x00FFFF);
 		renderText(g, "Cards", getCards().size(), 0, 9, 0xCCCCCC);
 		if (corporation != null) {
-			final String name = corporation.getTitle();
+			final String name = corporation.getName();
 			final int w = g.getFontMetrics().stringWidth(name);
 			g.setColor(new Color(0xFFFFFF));
-			g.drawString(corporation.getTitle(), 350 - w / 2, 12);
+			g.drawString(corporation.getName(), 350 - w / 2, 12);
 		}
         g.setColor(oldColor);
 	}
 	
-	private static void renderText(final Graphics g, final String name, final int amount, final int income, final int i, final int color) {
+	private static void renderText(Graphics g, String name, int amount, int income, int i, int color) {
 		g.setColor(new Color(color));
 		final String text = name + ": " + amount + (income > 0 ? " (" + income + ")" : "");
 		final FontMetrics metrics = g.getFontMetrics(); 

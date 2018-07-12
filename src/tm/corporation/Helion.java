@@ -12,7 +12,7 @@ import tm.action.ResourceDeltaAction;
 public class Helion extends Corporation {
 
     public Helion() {
-        super(new Tags().space());
+        super("Helion", new Tags().space());
     }
 
     @Override
@@ -20,10 +20,5 @@ public class Helion extends Corporation {
         return new ActionChain(
         	new ResourceDeltaAction(new Resources(42)),
         	new IncomeDeltaAction(new Resources(0, 0, 0, 0, 0, 3)));
-    }
-
-    @Override
-    public String getTitle() {
-        return "Helion";
     }
 }

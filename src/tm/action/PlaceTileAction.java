@@ -21,7 +21,7 @@ public class PlaceTileAction implements Action {
 
 	final Tile.Type type;
 
-	public PlaceTileAction(final Tile.Type type) {
+	public PlaceTileAction(Tile.Type type) {
 		this.type = type;
 	}
 	
@@ -31,12 +31,12 @@ public class PlaceTileAction implements Action {
 	}
 	
 	@Override
-	public boolean check(final Game game) {
+	public boolean check(Game game) {
 		return true;
 	}
 
 	@Override
-	public Completable begin(final Game game) {
+	public Completable begin(Game game) {
 		return new PlaceTileCompletable(game);
 			
 	}
@@ -111,7 +111,7 @@ public class PlaceTileAction implements Action {
 			}
 		};
 
-		private PlaceTileCompletable(final Game game) {
+		private PlaceTileCompletable(Game game) {
 			this.game = game;
 			game.addMouseListener(mouseListener);
 			game.addMouseMotionListener(mouseMotionListener);
@@ -120,7 +120,7 @@ public class PlaceTileAction implements Action {
 		}
 		
 		@Override
-		public boolean remove(final Set<Completable> completedSet) {
+		public boolean remove(Set<Completable> completedSet) {
 			return completedSet.remove(this);
 		}
 
@@ -139,7 +139,7 @@ public class PlaceTileAction implements Action {
 				targetTile.setOwner(game.getCurrentPlayer());
 			}
 			int sum = 0;
-			for (final Tile tile : targetTile.getNeighbors()) {
+			for (Tile tile : targetTile.getNeighbors()) {
 				if (tile.getType() == Tile.Type.WATER) {
 					sum += 2;
 				}
@@ -177,7 +177,7 @@ public class PlaceTileAction implements Action {
 		}
 		
 		@Override
-		public void paint(final Graphics g) {
+		public void paint(Graphics g) {
 			if (type != null && customCursorLocation != null) {
 				g.drawImage(type.getImage(), customCursorLocation.x - 37, customCursorLocation.y - 43, null);
 			}

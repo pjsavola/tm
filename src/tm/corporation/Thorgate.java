@@ -12,7 +12,7 @@ import tm.action.ResourceDeltaAction;
 public class Thorgate extends Corporation {
 
     public Thorgate() {
-        super(new Tags().power());
+        super("Thorgate", new Tags().power());
     }
 
     @Override
@@ -20,10 +20,5 @@ public class Thorgate extends Corporation {
         return new ActionChain(
         	new ResourceDeltaAction(new Resources(48)),
         	new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0)));
-    }
-
-    @Override
-    public String getTitle() {
-        return "Thorgate";
     }
 }

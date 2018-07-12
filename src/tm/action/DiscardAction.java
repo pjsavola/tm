@@ -12,12 +12,12 @@ import tm.completable.SelectCardsCompletable;
 public class DiscardAction implements Action {
 
     @Override
-    public boolean check(final Game game) {
+    public boolean check(Game game) {
         return !game.getCurrentPlayer().getCards().isEmpty();
     }
 
     @Override
-    public Completable begin(final Game game) {
+    public Completable begin(Game game) {
         final List<Card> hand = new ArrayList<>(game.getCurrentPlayer().getCards());
         return new SelectCardsCompletable(game, game.getCurrentPlayer().getCards()) {
 

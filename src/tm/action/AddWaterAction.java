@@ -7,12 +7,12 @@ import tm.completable.InstantCompletable;
 public class AddWaterAction implements Action {
 
 	@Override
-	public boolean check(final Game game) {
+	public boolean check(Game game) {
 		return game.getPlanet().getWaterCount() > 0;
 	}
 
 	@Override
-	public Completable begin(final Game game) {
+	public Completable begin(Game game) {
 		return new InstantCompletable(game) {
 			@Override
 			public void complete() {
@@ -34,4 +34,8 @@ public class AddWaterAction implements Action {
 		};
 	}
 
+	@Override
+	public boolean isOptional() {
+		return true;
+	}
 }

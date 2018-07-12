@@ -15,14 +15,14 @@ public class DrawCardsAction implements Action {
     final boolean choice;
     final boolean initial;
 
-    public DrawCardsAction(final int amount, final boolean choice, final boolean initial) {
+    public DrawCardsAction(int amount, boolean choice, boolean initial) {
         this.amount = amount;
         this.choice = choice;
         this.initial = initial;
     }
 
     @Override
-    public Completable begin(final Game game) {
+    public Completable begin(Game game) {
         final List<Card> drawnCards = new ArrayList<>(amount);
         while (drawnCards.size() < amount) {
             drawnCards.add(game.drawCard());

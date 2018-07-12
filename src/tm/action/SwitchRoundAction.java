@@ -5,9 +5,9 @@ import tm.Game;
 import tm.completable.InstantCompletable;
 
 public class SwitchRoundAction implements Action {
-
+    
 	@Override
-	public Completable begin(final Game game) {
+	public Completable begin(Game game) {
 		return new InstantCompletable(game) {
 			@Override
 			public void complete() {

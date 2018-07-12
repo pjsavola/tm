@@ -10,16 +10,11 @@ import tm.action.ResourceDeltaAction;
 public class Phoblog extends Corporation {
 
     public Phoblog() {
-        super(new Tags().space());
+        super("Phoblog", new Tags().space());
     }
 
     @Override
     protected Action getInitialAction() {
         return new ResourceDeltaAction(new Resources(23, 0, 10, 0, 0, 0));
-    }
-
-    @Override
-    public String getTitle() {
-        return "Phoblog";
     }
 }

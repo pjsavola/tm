@@ -2,8 +2,6 @@ package tm;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
 
 import tm.action.Action;
 
@@ -15,8 +13,8 @@ public abstract class Corporation extends Card {
     private static final Color BG_COLOR = new Color(0x000000);
     private static final Font FONT = new Font("Arial", Font.BOLD, 12);
 
-    protected Corporation(final Tags tags) {
-        super(tags);
+    protected Corporation(String name, Tags tags) {
+        super(name, 0, tags, false);
     }
 
     @Override
@@ -29,7 +27,7 @@ public abstract class Corporation extends Card {
         throw new UnsupportedOperationException();
     }
 
-    public boolean start(final Game game) {
+    public boolean start(Game game) {
         final Action action = getInitialAction();
         if (action.check(game)) {
             game.getActionHandler().addPendingAction(action);
@@ -39,24 +37,4 @@ public abstract class Corporation extends Card {
     }
 
     protected abstract Action getInitialAction();
-
-    @Override
-    public void renderTitle(final Graphics g, final int x, final int y) {
-        g.setFont(FONT);
-        final FontMetrics metrics = g.getFontMetrics();
-        final int h = metrics.getHeight();
-        final int w = metrics.stringWidth(getTitle());
-
-        // Draw background
-        g.setColor(BG_COLOR);
-        g.fillRect(x, y, WIDTH, TITLE_HEIGHT);
-        
-        // Draw border
-        g.setColor(getBorderColor());
-        g.drawRect(x, y, WIDTH, TITLE_HEIGHT);
-
-        // Draw text
-        g.setColor(TEXT_COLOR);
-        g.drawString(getTitle(), x + (WIDTH - w) / 2, y + 12);
-    }
 }

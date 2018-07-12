@@ -12,6 +12,7 @@ import tm.Resources;
 import tm.Tags;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
+import tm.corporation.Credicor;
 
 public class PlayCardAction implements Action {
 
@@ -21,12 +22,12 @@ public class PlayCardAction implements Action {
     }
 
     @Override
-    public boolean check(final Game game) {
+    public boolean check(Game game) {
         return !game.getCurrentPlayer().getCards().isEmpty();
     }
 
     @Override
-    public Completable begin(final Game game) {
+    public Completable begin(Game game) {
         final List<Card> hand = new ArrayList<>(game.getCurrentPlayer().getCards());
         return new PlayCardCompletable(game, hand);
     }
@@ -58,14 +59,18 @@ public class PlayCardAction implements Action {
             }
             final Card card = selectedCards.iterator().next();
             final int cost = Math.max(0, card.getCost() - materialsUsed * materialValue);
-            final Action paymentAction;
+            final Resources payment;
             if (card.getTags().hasBuilding()) {
-                paymentAction = new ResourceDeltaAction(new Resources(-cost, -materialsUsed, 0, 0, 0, 0));
+                payment = new Resources(-cost, -materialsUsed, 0, 0, 0, 0);
             } else {
-                paymentAction = new ResourceDeltaAction(new Resources(-cost, 0, -materialsUsed, 0, 0, 0));
+                payment = new Resources(-cost, 0, -materialsUsed, 0, 0, 0);
             }
+            final Action paymentAction = new ResourceDeltaAction(payment);
             if (paymentAction.check(game)) {
                 game.getActionHandler().addPendingAction(paymentAction);
+                if (card.getCost() >= 20 && game.getCurrentPlayer().getCorporation() instanceof Credicor) {
+                    game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(4)));
+                }
                 return true;
             } else {
                 System.err.println("Not enough money to pay for the card");

@@ -10,16 +10,11 @@ import tm.action.ResourceDeltaAction;
 public class InterplanetaryCinematics extends Corporation {
 
     public InterplanetaryCinematics() {
-        super(new Tags().building());
+        super("Interplanetary Cinematics", new Tags().building());
     }
 
     @Override
     protected Action getInitialAction() {
         return new ResourceDeltaAction(new Resources(30, 20, 0, 0, 0, 0));
-    }
-
-    @Override
-    public String getTitle() {
-        return "Interplanetary Cinematics";
     }
 }

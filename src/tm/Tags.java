@@ -71,6 +71,10 @@ public class Tags {
 		return this;
 	}
 
+	public boolean hasEvent() {
+		return event > 0;
+	}
+
 	public boolean hasBuilding() {
 		return building > 0;
 	}

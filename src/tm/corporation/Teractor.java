@@ -10,16 +10,11 @@ import tm.action.ResourceDeltaAction;
 public class Teractor extends Corporation {
 
     public Teractor() {
-        super(new Tags().earth());
+        super("Teractor", new Tags().earth());
     }
 
     @Override
     protected Action getInitialAction() {
        	return new ResourceDeltaAction(new Resources(60));
-    }
-
-    @Override
-    public String getTitle() {
-        return "Teractor";
     }
 }

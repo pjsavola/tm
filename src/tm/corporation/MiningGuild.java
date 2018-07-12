@@ -12,7 +12,7 @@ import tm.action.ResourceDeltaAction;
 public class MiningGuild extends Corporation {
 
     public MiningGuild() {
-        super(new Tags().building().building());
+        super("Mining Guild", new Tags().building().building());
     }
 
     @Override
@@ -20,10 +20,5 @@ public class MiningGuild extends Corporation {
         return new ActionChain(
         	new ResourceDeltaAction(new Resources(30, 5, 0, 0, 0, 0)),
         	new IncomeDeltaAction(new Resources(0, 1, 0, 0, 0, 0)));
-    }
-
-    @Override
-    public String getTitle() {
-        return "Mining Guild";
     }
 }
