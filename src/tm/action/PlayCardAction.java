@@ -1,10 +1,9 @@
 package tm.action;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Game;
 import tm.Player;
@@ -44,9 +43,8 @@ public class PlayCardAction implements Action {
 
         private final Game game;
         private final List<Card> hand;
-        private int materialsUsed;
-        private int materialMax;
-        private int materialValue;
+        @Nullable
+        private Payment payment;
 
         public PlayCardCompletable(Game game, List<Card> hand) {
             super(game, player.getCards());
@@ -70,14 +68,7 @@ public class PlayCardAction implements Action {
                 System.err.println("Card requirements not fulfilled");
                 return false;
             }
-            final int cost = Math.max(0, card.getCost() - player.getDiscount(card) - materialsUsed * materialValue);
-            final Resources payment;
-            if (card.getTags().hasBuilding()) {
-                payment = new Resources(-cost, -materialsUsed, 0, 0, 0, 0);
-            } else {
-                payment = new Resources(-cost, 0, -materialsUsed, 0, 0, 0);
-            }
-            final Action paymentAction = new ResourceDeltaAction(payment);
+            final Action paymentAction = new ResourceDeltaAction(payment.getResources());
             if (paymentAction.check(game)) {
                 game.getActionHandler().addPendingAction(paymentAction);
                 if (card.getCost() >= 20 && player.getCorporation() instanceof Credicor) {
@@ -119,31 +110,28 @@ public class PlayCardAction implements Action {
         }
 
         @Override
+        public void cancel() {
+            player.setResourcesDelta(new Resources(0));
+            player.setIncomeDelta(new Resources(0));
+            payment = null;
+            super.cancel();
+        }
+
+        @Override
         public String getTitle() {
             return "Select card to play";
         }
 
         @Override
-        public void paint(Graphics g) {
-            super.paint(g);
-            if (!selectedCards.isEmpty()) {
-                final Color oldColor = g.getColor();
-                g.setColor(Color.BLUE);
-                final int x = LEFT_MARGIN + Card.WIDTH + VISIBLE_SPACING;
-                final int y = TOP_MARGIN + CARD_HEIGHT + 40;
-                g.drawString("Materials used: " + materialsUsed, x, y);
-                g.setColor(oldColor);
-            }
-        }
-
-        @Override
         public boolean pressKey(char key) {
-            if (key == '-') {
-                materialsUsed = Math.max(0, materialsUsed - 1);
-                return true;
-            } else if (key == '+') {
-                materialsUsed = Math.min(materialsUsed + 1, materialMax);
-                return true;
+            if (payment != null) {
+                if (key == '-') {
+                    payment.decrement();
+                    return true;
+                } else if (key == '+') {
+                    payment.increment();
+                    return true;
+                }
             }
             return false;
         }
@@ -153,21 +141,71 @@ public class PlayCardAction implements Action {
             if (!selectedCards.isEmpty()) {
                 final Card card = selectedCards.iterator().next();
                 final Tags tags = card.getTags();
-                if (tags.hasBuilding()) {
+                payment = new Payment(card);
+            } else {
+                player.setResourcesDelta(new Resources(0));
+                player.setIncomeDelta(new Resources(0));
+                payment = null;
+            }
+        }
+
+        class Payment {
+            private final boolean steel;
+            private final boolean titanium;
+            private final int costAfterDiscounts;
+            private final int materialValue;
+            private final int materialMax;
+            private int materialsUsed;
+
+            private Payment(Card card) {
+                steel = card.getTags().hasBuilding();
+                titanium = card.getTags().hasSpace();
+                costAfterDiscounts = card.getCost() - player.getDiscount(card);
+                if (steel) {
                     materialValue = player.getSteelValue();
-                    materialsUsed = Math.min(player.getSteel(), (card.getCost() - player.getDiscount(card)) / materialValue);
-                    materialMax = materialsUsed;
+                    materialsUsed = Math.min(player.getSteel(), costAfterDiscounts / materialValue);
                     if (player.getSteel() > materialsUsed && card.getCost() % materialValue != 0) {
-                        materialMax++;
+                        materialMax = materialsUsed + 1;
+                    } else {
+                        materialMax = materialsUsed;
                     }
-                } else if (tags.hasSpace()) {
+                } else if (titanium) {
                     materialValue = player.getTitaniumValue();
-                    materialsUsed = Math.min(player.getTitanium(), (card.getCost() - player.getDiscount(card)) / materialValue);
-                    materialMax = materialsUsed;
+                    materialsUsed = Math.min(player.getTitanium(), costAfterDiscounts / materialValue);
                     if (player.getTitanium() > materialsUsed && card.getCost() % materialValue != 0) {
-                        materialMax++;
+                        materialMax = materialsUsed + 1;
+                    } else {
+                        materialMax = materialsUsed;
                     }
+                } else {
+                    materialValue = 0;
+                    materialMax = 0;
                 }
+                updateDelta();
+            }
+
+            private void increment() {
+                materialsUsed = Math.min(materialsUsed + 1, materialMax);
+                updateDelta();
+            }
+
+            private void decrement() {
+                materialsUsed = Math.max(0, materialsUsed - 1);
+                updateDelta();
+            }
+
+            private Resources getResources() {
+                if (steel) {
+                    return new Resources(materialsUsed * materialValue - costAfterDiscounts, -materialsUsed, 0, 0, 0, 0);
+                } else if (titanium) {
+                    return new Resources(materialsUsed * materialValue - costAfterDiscounts, 0, -materialsUsed, 0, 0, 0);
+                } else {
+                    return new Resources(-costAfterDiscounts);
+                }
+            }
+
+            private void updateDelta() {
+                player.setResourcesDelta(getResources());
             }
         }
     }

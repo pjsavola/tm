@@ -2,7 +2,6 @@ package tm;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,6 +29,8 @@ public class Player {
 	private static final Font font = new Font("Arial", Font.BOLD, 12);
 	private Resources resources = new Resources(0);
 	private Resources income = new Resources(0);
+	private Resources resourcesDelta = new Resources(0);
+    private Resources incomeDelta = new Resources(0);
 	private int rating = 20;
 	private int savedRating = 20;
 	private final Color color = new Color(0xFF0000);
@@ -49,7 +50,15 @@ public class Player {
 		return resources.canAdjust(delta);
 	}
 
-	public boolean canAdjustIncome(Resources delta) {
+	public void setResourcesDelta(Resources delta) {
+	    resourcesDelta = delta;
+    }
+
+    public void setIncomeDelta(Resources delta) {
+        incomeDelta = delta;
+    }
+
+    public boolean canAdjustIncome(Resources delta) {
 	    final Resources newIncome = income.combine(delta);
 	    return newIncome.steel >= 0 && newIncome.titanium >= 0 && newIncome.plants >= 0 && newIncome.energy >= 0 && newIncome.heat >= 0;
 	}
@@ -216,15 +225,18 @@ public class Player {
 	public void render(Graphics g) {
 		final Color oldColor = g.getColor();
 		g.setFont(font);
-		renderText(g, "Money", resources.money, income.money, 1, 0xFFFF00);
-		renderText(g, "Steel", resources.steel, income.steel, 2, 0x8B4513);
-		renderText(g, "Titanium", resources.titanium, income.titanium, 3, 0x888888);
-		renderText(g, "Plants", resources.plants, income.plants, 4, 0x00FF00);
-		renderText(g, "Energy", resources.energy, income.energy, 5, 0x6600FF);
-		renderText(g, "Heat", resources.heat, income.heat, 6, 0xFF9900);
-		renderText(g, "Rating", rating, 0, 7, 0x0000FF);
-		renderText(g, "Points", getPoints(), 0, 8, 0x00FFFF);
-		renderText(g, "Cards", getCards().size(), 0, 9, 0xCCCCCC);
+		final Resources renderableResources = resources.combine(resourcesDelta);
+        final Resources renderableIncome = income.combine(incomeDelta);
+		renderText(g, "images/icon_money.png", renderableResources.money, renderableIncome.money, 1, 0xFFFF00);
+		renderText(g, "images/icon_steel.png", renderableResources.steel, renderableIncome.steel, 2, 0x8B4513);
+		renderText(g, "images/icon_titanium.png", renderableResources.titanium, renderableIncome.titanium, 3, 0x888888);
+		renderText(g, "images/icon_plant.png", renderableResources.plants, renderableIncome.plants, 4, 0x00FF00);
+		renderText(g, "images/icon_energy.png", renderableResources.energy, renderableIncome.energy, 5, 0x6600FF);
+		renderText(g, "images/icon_heat.png", renderableResources.heat, renderableIncome.heat, 6, 0xFF9900);
+		renderText(g, "images/icon_heat.png", rating, 0, 7, 0x0000FF);
+		renderText(g, "images/icon_heat.png", getPoints(), 0, 8, 0x00FFFF);
+		renderText(g, "images/icon_heat.png", getCards().size(), 0, 9, 0xCCCCCC);
+
 		if (corporation != null) {
 			final String name = corporation.getName();
 			final int w = g.getFontMetrics().stringWidth(name);
@@ -234,11 +246,13 @@ public class Player {
         g.setColor(oldColor);
 	}
 	
-	private static void renderText(Graphics g, String name, int amount, int income, int i, int color) {
+	private static void renderText(Graphics g, String path, int amount, int income, int i, int color) {
+	    g.drawImage(ImageCache.getImage(path), 2, i * 18 - 16, null);
 		g.setColor(new Color(color));
-		final String text = name + ": " + amount + (income > 0 ? " (" + income + ")" : "");
-		final FontMetrics metrics = g.getFontMetrics(); 
-        int h = metrics.getHeight();
-        g.drawString(text, 2, (h + 1) * i);
+        g.drawString(Integer.toString(amount), 24, 18 * i - 4);
+        if (income > 0) {
+            final String incomeString = (income < 0 ? "+" : "") + income;
+            g.drawString(incomeString, 45, 18 * i - 4);
+        }
 	}
 }
