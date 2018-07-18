@@ -1,6 +1,7 @@
 package tm.action;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 import tm.Card;
@@ -15,9 +16,8 @@ public class PlayCorporationAction implements Action {
 
     @Override
     public Completable begin(Game game) {
-        final List<Card> corporations = new ArrayList<>(2);
-        corporations.add(game.getCorporationDeck().pop());
-        corporations.add(game.getCorporationDeck().pop());
+        final Deque<Card> deck = game.getCorporationDeck();
+        final List<Card> corporations = new ArrayList<>(deck);
         return new SelectCardsCompletable(game, corporations) {
 
             @Override
@@ -50,8 +50,6 @@ public class PlayCorporationAction implements Action {
             public void undo() {
                 game.getCurrentPlayer().removeTags(corporation.getTags());
                 game.getCurrentPlayer().setCorporation(null);
-                game.getCorporationDeck().push(corporations.remove(1));
-                game.getCorporationDeck().push(corporations.remove(0));
                 game.repaint();
             }
 

@@ -59,15 +59,15 @@ public class Game extends JPanel {
 		// Temporary bogus cards
 		for (int i = 0; i < 100; i++)
 			deck.add(new Card("Card", 5, new Tags().space().event(), false));
-		corporationDeck.add(new Phoblog());
-		corporationDeck.add(new TharsisRepublic());
-		corporationDeck.add(new InterplanetaryCinematics());
-        corporationDeck.add(new Inventrix());
 		corporationDeck.add(new Credicor());
 		corporationDeck.add(new Ecoline());
 		corporationDeck.add(new Helion());
+        corporationDeck.add(new InterplanetaryCinematics());
+        corporationDeck.add(new Inventrix());
 		corporationDeck.add(new MiningGuild());
+        corporationDeck.add(new Phoblog());
 		corporationDeck.add(new SaturnSystems());
+        corporationDeck.add(new TharsisRepublic());
 		corporationDeck.add(new Thorgate());
 		corporationDeck.add(new Teractor());
 		corporationDeck.add(new UnitedNationsMarsInitiative());
@@ -180,32 +180,32 @@ public class Game extends JPanel {
                 final int x = e.getX();
                 final int y = e.getY();
                 if (Math.abs(x - 10) <= 8 && Math.abs(y - 10) <= 8) {
-                    System.err.println("Convert heat to money");
                     g.getActionHandler().process(ActionType.HEAT_TO_MONEY);
                 }
                 if (Math.abs(x - 10) <= 8 && Math.abs(y - 28) <= 8) {
-                    System.err.println("Adjust steel payment");
                     g.getActionHandler().adjustPayment(true, e.getButton() == MouseEvent.BUTTON1);
                 }
                 if (Math.abs(x - 10) <= 8 && Math.abs(y - 46) <= 8) {
-                    System.err.println("Adjust titanium payment");
                     g.getActionHandler().adjustPayment(false, e.getButton() != MouseEvent.BUTTON1);
                 }
                 if (Math.abs(x - 10) <= 8 && Math.abs(y - 64) <= 8) {
-                    System.err.println("Convert plants to greenery");
                     g.getActionHandler().process(ActionType.PLANT_TO_GREENERY);
                 }
+                if (Math.abs(x - 10) <= 8 && Math.abs(y - 82) <= 8) {
+                    g.getActionHandler().process(ActionType.ENERGY);
+                }
                 if (Math.abs(x - 10) <= 8 && Math.abs(y - 100) <= 8) {
-                    System.err.println("Convert heat to temperature");
                     g.getActionHandler().process(ActionType.HEAT_TO_TEMPERATURE);
                 }
                 if (Math.abs(x - 10) <= 8 && Math.abs(y - 118) <= 8) {
-                    System.err.println("Raise TR");
                     g.getActionHandler().process(ActionType.TR);
                 }
                 if (Math.abs(x - 10) <= 8 && Math.abs(y - 154) <= 8) {
-                    System.err.println("Play card");
-                    g.getActionHandler().process(ActionType.PLAY);
+                    if (e.getButton() == MouseEvent.BUTTON1) {
+                        g.getActionHandler().process(ActionType.PLAY);
+                    } else {
+                        g.getActionHandler().process(ActionType.DISCARD);
+                    }
                 }
             }
 

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Card {
 
@@ -93,6 +95,13 @@ public class Card {
 
         // Draw content
         g.setColor(TEXT_COLOR);
-        g.drawString("jee jee", x + 4, y + 16);
+        final List<String> contents = getContents();
+        for (int i = 0; i < contents.size(); i++) {
+            g.drawString(contents.get(i), x + 4, y + 16 + i * 16);
+        }
+    }
+
+    protected List<String> getContents() {
+        return new ArrayList<>();
     }
 }

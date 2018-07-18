@@ -1,5 +1,8 @@
 package tm.corporation;
 
+import java.util.Arrays;
+import java.util.List;
+
 import tm.Corporation;
 import tm.Resources;
 import tm.Tags;
@@ -15,5 +18,10 @@ public class Phoblog extends Corporation {
     @Override
     protected Action getInitialAction() {
         return new ResourceDeltaAction(new Resources(23, 0, 10, 0, 0, 0));
+    }
+
+    @Override
+    protected List<String> getContents() {
+        return Arrays.asList("23 money", "10 titanium", "Titanium value +1");
     }
 }

@@ -262,7 +262,7 @@ public class Player {
 		g.setColor(new Color(color));
         g.drawString(Integer.toString(amount), 24, 18 * i - 4);
         if (income > 0) {
-            final String incomeString = (income < 0 ? "+" : "") + income;
+            final String incomeString = (income > 0 ? "+" : "") + income;
             g.drawString(incomeString, 45, 18 * i - 4);
         }
 	}

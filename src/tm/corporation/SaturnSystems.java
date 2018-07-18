@@ -1,5 +1,8 @@
 package tm.corporation;
 
+import java.util.Arrays;
+import java.util.List;
+
 import tm.Corporation;
 import tm.Resources;
 import tm.Tags;
@@ -19,5 +22,10 @@ public class SaturnSystems extends Corporation {
         return new ActionChain(
         	new ResourceDeltaAction(new Resources(42)),
         	new IncomeDeltaAction(new Resources(1, 0, 1, 0, 0, 0)));
+    }
+
+    @Override
+    protected List<String> getContents() {
+        return Arrays.asList("42 money", "1 titanium income", "1 money income for each Jovian tag");
     }
 }

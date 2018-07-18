@@ -205,18 +205,11 @@ public class ActionHandler {
 
 	private static ActionType getActionType(char c) {
         switch (c) {
-            case 'd': return ActionType.DISCARD;
-            case 'e': return ActionType.ENERGY;
             case 'm': return ActionType.TEMPERATURE;
             case 'w': return ActionType.WATER;
             case 'g': return ActionType.GREENERY;
             case 'c': return ActionType.CITY;
-            case 'p': return ActionType.PLANT_TO_GREENERY;
-            case 'h': return ActionType.HEAT_TO_TEMPERATURE;
-            case 't': return ActionType.TR;
-            case '1': return ActionType.HEAT_TO_MONEY;
-            case 'x': return ActionType.PLAY;
-            case 'Q': return ActionType.PASS;
+            case 'q': return ActionType.PASS;
         }
         return null;
     }

@@ -1,5 +1,8 @@
 package tm.corporation;
 
+import java.util.Arrays;
+import java.util.List;
+
 import tm.Corporation;
 import tm.Game;
 import tm.Resources;
@@ -27,5 +30,10 @@ public class Inventrix extends Corporation {
     @Override
     protected Action getInitialAction() {
         return new ResourceDeltaAction(new Resources(45));
+    }
+
+    @Override
+    protected List<String> getContents() {
+        return Arrays.asList("45 money", "3 cards", "Has +/- 2 to card requirements");
     }
 }

@@ -1,5 +1,8 @@
 package tm.corporation;
 
+import java.util.Arrays;
+import java.util.List;
+
 import tm.Corporation;
 import tm.Resources;
 import tm.Tags;
@@ -22,5 +25,10 @@ public class TharsisRepublic extends Corporation {
             new ResourceDeltaAction(new Resources(40)),
             new IncomeDeltaAction(new Resources(2)), // Initial cities in solo game
             new PlaceTileAction(Tile.Type.CITY));
+    }
+
+    @Override
+    protected List<String> getContents() {
+        return Arrays.asList("40 money", "3 money for each city you play", "1 money income for each city");
     }
 }

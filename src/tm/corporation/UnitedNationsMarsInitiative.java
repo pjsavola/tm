@@ -1,5 +1,8 @@
 package tm.corporation;
 
+import java.util.Arrays;
+import java.util.List;
+
 import tm.Corporation;
 import tm.Resources;
 import tm.Tags;
@@ -15,5 +18,10 @@ public class UnitedNationsMarsInitiative extends Corporation {
     @Override
     protected Action getInitialAction() {
        	return new ResourceDeltaAction(new Resources(40));
+    }
+
+    @Override
+    protected List<String> getContents() {
+        return Arrays.asList("40 money", "May increase TR for 3 money if TR has been increased this turn");
     }
 }
