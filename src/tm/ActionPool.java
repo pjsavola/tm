@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.istack.internal.Nullable;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddOxygenAction;
@@ -21,7 +22,7 @@ import tm.action.SwitchRoundAction;
 import tm.completable.Completable;
 
 public class ActionPool {
-	private static final Font font = new Font("Arial", Font.BOLD, 12);
+    private static final Font font = new Font("Arial", Font.BOLD, 12);
 	private final Game game;
 	private final List<ActionChain> standardActions = new ArrayList<>();
 	private static final Color ENABLED_COLOR = new Color(0xFFFFFF);
@@ -29,52 +30,53 @@ public class ActionPool {
 	
 	public ActionPool(Game game) {
 		this.game = game;
-		standardActions.add(new ActionChain('d', "Discard",
+		standardActions.add(new ActionChain(ActionType.DISCARD, "Discard",
 			new DiscardAction()));
-		standardActions.add(new ActionChain('e', "Energy income",
+		standardActions.add(new ActionChain(ActionType.ENERGY, "Energy income",
 			new ResourceDeltaAction(new Resources(-11)),
 			new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0))));
-		standardActions.add(new ActionChain('m', "Temperature",
+		standardActions.add(new ActionChain(ActionType.TEMPERATURE, "Temperature",
 			new ResourceDeltaAction(new Resources(-14)),
 			new AddTemperatureAction()));
-		standardActions.add(new ActionChain('w', "Water",
+		standardActions.add(new ActionChain(ActionType.WATER, "Water",
 			new ResourceDeltaAction(new Resources(-18)),
 			new PlaceTileAction(Tile.Type.WATER),
 			new AddWaterAction()));
-		standardActions.add(new ActionChain('g', "Greenery",
+		standardActions.add(new ActionChain(ActionType.GREENERY, "Greenery",
 			new ResourceDeltaAction(new Resources(-23)),
 			new PlaceTileAction(Tile.Type.GREENERY),
 			new AddOxygenAction()));
-		standardActions.add(new ActionChain('c', "City",
+		standardActions.add(new ActionChain(ActionType.CITY, "City",
 			new ResourceDeltaAction(new Resources(-25)),
 			new PlaceTileAction(Tile.Type.CITY),
 			new IncomeDeltaAction(new Resources(1))));
-		standardActions.add(new ActionChain('p', "Plant",
+		standardActions.add(new ActionChain(ActionType.PLANT_TO_GREENERY, "Plant",
 			new ResourceDeltaAction(new Resources(0, 0, 0, -8, 0, 0)),
 			new PlaceTileAction(Tile.Type.GREENERY),
 			new AddOxygenAction()));
-		standardActions.add(new ActionChain('h', "Heat",
+		standardActions.add(new ActionChain(ActionType.HEAT_TO_TEMPERATURE, "Heat",
 			new ResourceDeltaAction(new Resources(0, 0, 0, 0, 0, -8)),
 			new AddTemperatureAction()));
-		standardActions.add(new ActionChain('p', "Pass",
+		standardActions.add(new ActionChain(ActionType.PASS, "Pass",
 			new SwitchRoundAction()));
-		standardActions.add(new ActionChain('x', "Play card",
+		standardActions.add(new ActionChain(ActionType.PLAY, "Play card",
 			new PlayCardAction(game.getCurrentPlayer())));
 	}
 
-	public Completable getCompletable(char c) {
+	@Nullable
+	public Completable getCompletable(@Nullable ActionType type) {
         for (Action action : game.getCurrentPlayer().getActions()) {
-            if (action.getKey() == c && action.check(game)) {
+            if (action.getType() == type && action.check(game)) {
                 return action.begin(game);
             }
         }
-		for (Action action : standardActions) {
-			if (action.getKey() == c && action.check(game)) {
-				return action.begin(game);
-			}
-		}
-		return null;
-	}
+        for (Action action : standardActions) {
+            if (action.getType() == type && action.check(game)) {
+                return action.begin(game);
+            }
+        }
+        return null;
+    }
 	
 	public void render(Graphics g) {
     	final Color oldColor = g.getColor();
@@ -83,7 +85,7 @@ public class ActionPool {
 		int i = 13;
 		for (final ActionChain action : standardActions) {
 			g.setColor(canAct && action.check(game) ? ENABLED_COLOR : DISABLED_COLOR);
-			renderText(g, action.getKey() + ": " + action.getDescription(), i--);
+			//renderText(g, action.getKey() + ": " + action.getDescription(), i--);
 		}
 		g.setColor(game.getActionHandler().canUndo() ? ENABLED_COLOR : DISABLED_COLOR);
 		renderText(g, "u: Undo", 2);

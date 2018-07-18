@@ -31,6 +31,7 @@ public class Player {
 	private Resources income = new Resources(0);
 	private Resources resourcesDelta = new Resources(0);
     private Resources incomeDelta = new Resources(0);
+    private Tags tags = new Tags();
 	private int rating = 20;
 	private int savedRating = 20;
 	private final Color color = new Color(0xFF0000);
@@ -129,38 +130,46 @@ public class Player {
 	    return true;
     }
 
+    public void addTags(Tags tags) {
+	    this.tags.combine(tags, true);
+    }
+
+    public void removeTags(Tags tags) {
+        this.tags.combine(tags, false);
+    }
+
     public List<Action> getActions() {
         final List<Action> actions = new ArrayList<>();
         if (corporation instanceof Credicor) {
-            actions.add(new ActionChain('g', "Greenery",
+            actions.add(new ActionChain(ActionType.GREENERY, "Greenery",
                 new ResourceDeltaAction(new Resources(-23)),
                 new PlaceTileAction(Tile.Type.GREENERY),
                 new AddOxygenAction(),
                 new ResourceDeltaAction(new Resources(4))
             ));
-            actions.add(new ActionChain('c', "City",
+            actions.add(new ActionChain(ActionType.CITY, "City",
                 new ResourceDeltaAction(new Resources(-25)),
                 new PlaceTileAction(Tile.Type.CITY),
                 new IncomeDeltaAction(new Resources(1)),
                 new ResourceDeltaAction(new Resources(4))
             ));
         } else if (corporation instanceof Ecoline) {
-            actions.add(new ActionChain('p', "Plant",
+            actions.add(new ActionChain(ActionType.PLANT_TO_GREENERY, "Plant",
                 new ResourceDeltaAction(new Resources(0, 0, 0, -7, 0, 0)),
                 new PlaceTileAction(Tile.Type.GREENERY),
                 new AddOxygenAction()
             ));
         } else if (corporation instanceof Helion) {
-            actions.add(new ActionChain('m', "Heat to money",
+            actions.add(new ActionChain(ActionType.HEAT_TO_MONEY, "Heat to money",
                 new ResourceDeltaAction(new Resources(1, 0, 0, 0, 0, -1))
             ));
         } else if (corporation instanceof Thorgate) {
-            actions.add(new ActionChain('e', "Energy income",
+            actions.add(new ActionChain(ActionType.ENERGY, "Energy income",
                 new ResourceDeltaAction(new Resources(-8)),
                 new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0))
             ));
         } else if (corporation instanceof UnitedNationsMarsInitiative) {
-            actions.add(new ActionChain('t', "Increase TR",
+            actions.add(new ActionChain(ActionType.TR, "Increase TR",
                 new ResourceDeltaAction(new Resources(-3)),
                 new Action() {
                     @Override
@@ -237,7 +246,9 @@ public class Player {
 		renderText(g, "images/icon_heat.png", getPoints(), 0, 8, 0x00FFFF);
 		renderText(g, "images/icon_heat.png", getCards().size(), 0, 9, 0xCCCCCC);
 
-		if (corporation != null) {
+		tags.renderVertical(g, 2, 682);
+
+        if (corporation != null) {
 			final String name = corporation.getName();
 			final int w = g.getFontMetrics().stringWidth(name);
 			g.setColor(new Color(0xFFFFFF));

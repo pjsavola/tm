@@ -41,12 +41,14 @@ public class PlayCorporationAction implements Action {
 
             @Override
             public void complete() {
+                game.getCurrentPlayer().addTags(corporation.getTags());
                 game.getCurrentPlayer().setCorporation(corporation);
                 cancel();
             }
 
             @Override
             public void undo() {
+                game.getCurrentPlayer().removeTags(corporation.getTags());
                 game.getCurrentPlayer().setCorporation(null);
                 game.getCorporationDeck().push(corporations.remove(1));
                 game.getCorporationDeck().push(corporations.remove(0));

@@ -27,12 +27,7 @@ public class PlaceTileAction implements Action {
 	public PlaceTileAction(Tile.Type type) {
 		this.type = type;
 	}
-	
-	@Override
-	public char getKey() {
-		throw new UnsupportedOperationException();
-	}
-	
+
 	@Override
 	public boolean check(Game game) {
 		return true;

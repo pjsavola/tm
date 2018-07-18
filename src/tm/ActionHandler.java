@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.sun.istack.internal.Nullable;
 import tm.action.Action;
 import tm.action.DrawCardsAction;
 import tm.completable.Completable;
@@ -43,7 +44,7 @@ public class ActionHandler {
 		}
 	}
 	
-	private void process(Completable completable) {
+	private void process(@Nullable Completable completable) {
 		if (completable != null) {
 			current = completable;
 			if (current.remove(completedActions)) {
@@ -181,11 +182,42 @@ public class ActionHandler {
 					} else if (c == 'r') {
 						redo();
 					} else if (cancel()) {
-						process(pool.getCompletable(c));
+						process(pool.getCompletable(getActionType(c)));
 					}
 				}
 				game.repaint();
 			}
         };
 	}
+
+	public void process(ActionType actionType) {
+	    if (current == null) {
+	        process(pool.getCompletable(actionType));
+	        game.repaint();
+        }
+    }
+
+    public void adjustPayment(boolean steel, boolean increment) {
+	    if (current != null && current.adjustPayment(steel, increment)) {
+	        game.repaint();
+        }
+    }
+
+	private static ActionType getActionType(char c) {
+        switch (c) {
+            case 'd': return ActionType.DISCARD;
+            case 'e': return ActionType.ENERGY;
+            case 'm': return ActionType.TEMPERATURE;
+            case 'w': return ActionType.WATER;
+            case 'g': return ActionType.GREENERY;
+            case 'c': return ActionType.CITY;
+            case 'p': return ActionType.PLANT_TO_GREENERY;
+            case 'h': return ActionType.HEAT_TO_TEMPERATURE;
+            case 't': return ActionType.TR;
+            case '1': return ActionType.HEAT_TO_MONEY;
+            case 'x': return ActionType.PLAY;
+            case 'Q': return ActionType.PASS;
+        }
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 package tm;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Tags {
@@ -71,6 +72,35 @@ public class Tags {
 		return this;
 	}
 
+	public Tags combine(Tags tags, boolean add) {
+	    if (add) {
+            event += tags.event;
+            building += tags.building;
+            city += tags.city;
+            space += tags.space;
+            earth += tags.earth;
+            jovian += tags.jovian;
+            science += tags.science;
+            power += tags.power;
+            plant += tags.plant;
+            animal += tags.animal;
+            microbe += tags.microbe;
+        } else {
+            event -= tags.event;
+            building -= tags.building;
+            city -= tags.city;
+            space -= tags.space;
+            earth -= tags.earth;
+            jovian -= tags.jovian;
+            science -= tags.science;
+            power -= tags.power;
+            plant -= tags.plant;
+            animal -= tags.animal;
+            microbe -= tags.microbe;
+        }
+	    return this;
+    }
+
 	public boolean hasEvent() {
 		return event > 0;
 	}
@@ -118,4 +148,31 @@ public class Tags {
 		}
 		return actualX;
 	}
+
+	public void renderVertical(Graphics g, int x, int y) {
+        g.setColor(Color.WHITE);
+        int offset = y;
+        offset = drawTagCount(g, "images/tag_microbe.png", microbe, x, offset);
+        offset = drawTagCount(g, "images/tag_animal.png", animal, x, offset);
+        offset = drawTagCount(g, "images/tag_plant.png", plant, x, offset);
+        offset = drawTagCount(g, "images/tag_power.png", power, x, offset);
+        offset = drawTagCount(g, "images/tag_science.png", science, x, offset);
+        offset = drawTagCount(g, "images/tag_jovian.png", jovian, x, offset);
+        offset = drawTagCount(g, "images/tag_earth.png", earth, x, offset);
+        offset = drawTagCount(g, "images/tag_space.png", space, x, offset);
+        offset = drawTagCount(g, "images/tag_city.png", city, x, offset);
+        offset = drawTagCount(g, "images/tag_building.png", building, x, offset);
+        drawTagCount(g, "images/tag_event.png", event, x, offset);
+    }
+
+    private static int drawTagCount(Graphics g, String path, int count, int x, int y) {
+	    if (count > 0) {
+            g.drawImage(ImageCache.getImage(path), x, y, null);
+            g.drawString(Integer.toString(count), x + 22, y + 12);
+            return y - 18;
+        } else {
+	        return y;
+        }
+    }
+
 }

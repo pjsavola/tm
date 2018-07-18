@@ -3,6 +3,8 @@ package tm;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -172,6 +174,61 @@ public class Game extends JPanel {
 	public static void main(String[] args) {
         JFrame f = new JFrame();
         Game g = new Game();
+        g.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                final int x = e.getX();
+                final int y = e.getY();
+                if (Math.abs(x - 10) <= 8 && Math.abs(y - 10) <= 8) {
+                    System.err.println("Convert heat to money");
+                    g.getActionHandler().process(ActionType.HEAT_TO_MONEY);
+                }
+                if (Math.abs(x - 10) <= 8 && Math.abs(y - 28) <= 8) {
+                    System.err.println("Adjust steel payment");
+                    g.getActionHandler().adjustPayment(true, e.getButton() == MouseEvent.BUTTON1);
+                }
+                if (Math.abs(x - 10) <= 8 && Math.abs(y - 46) <= 8) {
+                    System.err.println("Adjust titanium payment");
+                    g.getActionHandler().adjustPayment(false, e.getButton() != MouseEvent.BUTTON1);
+                }
+                if (Math.abs(x - 10) <= 8 && Math.abs(y - 64) <= 8) {
+                    System.err.println("Convert plants to greenery");
+                    g.getActionHandler().process(ActionType.PLANT_TO_GREENERY);
+                }
+                if (Math.abs(x - 10) <= 8 && Math.abs(y - 100) <= 8) {
+                    System.err.println("Convert heat to temperature");
+                    g.getActionHandler().process(ActionType.HEAT_TO_TEMPERATURE);
+                }
+                if (Math.abs(x - 10) <= 8 && Math.abs(y - 118) <= 8) {
+                    System.err.println("Raise TR");
+                    g.getActionHandler().process(ActionType.TR);
+                }
+                if (Math.abs(x - 10) <= 8 && Math.abs(y - 154) <= 8) {
+                    System.err.println("Play card");
+                    g.getActionHandler().process(ActionType.PLAY);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
         f.addKeyListener(g.getActionHandler().getKeyListener());
         f.setTitle("Terraforming Mars");
         f.setContentPane(g);

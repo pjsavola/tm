@@ -22,6 +22,10 @@ public interface Completable {
 		return false;
 	}
 
+	default boolean adjustPayment(boolean steel, boolean increment) {
+	    return false;
+    }
+
 	default void paint(Graphics g) {
 	}
 }

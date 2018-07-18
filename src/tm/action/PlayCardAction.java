@@ -24,11 +24,6 @@ public class PlayCardAction implements Action {
     }
 
     @Override
-    public char getKey() {
-        return 'x';
-    }
-
-    @Override
     public boolean check(Game game) {
         return !player.getCards().isEmpty();
     }
@@ -43,6 +38,8 @@ public class PlayCardAction implements Action {
 
         private final Game game;
         private final List<Card> hand;
+        @Nullable
+        private Card selectedCard;
         @Nullable
         private Payment payment;
 
@@ -59,25 +56,24 @@ public class PlayCardAction implements Action {
 
         @Override
         public boolean check() {
-            if (selectedCards.isEmpty()) {
+            if (selectedCard == null) {
                 System.err.println("You must select a card to play it");
                 return false;
             }
-            final Card card = selectedCards.iterator().next();
-            if (!player.fulfillsRequirements(card, game.getPlanet())) {
+            if (!player.fulfillsRequirements(selectedCard, game.getPlanet())) {
                 System.err.println("Card requirements not fulfilled");
                 return false;
             }
             final Action paymentAction = new ResourceDeltaAction(payment.getResources());
             if (paymentAction.check(game)) {
                 game.getActionHandler().addPendingAction(paymentAction);
-                if (card.getCost() >= 20 && player.getCorporation() instanceof Credicor) {
+                if (selectedCard.getCost() >= 20 && player.getCorporation() instanceof Credicor) {
                     game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(4)));
                 }
-                if (card.getTags().hasEvent() && player.getCorporation() instanceof InterplanetaryCinematics) {
+                if (selectedCard.getTags().hasEvent() && player.getCorporation() instanceof InterplanetaryCinematics) {
                     game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
                 }
-                if (card.getTags().hasJovian()) {
+                if (selectedCard.getTags().hasJovian()) {
                     final Player saturnSystemPlayer = game.getPlayer(SaturnSystems.class);
                     if (saturnSystemPlayer != null) {
                         game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(1), saturnSystemPlayer));
@@ -92,12 +88,14 @@ public class PlayCardAction implements Action {
 
         @Override
         public void complete() {
-            player.getCards().removeAll(selectedCards);
+            player.addTags(selectedCard.getTags());
+            player.getCards().remove(selectedCard);
             cancel();
         }
 
         @Override
         public void undo() {
+            player.removeTags(selectedCard.getTags());
             player.getCards().clear();
             player.getCards().addAll(hand);
             game.repaint();
@@ -105,7 +103,8 @@ public class PlayCardAction implements Action {
 
         @Override
         public void redo() {
-            player.getCards().removeAll(selectedCards);
+            player.addTags(selectedCard.getTags());
+            player.getCards().remove(selectedCard);
             game.repaint();
         }
 
@@ -137,15 +136,29 @@ public class PlayCardAction implements Action {
         }
 
         @Override
+        public boolean adjustPayment(boolean steel, boolean increment) {
+            if (payment != null && payment.steel == steel && payment.titanium == !steel) {
+                if (increment) {
+                    payment.increment();
+                } else {
+                    payment.decrement();
+                }
+                return true;
+            }
+            return false;
+        }
+
+        @Override
         protected void selectionChanged() {
             if (!selectedCards.isEmpty()) {
-                final Card card = selectedCards.iterator().next();
-                final Tags tags = card.getTags();
-                payment = new Payment(card);
+                selectedCard = selectedCards.iterator().next();
+                final Tags tags = selectedCard.getTags();
+                payment = new Payment(selectedCard);
             } else {
                 player.setResourcesDelta(new Resources(0));
                 player.setIncomeDelta(new Resources(0));
                 payment = null;
+                selectedCard = null;
             }
         }
 

@@ -70,4 +70,14 @@ public class CompletableChain implements Completable {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean adjustPayment(boolean steel, boolean increment) {
+		for (Completable completable : completables) {
+			if (completable.adjustPayment(steel, increment)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

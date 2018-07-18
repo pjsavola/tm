@@ -1,11 +1,12 @@
 package tm.action;
 
+import tm.ActionType;
 import tm.Game;
 import tm.completable.Completable;
 
 public interface Action {
 
-	default char getKey() {
+	default ActionType getType() {
 		throw new UnsupportedOperationException();
 	}
 

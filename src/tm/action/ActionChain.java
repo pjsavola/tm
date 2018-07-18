@@ -4,29 +4,32 @@ package tm.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.istack.internal.Nullable;
+import tm.ActionType;
 import tm.Game;
 import tm.completable.Completable;
 import tm.completable.CompletableChain;
 
 public class ActionChain implements Action {
 
-	final char key;
+	@Nullable
+	final ActionType type;
 	final String description;
 	final Action[] actions;
 	
 	public ActionChain(Action ... actions) {
-		this(' ', "", actions);
+		this(null, "", actions);
 	}
 	
-	public ActionChain(char key, String description, Action ... actions) {
-		this.key = key;
+	public ActionChain(ActionType type, String description, Action ... actions) {
+		this.type = type;
 		this.description = description;
 		this.actions = actions;
 	}
 	
 	@Override
-	public char getKey() {
-		return key;
+	public ActionType getType() {
+		return type;
 	}
 	
 	public String getDescription() {
