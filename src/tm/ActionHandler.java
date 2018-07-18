@@ -181,8 +181,6 @@ public class ActionHandler {
 						undo();
 					} else if (c == 'r') {
 						redo();
-					} else if (cancel()) {
-						process(pool.getCompletable(getActionType(c)));
 					}
 				}
 				game.repaint();
@@ -201,16 +199,5 @@ public class ActionHandler {
 	    if (current != null && current.adjustPayment(steel, increment)) {
 	        game.repaint();
         }
-    }
-
-	private static ActionType getActionType(char c) {
-        switch (c) {
-            case 'm': return ActionType.TEMPERATURE;
-            case 'w': return ActionType.WATER;
-            case 'g': return ActionType.GREENERY;
-            case 'c': return ActionType.CITY;
-            case 'q': return ActionType.PASS;
-        }
-        return null;
     }
 }

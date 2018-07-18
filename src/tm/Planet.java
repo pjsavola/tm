@@ -2,11 +2,10 @@ package tm;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 public class Planet {
-	private static final Font font = new Font("Arial", Font.BOLD, 12);
+	private static final Font font = new Font("Arial", Font.BOLD, 16);
 	private int waterCount = 9;
 	private int temperature = -30;
 	private int oxygen = 0;
@@ -51,10 +50,19 @@ public class Planet {
 	public void render(Graphics g) {
     	final Color oldColor = g.getColor();
 		g.setFont(font);
-		renderText(g, "Round", round, 1, new Color(0xFFFFFF));
-		renderText(g, "Temperature", temperature, 2, getColor(-30, temperature, 8, new Color(0x6666FF), new Color(0xFF3300)));
-		renderText(g, "Oxygen", oxygen, 3, getColor(0, oxygen, 14, new Color(0x8B4513), new Color(0xBBBBFF)));
-		renderText(g, "Water left", waterCount, 4, new Color(0x0000FF));
+        final String generation = "Generation " + round;
+        final int w = g.getFontMetrics().stringWidth(generation);
+        g.setColor(new Color(0xFFFFFF));
+        g.drawString(generation, 350 - w / 2, 688);
+        g.drawImage(ImageCache.getImage("images/icon_temperature.png"), 658, 2, null);
+        g.drawImage(ImageCache.getImage("images/icon_oxygen.png"), 650, 34, null);
+        g.drawImage(ImageCache.getImage("images/icon_water.png"), 650, 60, null);
+        g.setColor(getColor(-30, temperature, 8, new Color(0x6666FF), new Color(0xFF3300)));
+        g.drawString(Integer.toString(temperature), 670, 20);
+        g.setColor(getColor(0, oxygen, 14, new Color(0x8B4513), new Color(0xBBBBFF)));
+        g.drawString(Integer.toString(oxygen), 680, 52);
+        g.setColor(new Color(0x4444FF));
+        g.drawString(Integer.toString(waterCount), 680, 78);
 		g.setColor(oldColor);
 	}
 	
@@ -71,13 +79,4 @@ public class Planet {
     			         (int) (coeff1 * g1 + coeff2 * g2),
     			         (int) (coeff1 * b1 + coeff2 * b2));
     }
-    
-	private static void renderText(Graphics g, String name, int amount, int i, Color color) {
-		g.setColor(color);
-		final String text = name + ": " + amount;
-		final FontMetrics metrics = g.getFontMetrics();
-		final int w = metrics.stringWidth(text);
-        final int h = metrics.getHeight();
-        g.drawString(text, 698 - w, (h + 1) * i);
-	}
 }

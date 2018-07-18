@@ -1,5 +1,6 @@
 package tm;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -101,7 +102,13 @@ public class Game extends JPanel {
     	actionHandler.render(g);
     	currentPlayer.render(g);
     	planet.render(g);
-    }
+
+    	final long cityCount = grid.values().stream().filter(tile -> tile.getType() == Tile.Type.CITY).count();
+		g.drawImage(ImageCache.getImage("images/icon_city.png"), 650, 90, null);
+		g.setColor(Color.LIGHT_GRAY);
+		g.drawString(Long.toString(cityCount), 680, 110);
+
+	}
 
     public ActionHandler getActionHandler() {
     	return actionHandler;
@@ -177,36 +184,40 @@ public class Game extends JPanel {
         g.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                final int x = e.getX();
-                final int y = e.getY();
-                if (Math.abs(x - 10) <= 8 && Math.abs(y - 10) <= 8) {
-                    g.getActionHandler().process(ActionType.HEAT_TO_MONEY);
-                }
-                if (Math.abs(x - 10) <= 8 && Math.abs(y - 28) <= 8) {
-                    g.getActionHandler().adjustPayment(true, e.getButton() == MouseEvent.BUTTON1);
-                }
-                if (Math.abs(x - 10) <= 8 && Math.abs(y - 46) <= 8) {
-                    g.getActionHandler().adjustPayment(false, e.getButton() != MouseEvent.BUTTON1);
-                }
-                if (Math.abs(x - 10) <= 8 && Math.abs(y - 64) <= 8) {
-                    g.getActionHandler().process(ActionType.PLANT_TO_GREENERY);
-                }
-                if (Math.abs(x - 10) <= 8 && Math.abs(y - 82) <= 8) {
-                    g.getActionHandler().process(ActionType.ENERGY);
-                }
-                if (Math.abs(x - 10) <= 8 && Math.abs(y - 100) <= 8) {
-                    g.getActionHandler().process(ActionType.HEAT_TO_TEMPERATURE);
-                }
-                if (Math.abs(x - 10) <= 8 && Math.abs(y - 118) <= 8) {
-                    g.getActionHandler().process(ActionType.TR);
-                }
-                if (Math.abs(x - 10) <= 8 && Math.abs(y - 154) <= 8) {
+				final int x = e.getX();
+				final int y = e.getY();
+				if (Math.abs(x - 10) <= 8 && Math.abs(y - 10) <= 8) {
+					g.getActionHandler().process(ActionType.HEAT_TO_MONEY);
+				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 28) <= 8) {
+					g.getActionHandler().adjustPayment(true, e.getButton() == MouseEvent.BUTTON1);
+				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 46) <= 8) {
+					g.getActionHandler().adjustPayment(false, e.getButton() != MouseEvent.BUTTON1);
+				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 64) <= 8) {
+					g.getActionHandler().process(ActionType.PLANT_TO_GREENERY);
+				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 82) <= 8) {
+					g.getActionHandler().process(ActionType.ENERGY);
+				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 100) <= 8) {
+					g.getActionHandler().process(ActionType.HEAT_TO_TEMPERATURE);
+				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 118) <= 8) {
+					g.getActionHandler().process(ActionType.TR);
+				} else if (Math.abs(x - 663) <= 5 && Math.abs(y - 17) <= 15) {
+					g.getActionHandler().process(ActionType.TEMPERATURE);
+				} else if (Math.abs(x - 663) <= 13 && Math.abs(y - 47) <= 13) {
+					g.getActionHandler().process(ActionType.GREENERY);
+				} else if (Math.abs(x - 663) <= 13 && Math.abs(y - 73) <= 13) {
+					g.getActionHandler().process(ActionType.WATER);
+                } else if (Math.abs(x - 663) <= 13 && Math.abs(y - 103) <= 13) {
+        			g.getActionHandler().process(ActionType.CITY);
+				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 154) <= 8) {
                     if (e.getButton() == MouseEvent.BUTTON1) {
                         g.getActionHandler().process(ActionType.PLAY);
                     } else {
                         g.getActionHandler().process(ActionType.DISCARD);
                     }
                 }
+                if (Math.abs(x - 350) <= 60 && Math.abs(y - 688) <= 11) {
+                	g.getActionHandler().process(ActionType.PASS);
+				}
             }
 
             @Override

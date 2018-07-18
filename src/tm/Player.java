@@ -242,9 +242,9 @@ public class Player {
 		renderText(g, "images/icon_plant.png", renderableResources.plants, renderableIncome.plants, 4, 0x00FF00);
 		renderText(g, "images/icon_energy.png", renderableResources.energy, renderableIncome.energy, 5, 0x6600FF);
 		renderText(g, "images/icon_heat.png", renderableResources.heat, renderableIncome.heat, 6, 0xFF9900);
-		renderText(g, "images/icon_heat.png", rating, 0, 7, 0x0000FF);
-		renderText(g, "images/icon_heat.png", getPoints(), 0, 8, 0x00FFFF);
-		renderText(g, "images/icon_heat.png", getCards().size(), 0, 9, 0xCCCCCC);
+		renderText(g, "images/icon_tr.png", rating, 0, 7, 0x0000FF);
+		renderText(g, "images/icon_vp.png", getPoints(), 0, 8, 0x00FFFF);
+		renderText(g, "images/icon_card.png", getCards().size(), 0, 9, 0xCCCCCC);
 
 		tags.renderVertical(g, 2, 682);
 
@@ -260,10 +260,10 @@ public class Player {
 	private static void renderText(Graphics g, String path, int amount, int income, int i, int color) {
 	    g.drawImage(ImageCache.getImage(path), 2, i * 18 - 16, null);
 		g.setColor(new Color(color));
-        g.drawString(Integer.toString(amount), 24, 18 * i - 4);
+        g.drawString(Integer.toString(amount), 30, 18 * i - 4);
         if (income > 0) {
             final String incomeString = (income > 0 ? "+" : "") + income;
-            g.drawString(incomeString, 45, 18 * i - 4);
+            g.drawString(incomeString, 50, 18 * i - 4);
         }
 	}
 }
