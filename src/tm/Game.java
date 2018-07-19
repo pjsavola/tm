@@ -23,6 +23,8 @@ import tm.card.AsteroidMiningConsortium;
 import tm.card.CloudSeeding;
 import tm.card.ColonizerTrainingCamp;
 import tm.card.DeepWellHeating;
+import tm.card.InventorsGuild;
+import tm.card.MartianRail;
 import tm.card.SearchForLife;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
@@ -67,6 +69,8 @@ public class Game extends JPanel {
 		deck.add(new DeepWellHeating());
 		deck.add(new CloudSeeding());
 		deck.add(new SearchForLife());
+		deck.add(new InventorsGuild());
+		deck.add(new MartianRail());
 		for (int i = 0; i < 100; i++)
 			deck.add(new ColonizerTrainingCamp());
 			//deck.add(new Card("Card", 5, new Tags().space().event(), false));
@@ -113,11 +117,13 @@ public class Game extends JPanel {
     	currentPlayer.render(g);
     	planet.render(g);
 
-    	final long cityCount = grid.values().stream().filter(tile -> tile.getType() == Tile.Type.CITY).count();
 		g.drawImage(ImageCache.getImage("images/icon_city.png"), 650, 90, null);
 		g.setColor(Color.LIGHT_GRAY);
-		g.drawString(Long.toString(cityCount), 680, 110);
+		g.drawString(Long.toString(getCityCount()), 680, 110);
+	}
 
+	public int getCityCount() {
+		return (int) grid.values().stream().filter(tile -> tile.getType() == Tile.Type.CITY).count();
 	}
 
     public ActionHandler getActionHandler() {
