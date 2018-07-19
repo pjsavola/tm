@@ -34,6 +34,7 @@ public class DiscardAction implements Action {
             @Override
             public void complete() {
                 game.getCurrentPlayer().getCards().removeAll(selectedCards);
+                game.getDiscardDeck().addAll(selectedCards);
                 cancel();
             }
 
@@ -41,12 +42,14 @@ public class DiscardAction implements Action {
             public void undo() {
                 game.getCurrentPlayer().getCards().clear();
                 game.getCurrentPlayer().getCards().addAll(hand);
+                game.getDiscardDeck().removeAll(selectedCards);
                 game.repaint();
             }
 
             @Override
             public void redo() {
                 game.getCurrentPlayer().getCards().removeAll(selectedCards);
+                game.getDiscardDeck().addAll(selectedCards);
                 game.repaint();
             }
 

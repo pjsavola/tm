@@ -79,6 +79,10 @@ public class PlayCardAction implements Action {
                         game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(1), saturnSystemPlayer));
                     }
                 }
+                final Action action = selectedCard.getInitialAction();
+                if (action != null) {
+                    game.getActionHandler().addPendingAction(action);
+                }
                 return true;
             } else {
                 System.err.println("Not enough money to pay for the card");
@@ -90,6 +94,7 @@ public class PlayCardAction implements Action {
         public void complete() {
             player.addTags(selectedCard.getTags());
             player.getCards().remove(selectedCard);
+            player.getPlayedCards().add(selectedCard);
             cancel();
         }
 
@@ -98,6 +103,7 @@ public class PlayCardAction implements Action {
             player.removeTags(selectedCard.getTags());
             player.getCards().clear();
             player.getCards().addAll(hand);
+            player.getPlayedCards().remove(selectedCard);
             game.repaint();
         }
 
@@ -105,6 +111,7 @@ public class PlayCardAction implements Action {
         public void redo() {
             player.addTags(selectedCard.getTags());
             player.getCards().remove(selectedCard);
+            player.getPlayedCards().add(selectedCard);
             game.repaint();
         }
 

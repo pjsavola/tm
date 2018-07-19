@@ -4,13 +4,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import com.sun.istack.internal.Nullable;
+import tm.action.Action;
 
 public class Card {
 
     public static final int WIDTH = 200;
-    public static final int TITLE_HEIGHT = 16;
+    public static final int TITLE_HEIGHT = 19;
     public static final int CARD_HEIGHT = 200;
     private static final Color TEXT_COLOR = new Color(0xFFFFFF);
     private static final Color BG_COLOR = new Color(0x333333);
@@ -30,12 +33,12 @@ public class Card {
     public Color getBorderColor() {
         if (tags.hasEvent()) {
             return Color.RED;
-        } else if (effect) {
-            return Color.BLUE;
         } else if (cost == 0) {
             return Color.WHITE;
+        } else if (effect || !getActions().isEmpty()) {
+            return Color.BLUE;
         } else {
-            return Color.GREEN;
+            return new Color(0x00BB00);
         }
     }
 
@@ -49,6 +52,31 @@ public class Card {
 
     public Tags getTags() {
         return tags;
+    }
+
+    public boolean check(Planet planet, int tolerance) {
+        return true;
+    }
+
+    public boolean check(Player player) {
+        return true;
+    }
+
+    public int getVPs() {
+        return 0;
+    }
+
+    public List<Action> getActions() {
+        return Collections.emptyList();
+    }
+
+    @Nullable
+    public Action getInitialAction() {
+        return null;
+    }
+
+    public int markerCount() {
+        return 0;
     }
 
     public void renderTitle(Graphics g, int x, int y) {
@@ -67,19 +95,19 @@ public class Card {
 
         // Draw text
         g.setColor(TEXT_COLOR);
-        g.drawString(name, x + (WIDTH - w) / 2, y + 12);
+        g.drawString(name, x + (WIDTH - w) / 2 - 8, y + 14);
 
         // Draw cost
         if (cost > 0) {
             final String costString = Integer.toString(cost);
             final int costWidth = metrics.stringWidth(costString);
-            g.drawImage(ImageCache.getImage("images/icon_money.png"), x, y, null);
+            g.drawImage(ImageCache.getImage("images/icon_money.png"), x + 2, y + 2, null);
             g.setColor(Color.BLACK);
-            g.drawString(costString, x + (16 - costWidth) / 2, y + 12);
+            g.drawString(costString, x + (18 - costWidth) / 2, y + 14);
         }
 
         // Draw tags
-        tags.render(g, x + WIDTH, y);
+        tags.render(g, x + WIDTH - 1, y + 2);
     }
 
     // x: top-left corner
@@ -93,15 +121,35 @@ public class Card {
         g.setColor(getBorderColor());
         g.drawRect(x, y, WIDTH, CARD_HEIGHT);
 
+        // Draw requirements
+        g.setColor(Color.RED);
+        int i = 0;
+        for (String requirement : getRequirements()) {
+            g.drawString(requirement, x + 4, y + 16 + i * 16);
+            i++;
+        }
+        i++;
+
         // Draw content
         g.setColor(TEXT_COLOR);
-        final List<String> contents = getContents();
-        for (int i = 0; i < contents.size(); i++) {
-            g.drawString(contents.get(i), x + 4, y + 16 + i * 16);
+        for (String content : getContents()) {
+            g.drawString(content, x + 4, y + 16 + i * 16);
+            i++;
+        }
+
+        // Draw VPS
+        if (getVPs() > 0) {
+            g.drawImage(ImageCache.getImage("images/icon_vp.png"), x + WIDTH - 18, y + CARD_HEIGHT - 18, null);
+            g.setColor(Color.BLACK);
+            g.drawString(Integer.toString(getVPs()), x + WIDTH - 13, y + CARD_HEIGHT - 6);
         }
     }
 
+    protected List<String> getRequirements() {
+        return Collections.emptyList();
+    }
+
     protected List<String> getContents() {
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 }

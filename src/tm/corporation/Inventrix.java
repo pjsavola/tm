@@ -11,7 +11,6 @@ import tm.action.Action;
 import tm.action.DrawCardsAction;
 import tm.action.ResourceDeltaAction;
 
-// TODO: +/-2 requirements
 public class Inventrix extends Corporation {
 
     public Inventrix() {
@@ -28,7 +27,7 @@ public class Inventrix extends Corporation {
     }
 
     @Override
-    protected Action getInitialAction() {
+    public Action getInitialAction() {
         return new ResourceDeltaAction(new Resources(45));
     }
 

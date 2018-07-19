@@ -29,12 +29,12 @@ public abstract class Corporation extends Card {
 
     public boolean start(Game game) {
         final Action action = getInitialAction();
-        if (action.check(game)) {
-            game.getActionHandler().addPendingAction(action);
-            return true;
+        if (action != null) {
+            if (action.check(game)) {
+                game.getActionHandler().addPendingAction(action);
+                return true;
+            }
         }
         return false;
     }
-
-    protected abstract Action getInitialAction();
 }

@@ -125,19 +125,23 @@ public class Tags {
 	    return power > 0;
     }
 
+    public boolean hasMicrobe() {
+		return microbe > 0;
+	}
+
 	public void render(Graphics g, int x, int y) {
-		int offset = x - 17;
+		int offset = x - 16;
 		offset = drawTags(g, "images/tag_event.png", event, offset, y);
-		offset = drawTags(g, "images/tag_building.png", building, offset, y);
-		offset = drawTags(g, "images/tag_city.png", city, offset, y);
-		offset = drawTags(g, "images/tag_space.png", space, offset, y);
-		offset = drawTags(g, "images/tag_earth.png", earth, offset, y);
-		offset = drawTags(g, "images/tag_jovian.png", jovian, offset, y);
-		offset = drawTags(g, "images/tag_science.png", science, offset, y);
 		offset = drawTags(g, "images/tag_power.png", power, offset, y);
-		offset = drawTags(g, "images/tag_plant.png", plant, offset, y);
+		offset = drawTags(g, "images/tag_jovian.png", jovian, offset, y);
+		offset = drawTags(g, "images/tag_earth.png", earth, offset, y);
+		offset = drawTags(g, "images/tag_city.png", city, offset, y);
 		offset = drawTags(g, "images/tag_animal.png", animal, offset, y);
-		drawTags(g, "images/tag_microbe.png", microbe, offset, y);
+		offset = drawTags(g, "images/tag_plant.png", plant, offset, y);
+		offset = drawTags(g, "images/tag_microbe.png", microbe, offset, y);
+		offset = drawTags(g, "images/tag_space.png", space, offset, y);
+		offset = drawTags(g, "images/tag_building.png", building, offset, y);
+		drawTags(g, "images/tag_science.png", science, offset, y);
 	}
 
 	private static int drawTags(Graphics g, String path, int count, int x, int y) {

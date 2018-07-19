@@ -10,20 +10,10 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.AddOxygenAction;
-import tm.action.IncomeDeltaAction;
-import tm.action.PlaceTileAction;
-import tm.action.ResourceDeltaAction;
-import tm.completable.Completable;
-import tm.completable.InstantCompletable;
-import tm.corporation.Credicor;
-import tm.corporation.Ecoline;
-import tm.corporation.Helion;
+import tm.corporation.Inventrix;
 import tm.corporation.Phoblog;
 import tm.corporation.Teractor;
 import tm.corporation.Thorgate;
-import tm.corporation.UnitedNationsMarsInitiative;
 
 public class Player {
 	private static final Font font = new Font("Arial", Font.BOLD, 12);
@@ -37,6 +27,7 @@ public class Player {
 	private final Color color = new Color(0xFF0000);
 	final Set<Tile> ownedTiles = new HashSet<>();
 	final List<Card> cards = new ArrayList<>();
+	private final List<Card> playedCards = new ArrayList<>();
 	Corporation corporation;
 
 	public Color getColor() {
@@ -72,7 +63,7 @@ public class Player {
 	    savedRating = rating;
     }
 
-    private boolean hasIncreasedRating() {
+    public boolean hasIncreasedRating() {
 	    return rating > savedRating;
     }
 	
@@ -91,6 +82,10 @@ public class Player {
 	public List<Card> getCards() {
 		return cards;
 	}
+
+	public List<Card> getPlayedCards() {
+	    return playedCards;
+    }
 
 	public Resources getIncome() {
 		final int leftOverEnergy = resources.energy;
@@ -127,7 +122,8 @@ public class Player {
     }
 
     public boolean fulfillsRequirements(Card card, Planet planet) {
-	    return true;
+	    int tolerance = corporation instanceof Inventrix ? 2 : 0;
+	    return card.check(planet, tolerance) && card.check(this);
     }
 
     public void addTags(Tags tags) {
@@ -139,66 +135,8 @@ public class Player {
     }
 
     public List<Action> getActions() {
-        final List<Action> actions = new ArrayList<>();
-        if (corporation instanceof Credicor) {
-            actions.add(new ActionChain(ActionType.GREENERY, "Greenery",
-                new ResourceDeltaAction(new Resources(-23)),
-                new PlaceTileAction(Tile.Type.GREENERY),
-                new AddOxygenAction(),
-                new ResourceDeltaAction(new Resources(4))
-            ));
-            actions.add(new ActionChain(ActionType.CITY, "City",
-                new ResourceDeltaAction(new Resources(-25)),
-                new PlaceTileAction(Tile.Type.CITY),
-                new IncomeDeltaAction(new Resources(1)),
-                new ResourceDeltaAction(new Resources(4))
-            ));
-        } else if (corporation instanceof Ecoline) {
-            actions.add(new ActionChain(ActionType.PLANT_TO_GREENERY, "Plant",
-                new ResourceDeltaAction(new Resources(0, 0, 0, -7, 0, 0)),
-                new PlaceTileAction(Tile.Type.GREENERY),
-                new AddOxygenAction()
-            ));
-        } else if (corporation instanceof Helion) {
-            actions.add(new ActionChain(ActionType.HEAT_TO_MONEY, "Heat to money",
-                new ResourceDeltaAction(new Resources(1, 0, 0, 0, 0, -1))
-            ));
-        } else if (corporation instanceof Thorgate) {
-            actions.add(new ActionChain(ActionType.ENERGY, "Energy income",
-                new ResourceDeltaAction(new Resources(-8)),
-                new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0))
-            ));
-        } else if (corporation instanceof UnitedNationsMarsInitiative) {
-            actions.add(new ActionChain(ActionType.TR, "Increase TR",
-                new ResourceDeltaAction(new Resources(-3)),
-                new Action() {
-                    @Override
-                    public boolean check(Game game) {
-                        return hasIncreasedRating();
-                    }
-
-                    @Override
-                    public Completable begin(Game game) {
-                        return new InstantCompletable(game) {
-                            @Override
-                            public void complete() {
-                                game.getCurrentPlayer().adjustRating(1);
-                            }
-
-                            @Override
-                            public void undo() {
-                                game.getCurrentPlayer().adjustRating(-1);
-                            }
-
-                            @Override
-                            public void redo() {
-                                game.getCurrentPlayer().adjustRating(1);
-                            }
-                        };
-                    }
-                }
-            ));
-        }
+        final List<Action> actions = new ArrayList<>(corporation.getActions());
+        playedCards.forEach(card -> actions.addAll(card.getActions()));
         return actions;
     }
 
@@ -214,6 +152,7 @@ public class Player {
 					.filter(neighborTile -> neighborTile.getType() == Tile.Type.GREENERY)
 					.count());
 			});
+		playedCards.forEach(card -> total.addAndGet(card.getVPs()));
 		total.addAndGet(ownedTiles
 			.stream()
 			.filter(tile -> tile.getType() == Tile.Type.GREENERY)

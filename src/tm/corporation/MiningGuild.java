@@ -18,7 +18,7 @@ public class MiningGuild extends Corporation {
     }
 
     @Override
-    protected Action getInitialAction() {
+    public Action getInitialAction() {
         return new ActionChain(
         	new ResourceDeltaAction(new Resources(30, 5, 0, 0, 0, 0)),
         	new IncomeDeltaAction(new Resources(0, 1, 0, 0, 0, 0)));

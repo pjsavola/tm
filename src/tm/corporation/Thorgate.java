@@ -1,8 +1,10 @@
 package tm.corporation;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import tm.ActionType;
 import tm.Corporation;
 import tm.Resources;
 import tm.Tags;
@@ -18,10 +20,18 @@ public class Thorgate extends Corporation {
     }
 
     @Override
-    protected Action getInitialAction() {
+    public Action getInitialAction() {
         return new ActionChain(
         	new ResourceDeltaAction(new Resources(48)),
         	new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0)));
+    }
+
+    @Override
+    public List<Action> getActions() {
+        return Collections.singletonList(new ActionChain(ActionType.ENERGY, "Energy income",
+            new ResourceDeltaAction(new Resources(-8)),
+            new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0))
+        ));
     }
 
     @Override

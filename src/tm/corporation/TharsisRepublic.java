@@ -20,7 +20,7 @@ public class TharsisRepublic extends Corporation {
     }
 
     @Override
-    protected Action getInitialAction() {
+    public Action getInitialAction() {
         return new ActionChain(
             new ResourceDeltaAction(new Resources(40)),
             new IncomeDeltaAction(new Resources(2)), // Initial cities in solo game

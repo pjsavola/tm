@@ -1,8 +1,10 @@
 package tm.corporation;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import tm.ActionType;
 import tm.Corporation;
 import tm.Resources;
 import tm.Tags;
@@ -18,10 +20,17 @@ public class Helion extends Corporation {
     }
 
     @Override
-    protected Action getInitialAction() {
+    public Action getInitialAction() {
         return new ActionChain(
         	new ResourceDeltaAction(new Resources(42)),
         	new IncomeDeltaAction(new Resources(0, 0, 0, 0, 0, 3)));
+    }
+
+    @Override
+    public List<Action> getActions() {
+        return Collections.singletonList(new ActionChain(ActionType.HEAT_TO_MONEY, "Heat to money",
+            new ResourceDeltaAction(new Resources(1, 0, 0, 0, 0, -1))
+        ));
     }
 
     @Override

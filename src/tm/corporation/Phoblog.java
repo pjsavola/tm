@@ -16,7 +16,7 @@ public class Phoblog extends Corporation {
     }
 
     @Override
-    protected Action getInitialAction() {
+    public Action getInitialAction() {
         return new ResourceDeltaAction(new Resources(23, 0, 10, 0, 0, 0));
     }
 

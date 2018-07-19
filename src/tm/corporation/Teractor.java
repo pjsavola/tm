@@ -16,7 +16,7 @@ public class Teractor extends Corporation {
     }
 
     @Override
-    protected Action getInitialAction() {
+    public Action getInitialAction() {
        	return new ResourceDeltaAction(new Resources(60));
     }
 
