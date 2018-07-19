@@ -23,6 +23,7 @@ import tm.card.AsteroidMiningConsortium;
 import tm.card.CloudSeeding;
 import tm.card.ColonizerTrainingCamp;
 import tm.card.DeepWellHeating;
+import tm.card.SearchForLife;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
 import tm.corporation.Helion;
@@ -65,6 +66,7 @@ public class Game extends JPanel {
 		deck.add(new AsteroidMiningConsortium());
 		deck.add(new DeepWellHeating());
 		deck.add(new CloudSeeding());
+		deck.add(new SearchForLife());
 		for (int i = 0; i < 100; i++)
 			deck.add(new ColonizerTrainingCamp());
 			//deck.add(new Card("Card", 5, new Tags().space().event(), false));
@@ -222,9 +224,10 @@ public class Game extends JPanel {
                     } else {
                         g.getActionHandler().process(ActionType.DISCARD);
                     }
-                }
-                if (Math.abs(x - 350) <= 60 && Math.abs(y - 688) <= 11) {
-                	g.getActionHandler().process(ActionType.PASS);
+                } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 172) <= 8) {
+					g.getActionHandler().process(ActionType.CUSTOM);
+				} else if (Math.abs(x - 350) <= 60 && Math.abs(y - 688) <= 11) {
+					g.getActionHandler().process(ActionType.PASS);
 				}
             }
 

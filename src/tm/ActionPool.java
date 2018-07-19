@@ -18,6 +18,7 @@ import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.action.PlayCardAction;
 import tm.action.ResourceDeltaAction;
+import tm.action.SelectActionAction;
 import tm.action.SwitchRoundAction;
 import tm.completable.Completable;
 
@@ -61,6 +62,8 @@ public class ActionPool {
 			new SwitchRoundAction()));
 		standardActions.add(new ActionChain(ActionType.PLAY, "Play card",
 			new PlayCardAction(game.getCurrentPlayer())));
+		standardActions.add(new ActionChain(ActionType.CUSTOM, "Select action",
+			new SelectActionAction()));
 	}
 
 	@Nullable

@@ -12,5 +12,7 @@ public enum ActionType {
     PLANT_TO_GREENERY,
     HEAT_TO_TEMPERATURE,
     TR,
-    HEAT_TO_MONEY
+    HEAT_TO_MONEY,
+    CUSTOM,
+    SEARCH_FOR_LIFE
 }

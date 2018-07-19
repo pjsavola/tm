@@ -17,7 +17,7 @@ public class Card {
     public static final int CARD_HEIGHT = 200;
     private static final Color TEXT_COLOR = new Color(0xFFFFFF);
     private static final Color BG_COLOR = new Color(0x333333);
-    private static final Font FONT = new Font("Arial", Font.BOLD, 12);
+    public static final Font FONT = new Font("Arial", Font.BOLD, 12);
     private final String name;
     private final int cost;
     private final Tags tags;

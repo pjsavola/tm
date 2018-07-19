@@ -135,9 +135,7 @@ public class Player {
     }
 
     public List<Action> getActions() {
-        final List<Action> actions = new ArrayList<>(corporation.getActions());
-        playedCards.forEach(card -> actions.addAll(card.getActions()));
-        return actions;
+        return corporation.getActions();
     }
 
 	public int getPoints() {

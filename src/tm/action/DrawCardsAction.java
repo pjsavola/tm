@@ -105,7 +105,7 @@ public class DrawCardsAction implements Action {
 
                 @Override
                 public String getTitle() {
-                    return "You got these new cards";
+                    return "You got these cards";
                 }
             };
         }
