@@ -12,7 +12,8 @@ public class Tile {
 	public enum Type {
 		WATER("images/water.png"),
 		GREENERY("images/forest.png"),
-		CITY("images/city.png");
+		CITY("images/city.png"),
+		CAPITAL("images/city.png");
 		
 		private final BufferedImage image;
 		
@@ -73,6 +74,14 @@ public class Tile {
 	
 	public Type getType() {
 		return type;
+	}
+
+	public boolean isCity() {
+		return isCity(type);
+	}
+
+	public static boolean isCity(Tile.Type type) {
+		return type == Type.CITY || type == Type.CAPITAL;
 	}
 	
 	public void setOwner(Player player) {

@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 
 import com.sun.istack.internal.Nullable;
 import tm.card.AsteroidMiningConsortium;
+import tm.card.Capital;
 import tm.card.CloudSeeding;
 import tm.card.ColonizerTrainingCamp;
 import tm.card.DeepWellHeating;
@@ -71,6 +72,7 @@ public class Game extends JPanel {
 		deck.add(new SearchForLife());
 		deck.add(new InventorsGuild());
 		deck.add(new MartianRail());
+		deck.add(new Capital());
 		for (int i = 0; i < 100; i++)
 			deck.add(new ColonizerTrainingCamp());
 			//deck.add(new Card("Card", 5, new Tags().space().event(), false));
@@ -123,7 +125,7 @@ public class Game extends JPanel {
 	}
 
 	public int getCityCount() {
-		return (int) grid.values().stream().filter(tile -> tile.getType() == Tile.Type.CITY).count();
+		return (int) grid.values().stream().filter(Tile::isCity).count();
 	}
 
     public ActionHandler getActionHandler() {

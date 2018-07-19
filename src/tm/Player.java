@@ -142,12 +142,23 @@ public class Player {
 		final AtomicLong total = new AtomicLong(rating);
 		ownedTiles
 			.stream()
-			.filter(tile -> tile.getType() == Tile.Type.CITY)
+			.filter(Tile::isCity)
 			.forEach(tile -> {
 				total.addAndGet(tile
 					.getNeighbors()
 					.stream()
 					.filter(neighborTile -> neighborTile.getType() == Tile.Type.GREENERY)
+					.count());
+			});
+		ownedTiles
+			.stream()
+			.filter(tile -> tile.getType() == Tile.Type.CAPITAL)
+			.findAny()
+			.ifPresent(capital -> {
+				total.addAndGet(capital
+					.getNeighbors()
+					.stream()
+					.filter(neighborTile -> neighborTile.getType() == Tile.Type.WATER)
 					.count());
 			});
 		playedCards.forEach(card -> total.addAndGet(card.getVPs()));

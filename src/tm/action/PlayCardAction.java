@@ -81,7 +81,12 @@ public class PlayCardAction implements Action {
                 }
                 final Action action = selectedCard.getInitialAction();
                 if (action != null) {
-                    game.getActionHandler().addPendingAction(action);
+                    if (action.check(game)) {
+                        game.getActionHandler().addPendingAction(action);
+                        return true;
+                    }
+                    System.err.println("Cannot play the card");
+                    return false;
                 }
                 return true;
             } else {

@@ -80,8 +80,8 @@ public class PlaceTileAction implements Action {
 						System.err.println("Reserved for Noctis City");
 						return;
 					}
-					if (type == Tile.Type.CITY) {
-						if (targetTile.getNeighbors().stream().anyMatch(tile -> tile.getType() == Tile.Type.CITY)) {
+					if (Tile.isCity(type)) {
+						if (targetTile.getNeighbors().stream().anyMatch(tile -> Tile.isCity(tile.getType()))) {
 							System.err.println("Too close to another city");
 							return;
 						}
@@ -142,7 +142,7 @@ public class PlaceTileAction implements Action {
 					sum += 2;
 				}
 			}
-			if (type == Tile.Type.CITY) {
+			if (Tile.isCity(type)) {
 			    final Player tharsisRepublicPlayer = game.getPlayer(TharsisRepublic.class);
 			    if (tharsisRepublicPlayer != null) {
 			        game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(1), tharsisRepublicPlayer));
