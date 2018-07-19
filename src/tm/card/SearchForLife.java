@@ -12,9 +12,9 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
-import tm.action.BlankAction;
 import tm.action.ResourceDeltaAction;
 import tm.completable.Completable;
+import tm.completable.InstantCompletable;
 import tm.completable.SelectCardsCompletable;
 
 public class SearchForLife extends Card {
@@ -55,27 +55,53 @@ public class SearchForLife extends Card {
 
                 @Override
                 public Completable begin(Game game) {
-                    final Card card = game.drawCard();
-                    return new SelectCardsCompletable(game, Collections.singletonList(card)) {
-
-                        @Override
-                        public int maxSelection() {
-                                    return 0;
-                                }
-
-                        @Override
-                        public boolean check() {
-                                    return true;
-                                }
-
+                    return new InstantCompletable(game) {
                         @Override
                         public void complete() {
+                            final Card card = game.drawCard();
                             generationLimit = game.getPlanet().getRound();
                             if (card.getTags().hasMicrobe()) {
                                 markerCount++;
                             }
-                            game.getActionHandler().addPendingIrreversibleAction(new BlankAction());
-                            cancel();
+                            game.getActionHandler().addPendingIrreversibleAction(new Action() {
+                                @Override
+                                public Completable begin(Game game) {
+                                    return new SelectCardsCompletable(game, Collections.singletonList(card)) {
+
+                                        @Override
+                                        public int maxSelection() {
+                                            return 0;
+                                        }
+
+                                        @Override
+                                        public boolean check() {
+                                            return true;
+                                        }
+
+                                        @Override
+                                        public void complete() {
+                                            cancel();
+                                        }
+
+                                        @Override
+                                        public void undo() {
+                                            game.getActionHandler().reprocess(this);
+                                            game.addMouseListener(mouseListener);
+                                            game.repaint();
+                                        }
+
+                                        @Override
+                                        public void redo() {
+                                            cancel();
+                                        }
+
+                                        @Override
+                                        public String getTitle() {
+                                            return "You drew this card";
+                                        }
+                                    };
+                                }
+                            });
                         }
 
                         @Override
@@ -85,11 +111,6 @@ public class SearchForLife extends Card {
                         @Override
                         public void redo() {
                         }
-
-                        @Override
-                        public String getTitle() {
-                                    return "You drew this card";
-                                }
                     };
                 }
             }
