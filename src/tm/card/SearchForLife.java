@@ -8,19 +8,21 @@ import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Planet;
-import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.CardAction;
-import tm.action.ResourceDeltaAction;
+import tm.action.CardActionWithCost;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
 
 public class SearchForLife extends Card {
 
     private int markerCount;
-    private final Action action = new CardAction(false) {
+    private final Action action = new CardActionWithCost(false, 1, false) {
+        @Override
+        public ActionType getType() {
+            return ActionType.SEARCH_FOR_LIFE;
+        }
+
         @Override
         protected Action getAction(Game game) {
             final Card card = game.drawCard();
@@ -90,12 +92,7 @@ public class SearchForLife extends Card {
 
     @Override
     public List<Action> getActions() {
-        return Collections.singletonList(new ActionChain(
-            ActionType.SEARCH_FOR_LIFE,
-            "Search For Life",
-            new ResourceDeltaAction(new Resources(-1)),
-            action
-        ));
+        return Collections.singletonList(action);
     }
 
     @Override
