@@ -14,7 +14,7 @@ import tm.action.AddWaterAction;
 public class Comet extends Card {
 
     public Comet() {
-        super("Comet", 21, new Tags().space().event(), false);
+        super("Comet", 21, new Tags().space().event());
     }
 
     @Override

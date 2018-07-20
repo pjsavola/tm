@@ -15,7 +15,7 @@ import tm.action.IncomeDeltaAction;
 public class BigAsteroid extends Card {
 
     public BigAsteroid() {
-        super("Big Asteroid", 27, new Tags().space().event(), false);
+        super("Big Asteroid", 27, new Tags().space().event());
     }
 
     @Override

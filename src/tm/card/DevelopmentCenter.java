@@ -25,7 +25,7 @@ public class DevelopmentCenter extends Card {
     };
 
     public DevelopmentCenter() {
-        super("Development Center", 11, new Tags().building().science(), false);
+        super("Development Center", 11, new Tags().building().science());
     }
 
     @Override

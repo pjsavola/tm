@@ -15,7 +15,7 @@ import tm.action.IncomeDeltaAction;
 public class CloudSeeding extends Card {
 
     public CloudSeeding() {
-        super("Cloud Seeding", 11, new Tags(), false);
+        super("Cloud Seeding", 11, new Tags());
     }
 
     @Override

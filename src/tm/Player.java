@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 import tm.action.Action;
+import tm.card.ResearchOutpost;
 import tm.card.WaterImportFromEuropa;
 import tm.corporation.Inventrix;
 import tm.corporation.Phoblog;
@@ -113,13 +114,17 @@ public class Player {
     }
 
     public int getDiscount(Card card) {
+		int discount = 0;
 	    if (card.getTags().hasPower() && corporation instanceof Thorgate) {
-            return 3;
+            discount += 3;
         }
         if (card.getTags().hasEvent() && corporation instanceof Teractor) {
-	        return 3;
+	    	discount += 3;
         }
-	    return 0;
+        if (playedCards.stream().anyMatch(c -> c instanceof ResearchOutpost)) {
+	    	discount += 1;
+		}
+	    return discount;
     }
 
     public boolean fulfillsRequirements(Card card, Planet planet) {

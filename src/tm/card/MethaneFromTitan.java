@@ -14,7 +14,7 @@ import tm.action.IncomeDeltaAction;
 public class MethaneFromTitan extends Card {
 
     public MethaneFromTitan() {
-        super("Methane From Titan", 28, new Tags().space().jovian(), false);
+        super("Methane From Titan", 28, new Tags().space().jovian());
     }
 
     @Override

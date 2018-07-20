@@ -15,7 +15,7 @@ import tm.action.IncomeDeltaAction;
 public class DeepWellHeating extends Card {
 
     public DeepWellHeating() {
-        super("Deep Well Heating", 13, new Tags().building().power(), false);
+        super("Deep Well Heating", 13, new Tags().building().power());
     }
 
     @Override

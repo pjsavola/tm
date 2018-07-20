@@ -125,6 +125,10 @@ public class Tags {
 	    return power > 0;
     }
 
+    public boolean hasAnimal() {
+		return animal > 0;
+	}
+
     public boolean hasMicrobe() {
 		return microbe > 0;
 	}

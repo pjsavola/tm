@@ -27,7 +27,7 @@ public class InventorsGuild extends Card {
     };
 
     public InventorsGuild() {
-        super("Inventors' Guild", 9, new Tags().science(), false);
+        super("Inventors' Guild", 9, new Tags().science());
     }
 
     @Override

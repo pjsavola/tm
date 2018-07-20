@@ -72,7 +72,7 @@ public class SearchForLife extends Card {
     };
 
     public SearchForLife() {
-        super("Search For Life", 3, new Tags().science(), false);
+        super("Search For Life", 3, new Tags().science());
     }
 
     @Override

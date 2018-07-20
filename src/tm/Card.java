@@ -23,6 +23,10 @@ public class Card {
     private final Tags tags;
     private final boolean effect;
 
+    public Card(String name, int cost, Tags tags) {
+        this(name, cost, tags, false);
+    }
+
     public Card(String name, int cost, Tags tags, boolean effect) {
         this.name = name;
         this.cost = cost;
@@ -77,6 +81,9 @@ public class Card {
 
     public int markerCount() {
         return 0;
+    }
+
+    public void adjustMarkers(int delta) {
     }
 
     public void renderTitle(Graphics g, int x, int y) {

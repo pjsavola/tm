@@ -24,7 +24,10 @@ import tm.card.ColonizerTrainingCamp;
 import tm.card.DevelopmentCenter;
 import tm.card.DomedCrater;
 import tm.card.EquatorialMagnetizer;
+import tm.card.ImportedHydrogen;
+import tm.card.MethaneFromTitan;
 import tm.card.NoctisCity;
+import tm.card.ResearchOutpost;
 import tm.card.SpaceElevator;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
@@ -83,6 +86,9 @@ public class Game extends JPanel {
 		deck.add(new EquatorialMagnetizer());
 		deck.add(new DomedCrater());
 		deck.add(new NoctisCity());
+		deck.add(new MethaneFromTitan());
+		deck.add(new ImportedHydrogen());
+		deck.add(new ResearchOutpost());
 		for (int i = 0; i < 100; i++)
 			deck.add(new ColonizerTrainingCamp());
 		corporationDeck.add(new Credicor());

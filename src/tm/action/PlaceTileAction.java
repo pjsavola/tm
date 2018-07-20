@@ -23,9 +23,15 @@ import tm.corporation.TharsisRepublic;
 public class PlaceTileAction implements Action {
 
 	private final Tile.Type type;
+	private final boolean isolated;
 
 	public PlaceTileAction(Tile.Type type) {
+		this(type, false);
+	}
+
+	public PlaceTileAction(Tile.Type type, boolean isolated) {
 		this.type = type;
+		this.isolated = isolated;
 	}
 
 	@Override
@@ -35,13 +41,12 @@ public class PlaceTileAction implements Action {
 
 	@Override
 	public Completable begin(Game game) {
-		return new PlaceTileCompletable(game, type);
+		return new PlaceTileCompletable(game);
 	}
 	
-	private static class PlaceTileCompletable implements Completable {
+	private class PlaceTileCompletable implements Completable {
 
 		private final Game game;
-		private final Tile.Type type;
 		private Point customCursorLocation;
 		private Tile targetTile;
 
@@ -86,6 +91,12 @@ public class PlaceTileAction implements Action {
 							return;
 						}
 					}
+					if (isolated) {
+						if (targetTile.getNeighbors().stream().anyMatch(tile -> tile.getType() != null)) {
+							System.err.println("Too close to another tile");
+							return;
+						}
+					}
 					if (type == Tile.Type.GREENERY) {
 						final Set<Tile> freeAdjacentTiles = game.getCurrentPlayer().getFreeAdjacentTiles();
 						if (!freeAdjacentTiles.isEmpty() && !freeAdjacentTiles.contains(targetTile)) {
@@ -109,9 +120,8 @@ public class PlaceTileAction implements Action {
 			}
 		};
 
-		public PlaceTileCompletable(Game game, Tile.Type type) {
+		public PlaceTileCompletable(Game game) {
 			this.game = game;
-			this.type = type;
 			game.addMouseListener(mouseListener);
 			game.addMouseMotionListener(mouseMotionListener);
 			customCursorLocation = MouseInfo.getPointerInfo().getLocation();
