@@ -11,9 +11,8 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
+import tm.action.AddTerraformingRatingAction;
 import tm.action.ResourceDeltaAction;
-import tm.completable.Completable;
-import tm.completable.InstantCompletable;
 
 public class UnitedNationsMarsInitiative extends Corporation {
 
@@ -30,30 +29,10 @@ public class UnitedNationsMarsInitiative extends Corporation {
     public List<Action> getActions() {
         return Collections.singletonList(new ActionChain(ActionType.TR, "Increase TR",
             new ResourceDeltaAction(new Resources(-3)),
-            new Action() {
+            new AddTerraformingRatingAction() {
                 @Override
                 public boolean check(Game game) {
                     return game.getCurrentPlayer().hasIncreasedRating();
-                }
-
-                @Override
-                public Completable begin(Game game) {
-                    return new InstantCompletable(game) {
-                        @Override
-                        public void complete() {
-                            game.getCurrentPlayer().adjustRating(1);
-                        }
-
-                        @Override
-                        public void undo() {
-                            game.getCurrentPlayer().adjustRating(-1);
-                        }
-
-                        @Override
-                        public void redo() {
-                            game.getCurrentPlayer().adjustRating(1);
-                        }
-                    };
                 }
             }
         ));
