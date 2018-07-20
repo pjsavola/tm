@@ -20,6 +20,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.sun.istack.internal.Nullable;
+import tm.card.ArcticAlgae;
+import tm.card.BlackPolarDust;
 import tm.card.ColonizerTrainingCamp;
 import tm.card.DevelopmentCenter;
 import tm.card.DomedCrater;
@@ -27,6 +29,7 @@ import tm.card.EquatorialMagnetizer;
 import tm.card.ImportedHydrogen;
 import tm.card.MethaneFromTitan;
 import tm.card.NoctisCity;
+import tm.card.PhobosSpaceHaven;
 import tm.card.ResearchOutpost;
 import tm.card.SpaceElevator;
 import tm.corporation.Credicor;
@@ -89,6 +92,9 @@ public class Game extends JPanel {
 		deck.add(new MethaneFromTitan());
 		deck.add(new ImportedHydrogen());
 		deck.add(new ResearchOutpost());
+		deck.add(new PhobosSpaceHaven());
+		deck.add(new BlackPolarDust());
+		deck.add(new ArcticAlgae());
 		for (int i = 0; i < 100; i++)
 			deck.add(new ColonizerTrainingCamp());
 		corporationDeck.add(new Credicor());

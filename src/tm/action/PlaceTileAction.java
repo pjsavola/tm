@@ -16,6 +16,7 @@ import tm.Player;
 import tm.Resources;
 import tm.Tile;
 import tm.TileProperties;
+import tm.card.ArcticAlgae;
 import tm.completable.Completable;
 import tm.corporation.MiningGuild;
 import tm.corporation.TharsisRepublic;
@@ -185,6 +186,11 @@ public class PlaceTileAction implements Action {
 		targetTile.setType(type);
 		if (type != Tile.Type.WATER) {
 			targetTile.setOwner(game.getCurrentPlayer());
+		} else {
+			// TODO: Find player who owns the card if we need support for more than 1 player
+			if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof ArcticAlgae)) {
+				game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(0, 0, 0, 2, 0, 0)));
+			}
 		}
 		int sum = 0;
 		for (Tile tile : targetTile.getNeighbors()) {
