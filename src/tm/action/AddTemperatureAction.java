@@ -1,10 +1,9 @@
 package tm.action;
 
-import tm.completable.Completable;
 import tm.Game;
-import tm.completable.InstantCompletable;
 import tm.Resources;
-import tm.Tile;
+import tm.completable.Completable;
+import tm.completable.InstantCompletable;
 
 public class AddTemperatureAction implements Action {
 
@@ -27,10 +26,8 @@ public class AddTemperatureAction implements Action {
 					}
 				}
 				if (game.getPlanet().getTemperature() == 0) {
-					final Action bonusAction = new ActionChain(
-						new AddWaterAction(), new PlaceTileAction(Tile.Type.WATER));
-					if (bonusAction.check(game)) {
-						game.getActionHandler().addPendingAction(bonusAction);
+					if (game.getPlanet().getWaterCount() > 0) {
+						game.getActionHandler().addPendingAction(new AddWaterAction());
 					}
 				}
 			}

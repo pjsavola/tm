@@ -29,8 +29,6 @@ public class DomedCrater extends Card {
     @Override
     public Action getInitialAction() {
         return new ActionChain(
-            null,
-            getName(),
             new PlaceTileAction(Tile.Type.CITY),
             new ResourceDeltaAction(new Resources(0, 0, 0, 3, 0, 0)),
             new IncomeDeltaAction(new Resources(3, 0, 0, 0, -1, 0))

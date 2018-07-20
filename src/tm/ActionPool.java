@@ -41,7 +41,6 @@ public class ActionPool {
 			new AddTemperatureAction()));
 		standardActions.add(new ActionChain(ActionType.WATER, "Water",
 			new ResourceDeltaAction(new Resources(-18)),
-			new PlaceTileAction(Tile.Type.WATER),
 			new AddWaterAction()));
 		standardActions.add(new ActionChain(ActionType.GREENERY, "Greenery",
 			new ResourceDeltaAction(new Resources(-23)),

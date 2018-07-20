@@ -8,12 +8,9 @@ import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Tags;
-import tm.Tile;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddWaterAction;
 import tm.action.CardActionWithCost;
-import tm.action.PlaceTileAction;
 
 public class WaterImportFromEuropa extends Card {
 
@@ -30,12 +27,7 @@ public class WaterImportFromEuropa extends Card {
 
         @Override
         protected Action getAction(Game game) {
-            return new ActionChain(
-                null,
-                "Water Import From Europa",
-                new PlaceTileAction(Tile.Type.WATER),
-                new AddWaterAction()
-            );
+            return new AddWaterAction();
         }
     };
 

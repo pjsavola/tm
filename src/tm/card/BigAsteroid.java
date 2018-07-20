@@ -21,8 +21,6 @@ public class BigAsteroid extends Card {
     @Override
     public Action getInitialAction() {
         return new ActionChain(
-            null,
-            "Big Asteroid",
             new IncomeDeltaAction(new Resources(0, 0, 4, 0, 0, 0)),
             new AddTemperatureAction(),
             new AddTemperatureAction()

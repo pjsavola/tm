@@ -1,7 +1,8 @@
 package tm.action;
 
-import tm.completable.Completable;
 import tm.Game;
+import tm.Tile;
+import tm.completable.Completable;
 import tm.completable.InstantCompletable;
 
 public class AddWaterAction implements Action {
@@ -18,6 +19,7 @@ public class AddWaterAction implements Action {
 			public void complete() {
 				game.getPlanet().adjustWaterCount(-1);
 				game.getCurrentPlayer().adjustRating(1);
+				game.getActionHandler().addPendingAction(new PlaceTileAction(Tile.Type.WATER));
 			}
 
 			@Override

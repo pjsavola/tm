@@ -25,7 +25,7 @@ public class DeepWellHeating extends Card {
 
     @Override
     public Action getInitialAction() {
-        return new ActionChain(null, "",
+        return new ActionChain(
             new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0)),
             new AddTemperatureAction()
         );

@@ -30,8 +30,6 @@ public class NoctisCity extends Card {
     @Override
     public Action getInitialAction() {
         return new ActionChain(
-            null,
-            getName(),
             new Action() {
                 @Override
                 public Completable begin(Game game) {

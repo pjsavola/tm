@@ -22,7 +22,7 @@ import tm.corporation.TharsisRepublic;
 
 public class PlaceTileAction implements Action {
 
-	final Tile.Type type;
+	private final Tile.Type type;
 
 	public PlaceTileAction(Tile.Type type) {
 		this.type = type;
@@ -35,17 +35,17 @@ public class PlaceTileAction implements Action {
 
 	@Override
 	public Completable begin(Game game) {
-		return new PlaceTileCompletable(game);
-			
+		return new PlaceTileCompletable(game, type);
 	}
 	
-	private class PlaceTileCompletable implements Completable {
+	private static class PlaceTileCompletable implements Completable {
 
-		final Game game;
-		Point customCursorLocation;
-		Tile targetTile;
+		private final Game game;
+		private final Tile.Type type;
+		private Point customCursorLocation;
+		private Tile targetTile;
 
-		final MouseListener mouseListener = new MouseListener() {
+		private final MouseListener mouseListener = new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 			}
@@ -98,7 +98,7 @@ public class PlaceTileAction implements Action {
 			}
 		};
 		
-		final MouseMotionListener mouseMotionListener = new MouseMotionListener() {
+		private final MouseMotionListener mouseMotionListener = new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				customCursorLocation = new Point(e.getX(), e.getY());
@@ -109,8 +109,9 @@ public class PlaceTileAction implements Action {
 			}
 		};
 
-		private PlaceTileCompletable(Game game) {
+		public PlaceTileCompletable(Game game, Tile.Type type) {
 			this.game = game;
+			this.type = type;
 			game.addMouseListener(mouseListener);
 			game.addMouseMotionListener(mouseMotionListener);
 			customCursorLocation = MouseInfo.getPointerInfo().getLocation();

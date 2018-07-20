@@ -28,8 +28,6 @@ public class Capital extends Card {
     @Override
     public Action getInitialAction() {
         return new ActionChain(
-            null,
-            "Capital",
             new PlaceTileAction(Tile.Type.CAPITAL),
             new IncomeDeltaAction(new Resources(5, 0, 0, 0, -2, 0))
         );

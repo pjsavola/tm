@@ -10,6 +10,7 @@ import tm.Game;
 import tm.completable.Completable;
 import tm.completable.CompletableChain;
 
+// TODO: ActionChain inside ActionChain probably does not work. Work around it by using pending actions.
 public class ActionChain implements Action {
 
 	@Nullable
