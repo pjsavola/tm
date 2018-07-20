@@ -132,43 +132,9 @@ public class PlaceTileAction implements Action {
 
 		@Override
 		public void complete() {
-			targetTile.setType(type);
-			if (type != Tile.Type.WATER) {
-				targetTile.setOwner(game.getCurrentPlayer());
-			}
-			int sum = 0;
-			for (Tile tile : targetTile.getNeighbors()) {
-				if (tile.getType() == Tile.Type.WATER) {
-					sum += 2;
-				}
-			}
-			if (Tile.isCity(type)) {
-			    final Player tharsisRepublicPlayer = game.getPlayer(TharsisRepublic.class);
-			    if (tharsisRepublicPlayer != null) {
-			        game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(1), tharsisRepublicPlayer));
-                }
-                if (tharsisRepublicPlayer == game.getCurrentPlayer()) {
-			        game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(3)));
-                }
-            }
-			final TileProperties p = targetTile.getProperties();
-			if (sum > 0 || p != null) {
-				final Resources money = new Resources(sum);
-				final Resources resources = p == null ? money : p.getResources().combine(money);
-				final Action bonusAction = new ResourceDeltaAction(resources);
-				if (bonusAction.check(game)) {
-					game.getActionHandler().addPendingAction(bonusAction);
-				}
-				if (game.getCurrentPlayer().getCorporation() instanceof MiningGuild && (resources.steel > 0 || resources.titanium > 0)) {
-                    game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(0, 1, 0, 0, 0, 0)));
-                }
-				if (p != null && p.getCards() > 0) {
-					game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(p.getCards(), false, false));
-				}
-			}
+			placeTile(game, targetTile, type);
 			cancel();
 		}
-		
 
 		@Override
 		public void undo() {
@@ -201,6 +167,43 @@ public class PlaceTileAction implements Action {
 				"Blank");
 			game.setCursor(cursor);
 			game.repaint();
+		}
+	}
+
+	public static void placeTile(Game game, Tile targetTile, Tile.Type type) {
+		targetTile.setType(type);
+		if (type != Tile.Type.WATER) {
+			targetTile.setOwner(game.getCurrentPlayer());
+		}
+		int sum = 0;
+		for (Tile tile : targetTile.getNeighbors()) {
+			if (tile.getType() == Tile.Type.WATER) {
+				sum += 2;
+			}
+		}
+		if (Tile.isCity(type)) {
+			final Player tharsisRepublicPlayer = game.getPlayer(TharsisRepublic.class);
+			if (tharsisRepublicPlayer != null) {
+				game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(1), tharsisRepublicPlayer));
+			}
+			if (tharsisRepublicPlayer == game.getCurrentPlayer()) {
+				game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(3)));
+			}
+		}
+		final TileProperties p = targetTile.getProperties();
+		if (sum > 0 || p != null) {
+			final Resources money = new Resources(sum);
+			final Resources resources = p == null ? money : p.getResources().combine(money);
+			final Action bonusAction = new ResourceDeltaAction(resources);
+			if (bonusAction.check(game)) {
+				game.getActionHandler().addPendingAction(bonusAction);
+			}
+			if (game.getCurrentPlayer().getCorporation() instanceof MiningGuild && (resources.steel > 0 || resources.titanium > 0)) {
+				game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(0, 1, 0, 0, 0, 0)));
+			}
+			if (p != null && p.getCards() > 0) {
+				game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(p.getCards(), false, false));
+			}
 		}
 	}
 }

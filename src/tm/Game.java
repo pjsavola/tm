@@ -13,6 +13,7 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -21,7 +22,9 @@ import javax.swing.JPanel;
 import com.sun.istack.internal.Nullable;
 import tm.card.ColonizerTrainingCamp;
 import tm.card.DevelopmentCenter;
+import tm.card.DomedCrater;
 import tm.card.EquatorialMagnetizer;
+import tm.card.NoctisCity;
 import tm.card.SpaceElevator;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
@@ -78,6 +81,8 @@ public class Game extends JPanel {
 		deck.add(new SpaceElevator());
 		deck.add(new DevelopmentCenter());
 		deck.add(new EquatorialMagnetizer());
+		deck.add(new DomedCrater());
+		deck.add(new NoctisCity());
 		for (int i = 0; i < 100; i++)
 			deck.add(new ColonizerTrainingCamp());
 		corporationDeck.add(new Credicor());
@@ -113,6 +118,14 @@ public class Game extends JPanel {
 		}
 		return closestTile;
     }
+
+    public Tile getNoctisTile() {
+		final Optional<Tile> noctis = grid.values().stream().filter(tile -> tile.getProperties() != null && tile.getProperties().isNoctis()).findAny();
+		if (noctis.isPresent()) {
+			return noctis.get();
+		}
+		throw new RuntimeException("Place for Noctis City not found!");
+	}
 	
     @Override
     public void paintComponent(Graphics g) {
