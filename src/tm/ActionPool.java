@@ -61,7 +61,7 @@ public class ActionPool {
 		standardActions.add(new ActionChain(ActionType.PASS, "Pass",
 			new SwitchRoundAction()));
 		standardActions.add(new ActionChain(ActionType.PLAY, "Play card",
-			new PlayCardAction(game.getCurrentPlayer())));
+			new PlayCardAction()));
 		standardActions.add(new ActionChain(ActionType.CUSTOM, "Select action",
 			new SelectActionAction()));
 	}

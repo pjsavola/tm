@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 import tm.action.Action;
+import tm.card.WaterImportFromEuropa;
 import tm.corporation.Inventrix;
 import tm.corporation.Phoblog;
 import tm.corporation.Teractor;
@@ -166,6 +167,7 @@ public class Player {
 			.stream()
 			.filter(tile -> tile.getType() == Tile.Type.GREENERY)
 			.count());
+		playedCards.stream().filter(card -> card instanceof WaterImportFromEuropa).findAny().ifPresent(_card -> total.addAndGet(tags.jovian));
 		return total.intValue();
 	}
 	

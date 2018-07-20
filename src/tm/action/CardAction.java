@@ -2,7 +2,6 @@ package tm.action;
 
 import tm.Game;
 import tm.completable.Completable;
-import tm.completable.InstantCompletable;
 
 public abstract class CardAction implements Action {
 
@@ -20,28 +19,39 @@ public abstract class CardAction implements Action {
 
     @Override
     public Completable begin(Game game) {
-        return new InstantCompletable(game) {
-            @Override
-            public void complete() {
-                usedOnRound = game.getPlanet().getRound();
-                if (undoable) {
-                    game.getActionHandler().addPendingAction(getAction(game));
-                } else {
-                    game.getActionHandler().addPendingIrreversibleAction(getAction(game));
-                }
-            }
-
-            @Override
-            public void undo() {
-                usedOnRound = game.getPlanet().getRound() - 1;
-            }
-
-            @Override
-            public void redo() {
-                usedOnRound = game.getPlanet().getRound();
-            }
-        };
+        return new CardActionCompletable(game, this);
     }
 
     protected abstract Action getAction(Game game);
+
+    protected static class CardActionCompletable implements Completable {
+        private final CardAction action;
+        private final Game game;
+
+        protected CardActionCompletable(Game game, CardAction action) {
+            this.game = game;
+            this.action = action;
+            game.getActionHandler().completed(this);
+        }
+
+        @Override
+        public void complete() {
+            action.usedOnRound = game.getPlanet().getRound();
+            if (action.undoable) {
+                game.getActionHandler().addPendingAction(action.getAction(game));
+            } else {
+                game.getActionHandler().addPendingIrreversibleAction(action.getAction(game));
+            }
+        }
+
+        @Override
+        public void undo() {
+            action.usedOnRound = game.getPlanet().getRound() - 1;
+        }
+
+        @Override
+        public void redo() {
+            action.usedOnRound = game.getPlanet().getRound();
+        }
+    }
 }

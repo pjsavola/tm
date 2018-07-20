@@ -10,7 +10,7 @@ public class Tags {
 	private int city;
 	private int space;
 	private int earth;
-	private int jovian;
+	int jovian;
 	private int science;
 	private int power;
 	private int plant;

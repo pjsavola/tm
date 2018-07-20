@@ -16,5 +16,6 @@ public enum ActionType {
     CUSTOM,
     SEARCH_FOR_LIFE,
     INVENTORS_GUILD,
-    MARTIAN_RAIL
+    MARTIAN_RAIL,
+    WATER_IMPORT_FROM_EUROPA
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
+import tm.Resources;
 import tm.completable.Completable;
 
 public class SelectActionAction implements Action {
@@ -62,9 +63,15 @@ public class SelectActionAction implements Action {
                 for (int i = 0; i < selectableActions.size(); i++) {
                     if (x >= LEFT_MARGIN && x <= LEFT_MARGIN + Card.WIDTH && y >= TOP_MARGIN + CARD_HEIGHT * (i + 1) && y <= TOP_MARGIN + CARD_HEIGHT * (i + 2)) {
                         if (selectedAction == selectableActions.get(i)) {
+                            if (selectedAction instanceof CardActionWithCost) {
+                                ((CardActionWithCost) selectedAction).resetPayment(game.getCurrentPlayer());
+                            }
                             selectedAction = null;
                         } else {
                             selectedAction = selectableActions.get(i);
+                            if (selectedAction instanceof CardActionWithCost) {
+                                ((CardActionWithCost) selectedAction).initPayment(game.getCurrentPlayer());
+                            }
                         }
                         game.repaint();
                         break;
@@ -101,6 +108,8 @@ public class SelectActionAction implements Action {
 
         @Override
         public void cancel() {
+            game.getCurrentPlayer().setResourcesDelta(new Resources(0));
+            game.getCurrentPlayer().setIncomeDelta(new Resources(0));
             game.removeMouseListener(mouseListener);
             game.repaint();
         }
@@ -127,6 +136,14 @@ public class SelectActionAction implements Action {
             g.setColor(TITLE_COLOR);
             g.drawString("Confirm", LEFT_MARGIN, TOP_MARGIN + CARD_HEIGHT * (selectableActions.size() + 2) + 12);
             g.setColor(oldColor);
+        }
+
+        @Override
+        public boolean adjustPayment(boolean steel, boolean increment) {
+            if (selectedAction instanceof CardActionWithCost) {
+                return ((CardActionWithCost) selectedAction).adjustPayment(steel, increment);
+            }
+            return false;
         }
 
         private static void drawAction(Graphics g, String name, int x, int y) {
