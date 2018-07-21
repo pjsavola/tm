@@ -30,8 +30,10 @@ import tm.card.ImportedHydrogen;
 import tm.card.MethaneFromTitan;
 import tm.card.NoctisCity;
 import tm.card.PhobosSpaceHaven;
+import tm.card.Predators;
 import tm.card.ResearchOutpost;
 import tm.card.SpaceElevator;
+import tm.card.SpaceStation;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
 import tm.corporation.Helion;
@@ -95,6 +97,8 @@ public class Game extends JPanel {
 		deck.add(new PhobosSpaceHaven());
 		deck.add(new BlackPolarDust());
 		deck.add(new ArcticAlgae());
+		deck.add(new Predators());
+		deck.add(new SpaceStation());
 		for (int i = 0; i < 100; i++)
 			deck.add(new ColonizerTrainingCamp());
 		corporationDeck.add(new Credicor());

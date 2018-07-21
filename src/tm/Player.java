@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import tm.action.Action;
 import tm.card.ResearchOutpost;
+import tm.card.SpaceStation;
 import tm.card.WaterImportFromEuropa;
 import tm.corporation.Inventrix;
 import tm.corporation.Phoblog;
@@ -115,7 +116,7 @@ public class Player {
 
     public int getDiscount(Card card) {
 		int discount = 0;
-	    if (card.getTags().hasPower() && corporation instanceof Thorgate) {
+		if (card.getTags().hasPower() && corporation instanceof Thorgate) {
             discount += 3;
         }
         if (card.getTags().hasEvent() && corporation instanceof Teractor) {
@@ -123,6 +124,9 @@ public class Player {
         }
         if (playedCards.stream().anyMatch(c -> c instanceof ResearchOutpost)) {
 	    	discount += 1;
+		}
+		if (card.getTags().hasSpace() && playedCards.stream().anyMatch(c -> c instanceof SpaceStation)) {
+			discount += 2;
 		}
 	    return discount;
     }
@@ -139,6 +143,10 @@ public class Player {
     public void removeTags(Tags tags) {
         this.tags.combine(tags, false);
     }
+
+    public boolean hasTags(Tags tags) {
+		return tags.hasTags(tags);
+	}
 
     public List<Action> getActions() {
         return corporation.getActions();

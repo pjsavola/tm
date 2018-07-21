@@ -22,7 +22,7 @@ public abstract class SelectCardsCompletable implements Completable {
     private static final Color HIGHLIGHT_COLOR = new Color(0xFFFF00);
     private final Game game;
     protected final Set<Card> selectedCards = new HashSet<>();
-    protected final List<Card> selection;
+    protected final List<? extends Card> selection;
     Card cardToRender;
 
     protected final MouseListener mouseListener = new MouseListener() {
@@ -72,7 +72,7 @@ public abstract class SelectCardsCompletable implements Completable {
         }
     };
 
-    protected SelectCardsCompletable(Game game, List<Card> selection) {
+    protected SelectCardsCompletable(Game game, List<? extends Card> selection) {
         this.game = game;
         this.selection = selection;
         game.addMouseListener(mouseListener);

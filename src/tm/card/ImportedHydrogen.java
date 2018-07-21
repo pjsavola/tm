@@ -12,6 +12,7 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddWaterAction;
+import tm.action.CardWithMarkers;
 import tm.action.ResourceDeltaAction;
 import tm.completable.Completable;
 import tm.completable.InstantCompletable;
@@ -29,10 +30,12 @@ public class ImportedHydrogen extends Card {
             new Action() {
                 @Override
                 public Completable begin(Game game) {
-                    final List<Card> cards = game
+                    final List<CardWithMarkers> cards = game
                         .getCurrentPlayer()
                         .getPlayedCards()
                         .stream()
+                        .filter(card -> card instanceof CardWithMarkers)
+                        .map(card -> (CardWithMarkers) card)
                         .filter(card -> card.getTags().hasMicrobe() || card.getTags().hasAnimal())
                         .collect(Collectors.toList());
                     if (cards.isEmpty()) {
@@ -54,7 +57,7 @@ public class ImportedHydrogen extends Card {
                     }
                     return new SelectCardsCompletable(game, cards) {
                         @Nullable
-                        private Card selectedCard;
+                        private CardWithMarkers selectedCard;
                         private int markers;
 
                         @Override
@@ -75,12 +78,11 @@ public class ImportedHydrogen extends Card {
                         @Override
                         public void complete() {
                             if (!selectedCards.isEmpty()) {
-                                selectedCard = selectedCards.iterator().next();
+                                selectedCard = (CardWithMarkers) selectedCards.iterator().next();
                             }
                             if (selectedCard == null) {
                                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(0, 0, 0, 3, 0, 0)));
                             } else {
-                                // TODO: What if microbe/animal does not have markers??
                                 markers = selectedCard.getTags().hasMicrobe() ? 3 : 2;
                                 selectedCard.adjustMarkers(markers);
                             }

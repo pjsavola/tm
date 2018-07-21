@@ -79,13 +79,6 @@ public class Card {
         return null;
     }
 
-    public int markerCount() {
-        return 0;
-    }
-
-    public void adjustMarkers(int delta) {
-    }
-
     public void renderTitle(Graphics g, int x, int y) {
         g.setFont(FONT);
         final FontMetrics metrics = g.getFontMetrics();

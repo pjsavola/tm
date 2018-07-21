@@ -133,6 +133,20 @@ public class Tags {
 		return microbe > 0;
 	}
 
+	public boolean hasTags(Tags tags) {
+		return event >= tags.event &&
+			building >= tags.building &&
+			city >= tags.city &&
+			space >= tags.space &&
+			earth >= tags.earth &&
+			jovian >= tags.jovian &&
+			science >= tags.science &&
+			power >= tags.power &&
+			plant >= tags.plant &&
+			animal >= tags.animal &&
+			microbe >= tags.microbe;
+	}
+
 	public void render(Graphics g, int x, int y) {
 		int offset = x - 16;
 		offset = drawTags(g, "images/tag_event.png", event, offset, y);

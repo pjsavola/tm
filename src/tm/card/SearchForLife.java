@@ -11,12 +11,12 @@ import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardActionWithCost;
+import tm.action.CardWithMarkers;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
 
-public class SearchForLife extends Card {
+public class SearchForLife extends CardWithMarkers {
 
-    private int markerCount;
     private final Action action = new CardActionWithCost(false, 1, false) {
         @Override
         public ActionType getType() {
@@ -27,7 +27,7 @@ public class SearchForLife extends Card {
         protected Action getAction(Game game) {
             final Card card = game.drawCard();
             if (card.getTags().hasMicrobe()) {
-                markerCount++;
+                adjustMarkers(1);
             }
             return new Action() {
                 @Override
@@ -82,12 +82,7 @@ public class SearchForLife extends Card {
 
     @Override
     public int getVPs() {
-        return markerCount > 0 ? 3 : 0;
-    }
-
-    @Override
-    public int markerCount() {
-        return markerCount;
+        return getMarkerCount() > 0 ? 3 : 0;
     }
 
     @Override
@@ -102,6 +97,6 @@ public class SearchForLife extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Draw card", "Gain marker if microbe", "3 VPs if you have any markers", "Currently " + markerCount() + " markers");
+        return Arrays.asList("Action:", "Draw card", "Gain marker if microbe", "3 VPs if you have any markers", "Currently " + getMarkerCount() + " markers");
     }
 }
