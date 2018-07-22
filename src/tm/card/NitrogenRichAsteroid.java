@@ -21,7 +21,7 @@ public class NitrogenRichAsteroid extends Card {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ActionChain(
             new AddTemperatureAction(),
             new AddTerraformingRatingAction(2),

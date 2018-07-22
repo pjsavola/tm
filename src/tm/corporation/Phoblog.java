@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tm.Corporation;
+import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -16,7 +17,7 @@ public class Phoblog extends Corporation {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ResourceDeltaAction(new Resources(23, 0, 10, 0, 0, 0));
     }
 

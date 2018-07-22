@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tm.Card;
+import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -18,7 +19,7 @@ public class BlackPolarDust extends Card {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ActionChain(
             new IncomeDeltaAction(new Resources(-2, 0, 0, 0, 0, 3)),
             new AddWaterAction()

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tm.Card;
+import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -19,7 +20,7 @@ public class UndergroundCity extends Card {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ActionChain(
             new PlaceTileAction(Tile.Type.CITY),
             new IncomeDeltaAction(new Resources(0, 2, 0, 0, -2, 0))

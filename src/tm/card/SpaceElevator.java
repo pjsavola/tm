@@ -34,7 +34,7 @@ public class SpaceElevator extends Card {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new IncomeDeltaAction(new Resources(0, 0, 1, 0, 0, 0));
     }
 

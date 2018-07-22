@@ -27,5 +27,6 @@ public enum ActionType {
     REGOLITH_EATERS_2,
     GHG_PRODUCING_BACTERIA_1,
     GHG_PRODUCING_BACTERIA_2,
-    ANTS
+    ANTS,
+    TARDIGRADES
 }

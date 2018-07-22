@@ -6,6 +6,7 @@ import java.util.List;
 
 import tm.ActionType;
 import tm.Corporation;
+import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -23,7 +24,7 @@ public class Credicor extends Corporation {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ResourceDeltaAction(new Resources(57));
     }
 

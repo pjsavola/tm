@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
+import tm.Game;
 import tm.Planet;
 import tm.Resources;
 import tm.Tags;
@@ -27,7 +28,7 @@ public class DomedCrater extends Card {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ActionChain(
             new PlaceTileAction(Tile.Type.CITY),
             new ResourceDeltaAction(new Resources(0, 0, 0, 3, 0, 0)),

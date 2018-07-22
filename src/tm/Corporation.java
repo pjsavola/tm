@@ -28,7 +28,7 @@ public abstract class Corporation extends Card {
     }
 
     public boolean start(Game game) {
-        final Action action = getInitialAction();
+        final Action action = getInitialAction(game);
         if (action != null) {
             if (action.check(game)) {
                 game.getActionHandler().addPendingAction(action);

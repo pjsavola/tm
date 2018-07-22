@@ -21,7 +21,7 @@ public class UnitedNationsMarsInitiative extends Corporation {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ResourceDeltaAction(new Resources(40));
     }
 

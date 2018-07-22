@@ -75,7 +75,7 @@ public class Card {
     }
 
     @Nullable
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return null;
     }
 

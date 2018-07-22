@@ -65,7 +65,7 @@ public class PlayCardAction implements Action {
                 System.err.println("Not enough money to pay for the card");
                 return false;
             }
-            final Action action = selectedCard.getInitialAction();
+            final Action action = selectedCard.getInitialAction(game);
             if (action != null && !action.check(game)) {
                 System.err.println("Not enough resources to play the card");
                 return false;

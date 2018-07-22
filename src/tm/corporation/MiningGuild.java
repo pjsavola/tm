@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tm.Corporation;
+import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -18,7 +19,7 @@ public class MiningGuild extends Corporation {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ActionChain(
             new ResourceDeltaAction(new Resources(30, 5, 0, 0, 0, 0)),
             new IncomeDeltaAction(new Resources(0, 1, 0, 0, 0, 0)));

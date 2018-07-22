@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
+import tm.Game;
 import tm.Planet;
 import tm.Resources;
 import tm.Tags;
@@ -26,7 +27,7 @@ public class NaturalPreserve extends Card {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ActionChain(
             new PlaceTileAction(Tile.Type.MISC, true),
             new IncomeDeltaAction(new Resources(1))

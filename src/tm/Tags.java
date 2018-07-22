@@ -9,7 +9,7 @@ public class Tags {
     private int building;
     private int city;
     private int space;
-    private int earth;
+    public int earth;
     int jovian;
     private int science;
     private int power;

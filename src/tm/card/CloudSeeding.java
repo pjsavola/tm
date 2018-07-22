@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
+import tm.Game;
 import tm.Planet;
 import tm.Resources;
 import tm.Tags;
@@ -24,7 +25,7 @@ public class CloudSeeding extends Card {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new IncomeDeltaAction(new Resources(-1, 0, 0, 2, 0, 0));
     }
 

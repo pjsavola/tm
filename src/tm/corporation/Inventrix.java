@@ -27,7 +27,7 @@ public class Inventrix extends Corporation {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ResourceDeltaAction(new Resources(45));
     }
 

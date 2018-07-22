@@ -148,6 +148,10 @@ public class Player {
         return this.tags.hasTags(tags);
     }
 
+    public Tags getTags() {
+        return tags;
+    }
+
     public List<Action> getActions() {
         return corporation.getActions();
     }

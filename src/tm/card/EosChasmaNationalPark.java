@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import tm.Card;
 import tm.CardWithMarkers;
+import tm.Game;
 import tm.Planet;
 import tm.Resources;
 import tm.Tags;
@@ -33,7 +34,7 @@ public class EosChasmaNationalPark extends Card {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ActionChain(
             new IncomeDeltaAction(new Resources(2)),
             new ResourceDeltaAction(new Resources(0, 0, 0, 3, 0, 0)),

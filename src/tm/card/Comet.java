@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tm.Card;
+import tm.Game;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
@@ -18,7 +19,7 @@ public class Comet extends Card {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ActionChain(
             new AddWaterAction(),
             new AddTemperatureAction()

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tm.Corporation;
+import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -20,7 +21,7 @@ public class TharsisRepublic extends Corporation {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ActionChain(
             new ResourceDeltaAction(new Resources(40)),
             new IncomeDeltaAction(new Resources(2)), // Initial cities in solo game

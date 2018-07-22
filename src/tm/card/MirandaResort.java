@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -10,10 +10,10 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
 
-public class FoodFactory extends Card {
+public class MirandaResort extends Card {
 
-    public FoodFactory() {
-        super("Food Factory", 12, new Tags().building());
+    public MirandaResort() {
+        super("Miranda Resort", 12, new Tags().space().jovian());
     }
 
     @Override
@@ -23,11 +23,11 @@ public class FoodFactory extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(4, 0, 0, -1, 0, 0));
+        return new IncomeDeltaAction(new Resources(game.getCurrentPlayer().getTags().earth));
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("4 money income", "-1 plant income");
+        return Collections.singletonList("1 money income for each Earth tag");
     }
 }

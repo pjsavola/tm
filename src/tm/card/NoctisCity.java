@@ -28,7 +28,7 @@ public class NoctisCity extends Card {
     }
 
     @Override
-    public Action getInitialAction() {
+    public Action getInitialAction(Game game) {
         return new ActionChain(
             new Action() {
                 @Override
