@@ -45,11 +45,13 @@ import tm.card.NoctisCity;
 import tm.card.OptimalAerobraking;
 import tm.card.PhobosSpaceHaven;
 import tm.card.Predators;
+import tm.card.RegolithEaters;
 import tm.card.ResearchOutpost;
 import tm.card.SearchForLife;
 import tm.card.SecurityFleet;
 import tm.card.SpaceElevator;
 import tm.card.SpaceStation;
+import tm.card.UndergroundCity;
 import tm.card.WaterImportFromEuropa;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
@@ -89,6 +91,16 @@ public class Game extends JPanel {
 		for (int i = -4; i <= 1; i++) new Tile(i, 3, grid);
 		for (int i = -4; i <= 0; i++) new Tile(i, 4, grid);
 
+		deck.add(new SpaceStation());
+		deck.add(new EosChasmaNationalPark());
+		deck.add(new InterstellarColonyShip());
+		deck.add(new SecurityFleet());
+		deck.add(new CupolaCity());
+		deck.add(new LunarBeam());
+		deck.add(new OptimalAerobraking());
+		deck.add(new UndergroundCity());
+		deck.add(new RegolithEaters());
+		///
 		deck.add(new ColonizerTrainingCamp());
 		deck.add(new AsteroidMiningConsortium());
 		deck.add(new DeepWellHeating());
@@ -113,15 +125,7 @@ public class Game extends JPanel {
 		deck.add(new BlackPolarDust());
 		deck.add(new ArcticAlgae());
 		deck.add(new Predators());
-		deck.add(new SpaceStation());
-		deck.add(new EosChasmaNationalPark());
-		deck.add(new InterstellarColonyShip());
-		deck.add(new SecurityFleet());
-		deck.add(new CupolaCity());
-		deck.add(new LunarBeam());
-		deck.add(new OptimalAerobraking());
-		for (int i = 0; i < 100; i++)
-			deck.add(new ColonizerTrainingCamp());
+
 		corporationDeck.add(new Credicor());
 		corporationDeck.add(new Ecoline());
 		corporationDeck.add(new Helion());
@@ -203,12 +207,17 @@ public class Game extends JPanel {
     	return planet;
     }
 
+    @Nullable
     public Card drawCard() {
 		if (deck.isEmpty()) {
 			// Shuffle the discard to deck
 			while (!discard.isEmpty()) {
 				deck.push(discard.remove(r.nextInt(discard.size())));
 			}
+		}
+		if (deck.isEmpty()) {
+			// Run out of cards
+			return null;
 		}
 		return deck.pop();
 	}

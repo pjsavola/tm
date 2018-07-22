@@ -1,5 +1,6 @@
 package tm.action;
 
+import com.sun.istack.internal.Nullable;
 import tm.Game;
 import tm.completable.Completable;
 
@@ -7,15 +8,29 @@ public abstract class CardAction implements Action {
 
     private int usedOnRound;
     private final boolean undoable;
+    @Nullable
+    private CardAction alternativeAction;
 
     public CardAction(boolean undoable) {
         this.undoable = undoable;
     }
 
+    public void setAlternativeAction(CardAction action) {
+        alternativeAction = action;
+    }
+
     @Override
     public boolean check(Game game) {
-                return usedOnRound < game.getPlanet().getRound();
-            }
+        final int round = game.getPlanet().getRound();
+        if (usedOnRound >= round) {
+            return false;
+        }
+        if (alternativeAction != null && alternativeAction.usedOnRound >= round) {
+            return false;
+        }
+        final Action cardAction = getAction(game);
+        return cardAction.check(game);
+    }
 
     @Override
     public Completable begin(Game game) {
@@ -36,11 +51,12 @@ public abstract class CardAction implements Action {
 
         @Override
         public void complete() {
+            final Action cardAction = action.getAction(game);
             action.usedOnRound = game.getPlanet().getRound();
             if (action.undoable) {
-                game.getActionHandler().addPendingAction(action.getAction(game));
+                game.getActionHandler().addPendingAction(cardAction);
             } else {
-                game.getActionHandler().addPendingIrreversibleAction(action.getAction(game));
+                game.getActionHandler().addPendingIrreversibleAction(cardAction);
             }
         }
 

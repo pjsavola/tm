@@ -46,11 +46,13 @@ public class SearchForLife extends CardWithMarkers {
 
                         @Override
                         public void complete() {
+                            game.getDiscardDeck().add(card);
                             cancel();
                         }
 
                         @Override
                         public void undo() {
+                            game.getDiscardDeck().remove(card);
                             game.getActionHandler().reprocess(this);
                             game.addMouseListener(mouseListener);
                             game.repaint();
@@ -58,6 +60,7 @@ public class SearchForLife extends CardWithMarkers {
 
                         @Override
                         public void redo() {
+                            game.getDiscardDeck().add(card);
                             cancel();
                         }
 

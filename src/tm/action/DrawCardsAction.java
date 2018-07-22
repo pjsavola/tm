@@ -29,6 +29,7 @@ public class DrawCardsAction implements Action {
         }
         if (choice) {
             return new SelectCardsCompletable(game, drawnCards) {
+                private List<Card> discardedCards;
 
                 @Override
                 public boolean check() {
@@ -44,7 +45,10 @@ public class DrawCardsAction implements Action {
 
                 @Override
                 public void complete() {
+                    discardedCards = new ArrayList<>(selection);
+                    discardedCards.removeAll(selectedCards);
                     game.getCurrentPlayer().getCards().addAll(selectedCards);
+                    game.getDiscardDeck().addAll(discardedCards);
                     if (initial) {
                         game.getActionHandler().addPendingAction(new PlayCorporationAction());
                     }
@@ -54,6 +58,7 @@ public class DrawCardsAction implements Action {
                 @Override
                 public void undo() {
                     game.getCurrentPlayer().getCards().removeAll(selectedCards);
+                    game.getDiscardDeck().removeAll(discardedCards);
                     game.getActionHandler().reprocess(this);
                     game.addMouseListener(mouseListener);
                     game.repaint();
@@ -62,6 +67,7 @@ public class DrawCardsAction implements Action {
                 @Override
                 public void redo() {
                     game.getCurrentPlayer().getCards().addAll(selectedCards);
+                    game.getDiscardDeck().addAll(discardedCards);
                     cancel();
                 }
 

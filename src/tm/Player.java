@@ -119,7 +119,7 @@ public class Player {
 		if (card.getTags().hasPower() && corporation instanceof Thorgate) {
             discount += 3;
         }
-        if (card.getTags().hasEvent() && corporation instanceof Teractor) {
+        if (card.getTags().hasEarth() && corporation instanceof Teractor) {
 	    	discount += 3;
         }
         if (playedCards.stream().anyMatch(c -> c instanceof ResearchOutpost)) {
@@ -145,7 +145,7 @@ public class Player {
     }
 
     public boolean hasTags(Tags tags) {
-		return tags.hasTags(tags);
+		return this.tags.hasTags(tags);
 	}
 
     public List<Action> getActions() {
@@ -225,8 +225,9 @@ public class Player {
 		g.setColor(new Color(color));
         g.drawString(Integer.toString(amount), 30, 18 * i - 4);
         if (income > 0) {
-            final String incomeString = (income > 0 ? "+" : "") + income;
-            g.drawString(incomeString, 50, 18 * i - 4);
-        }
+            g.drawString("+" + income, 50, 18 * i - 4);
+        } else if (income < 0) {
+			g.drawString(Integer.toString(income), 50, 18 * i - 4);
+		}
 	}
 }
