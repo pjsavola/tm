@@ -49,9 +49,11 @@ public class AddMarkerAction implements Action {
                         game.getActionHandler().addPendingAction(onEmptySelection());
                     }
                 }
+
                 @Override
                 public void undo() {
                 }
+
                 @Override
                 public void redo() {
                 }
@@ -63,13 +65,13 @@ public class AddMarkerAction implements Action {
 
             @Override
             public boolean check() {
-                            return true;
-                        }
+                return true;
+            }
 
             @Override
             public int maxSelection() {
-                            return 1;
-                        }
+                return 1;
+            }
 
             @Override
             public String getTitle() {

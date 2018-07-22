@@ -24,7 +24,7 @@ public class DiscardAction implements Action {
             @Override
             public boolean check() {
                 if (selectedCards.isEmpty()) {
-                    System.err.println ("You must discard at least one card");
+                    System.err.println("You must discard at least one card");
                     return false;
                 }
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(selectedCards.size())));

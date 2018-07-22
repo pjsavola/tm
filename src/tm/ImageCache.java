@@ -12,43 +12,43 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 public abstract class ImageCache {
-	private static Map<String, BufferedImage> imageCache = new HashMap<>();
+    private static Map<String, BufferedImage> imageCache = new HashMap<>();
 
-	public static BufferedImage getImage(String path) {
-		BufferedImage image = imageCache.get(path);
-		if (image != null) {
-			return image;
-		}
-		try {
-			image = ImageIO.read(new File(path));
-		} catch (IOException e) {
-			throw new RuntimeException("Image " + path + " is missing");
-		}
-		return updateCache(image, path, imageCache);
-	}
+    public static BufferedImage getImage(String path) {
+        BufferedImage image = imageCache.get(path);
+        if (image != null) {
+            return image;
+        }
+        try {
+            image = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            throw new RuntimeException("Image " + path + " is missing");
+        }
+        return updateCache(image, path, imageCache);
+    }
 
-	private static <T> BufferedImage updateCache(BufferedImage image, T key, Map<T, BufferedImage> cache) {
-		final BufferedImage compatibleImage = toCompatibleImage(image);
-		cache.put(key, compatibleImage);
-		return compatibleImage;
-	}
+    private static <T> BufferedImage updateCache(BufferedImage image, T key, Map<T, BufferedImage> cache) {
+        final BufferedImage compatibleImage = toCompatibleImage(image);
+        cache.put(key, compatibleImage);
+        return compatibleImage;
+    }
 
-	private static BufferedImage toCompatibleImage(BufferedImage image) { 
+    private static BufferedImage toCompatibleImage(BufferedImage image) {
         final GraphicsConfiguration gc = getConfiguration();
-        if (image.getColorModel().equals(gc.getColorModel())) { 
-            return image; 
-        } 
+        if (image.getColorModel().equals(gc.getColorModel())) {
+            return image;
+        }
         final BufferedImage compatibleImage = gc.createCompatibleImage(
             image.getWidth(), image.getHeight(),
             image.getTransparency()
         );
         final Graphics g = compatibleImage.getGraphics();
-        g.drawImage(image, 0, 0, null); 
-        g.dispose(); 
-        return compatibleImage; 
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+        return compatibleImage;
     }
 
-    private static GraphicsConfiguration getConfiguration() { 
+    private static GraphicsConfiguration getConfiguration() {
         return GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
     }
 }

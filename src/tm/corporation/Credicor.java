@@ -24,7 +24,7 @@ public class Credicor extends Corporation {
 
     @Override
     public Action getInitialAction() {
-       	return new ResourceDeltaAction(new Resources(57));
+        return new ResourceDeltaAction(new Resources(57));
     }
 
     @Override

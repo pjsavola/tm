@@ -20,8 +20,8 @@ public class SaturnSystems extends Corporation {
     @Override
     public Action getInitialAction() {
         return new ActionChain(
-        	new ResourceDeltaAction(new Resources(42)),
-        	new IncomeDeltaAction(new Resources(1, 0, 1, 0, 0, 0)));
+            new ResourceDeltaAction(new Resources(42)),
+            new IncomeDeltaAction(new Resources(1, 0, 1, 0, 0, 0)));
     }
 
     @Override

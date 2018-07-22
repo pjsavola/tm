@@ -68,242 +68,242 @@ import tm.corporation.UnitedNationsMarsInitiative;
 
 public class Game extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	private final Map<Point, Tile> grid = new HashMap<>();
-	private final ActionHandler actionHandler;
-	private Player currentPlayer = new Player();
-	private Planet planet = new Planet();
-	private Deque<Card> deck = new ArrayDeque<>();
-	private List<Card> discard = new ArrayList<>();
-	private Deque<Card> corporationDeck = new ArrayDeque<>();
-	private static final Random r = new Random();
+    private static final long serialVersionUID = 1L;
+    private final Map<Point, Tile> grid = new HashMap<>();
+    private final ActionHandler actionHandler;
+    private Player currentPlayer = new Player();
+    private Planet planet = new Planet();
+    private Deque<Card> deck = new ArrayDeque<>();
+    private List<Card> discard = new ArrayList<>();
+    private Deque<Card> corporationDeck = new ArrayDeque<>();
+    private static final Random r = new Random();
 
-	public Game() {
-		setPreferredSize(new Dimension(700, 700));
-		
-		for (int i = 0; i <= 4; i++) new Tile(i, -4, grid);
-		for (int i = -1; i <= 4; i++) new Tile(i, -3, grid);
-		for (int i = -2; i <= 4; i++) new Tile(i, -2, grid);
-		for (int i = -3; i <= 4; i++) new Tile(i, -1, grid);
-		for (int i = -4; i <= 4; i++) new Tile(i, 0, grid);
-		for (int i = -4; i <= 3; i++) new Tile(i, 1, grid);
-		for (int i = -4; i <= 2; i++) new Tile(i, 2, grid);
-		for (int i = -4; i <= 1; i++) new Tile(i, 3, grid);
-		for (int i = -4; i <= 0; i++) new Tile(i, 4, grid);
+    public Game() {
+        setPreferredSize(new Dimension(700, 700));
 
-		deck.add(new SpaceStation());
-		deck.add(new EosChasmaNationalPark());
-		deck.add(new InterstellarColonyShip());
-		deck.add(new SecurityFleet());
-		deck.add(new CupolaCity());
-		deck.add(new LunarBeam());
-		deck.add(new OptimalAerobraking());
-		deck.add(new UndergroundCity());
-		deck.add(new RegolithEaters());
-		///
-		deck.add(new ColonizerTrainingCamp());
-		deck.add(new AsteroidMiningConsortium());
-		deck.add(new DeepWellHeating());
-		deck.add(new CloudSeeding());
-		deck.add(new SearchForLife());
-		deck.add(new InventorsGuild());
-		deck.add(new MartianRail());
-		deck.add(new Capital());
-		deck.add(new Asteroid());
-		deck.add(new Comet());
-		deck.add(new BigAsteroid());
-		deck.add(new WaterImportFromEuropa());
-		deck.add(new SpaceElevator());
-		deck.add(new DevelopmentCenter());
-		deck.add(new EquatorialMagnetizer());
-		deck.add(new DomedCrater());
-		deck.add(new NoctisCity());
-		deck.add(new MethaneFromTitan());
-		deck.add(new ImportedHydrogen());
-		deck.add(new ResearchOutpost());
-		deck.add(new PhobosSpaceHaven());
-		deck.add(new BlackPolarDust());
-		deck.add(new ArcticAlgae());
-		deck.add(new Predators());
+        for (int i = 0; i <= 4; i++) new Tile(i, -4, grid);
+        for (int i = -1; i <= 4; i++) new Tile(i, -3, grid);
+        for (int i = -2; i <= 4; i++) new Tile(i, -2, grid);
+        for (int i = -3; i <= 4; i++) new Tile(i, -1, grid);
+        for (int i = -4; i <= 4; i++) new Tile(i, 0, grid);
+        for (int i = -4; i <= 3; i++) new Tile(i, 1, grid);
+        for (int i = -4; i <= 2; i++) new Tile(i, 2, grid);
+        for (int i = -4; i <= 1; i++) new Tile(i, 3, grid);
+        for (int i = -4; i <= 0; i++) new Tile(i, 4, grid);
 
-		corporationDeck.add(new Credicor());
-		corporationDeck.add(new Ecoline());
-		corporationDeck.add(new Helion());
+        deck.add(new SpaceStation());
+        deck.add(new EosChasmaNationalPark());
+        deck.add(new InterstellarColonyShip());
+        deck.add(new SecurityFleet());
+        deck.add(new CupolaCity());
+        deck.add(new LunarBeam());
+        deck.add(new OptimalAerobraking());
+        deck.add(new UndergroundCity());
+        deck.add(new RegolithEaters());
+        ///
+        deck.add(new ColonizerTrainingCamp());
+        deck.add(new AsteroidMiningConsortium());
+        deck.add(new DeepWellHeating());
+        deck.add(new CloudSeeding());
+        deck.add(new SearchForLife());
+        deck.add(new InventorsGuild());
+        deck.add(new MartianRail());
+        deck.add(new Capital());
+        deck.add(new Asteroid());
+        deck.add(new Comet());
+        deck.add(new BigAsteroid());
+        deck.add(new WaterImportFromEuropa());
+        deck.add(new SpaceElevator());
+        deck.add(new DevelopmentCenter());
+        deck.add(new EquatorialMagnetizer());
+        deck.add(new DomedCrater());
+        deck.add(new NoctisCity());
+        deck.add(new MethaneFromTitan());
+        deck.add(new ImportedHydrogen());
+        deck.add(new ResearchOutpost());
+        deck.add(new PhobosSpaceHaven());
+        deck.add(new BlackPolarDust());
+        deck.add(new ArcticAlgae());
+        deck.add(new Predators());
+
+        corporationDeck.add(new Credicor());
+        corporationDeck.add(new Ecoline());
+        corporationDeck.add(new Helion());
         corporationDeck.add(new InterplanetaryCinematics());
         corporationDeck.add(new Inventrix());
-		corporationDeck.add(new MiningGuild());
+        corporationDeck.add(new MiningGuild());
         corporationDeck.add(new Phoblog());
-		corporationDeck.add(new SaturnSystems());
+        corporationDeck.add(new SaturnSystems());
         corporationDeck.add(new TharsisRepublic());
-		corporationDeck.add(new Thorgate());
-		corporationDeck.add(new Teractor());
-		corporationDeck.add(new UnitedNationsMarsInitiative());
-		
-		// Initial tiles
-		placeInitialTiles();
+        corporationDeck.add(new Thorgate());
+        corporationDeck.add(new Teractor());
+        corporationDeck.add(new UnitedNationsMarsInitiative());
 
-		actionHandler = new ActionHandler(this);
-	}
-	
+        // Initial tiles
+        placeInitialTiles();
+
+        actionHandler = new ActionHandler(this);
+    }
+
     public Tile getClosestTile(final int x, final int y) {
-    	double minDistance = Double.POSITIVE_INFINITY;
-    	Tile closestTile = null;
-    	final Point clickPoint = new Point(x, y);
-		for (final Tile tile : grid.values()) {
-			final Point tilePoint = new Point(tile.getX(347, 43.5), tile.getY(350, 43.5));
-			final double distance = tilePoint.distance(clickPoint);
-			if (distance < minDistance && distance < 37.5 * 0.8) {
-				minDistance = distance;
-				closestTile = tile;
-			}
-		}
-		return closestTile;
+        double minDistance = Double.POSITIVE_INFINITY;
+        Tile closestTile = null;
+        final Point clickPoint = new Point(x, y);
+        for (final Tile tile : grid.values()) {
+            final Point tilePoint = new Point(tile.getX(347, 43.5), tile.getY(350, 43.5));
+            final double distance = tilePoint.distance(clickPoint);
+            if (distance < minDistance && distance < 37.5 * 0.8) {
+                minDistance = distance;
+                closestTile = tile;
+            }
+        }
+        return closestTile;
     }
 
     public Tile getNoctisTile() {
-		final Optional<Tile> noctis = grid.values().stream().filter(tile -> tile.getProperties() != null && tile.getProperties().isNoctis()).findAny();
-		if (noctis.isPresent()) {
-			return noctis.get();
-		}
-		throw new RuntimeException("Place for Noctis City not found!");
-	}
-	
+        final Optional<Tile> noctis = grid.values().stream().filter(tile -> tile.getProperties() != null && tile.getProperties().isNoctis()).findAny();
+        if (noctis.isPresent()) {
+            return noctis.get();
+        }
+        throw new RuntimeException("Place for Noctis City not found!");
+    }
+
     @Override
     public void paintComponent(Graphics g) {
-    	final BufferedImage image = ImageCache.getImage("images/mars.png");
-    	g.drawImage(image, 0, 0, null);
-    	grid.values().forEach(tile -> tile.draw(g));
-    	actionHandler.render(g);
-    	currentPlayer.render(g);
-    	planet.render(g);
+        final BufferedImage image = ImageCache.getImage("images/mars.png");
+        g.drawImage(image, 0, 0, null);
+        grid.values().forEach(tile -> tile.draw(g));
+        actionHandler.render(g);
+        currentPlayer.render(g);
+        planet.render(g);
 
-		g.drawImage(ImageCache.getImage("images/icon_city.png"), 650, 90, null);
-		g.setColor(Color.LIGHT_GRAY);
-		g.drawString(Long.toString(getCityCount()), 680, 110);
-	}
+        g.drawImage(ImageCache.getImage("images/icon_city.png"), 650, 90, null);
+        g.setColor(Color.LIGHT_GRAY);
+        g.drawString(Long.toString(getCityCount()), 680, 110);
+    }
 
-	public int getCityCount() {
-		return (int) grid.values().stream().filter(Tile::isCity).count();
-	}
+    public int getCityCount() {
+        return (int) grid.values().stream().filter(Tile::isCity).count();
+    }
 
     public ActionHandler getActionHandler() {
-    	return actionHandler;
+        return actionHandler;
     }
-    
+
     public Player getCurrentPlayer() {
-    	return currentPlayer;
+        return currentPlayer;
     }
 
     @Nullable
     public Player getPlayer(Class<? extends Corporation> corporation) {
-	    if (currentPlayer.getCorporation().getClass().equals(corporation)) {
-	        return currentPlayer;
+        if (currentPlayer.getCorporation().getClass().equals(corporation)) {
+            return currentPlayer;
         } else {
-	        return null;
+            return null;
         }
     }
-    
+
     public Planet getPlanet() {
-    	return planet;
+        return planet;
     }
 
     @Nullable
     public Card drawCard() {
-		if (deck.isEmpty()) {
-			// Shuffle the discard to deck
-			while (!discard.isEmpty()) {
-				deck.push(discard.remove(r.nextInt(discard.size())));
-			}
-		}
-		if (deck.isEmpty()) {
-			// Run out of cards
-			return null;
-		}
-		return deck.pop();
-	}
+        if (deck.isEmpty()) {
+            // Shuffle the discard to deck
+            while (!discard.isEmpty()) {
+                deck.push(discard.remove(r.nextInt(discard.size())));
+            }
+        }
+        if (deck.isEmpty()) {
+            // Run out of cards
+            return null;
+        }
+        return deck.pop();
+    }
 
-	public boolean canDrawCard() {
-		return !deck.isEmpty() || !discard.isEmpty();
-	}
+    public boolean canDrawCard() {
+        return !deck.isEmpty() || !discard.isEmpty();
+    }
 
-	public Deque<Card> getCorporationDeck() {
-	    return corporationDeck;
-	}
+    public Deque<Card> getCorporationDeck() {
+        return corporationDeck;
+    }
 
-	public List<Card> getDiscardDeck() {
-		return discard;
-	}
+    public List<Card> getDiscardDeck() {
+        return discard;
+    }
 
-	// This is different from game rules, due to not needing card costs for randomization.
-	private void placeInitialTiles() {
-		int cityCount = 2;
-		final Tile[] tiles = grid.values().toArray(new Tile[grid.values().size()]);
-		while (cityCount > 0) {
-			final Tile randomTile = tiles[r.nextInt(tiles.length)];
-			if (isSuitable(randomTile)) {
-				cityCount--;
-				randomTile.setType(Tile.Type.CITY);
-				final List<Tile> neighbors = randomTile.getNeighbors();
-				while (true) {
-					final Tile randomNeighbor = neighbors.get(r.nextInt(neighbors.size()));
-					if (isSuitable(randomNeighbor)) {
-						randomNeighbor.setType(Tile.Type.GREENERY);
-						break;
-					}
-				}
-			}
-		}
-	}
+    // This is different from game rules, due to not needing card costs for randomization.
+    private void placeInitialTiles() {
+        int cityCount = 2;
+        final Tile[] tiles = grid.values().toArray(new Tile[grid.values().size()]);
+        while (cityCount > 0) {
+            final Tile randomTile = tiles[r.nextInt(tiles.length)];
+            if (isSuitable(randomTile)) {
+                cityCount--;
+                randomTile.setType(Tile.Type.CITY);
+                final List<Tile> neighbors = randomTile.getNeighbors();
+                while (true) {
+                    final Tile randomNeighbor = neighbors.get(r.nextInt(neighbors.size()));
+                    if (isSuitable(randomNeighbor)) {
+                        randomNeighbor.setType(Tile.Type.GREENERY);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
-	private static boolean isSuitable(Tile tile) {
-		if (tile.getType() != null) {
-			return false;
-		}
-		final TileProperties properties = tile.getProperties();
-		return properties == null || (!properties.isWater() && !properties.isNoctis());
-	}
+    private static boolean isSuitable(Tile tile) {
+        if (tile.getType() != null) {
+            return false;
+        }
+        final TileProperties properties = tile.getProperties();
+        return properties == null || (!properties.isWater() && !properties.isNoctis());
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         JFrame f = new JFrame();
         Game g = new Game();
         g.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-				final int x = e.getX();
-				final int y = e.getY();
-				if (Math.abs(x - 10) <= 8 && Math.abs(y - 10) <= 8) {
-					g.getActionHandler().process(ActionType.HEAT_TO_MONEY);
-				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 28) <= 8) {
-					g.getActionHandler().adjustPayment(true, e.getButton() == MouseEvent.BUTTON1);
-				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 46) <= 8) {
-					g.getActionHandler().adjustPayment(false, e.getButton() != MouseEvent.BUTTON1);
-				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 64) <= 8) {
-					g.getActionHandler().process(ActionType.PLANT_TO_GREENERY);
-				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 82) <= 8) {
-					g.getActionHandler().process(ActionType.ENERGY);
-				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 100) <= 8) {
-					g.getActionHandler().process(ActionType.HEAT_TO_TEMPERATURE);
-				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 118) <= 8) {
-					g.getActionHandler().process(ActionType.TR);
-				} else if (Math.abs(x - 663) <= 5 && Math.abs(y - 17) <= 15) {
-					g.getActionHandler().process(ActionType.TEMPERATURE);
-				} else if (Math.abs(x - 663) <= 13 && Math.abs(y - 47) <= 13) {
-					g.getActionHandler().process(ActionType.GREENERY);
-				} else if (Math.abs(x - 663) <= 13 && Math.abs(y - 73) <= 13) {
-					g.getActionHandler().process(ActionType.WATER);
+                final int x = e.getX();
+                final int y = e.getY();
+                if (Math.abs(x - 10) <= 8 && Math.abs(y - 10) <= 8) {
+                    g.getActionHandler().process(ActionType.HEAT_TO_MONEY);
+                } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 28) <= 8) {
+                    g.getActionHandler().adjustPayment(true, e.getButton() == MouseEvent.BUTTON1);
+                } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 46) <= 8) {
+                    g.getActionHandler().adjustPayment(false, e.getButton() != MouseEvent.BUTTON1);
+                } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 64) <= 8) {
+                    g.getActionHandler().process(ActionType.PLANT_TO_GREENERY);
+                } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 82) <= 8) {
+                    g.getActionHandler().process(ActionType.ENERGY);
+                } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 100) <= 8) {
+                    g.getActionHandler().process(ActionType.HEAT_TO_TEMPERATURE);
+                } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 118) <= 8) {
+                    g.getActionHandler().process(ActionType.TR);
+                } else if (Math.abs(x - 663) <= 5 && Math.abs(y - 17) <= 15) {
+                    g.getActionHandler().process(ActionType.TEMPERATURE);
+                } else if (Math.abs(x - 663) <= 13 && Math.abs(y - 47) <= 13) {
+                    g.getActionHandler().process(ActionType.GREENERY);
+                } else if (Math.abs(x - 663) <= 13 && Math.abs(y - 73) <= 13) {
+                    g.getActionHandler().process(ActionType.WATER);
                 } else if (Math.abs(x - 663) <= 13 && Math.abs(y - 103) <= 13) {
-        			g.getActionHandler().process(ActionType.CITY);
-				} else if (Math.abs(x - 10) <= 8 && Math.abs(y - 154) <= 8) {
+                    g.getActionHandler().process(ActionType.CITY);
+                } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 154) <= 8) {
                     if (e.getButton() == MouseEvent.BUTTON1) {
                         g.getActionHandler().process(ActionType.PLAY);
                     } else {
                         g.getActionHandler().process(ActionType.DISCARD);
                     }
                 } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 172) <= 8) {
-					g.getActionHandler().process(ActionType.CUSTOM);
-				} else if (Math.abs(x - 350) <= 60 && Math.abs(y - 688) <= 11) {
-					g.getActionHandler().process(ActionType.PASS);
-				}
+                    g.getActionHandler().process(ActionType.CUSTOM);
+                } else if (Math.abs(x - 350) <= 60 && Math.abs(y - 688) <= 11) {
+                    g.getActionHandler().process(ActionType.PASS);
+                }
             }
 
             @Override

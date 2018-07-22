@@ -24,9 +24,9 @@ public class Ecoline extends Corporation {
 
     @Override
     public Action getInitialAction() {
-       	return new ActionChain(
-       		new ResourceDeltaAction(new Resources(36, 0, 0, 3, 0, 0)),
-       		new IncomeDeltaAction(new Resources(0, 0, 0, 2, 0, 0)));
+        return new ActionChain(
+            new ResourceDeltaAction(new Resources(36, 0, 0, 3, 0, 0)),
+            new IncomeDeltaAction(new Resources(0, 0, 0, 2, 0, 0)));
     }
 
     @Override

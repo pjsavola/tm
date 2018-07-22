@@ -28,7 +28,7 @@ public class PlayCorporationAction implements Action {
             @Override
             public boolean check() {
                 if (selectedCards.isEmpty()) {
-                    System.err.println ("You must select one of the corporations");
+                    System.err.println("You must select one of the corporations");
                     return false;
                 }
                 corporation = (Corporation) selectedCards.iterator().next();

@@ -88,7 +88,7 @@ public class Card {
         // Draw background
         g.setColor(BG_COLOR);
         g.fillRect(x, y, WIDTH, TITLE_HEIGHT);
-        
+
         // Draw border
         g.setColor(getBorderColor());
         g.drawRect(x, y, WIDTH, TITLE_HEIGHT);
