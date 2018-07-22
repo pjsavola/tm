@@ -1,43 +1,50 @@
 package tm.card;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
+import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
-import tm.action.AddOxygenAction;
+import tm.action.AddTemperatureAction;
 import tm.action.CardAction;
 import tm.action.MarkerDeltaAction;
 
-public class RegolithEaters extends CardWithMarkers {
+public class GHGProducingBacteria extends CardWithMarkers {
 
     private final CardAction action1 = new CardAction(true) {
         @Override
         public ActionType getType() {
-            return ActionType.REGOLITH_EATERS_1;
+            return ActionType.GHG_PRODUCING_BACTERIA_1;
         }
 
         @Override
         protected Action getAction(Game game) {
-            return new MarkerDeltaAction(1, RegolithEaters.this);
+            return new MarkerDeltaAction(1, GHGProducingBacteria.this);
         }
     };
 
     private final CardAction action2 = new CardAction(true) {
         @Override
         protected Action getAction(Game game) {
-            return new AddOxygenAction();
+            return new AddTemperatureAction();
         }
     };
 
-    public RegolithEaters() {
-        super("Regolith Eaters", 13, new Tags().science().microbe());
+    public GHGProducingBacteria() {
+        super("GHG Producing Bacteria", 8, new Tags().science().microbe());
         action1.setAlternativeAction(action2);
         action2.setAlternativeAction(action1);
+    }
+
+    @Override
+    public boolean check(Planet planet, int tolerance) {
+        return planet.getOxygen() >= 4 - tolerance;
     }
 
     @Override
@@ -45,7 +52,7 @@ public class RegolithEaters extends CardWithMarkers {
         return Arrays.asList(
             action1,
             new ActionChain(
-                ActionType.REGOLITH_EATERS_2,
+                ActionType.GHG_PRODUCING_BACTERIA_2,
                 getName(),
                 new MarkerDeltaAction(-2, this),
                 action2
@@ -54,7 +61,12 @@ public class RegolithEaters extends CardWithMarkers {
     }
 
     @Override
+    protected List<String> getRequirements() {
+        return Collections.singletonList("Requires 4% oxygen");
+    }
+
+    @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action 1:", "Add 1 marker", "", "Action 2:", "Remove 2 markers to raise oxygen", "", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action 1:", "Add 1 marker", "", "Action 2:", "Remove 2 markers to raise temperature", "", "Currently " + getMarkerCount() + " markers");
     }
 }

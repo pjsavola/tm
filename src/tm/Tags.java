@@ -109,6 +109,10 @@ public class Tags {
         return building > 0;
     }
 
+    public boolean hasCity() {
+        return city > 0;
+    }
+
     public boolean hasSpace() {
         return space > 0;
     }

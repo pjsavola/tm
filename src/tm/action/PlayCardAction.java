@@ -9,6 +9,7 @@ import tm.Game;
 import tm.Player;
 import tm.Resources;
 import tm.card.OptimalAerobraking;
+import tm.card.RoverConstruction;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
 import tm.corporation.Credicor;
@@ -76,6 +77,7 @@ public class PlayCardAction implements Action {
             final boolean event = selectedCard.getTags().hasEvent();
             final boolean jovian = selectedCard.getTags().hasJovian();
             final boolean space = selectedCard.getTags().hasSpace();
+            final boolean city = selectedCard.getTags().hasCity();
             if (event && player.getCorporation() instanceof InterplanetaryCinematics) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
             }
@@ -87,6 +89,9 @@ public class PlayCardAction implements Action {
             }
             if (space && event && player.getPlayedCards().stream().anyMatch(c -> c instanceof OptimalAerobraking)) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(3, 0, 0, 0, 0, 3)));
+            }
+            if (city && player.getPlayedCards().stream().anyMatch(c -> c instanceof RoverConstruction)) {
+                game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
             }
             if (action != null) {
                 game.getActionHandler().addPendingAction(action);
