@@ -8,6 +8,7 @@ import tm.Card;
 import tm.Game;
 import tm.Player;
 import tm.Resources;
+import tm.card.OptimalAerobraking;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
 import tm.corporation.Credicor;
@@ -72,14 +73,20 @@ public class PlayCardAction implements Action {
             if (selectedCard.getCost() >= 20 && player.getCorporation() instanceof Credicor) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(4)));
             }
-            if (selectedCard.getTags().hasEvent() && player.getCorporation() instanceof InterplanetaryCinematics) {
+            final boolean event = selectedCard.getTags().hasEvent();
+            final boolean jovian = selectedCard.getTags().hasJovian();
+            final boolean space = selectedCard.getTags().hasSpace();
+            if (event && player.getCorporation() instanceof InterplanetaryCinematics) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
             }
-            if (selectedCard.getTags().hasJovian()) {
+            if (jovian) {
                 final Player saturnSystemPlayer = game.getPlayer(SaturnSystems.class);
                 if (saturnSystemPlayer != null) {
                     game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(1), saturnSystemPlayer));
                 }
+            }
+            if (space && event && player.getPlayedCards().stream().anyMatch(c -> c instanceof OptimalAerobraking)) {
+                game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(3, 0, 0, 0, 0, 3)));
             }
             if (action != null) {
                 game.getActionHandler().addPendingAction(action);

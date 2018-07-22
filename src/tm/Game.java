@@ -21,19 +21,36 @@ import javax.swing.JPanel;
 
 import com.sun.istack.internal.Nullable;
 import tm.card.ArcticAlgae;
+import tm.card.Asteroid;
+import tm.card.AsteroidMiningConsortium;
+import tm.card.BigAsteroid;
 import tm.card.BlackPolarDust;
+import tm.card.Capital;
+import tm.card.CloudSeeding;
 import tm.card.ColonizerTrainingCamp;
+import tm.card.Comet;
+import tm.card.CupolaCity;
+import tm.card.DeepWellHeating;
 import tm.card.DevelopmentCenter;
 import tm.card.DomedCrater;
+import tm.card.EosChasmaNationalPark;
 import tm.card.EquatorialMagnetizer;
 import tm.card.ImportedHydrogen;
+import tm.card.InterstellarColonyShip;
+import tm.card.InventorsGuild;
+import tm.card.LunarBeam;
+import tm.card.MartianRail;
 import tm.card.MethaneFromTitan;
 import tm.card.NoctisCity;
+import tm.card.OptimalAerobraking;
 import tm.card.PhobosSpaceHaven;
 import tm.card.Predators;
 import tm.card.ResearchOutpost;
+import tm.card.SearchForLife;
+import tm.card.SecurityFleet;
 import tm.card.SpaceElevator;
 import tm.card.SpaceStation;
+import tm.card.WaterImportFromEuropa;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
 import tm.corporation.Helion;
@@ -72,7 +89,6 @@ public class Game extends JPanel {
 		for (int i = -4; i <= 1; i++) new Tile(i, 3, grid);
 		for (int i = -4; i <= 0; i++) new Tile(i, 4, grid);
 
-		/*
 		deck.add(new ColonizerTrainingCamp());
 		deck.add(new AsteroidMiningConsortium());
 		deck.add(new DeepWellHeating());
@@ -85,7 +101,6 @@ public class Game extends JPanel {
 		deck.add(new Comet());
 		deck.add(new BigAsteroid());
 		deck.add(new WaterImportFromEuropa());
-		*/
 		deck.add(new SpaceElevator());
 		deck.add(new DevelopmentCenter());
 		deck.add(new EquatorialMagnetizer());
@@ -99,6 +114,12 @@ public class Game extends JPanel {
 		deck.add(new ArcticAlgae());
 		deck.add(new Predators());
 		deck.add(new SpaceStation());
+		deck.add(new EosChasmaNationalPark());
+		deck.add(new InterstellarColonyShip());
+		deck.add(new SecurityFleet());
+		deck.add(new CupolaCity());
+		deck.add(new LunarBeam());
+		deck.add(new OptimalAerobraking());
 		for (int i = 0; i < 100; i++)
 			deck.add(new ColonizerTrainingCamp());
 		corporationDeck.add(new Credicor());
