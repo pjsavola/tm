@@ -28,5 +28,7 @@ public enum ActionType {
     GHG_PRODUCING_BACTERIA_1,
     GHG_PRODUCING_BACTERIA_2,
     ANTS,
-    TARDIGRADES
+    TARDIGRADES,
+    FISH,
+    SMALL_ANIMALS
 }
