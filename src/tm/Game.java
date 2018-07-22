@@ -23,6 +23,7 @@ import com.sun.istack.internal.Nullable;
 import tm.card.Ants;
 import tm.card.ArcticAlgae;
 import tm.card.Asteroid;
+import tm.card.AsteroidMining;
 import tm.card.AsteroidMiningConsortium;
 import tm.card.BigAsteroid;
 import tm.card.BlackPolarDust;
@@ -32,6 +33,7 @@ import tm.card.ColonizerTrainingCamp;
 import tm.card.Comet;
 import tm.card.CupolaCity;
 import tm.card.DeepWellHeating;
+import tm.card.DeimosDown;
 import tm.card.DevelopmentCenter;
 import tm.card.DomedCrater;
 import tm.card.EosChasmaNationalPark;
@@ -110,6 +112,8 @@ public class Game extends JPanel {
         deck.add(new ReleaseOfInertGases());
         deck.add(new NitrogenRichAsteroid());
         deck.add(new RoverConstruction());
+        deck.add(new DeimosDown());
+        deck.add(new AsteroidMining());
         ///
         deck.add(new ColonizerTrainingCamp());
         deck.add(new AsteroidMiningConsortium());

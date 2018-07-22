@@ -11,23 +11,25 @@ import tm.action.ActionChain;
 import tm.action.AddTemperatureAction;
 import tm.action.ResourceDeltaAction;
 
-// Decrease any 3 plants is done from dummy player
-public class Asteroid extends Card {
+// Decrease any 8 plants is done from dummy player
+public class DeimosDown extends Card {
 
-    public Asteroid() {
-        super("Asteroid", 14, new Tags().space().event());
+    public DeimosDown() {
+        super("Deimos Down", 31, new Tags().space().event());
     }
 
     @Override
     public Action getInitialAction() {
         return new ActionChain(
-            new ResourceDeltaAction(new Resources(0, 0, 2, 0, 0, 0)),
+            new ResourceDeltaAction(new Resources(0, 4, 0, 0, 0, 0)),
+            new AddTemperatureAction(),
+            new AddTemperatureAction(),
             new AddTemperatureAction()
         );
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("2 titanium", "1 temperature");
+        return Arrays.asList("4 steel", "3 temperature");
     }
 }

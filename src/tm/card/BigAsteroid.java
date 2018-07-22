@@ -9,7 +9,7 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddTemperatureAction;
-import tm.action.IncomeDeltaAction;
+import tm.action.ResourceDeltaAction;
 
 // Decrease any 4 plants is done from dummy player
 public class BigAsteroid extends Card {
@@ -21,7 +21,7 @@ public class BigAsteroid extends Card {
     @Override
     public Action getInitialAction() {
         return new ActionChain(
-            new IncomeDeltaAction(new Resources(0, 0, 4, 0, 0, 0)),
+            new ResourceDeltaAction(new Resources(0, 0, 4, 0, 0, 0)),
             new AddTemperatureAction(),
             new AddTemperatureAction()
         );
