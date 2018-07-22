@@ -14,7 +14,8 @@ public class Tile {
         WATER("images/water.png"),
         GREENERY("images/forest.png"),
         CITY("images/city.png"),
-        CAPITAL("images/city.png");
+        CAPITAL("images/city.png"),
+        MISC("images/city.png");
 
         private final BufferedImage image;
 
