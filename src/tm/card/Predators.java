@@ -10,7 +10,7 @@ import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
-import tm.action.CardWithMarkers;
+import tm.CardWithMarkers;
 import tm.action.MarkerDeltaAction;
 
 // Removing 1 animal is done from dummy player

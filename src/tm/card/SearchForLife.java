@@ -11,7 +11,7 @@ import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardActionWithCost;
-import tm.action.CardWithMarkers;
+import tm.CardWithMarkers;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
 

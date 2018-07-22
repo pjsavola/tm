@@ -1,5 +1,6 @@
 package tm.action;
 
+import tm.CardWithMarkers;
 import tm.Game;
 import tm.completable.Completable;
 import tm.completable.InstantCompletable;

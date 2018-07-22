@@ -1,4 +1,4 @@
-package tm.action;
+package tm;
 
 import tm.Card;
 import tm.Tags;
