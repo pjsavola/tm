@@ -222,6 +222,10 @@ public class Game extends JPanel {
 		return deck.pop();
 	}
 
+	public boolean canDrawCard() {
+		return !deck.isEmpty() || !discard.isEmpty();
+	}
+
 	public Deque<Card> getCorporationDeck() {
 	    return corporationDeck;
 	}

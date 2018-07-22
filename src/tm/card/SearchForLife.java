@@ -6,12 +6,12 @@ import java.util.List;
 
 import tm.ActionType;
 import tm.Card;
+import tm.CardWithMarkers;
 import tm.Game;
 import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardActionWithCost;
-import tm.CardWithMarkers;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
 
@@ -21,6 +21,11 @@ public class SearchForLife extends CardWithMarkers {
         @Override
         public ActionType getType() {
             return ActionType.SEARCH_FOR_LIFE;
+        }
+
+        @Override
+        public boolean check(Game game) {
+            return game.canDrawCard();
         }
 
         @Override

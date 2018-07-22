@@ -25,7 +25,12 @@ public class DrawCardsAction implements Action {
     public Completable begin(Game game) {
         final List<Card> drawnCards = new ArrayList<>(amount);
         while (drawnCards.size() < amount) {
-            drawnCards.add(game.drawCard());
+            final Card card = game.drawCard();
+            if (card == null) {
+                // Game ran out of cards!?
+                break;
+            }
+            drawnCards.add(card);
         }
         if (choice) {
             return new SelectCardsCompletable(game, drawnCards) {
