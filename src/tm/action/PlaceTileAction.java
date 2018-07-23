@@ -77,11 +77,11 @@ public class PlaceTileAction implements Action {
                         return;
                     }
                     final boolean isWater = targetTile.getProperties() != null && targetTile.getProperties().isWater();
-                    if (isWater && type != Tile.Type.WATER) {
+                    if (isWater && !Tile.isPlacedOnWater(type)) {
                         System.err.println("Reserved for water");
                         return;
                     }
-                    if (!isWater && type == Tile.Type.WATER) {
+                    if (!isWater && Tile.isPlacedOnWater(type)) {
                         System.err.println("Not for water");
                         return;
                     }

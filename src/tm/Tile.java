@@ -15,6 +15,7 @@ public class Tile {
         GREENERY("images/forest.png"),
         CITY("images/city.png"),
         CAPITAL("images/city.png"),
+        MANGROVE("images/forest.png"),
         MISC("images/city.png");
 
         private final BufferedImage image;
@@ -86,6 +87,10 @@ public class Tile {
 
     public static boolean isCity(Tile.Type type) {
         return type == Type.CITY || type == Type.CAPITAL;
+    }
+
+    public static boolean isPlacedOnWater(Tile.Type type) {
+        return type == Type.WATER || type == Type.MANGROVE;
     }
 
     public void setOwner(Player player) {
