@@ -13,7 +13,7 @@ import tm.action.ResourceDeltaAction;
 public class InterplanetaryCinematics extends Corporation {
 
     public InterplanetaryCinematics() {
-        super("Interplanetary Cinematics", new Tags().building());
+        super("Interplanetary Cinematics", Tags.BUILDING);
     }
 
     @Override

@@ -13,7 +13,7 @@ import tm.action.ResourceDeltaAction;
 public class Teractor extends Corporation {
 
     public Teractor() {
-        super("Teractor", new Tags().earth());
+        super("Teractor", Tags.EARTH);
     }
 
     @Override

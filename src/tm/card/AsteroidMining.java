@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class AsteroidMining extends Card {
 
     public AsteroidMining() {
-        super("Asteroid Mining", 30, new Tags().space().jovian());
+        super("Asteroid Mining", 30, Tags.SPACE.combine(Tags.JOVIAN));
     }
 
     @Override

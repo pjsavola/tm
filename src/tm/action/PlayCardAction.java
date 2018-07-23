@@ -8,6 +8,7 @@ import tm.Card;
 import tm.Game;
 import tm.Player;
 import tm.Resources;
+import tm.Tags;
 import tm.card.OptimalAerobraking;
 import tm.card.RoverConstruction;
 import tm.completable.Completable;
@@ -74,10 +75,10 @@ public class PlayCardAction implements Action {
             if (selectedCard.getCost() >= 20 && player.getCorporation() instanceof Credicor) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(4)));
             }
-            final boolean event = selectedCard.getTags().hasEvent();
-            final boolean jovian = selectedCard.getTags().hasJovian();
-            final boolean space = selectedCard.getTags().hasSpace();
-            final boolean city = selectedCard.getTags().hasCity();
+            final boolean event = selectedCard.getTags().has(Tags.Type.EVENT);
+            final boolean jovian = selectedCard.getTags().has(Tags.Type.JOVIAN);
+            final boolean space = selectedCard.getTags().has(Tags.Type.SPACE);
+            final boolean city = selectedCard.getTags().has(Tags.Type.CITY);
             if (event && player.getCorporation() instanceof InterplanetaryCinematics) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
             }
@@ -188,7 +189,7 @@ public class PlayCardAction implements Action {
         private int materialsUsed;
 
         private Payment(Player player, Card card) {
-            this(player, card.getTags().hasBuilding(), card.getTags().hasSpace(), card.getCost(), player.getDiscount(card));
+            this(player, card.getTags().has(Tags.Type.BUILDING), card.getTags().has(Tags.Type.SPACE), card.getCost(), player.getDiscount(card));
         }
 
         public Payment(Player player, boolean steel, boolean titanium, int cost, int discount) {

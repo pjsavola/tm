@@ -11,12 +11,12 @@ import tm.Tags;
 public class SpaceStation extends Card {
 
     public SpaceStation() {
-        super("Space Station", 10, new Tags().space(), true);
+        super("Space Station", 10, Tags.SPACE, true);
     }
 
     @Override
     public boolean check(Player player) {
-        return player.hasTags(new Tags().microbe());
+        return player.getTags().has(Tags.Type.MICROBE);
     }
 
     @Override

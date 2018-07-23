@@ -2,198 +2,129 @@ package tm;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class Tags {
 
-    private int event;
-    private int building;
-    private int city;
-    private int space;
-    public int earth;
-    int jovian;
-    private int science;
-    private int power;
-    private int plant;
-    private int animal;
-    private int microbe;
+    public enum Type {
+        EVENT("images/tag_event.png"),
+        BUILDING("images/tag_building.png"),
+        CITY("images/tag_city.png"),
+        SPACE("images/tag_space.png"),
+        EARTH("images/tag_earth.png"),
+        JOVIAN("images/tag_jovian.png"),
+        SCIENCE("images/tag_science.png"),
+        POWER("images/tag_power.png"),
+        PLANT("images/tag_plant.png"),
+        ANIMAL("images/tag_animal.png"),
+        MICROBE("images/tag_microbe.png");
 
-    public Tags event() {
-        event++;
-        return this;
-    }
+        private final String imagePath;
 
-    public Tags building() {
-        building++;
-        return this;
-    }
-
-    public Tags city() {
-        city++;
-        return this;
-    }
-
-    public Tags space() {
-        space++;
-        return this;
-    }
-
-    public Tags earth() {
-        earth++;
-        return this;
-    }
-
-    public Tags jovian() {
-        jovian++;
-        return this;
-    }
-
-    public Tags science() {
-        science++;
-        return this;
-    }
-
-    public Tags power() {
-        power++;
-        return this;
-    }
-
-    public Tags plant() {
-        plant++;
-        return this;
-    }
-
-    public Tags animal() {
-        animal++;
-        return this;
-    }
-
-    public Tags microbe() {
-        microbe++;
-        return this;
-    }
-
-    public Tags combine(Tags tags, boolean add) {
-        if (add) {
-            event += tags.event;
-            building += tags.building;
-            city += tags.city;
-            space += tags.space;
-            earth += tags.earth;
-            jovian += tags.jovian;
-            science += tags.science;
-            power += tags.power;
-            plant += tags.plant;
-            animal += tags.animal;
-            microbe += tags.microbe;
-        } else {
-            event -= tags.event;
-            building -= tags.building;
-            city -= tags.city;
-            space -= tags.space;
-            earth -= tags.earth;
-            jovian -= tags.jovian;
-            science -= tags.science;
-            power -= tags.power;
-            plant -= tags.plant;
-            animal -= tags.animal;
-            microbe -= tags.microbe;
+        private Type(String imagePath) {
+            this.imagePath = imagePath;
         }
-        return this;
+
+        public Tags createTag() {
+            return create(ordinal(), 1);
+        }
+
+        public Tags createTags(int count) {
+            return create(ordinal(), count);
+        }
+
+        public BufferedImage getImage() {
+            return ImageCache.getImage(imagePath);
+        }
+    };
+
+    public static final Tags EMPTY = new Tags();
+    public static final Tags EVENT = Type.EVENT.createTag();
+    public static final Tags BUILDING = Type.BUILDING.createTag();
+    public static final Tags CITY = Type.CITY.createTag();
+    public static final Tags SPACE = Type.SPACE.createTag();
+    public static final Tags EARTH = Type.EARTH.createTag();
+    public static final Tags JOVIAN = Type.JOVIAN.createTag();
+    public static final Tags SCIENCE = Type.SCIENCE.createTag();
+    public static final Tags POWER = Type.POWER.createTag();
+    public static final Tags PLANT = Type.PLANT.createTag();
+    public static final Tags ANIMAL = Type.ANIMAL.createTag();
+    public static final Tags MICROBE = Type.MICROBE.createTag();
+
+    private final int[] tagCounts = new int[Type.values().length];
+
+    private Tags() {
     }
 
-    public boolean hasEvent() {
-        return event > 0;
+    private static Tags create(int index, int count) {
+        final Tags result = new Tags();
+        result.tagCounts[index] = count;
+        return result;
     }
 
-    public boolean hasBuilding() {
-        return building > 0;
+    public Tags combine(Tags tags) {
+        final Tags result = new Tags();
+        for (int i = 0; i < tagCounts.length; i++) {
+            result.tagCounts[i] = tagCounts[i] + tags.tagCounts[i];
+        }
+        return result;
     }
 
-    public boolean hasCity() {
-        return city > 0;
+    public Tags subtract(Tags tags) {
+        final Tags result = new Tags();
+        for (int i = 0; i < tagCounts.length; i++) {
+            result.tagCounts[i] = tagCounts[i] - tags.tagCounts[i];
+        }
+        return result;
     }
 
-    public boolean hasSpace() {
-        return space > 0;
+    public boolean has(Type type) {
+        return getCount(type) > 0;
     }
 
-    public boolean hasEarth() {
-        return earth > 0;
+    public int getCount(Type type) {
+        return tagCounts[type.ordinal()];
     }
 
-    public boolean hasJovian() {
-        return jovian > 0;
+    public boolean hasAll(Tags tags) {
+        for (int i = 0; i < tagCounts.length; i++) {
+            if (tagCounts[i] < tags.tagCounts[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public boolean hasPower() {
-        return power > 0;
-    }
-
-    public boolean hasAnimal() {
-        return animal > 0;
-    }
-
-    public boolean hasMicrobe() {
-        return microbe > 0;
-    }
-
-    public boolean hasTags(Tags tags) {
-        return event >= tags.event &&
-            building >= tags.building &&
-            city >= tags.city &&
-            space >= tags.space &&
-            earth >= tags.earth &&
-            jovian >= tags.jovian &&
-            science >= tags.science &&
-            power >= tags.power &&
-            plant >= tags.plant &&
-            animal >= tags.animal &&
-            microbe >= tags.microbe;
-    }
-
+    // (x,y) is top right corner of the tags
     public void render(Graphics g, int x, int y) {
-        int offset = x - 16;
-        offset = drawTags(g, "images/tag_event.png", event, offset, y);
-        offset = drawTags(g, "images/tag_power.png", power, offset, y);
-        offset = drawTags(g, "images/tag_jovian.png", jovian, offset, y);
-        offset = drawTags(g, "images/tag_earth.png", earth, offset, y);
-        offset = drawTags(g, "images/tag_city.png", city, offset, y);
-        offset = drawTags(g, "images/tag_animal.png", animal, offset, y);
-        offset = drawTags(g, "images/tag_plant.png", plant, offset, y);
-        offset = drawTags(g, "images/tag_microbe.png", microbe, offset, y);
-        offset = drawTags(g, "images/tag_space.png", space, offset, y);
-        offset = drawTags(g, "images/tag_building.png", building, offset, y);
-        drawTags(g, "images/tag_science.png", science, offset, y);
+        int offset = x - 17;
+        for (Type type : Type.values()) {
+            offset = drawTags(g, type.getImage(), getCount(type), offset, y + 2);
+        }
     }
 
-    private static int drawTags(Graphics g, String path, int count, int x, int y) {
+    private static int drawTags(Graphics g, BufferedImage image, int count, int x, int y) {
         int actualX = x;
         for (int i = 0; i < count; i++) {
-            g.drawImage(ImageCache.getImage(path), actualX, y, null);
+            g.drawImage(image, actualX, y, null);
             actualX -= 17;
         }
         return actualX;
     }
 
+    // (x,y) is bottom left corner of the tags
     public void renderVertical(Graphics g, int x, int y) {
         g.setColor(Color.WHITE);
-        int offset = y;
-        offset = drawTagCount(g, "images/tag_microbe.png", microbe, x, offset);
-        offset = drawTagCount(g, "images/tag_animal.png", animal, x, offset);
-        offset = drawTagCount(g, "images/tag_plant.png", plant, x, offset);
-        offset = drawTagCount(g, "images/tag_power.png", power, x, offset);
-        offset = drawTagCount(g, "images/tag_science.png", science, x, offset);
-        offset = drawTagCount(g, "images/tag_jovian.png", jovian, x, offset);
-        offset = drawTagCount(g, "images/tag_earth.png", earth, x, offset);
-        offset = drawTagCount(g, "images/tag_space.png", space, x, offset);
-        offset = drawTagCount(g, "images/tag_city.png", city, x, offset);
-        offset = drawTagCount(g, "images/tag_building.png", building, x, offset);
-        drawTagCount(g, "images/tag_event.png", event, x, offset);
+        int offset = y - 18;
+        final Type[] types = Type.values();
+        for (int i = types.length - 1; i >= 0; i--) {
+            offset = drawTagCount(g, types[i].getImage(), getCount(types[i]), x + 2 , offset);
+        }
     }
 
-    private static int drawTagCount(Graphics g, String path, int count, int x, int y) {
+    private static int drawTagCount(Graphics g, BufferedImage image, int count, int x, int y) {
         if (count > 0) {
-            g.drawImage(ImageCache.getImage(path), x, y, null);
+            g.drawImage(image, x, y, null);
             g.drawString(Integer.toString(count), x + 22, y + 12);
             return y - 18;
         } else {

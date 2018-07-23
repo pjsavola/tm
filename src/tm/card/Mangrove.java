@@ -17,7 +17,7 @@ import tm.action.PlaceTileAction;
 public class Mangrove extends Card {
 
     public Mangrove() {
-        super("Mangrove", 12, new Tags().plant());
+        super("Mangrove", 12, Tags.PLANT);
     }
 
     @Override

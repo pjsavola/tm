@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class LunarBeam extends Card {
 
     public LunarBeam() {
-        super("Lunar Beam", 13, new Tags().earth().power());
+        super("Lunar Beam", 13, Tags.EARTH.combine(Tags.POWER));
     }
 
     @Override

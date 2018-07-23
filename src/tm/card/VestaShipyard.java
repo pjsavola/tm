@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class VestaShipyard extends Card {
 
     public VestaShipyard() {
-        super("Vesta Shipyard", 15, new Tags().space());
+        super("Vesta Shipyard", 15, Tags.SPACE);
     }
 
     @Override

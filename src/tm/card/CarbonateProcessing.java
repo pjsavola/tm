@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class CarbonateProcessing extends Card {
 
     public CarbonateProcessing() {
-        super("Carbonate Processing", 6, new Tags().building());
+        super("Carbonate Processing", 6, Tags.BUILDING);
     }
 
     @Override

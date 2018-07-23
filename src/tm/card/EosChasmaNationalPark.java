@@ -20,7 +20,7 @@ import tm.action.ResourceDeltaAction;
 public class EosChasmaNationalPark extends Card {
 
     public EosChasmaNationalPark() {
-        super("Eos Chasma National Park", 16, new Tags().building().plant());
+        super("Eos Chasma National Park", 16, Tags.BUILDING.combine(Tags.PLANT));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class EosChasmaNationalPark extends Card {
             new AddMarkerAction() {
                 @Override
                 protected Stream<CardWithMarkers> filter(Stream<CardWithMarkers> stream) {
-                    return stream.filter(card -> card.getTags().hasAnimal());
+                    return stream.filter(card -> card.getTags().has(Tags.Type.ANIMAL));
                 }
             }
         );

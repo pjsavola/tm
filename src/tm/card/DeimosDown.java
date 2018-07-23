@@ -16,7 +16,7 @@ import tm.action.ResourceDeltaAction;
 public class DeimosDown extends Card {
 
     public DeimosDown() {
-        super("Deimos Down", 31, new Tags().space().event());
+        super("Deimos Down", 31, Tags.SPACE.combine(Tags.EVENT));
     }
 
     @Override

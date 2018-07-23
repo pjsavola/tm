@@ -20,7 +20,7 @@ import tm.action.ResourceDeltaAction;
 public class Credicor extends Corporation {
 
     public Credicor() {
-        super("Credicor", new Tags());
+        super("Credicor", Tags.EMPTY);
     }
 
     @Override

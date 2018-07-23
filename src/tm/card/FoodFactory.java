@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class FoodFactory extends Card {
 
     public FoodFactory() {
-        super("Food Factory", 12, new Tags().building());
+        super("Food Factory", 12, Tags.BUILDING);
     }
 
     @Override

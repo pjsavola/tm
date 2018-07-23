@@ -14,7 +14,7 @@ import tm.action.IncomeDeltaAction;
 public class Archaebacteria extends Card {
 
     public Archaebacteria() {
-        super("Archaebacteria", 6, new Tags().microbe());
+        super("Archaebacteria", 6, Tags.MICROBE);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class Predators extends CardWithMarkers {
     };
 
     public Predators() {
-        super("Predators", 14, new Tags().animal());
+        super("Predators", 14, Tags.ANIMAL);
     }
 
     @Override

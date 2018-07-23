@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class AdaptedLichen extends Card {
 
     public AdaptedLichen() {
-        super("Adapted Lichen", 9, new Tags().plant());
+        super("Adapted Lichen", 9, Tags.PLANT);
     }
 
     @Override

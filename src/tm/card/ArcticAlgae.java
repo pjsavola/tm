@@ -16,7 +16,7 @@ import tm.action.IncomeDeltaAction;
 public class ArcticAlgae extends Card {
 
     public ArcticAlgae() {
-        super("Arctic Algae", 12, new Tags().plant(), true);
+        super("Arctic Algae", 12, Tags.PLANT, true);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class Ants extends CardWithMarkers {
     };
 
     public Ants() {
-        super("Ants", 9, new Tags().microbe());
+        super("Ants", 9, Tags.MICROBE);
     }
 
     @Override

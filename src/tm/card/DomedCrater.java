@@ -19,7 +19,7 @@ import tm.action.ResourceDeltaAction;
 public class DomedCrater extends Card {
 
     public DomedCrater() {
-        super("Domed Crater", 24, new Tags().building().city());
+        super("Domed Crater", 24, Tags.BUILDING.combine(Tags.CITY));
     }
 
     @Override

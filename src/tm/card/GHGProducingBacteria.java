@@ -37,7 +37,7 @@ public class GHGProducingBacteria extends CardWithMarkers {
     };
 
     public GHGProducingBacteria() {
-        super("GHG Producing Bacteria", 8, new Tags().science().microbe());
+        super("GHG Producing Bacteria", 8, Tags.SCIENCE.combine(Tags.MICROBE));
         action1.setAlternativeAction(action2);
         action2.setAlternativeAction(action1);
     }

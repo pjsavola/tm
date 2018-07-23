@@ -14,7 +14,7 @@ import tm.action.ResourceDeltaAction;
 public class Inventrix extends Corporation {
 
     public Inventrix() {
-        super("Inventrix", new Tags().science());
+        super("Inventrix", Tags.SCIENCE);
     }
 
     @Override

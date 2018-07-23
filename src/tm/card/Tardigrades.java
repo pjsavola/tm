@@ -27,7 +27,7 @@ public class Tardigrades extends CardWithMarkers {
     };
 
     public Tardigrades() {
-        super("Tardigrades", 4, new Tags().microbe());
+        super("Tardigrades", 4, Tags.MICROBE);
     }
 
     @Override

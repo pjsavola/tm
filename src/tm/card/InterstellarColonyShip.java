@@ -10,12 +10,12 @@ import tm.Tags;
 public class InterstellarColonyShip extends Card {
 
     public InterstellarColonyShip() {
-        super("Interstellar Colony Ship", 24, new Tags().space().earth().event());
+        super("Interstellar Colony Ship", 24, Tags.SPACE.combine(Tags.EARTH).combine(Tags.EVENT));
     }
 
     @Override
     public boolean check(Player player) {
-        return player.hasTags(new Tags().science().science().science().science().science());
+        return player.getTags().hasAll(Tags.Type.SCIENCE.createTags(5));
     }
 
     @Override

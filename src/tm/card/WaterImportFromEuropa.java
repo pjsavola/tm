@@ -32,7 +32,7 @@ public class WaterImportFromEuropa extends Card {
     };
 
     public WaterImportFromEuropa() {
-        super("Water Import From Europa", 25, new Tags().space().jovian());
+        super("Water Import From Europa", 25, Tags.SPACE.combine(Tags.JOVIAN));
     }
 
     @Override

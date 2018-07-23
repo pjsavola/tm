@@ -14,7 +14,7 @@ import tm.action.IncomeDeltaAction;
 public class PhobosSpaceHaven extends Card {
 
     public PhobosSpaceHaven() {
-        super("Phobos Space Haven", 25, new Tags().space().city());
+        super("Phobos Space Haven", 25, Tags.SPACE.combine(Tags.CITY));
     }
 
     @Override

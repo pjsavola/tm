@@ -9,7 +9,7 @@ import tm.Tags;
 public class OptimalAerobraking extends Card {
 
     public OptimalAerobraking() {
-        super("Optimal Aerobraking", 7, new Tags().space(), true);
+        super("Optimal Aerobraking", 7, Tags.SPACE, true);
     }
 
     @Override

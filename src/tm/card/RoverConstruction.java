@@ -9,7 +9,7 @@ import tm.Tags;
 public class RoverConstruction extends Card {
 
     public RoverConstruction() {
-        super("Rover Construction", 18, new Tags().building(), true);
+        super("Rover Construction", 18, Tags.BUILDING, true);
     }
 
     @Override

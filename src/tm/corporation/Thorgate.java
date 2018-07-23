@@ -17,7 +17,7 @@ import tm.action.ResourceDeltaAction;
 public class Thorgate extends Corporation {
 
     public Thorgate() {
-        super("Thorgate", new Tags().power());
+        super("Thorgate", Tags.POWER);
     }
 
     @Override

@@ -17,7 +17,7 @@ import tm.action.ResourceDeltaAction;
 public class TharsisRepublic extends Corporation {
 
     public TharsisRepublic() {
-        super("Tharsis Republic", new Tags().building());
+        super("Tharsis Republic", Tags.BUILDING);
     }
 
     @Override

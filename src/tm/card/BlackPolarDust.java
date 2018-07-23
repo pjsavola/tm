@@ -15,7 +15,7 @@ import tm.action.IncomeDeltaAction;
 public class BlackPolarDust extends Card {
 
     public BlackPolarDust() {
-        super("Black Polar Dust", 15, new Tags());
+        super("Black Polar Dust", 15, Tags.EMPTY);
     }
 
     @Override

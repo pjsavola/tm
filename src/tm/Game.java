@@ -46,6 +46,7 @@ import tm.card.EquatorialMagnetizer;
 import tm.card.Fish;
 import tm.card.FoodFactory;
 import tm.card.GHGProducingBacteria;
+import tm.card.GreatEscarpmentConsortium;
 import tm.card.ImportedHydrogen;
 import tm.card.InterstellarColonyShip;
 import tm.card.InventorsGuild;
@@ -137,6 +138,7 @@ public class Game extends JPanel {
         deck.add(new BeamFromThoriumAsteroid());
         deck.add(new Mangrove());
         deck.add(new Trees());
+        deck.add(new GreatEscarpmentConsortium());
         ///
         deck.add(new ColonizerTrainingCamp());
         deck.add(new AsteroidMiningConsortium());

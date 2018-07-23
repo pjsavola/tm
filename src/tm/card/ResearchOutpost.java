@@ -13,7 +13,7 @@ import tm.action.PlaceTileAction;
 public class ResearchOutpost extends Card {
 
     public ResearchOutpost() {
-        super("Research Outpost", 18, new Tags().science().building().city(), true);
+        super("Research Outpost", 18, Tags.SCIENCE.combine(Tags.BUILDING).combine(Tags.CITY), true);
     }
 
     @Override

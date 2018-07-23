@@ -17,7 +17,7 @@ import tm.action.ResourceDeltaAction;
 public class KelpFarming extends Card {
 
     public KelpFarming() {
-        super("Kelp Farming", 17, new Tags());
+        super("Kelp Farming", 17, Tags.EMPTY);
     }
 
     @Override

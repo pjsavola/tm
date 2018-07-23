@@ -18,7 +18,7 @@ import tm.action.PlaceTileAction;
 public class CupolaCity extends Card {
 
     public CupolaCity() {
-        super("Cupola City", 16, new Tags().building().city());
+        super("Cupola City", 16, Tags.BUILDING.combine(Tags.CITY));
     }
 
     @Override

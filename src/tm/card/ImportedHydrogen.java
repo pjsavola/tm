@@ -18,7 +18,7 @@ import tm.action.ResourceDeltaAction;
 public class ImportedHydrogen extends Card {
 
     public ImportedHydrogen() {
-        super("Imported Hydrogen", 16, new Tags().space().earth().event());
+        super("Imported Hydrogen", 16, Tags.SPACE.combine(Tags.EARTH).combine(Tags.EVENT));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ImportedHydrogen extends Card {
 
                 @Override
                 protected Stream<CardWithMarkers> filter(Stream<CardWithMarkers> stream) {
-                    return stream.filter(card -> card.getTags().hasMicrobe() || card.getTags().hasAnimal());
+                    return stream.filter(card -> card.getTags().has(Tags.Type.MICROBE) || card.getTags().has(Tags.Type.ANIMAL));
                 }
 
                 @Override
@@ -42,7 +42,7 @@ public class ImportedHydrogen extends Card {
 
                 @Override
                 protected int getMarkerCount(CardWithMarkers card) {
-                    return card.getTags().hasMicrobe() ? 3 : 2;
+                    return card.getTags().has(Tags.Type.MICROBE) ? 3 : 2;
                 }
             },
             new AddWaterAction()

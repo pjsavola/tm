@@ -15,7 +15,7 @@ import tm.action.AddWaterAction;
 public class LakeMarineris extends Card {
 
     public LakeMarineris() {
-        super("Lake Marineris", 18, new Tags());
+        super("Lake Marineris", 18, Tags.EMPTY);
     }
 
     @Override

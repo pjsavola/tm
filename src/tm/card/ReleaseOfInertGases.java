@@ -12,7 +12,7 @@ import tm.action.AddTerraformingRatingAction;
 public class ReleaseOfInertGases extends Card {
 
     public ReleaseOfInertGases() {
-        super("ReleaseOfInertGases", 14, new Tags().event());
+        super("ReleaseOfInertGases", 14, Tags.EVENT);
     }
 
     @Override

@@ -16,7 +16,7 @@ import tm.action.ResourceDeltaAction;
 public class BigAsteroid extends Card {
 
     public BigAsteroid() {
-        super("Big Asteroid", 27, new Tags().space().event());
+        super("Big Asteroid", 27, Tags.SPACE.combine(Tags.EVENT));
     }
 
     @Override

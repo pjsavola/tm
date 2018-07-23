@@ -26,7 +26,7 @@ public class SecurityFleet extends CardWithMarkers {
     };
 
     public SecurityFleet() {
-        super("Security Fleet", 12, new Tags().space());
+        super("Security Fleet", 12, Tags.SPACE);
     }
 
     @Override

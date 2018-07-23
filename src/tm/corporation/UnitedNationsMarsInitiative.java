@@ -17,7 +17,7 @@ import tm.action.ResourceDeltaAction;
 public class UnitedNationsMarsInitiative extends Corporation {
 
     public UnitedNationsMarsInitiative() {
-        super("United Nations Mars Initiative", new Tags().plant());
+        super("United Nations Mars Initiative", Tags.PLANT);
     }
 
     @Override

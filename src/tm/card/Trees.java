@@ -17,7 +17,7 @@ import tm.action.ResourceDeltaAction;
 public class Trees extends Card {
 
     public Trees() {
-        super("Trees", 13, new Tags().plant());
+        super("Trees", 13, Tags.PLANT);
     }
 
     @Override

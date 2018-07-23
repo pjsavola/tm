@@ -15,7 +15,7 @@ import tm.action.ResourceDeltaAction;
 public class MiningGuild extends Corporation {
 
     public MiningGuild() {
-        super("Mining Guild", new Tags().building().building());
+        super("Mining Guild", Tags.Type.BUILDING.createTags(2));
     }
 
     @Override

@@ -24,7 +24,7 @@ public class Player {
     private Resources income = new Resources(0);
     private Resources resourcesDelta = new Resources(0);
     private Resources incomeDelta = new Resources(0);
-    private Tags tags = new Tags();
+    private Tags tags = Tags.EMPTY;
     private int rating = 20;
     private int savedRating = 20;
     private final Color color = new Color(0xFF0000);
@@ -114,16 +114,16 @@ public class Player {
 
     public int getDiscount(Card card) {
         int discount = 0;
-        if (card.getTags().hasPower() && corporation instanceof Thorgate) {
+        if (card.getTags().has(Tags.Type.POWER) && corporation instanceof Thorgate) {
             discount += 3;
         }
-        if (card.getTags().hasEarth() && corporation instanceof Teractor) {
+        if (card.getTags().has(Tags.Type.EARTH) && corporation instanceof Teractor) {
             discount += 3;
         }
         if (playedCards.stream().anyMatch(c -> c instanceof ResearchOutpost)) {
             discount += 1;
         }
-        if (card.getTags().hasSpace() && playedCards.stream().anyMatch(c -> c instanceof SpaceStation)) {
+        if (card.getTags().has(Tags.Type.SPACE) && playedCards.stream().anyMatch(c -> c instanceof SpaceStation)) {
             discount += 2;
         }
         return discount;
@@ -135,15 +135,11 @@ public class Player {
     }
 
     public void addTags(Tags tags) {
-        this.tags.combine(tags, true);
+        this.tags = this.tags.combine(tags);
     }
 
     public void removeTags(Tags tags) {
-        this.tags.combine(tags, false);
-    }
-
-    public boolean hasTags(Tags tags) {
-        return this.tags.hasTags(tags);
+        this.tags = this.tags.subtract(tags);
     }
 
     public Tags getTags() {
@@ -182,7 +178,7 @@ public class Player {
             .stream()
             .filter(tile -> tile.getType() == Tile.Type.GREENERY)
             .count());
-        playedCards.stream().filter(card -> card instanceof WaterImportFromEuropa).findAny().ifPresent(_card -> total.addAndGet(tags.jovian));
+        playedCards.stream().filter(card -> card instanceof WaterImportFromEuropa).findAny().ifPresent(_card -> total.addAndGet(tags.getCount(Tags.Type.JOVIAN)));
         return total.intValue();
     }
 
@@ -217,7 +213,7 @@ public class Player {
         renderText(g, "images/icon_vp.png", getPoints(), 8, 0x00FFFF);
         renderText(g, "images/icon_card.png", getCards().size(), 9, 0xCCCCCC);
 
-        tags.renderVertical(g, 2, 682);
+        tags.renderVertical(g, 0, 700);
 
         if (corporation != null) {
             final String name = corporation.getName();

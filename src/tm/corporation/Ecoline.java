@@ -20,7 +20,7 @@ import tm.action.ResourceDeltaAction;
 public class Ecoline extends Corporation {
 
     public Ecoline() {
-        super("Ecoline", new Tags().plant());
+        super("Ecoline", Tags.PLANT);
     }
 
     @Override

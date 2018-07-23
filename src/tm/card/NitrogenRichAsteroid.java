@@ -17,7 +17,7 @@ import tm.completable.InstantCompletable;
 public class NitrogenRichAsteroid extends Card {
 
     public NitrogenRichAsteroid() {
-        super("Nitrogen-Rich Asteroid", 31, new Tags().science().event());
+        super("Nitrogen-Rich Asteroid", 31, Tags.SCIENCE.combine(Tags.EVENT));
     }
 
     @Override
@@ -29,7 +29,7 @@ public class NitrogenRichAsteroid extends Card {
                 @Override
                 public Completable begin(Game game) {
                     final int plants;
-                    if (game.getCurrentPlayer().hasTags(new Tags().plant().plant().plant())) {
+                    if (game.getCurrentPlayer().getTags().hasAll(Tags.Type.PLANT.createTags(3))) {
                         plants = 4;
                     } else {
                         plants = 1;

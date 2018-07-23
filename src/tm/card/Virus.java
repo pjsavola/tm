@@ -7,6 +7,6 @@ import tm.Tags;
 public class Virus extends Card {
 
     public Virus() {
-        super("Virus", 1, new Tags().microbe().event());
+        super("Virus", 1, Tags.MICROBE.combine(Tags.EVENT));
     }
 }

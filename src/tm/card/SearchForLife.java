@@ -31,7 +31,7 @@ public class SearchForLife extends CardWithMarkers {
         @Override
         protected Action getAction(Game game) {
             final Card card = game.drawCard();
-            if (card.getTags().hasMicrobe()) {
+            if (card.getTags().has(Tags.Type.MICROBE)) {
                 adjustMarkers(1);
             }
             return new Action() {
@@ -80,7 +80,7 @@ public class SearchForLife extends CardWithMarkers {
     };
 
     public SearchForLife() {
-        super("Search For Life", 3, new Tags().science());
+        super("Search For Life", 3, Tags.SCIENCE);
     }
 
     @Override

@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class Mine extends Card {
 
     public Mine() {
-        super("Mine", 4, new Tags().building());
+        super("Mine", 4, Tags.BUILDING);
     }
 
     @Override

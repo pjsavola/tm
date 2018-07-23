@@ -11,12 +11,12 @@ import tm.Tags;
 public class BeamFromThoriumAsteroid extends Card {
 
     public BeamFromThoriumAsteroid() {
-        super("Beam From Thorium Asteroid", 32, new Tags().space().jovian().power());
+        super("Beam From Thorium Asteroid", 32, Tags.SPACE.combine(Tags.JOVIAN).combine(Tags.POWER));
     }
 
     @Override
     public boolean check(Player player) {
-        return player.hasTags(new Tags().jovian());
+        return player.getTags().has(Tags.Type.JOVIAN);
     }
 
     @Override

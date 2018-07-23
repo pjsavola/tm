@@ -15,7 +15,7 @@ import tm.action.ResourceDeltaAction;
 public class SaturnSystems extends Corporation {
 
     public SaturnSystems() {
-        super("Saturn Systems", new Tags().jovian());
+        super("Saturn Systems", Tags.JOVIAN);
     }
 
     @Override

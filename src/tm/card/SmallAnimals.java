@@ -29,7 +29,7 @@ public class SmallAnimals extends CardWithMarkers {
     };
 
     public SmallAnimals() {
-        super("Small Animals", 6, new Tags().animal());
+        super("Small Animals", 6, Tags.ANIMAL);
     }
 
     @Override

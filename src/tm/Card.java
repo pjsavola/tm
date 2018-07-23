@@ -35,7 +35,7 @@ public class Card {
     }
 
     public Color getBorderColor() {
-        if (tags.hasEvent()) {
+        if (tags.has(Tags.Type.EVENT)) {
             return Color.RED;
         } else if (cost == 0) {
             return Color.WHITE;
@@ -107,7 +107,7 @@ public class Card {
         }
 
         // Draw tags
-        tags.render(g, x + WIDTH - 1, y + 2);
+        tags.render(g, x + WIDTH, y);
     }
 
     // x: top-left corner

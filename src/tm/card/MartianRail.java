@@ -24,7 +24,7 @@ public class MartianRail extends Card {
     };
 
     public MartianRail() {
-        super("Martian Rail", 13, new Tags().building());
+        super("Martian Rail", 13, Tags.BUILDING);
     }
 
     @Override

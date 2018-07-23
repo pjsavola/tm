@@ -10,7 +10,7 @@ import tm.Tags;
 public class ColonizerTrainingCamp extends Card {
 
     public ColonizerTrainingCamp() {
-        super("Colonizer Training Camp", 8, new Tags().building().jovian());
+        super("Colonizer Training Camp", 8, Tags.BUILDING.combine(Tags.JOVIAN));
     }
 
     @Override

@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class MirandaResort extends Card {
 
     public MirandaResort() {
-        super("Miranda Resort", 12, new Tags().space().jovian());
+        super("Miranda Resort", 12, Tags.SPACE.combine(Tags.JOVIAN));
     }
 
     @Override
@@ -23,7 +23,7 @@ public class MirandaResort extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(game.getCurrentPlayer().getTags().earth));
+        return new IncomeDeltaAction(new Resources(game.getCurrentPlayer().getTags().getCount(Tags.Type.EARTH)));
     }
 
     @Override

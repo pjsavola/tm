@@ -13,7 +13,7 @@ import tm.action.ResourceDeltaAction;
 public class Phoblog extends Corporation {
 
     public Phoblog() {
-        super("Phoblog", new Tags().space());
+        super("Phoblog", Tags.SPACE);
     }
 
     @Override

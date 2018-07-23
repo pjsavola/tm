@@ -17,7 +17,7 @@ import tm.action.ResourceDeltaAction;
 public class Helion extends Corporation {
 
     public Helion() {
-        super("Helion", new Tags().space());
+        super("Helion", Tags.SPACE);
     }
 
     @Override

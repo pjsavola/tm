@@ -25,7 +25,7 @@ public class EquatorialMagnetizer extends Card {
     };
 
     public EquatorialMagnetizer() {
-        super("Equatorial Magnetizer", 11, new Tags().building());
+        super("Equatorial Magnetizer", 11, Tags.BUILDING);
     }
 
     @Override

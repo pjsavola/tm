@@ -18,7 +18,7 @@ import tm.action.PlaceTileAction;
 public class NaturalPreserve extends Card {
 
     public NaturalPreserve() {
-        super("Natural Preserve", 9, new Tags().science().building());
+        super("Natural Preserve", 9, Tags.SCIENCE.combine(Tags.BUILDING));
     }
 
     @Override

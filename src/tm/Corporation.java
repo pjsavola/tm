@@ -14,7 +14,7 @@ public abstract class Corporation extends Card {
     private static final Font FONT = new Font("Arial", Font.BOLD, 12);
 
     protected Corporation(String name, Tags tags) {
-        super(name, 0, tags, false);
+        super(name, 0, tags);
     }
 
     @Override
