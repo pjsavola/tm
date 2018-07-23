@@ -30,7 +30,7 @@ public class NaturalPreserve extends Card {
     public Action getInitialAction(Game game) {
         return new ActionChain(
             new PlaceTileAction(Tile.Type.MISC, true),
-            new IncomeDeltaAction(new Resources(1))
+            new IncomeDeltaAction(Resources.MONEY)
         );
     }
 

@@ -37,7 +37,7 @@ public class EosChasmaNationalPark extends Card {
     public Action getInitialAction(Game game) {
         return new ActionChain(
             new IncomeDeltaAction(new Resources(2)),
-            new ResourceDeltaAction(new Resources(0, 0, 0, 3, 0, 0)),
+            new ResourceDeltaAction(Resources.PLANT_3),
             new AddMarkerAction() {
                 @Override
                 protected Stream<CardWithMarkers> filter(Stream<CardWithMarkers> stream) {

@@ -84,7 +84,7 @@ public class PlayCardAction implements Action {
             if (jovian) {
                 final Player saturnSystemPlayer = game.getPlayer(SaturnSystems.class);
                 if (saturnSystemPlayer != null) {
-                    game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(1), saturnSystemPlayer));
+                    game.getActionHandler().addPendingAction(new IncomeDeltaAction(Resources.MONEY, saturnSystemPlayer));
                 }
             }
             if (space && event && player.getPlayedCards().stream().anyMatch(c -> c instanceof OptimalAerobraking)) {

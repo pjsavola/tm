@@ -194,7 +194,7 @@ public class PlaceTileAction implements Action {
         } else {
             // TODO: Find player who owns the card if we need support for more than 1 player
             if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof ArcticAlgae)) {
-                game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(0, 0, 0, 2, 0, 0)));
+                game.getActionHandler().addPendingAction(new IncomeDeltaAction(Resources.PLANT_2));
             }
         }
         int sum = 0;
@@ -206,7 +206,7 @@ public class PlaceTileAction implements Action {
         if (Tile.isCity(type)) {
             final Player tharsisRepublicPlayer = game.getPlayer(TharsisRepublic.class);
             if (tharsisRepublicPlayer != null) {
-                game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(1), tharsisRepublicPlayer));
+                game.getActionHandler().addPendingAction(new IncomeDeltaAction(Resources.MONEY, tharsisRepublicPlayer));
             }
             if (tharsisRepublicPlayer == game.getCurrentPlayer()) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(3)));
@@ -214,14 +214,18 @@ public class PlaceTileAction implements Action {
         }
         final TileProperties p = targetTile.getProperties();
         if (sum > 0 || p != null) {
-            final Resources money = new Resources(sum);
-            final Resources resources = p == null ? money : p.getResources().combine(money);
+            final Resources resources;
+            if (p == null) {
+                resources = new Resources(sum);
+            } else {
+                resources = new Resources(sum, p.getSteel(), p.getTitanium(), p.getPlants(), 0, 0);
+            }
             final Action bonusAction = new ResourceDeltaAction(resources);
             if (bonusAction.check(game)) {
                 game.getActionHandler().addPendingAction(bonusAction);
             }
-            if (game.getCurrentPlayer().getCorporation() instanceof MiningGuild && (resources.steel > 0 || resources.titanium > 0)) {
-                game.getActionHandler().addPendingAction(new IncomeDeltaAction(new Resources(0, 1, 0, 0, 0, 0)));
+            if (game.getCurrentPlayer().getCorporation() instanceof MiningGuild && p != null && (p.getSteel() > 0 || p.getTitanium() > 0)) {
+                game.getActionHandler().addPendingAction(new IncomeDeltaAction(Resources.STEEL));
             }
             if (p != null && p.getCards() > 0) {
                 game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(p.getCards(), false, false));

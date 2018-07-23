@@ -37,7 +37,7 @@ public class ImportedHydrogen extends Card {
 
                 @Override
                 protected Action onEmptySelection() {
-                    return new ResourceDeltaAction(new Resources(0, 0, 0, 3, 0, 0));
+                    return new ResourceDeltaAction(Resources.PLANT_3);
                 }
 
                 @Override

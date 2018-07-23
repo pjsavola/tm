@@ -31,7 +31,7 @@ public class DomedCrater extends Card {
     public Action getInitialAction(Game game) {
         return new ActionChain(
             new PlaceTileAction(Tile.Type.CITY),
-            new ResourceDeltaAction(new Resources(0, 0, 0, 3, 0, 0)),
+            new ResourceDeltaAction(Resources.PLANT_3),
             new IncomeDeltaAction(new Resources(3, 0, 0, 0, -1, 0))
         );
     }

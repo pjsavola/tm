@@ -33,7 +33,7 @@ public class KelpFarming extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(
-            new ResourceDeltaAction(new Resources(0, 0, 0, 2, 0, 0)),
+            new ResourceDeltaAction(Resources.PLANT_2),
             new IncomeDeltaAction(new Resources(2, 0, 0, 3, 0, 0))
         );
     }

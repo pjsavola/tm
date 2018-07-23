@@ -20,7 +20,7 @@ public class AsteroidMiningConsortium extends Card {
 
     @Override
     public boolean check(Player player) {
-        return player.getIncome().titanium > 0;
+        return player.getIncome().getTitanium() > 0;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class AsteroidMiningConsortium extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(0, 0, 1, 0, 0, 0));
+        return new IncomeDeltaAction(Resources.TITANIUM);
     }
 
     @Override

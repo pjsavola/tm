@@ -38,11 +38,11 @@ public class Player {
     }
 
     public void adjustResources(Resources delta) {
-        resources.adjust(delta);
+        resources = resources.combine(delta);
     }
 
     public boolean canAdjustResources(Resources delta) {
-        return resources.canAdjust(delta);
+        return resources.combine(delta).isValidState();
     }
 
     public void setResourcesDelta(Resources delta) {
@@ -54,8 +54,7 @@ public class Player {
     }
 
     public boolean canAdjustIncome(Resources delta) {
-        final Resources newIncome = income.combine(delta);
-        return newIncome.steel >= 0 && newIncome.titanium >= 0 && newIncome.plants >= 0 && newIncome.energy >= 0 && newIncome.heat >= 0;
+        return income.combine(delta).isValidIncome();
     }
 
     public void adjustRating(int delta) {
@@ -71,7 +70,7 @@ public class Player {
     }
 
     public void adjustIncome(Resources delta) {
-        income.adjust(delta);
+        income = income.combine(delta);
     }
 
     public void setCorporation(Corporation corporation) {
@@ -91,16 +90,15 @@ public class Player {
     }
 
     public Resources getIncome() {
-        final int leftOverEnergy = resources.energy;
-        return income.combine(new Resources(rating, 0, 0, 0, -leftOverEnergy, leftOverEnergy));
+        return income.getTurnIncome(rating, resources);
     }
 
     public int getSteel() {
-        return resources.steel;
+        return resources.getSteel();
     }
 
     public int getTitanium() {
-        return resources.titanium;
+        return resources.getTitanium();
     }
 
     public int getSteelValue() {
@@ -203,15 +201,21 @@ public class Player {
         g.setFont(font);
         final Resources renderableResources = resources.combine(resourcesDelta);
         final Resources renderableIncome = income.combine(incomeDelta);
-        renderText(g, "images/icon_money.png", renderableResources.money, renderableIncome.money, 1, 0xFFFF00);
-        renderText(g, "images/icon_steel.png", renderableResources.steel, renderableIncome.steel, 2, 0x8B4513);
-        renderText(g, "images/icon_titanium.png", renderableResources.titanium, renderableIncome.titanium, 3, 0x888888);
-        renderText(g, "images/icon_plant.png", renderableResources.plants, renderableIncome.plants, 4, 0x00FF00);
-        renderText(g, "images/icon_energy.png", renderableResources.energy, renderableIncome.energy, 5, 0x6600FF);
-        renderText(g, "images/icon_heat.png", renderableResources.heat, renderableIncome.heat, 6, 0xFF9900);
-        renderText(g, "images/icon_tr.png", rating, 0, 7, 0x0000FF);
-        renderText(g, "images/icon_vp.png", getPoints(), 0, 8, 0x00FFFF);
-        renderText(g, "images/icon_card.png", getCards().size(), 0, 9, 0xCCCCCC);
+        renderableResources.renderMoney(g, 0, 0, false);
+        renderableResources.renderSteel(g, 0, 18, false);
+        renderableResources.renderTitanium(g, 0, 36, false);
+        renderableResources.renderPlants(g, 0, 54, false);
+        renderableResources.renderEnergy(g, 0, 72, false);
+        renderableResources.renderHeat(g, 0, 90, false);
+        renderableIncome.renderMoney(g, 54, 0, true);
+        renderableIncome.renderSteel(g, 54, 18, true);
+        renderableIncome.renderTitanium(g, 54, 36, true);
+        renderableIncome.renderPlants(g, 54, 54, true);
+        renderableIncome.renderEnergy(g, 54, 72, true);
+        renderableIncome.renderHeat(g, 54, 90, true);
+        renderText(g, "images/icon_tr.png", rating, 7, 0x0000FF);
+        renderText(g, "images/icon_vp.png", getPoints(), 8, 0x00FFFF);
+        renderText(g, "images/icon_card.png", getCards().size(), 9, 0xCCCCCC);
 
         tags.renderVertical(g, 2, 682);
 
@@ -224,14 +228,9 @@ public class Player {
         g.setColor(oldColor);
     }
 
-    private static void renderText(Graphics g, String path, int amount, int income, int i, int color) {
+    private static void renderText(Graphics g, String path, int amount, int i, int color) {
         g.drawImage(ImageCache.getImage(path), 2, i * 18 - 16, null);
         g.setColor(new Color(color));
         g.drawString(Integer.toString(amount), 30, 18 * i - 4);
-        if (income > 0) {
-            g.drawString("+" + income, 50, 18 * i - 4);
-        } else if (income < 0) {
-            g.drawString(Integer.toString(income), 50, 18 * i - 4);
-        }
     }
 }

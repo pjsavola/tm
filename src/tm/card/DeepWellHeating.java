@@ -21,13 +21,13 @@ public class DeepWellHeating extends Card {
 
     @Override
     public boolean check(Player player) {
-        return player.getIncome().titanium > 0;
+        return player.getIncome().getSteel() > 0;
     }
 
     @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(
-            new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0)),
+            new IncomeDeltaAction(Resources.ENERGY),
             new AddTemperatureAction()
         );
     }

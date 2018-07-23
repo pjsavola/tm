@@ -22,7 +22,7 @@ public class Asteroid extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(
-            new ResourceDeltaAction(new Resources(0, 0, 2, 0, 0, 0)),
+            new ResourceDeltaAction(Resources.TITANIUM_2),
             new AddTemperatureAction()
         );
     }

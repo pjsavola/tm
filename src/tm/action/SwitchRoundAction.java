@@ -19,14 +19,13 @@ public class SwitchRoundAction implements Action {
 
             @Override
             public void undo() {
-                game.getCurrentPlayer().adjustResources(game.getCurrentPlayer().getIncome().negate());
-                game.getPlanet().adjustRound(-1);
+                // Cannot end up here because card drawing is irreversible
+                throw new UnsupportedOperationException();
             }
 
             @Override
             public void redo() {
-                game.getCurrentPlayer().adjustResources(game.getCurrentPlayer().getIncome());
-                game.getPlanet().adjustRound(1);
+                throw new UnsupportedOperationException();
             }
         };
     }

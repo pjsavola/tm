@@ -26,7 +26,7 @@ public class ArcticAlgae extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(0, 0, 0, 1, 0, 0));
+        return new IncomeDeltaAction(Resources.PLANT);
     }
 
     @Override

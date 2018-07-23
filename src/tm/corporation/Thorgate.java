@@ -24,14 +24,14 @@ public class Thorgate extends Corporation {
     public Action getInitialAction(Game game) {
         return new ActionChain(
             new ResourceDeltaAction(new Resources(48)),
-            new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0)));
+            new IncomeDeltaAction(Resources.ENERGY));
     }
 
     @Override
     public List<Action> getActions() {
         return Collections.singletonList(new ActionChain(ActionType.ENERGY, "Energy income",
             new ResourceDeltaAction(new Resources(-8)),
-            new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0))
+            new IncomeDeltaAction(Resources.ENERGY)
         ));
     }
 

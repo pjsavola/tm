@@ -49,7 +49,7 @@ public class ActionPool {
         standardActions.add(new ActionChain(ActionType.CITY, "City",
             new ResourceDeltaAction(new Resources(-25)),
             new PlaceTileAction(Tile.Type.CITY),
-            new IncomeDeltaAction(new Resources(1))));
+            new IncomeDeltaAction(Resources.MONEY)));
         standardActions.add(new ActionChain(ActionType.PLANT_TO_GREENERY, "Plant",
             new ResourceDeltaAction(new Resources(0, 0, 0, -8, 0, 0)),
             new PlaceTileAction(Tile.Type.GREENERY),

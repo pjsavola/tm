@@ -20,7 +20,7 @@ public class AddTemperatureAction implements Action {
                 game.getPlanet().adjustTemperature(2);
                 game.getCurrentPlayer().adjustRating(1);
                 if (game.getPlanet().getTemperature() == -26 || game.getPlanet().getTemperature() == -22) {
-                    final Action bonusAction = new IncomeDeltaAction(new Resources(0, 0, 0, 0, 0, 1));
+                    final Action bonusAction = new IncomeDeltaAction(Resources.HEAT);
                     if (bonusAction.check(game)) {
                         game.getActionHandler().addPendingAction(bonusAction);
                     }

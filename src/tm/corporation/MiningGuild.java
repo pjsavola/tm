@@ -22,7 +22,8 @@ public class MiningGuild extends Corporation {
     public Action getInitialAction(Game game) {
         return new ActionChain(
             new ResourceDeltaAction(new Resources(30, 5, 0, 0, 0, 0)),
-            new IncomeDeltaAction(new Resources(0, 1, 0, 0, 0, 0)));
+            new IncomeDeltaAction(Resources.STEEL)
+        );
     }
 
     @Override

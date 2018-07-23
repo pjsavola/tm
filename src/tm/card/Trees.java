@@ -33,8 +33,8 @@ public class Trees extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(
-            new ResourceDeltaAction(new Resources(0, 0, 0, 1, 0, 0)),
-            new IncomeDeltaAction(new Resources(0, 0, 0, 1, 0, 0))
+            new ResourceDeltaAction(Resources.PLANT),
+            new IncomeDeltaAction(Resources.PLANT)
         );
 
     }

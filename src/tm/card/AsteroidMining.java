@@ -23,7 +23,7 @@ public class AsteroidMining extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(0, 0, 2, 0, 0, 0));
+        return new IncomeDeltaAction(Resources.TITANIUM_2);
     }
 
     @Override

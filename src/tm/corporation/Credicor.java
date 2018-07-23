@@ -40,7 +40,7 @@ public class Credicor extends Corporation {
         actions.add(new ActionChain(ActionType.CITY, "City",
             new ResourceDeltaAction(new Resources(-25)),
             new PlaceTileAction(Tile.Type.CITY),
-            new IncomeDeltaAction(new Resources(1)),
+            new IncomeDeltaAction(Resources.MONEY),
             new ResourceDeltaAction(new Resources(4))
         ));
         return actions;
