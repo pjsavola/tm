@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -17,6 +18,11 @@ import tm.action.ResourceDeltaAction;
 public class SpaceMirrors extends Card {
 
     private final Action action = new CardAction(true) {
+        @Override
+        public ActionType getType() {
+            return ActionType.SPACE_MIRRORS;
+        }
+
         @Override
         protected Action getAction(Game game) {
             return new ActionChain(

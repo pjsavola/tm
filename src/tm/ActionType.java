@@ -33,5 +33,6 @@ public enum ActionType {
     SMALL_ANIMALS,
     ELECTRO_CATAPULT_1,
     ELECTRO_CATAPULT_2,
-    BIRDS
+    BIRDS,
+    SPACE_MIRRORS
 }

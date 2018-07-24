@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import tm.action.Action;
 import tm.card.AdvancedAlloys;
 import tm.card.EarthCatapult;
+import tm.card.QuantumExtractor;
 import tm.card.ResearchOutpost;
 import tm.card.SpaceStation;
 import tm.card.WaterImportFromEuropa;
@@ -137,6 +138,9 @@ public class Player {
             discount += 2;
         }
         if (card.getTags().has(Tags.Type.SPACE) && playedCards.stream().anyMatch(c -> c instanceof SpaceStation)) {
+            discount += 2;
+        }
+        if (card.getTags().has(Tags.Type.SPACE) && playedCards.stream().anyMatch(c -> c instanceof QuantumExtractor)) {
             discount += 2;
         }
         return Math.min(card.getCost(), discount);
