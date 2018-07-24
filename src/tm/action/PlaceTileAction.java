@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.Set;
 
+import com.sun.istack.internal.Nullable;
 import tm.Game;
 import tm.Player;
 import tm.Resources;
@@ -50,6 +51,8 @@ public class PlaceTileAction implements Action {
         private final Game game;
         private Point customCursorLocation;
         private Tile targetTile;
+        @Nullable
+        private Player owner; // Needed for Land Claim
 
         private final MouseListener mouseListener = new MouseListener() {
             @Override
@@ -74,6 +77,9 @@ public class PlaceTileAction implements Action {
                 if (targetTile != null) {
                     if (targetTile.getType() != null) {
                         System.err.println("There's already a tile");
+                        return;
+                    } else if (targetTile.getOwner() != null && targetTile.getOwner() != game.getCurrentPlayer()) {
+                        System.err.println("Land is claimed by another player");
                         return;
                     }
                     final boolean isWater = targetTile.getProperties() != null && targetTile.getProperties().isWater();
@@ -106,6 +112,17 @@ public class PlaceTileAction implements Action {
                         final Set<Tile> freeAdjacentTiles = game.getCurrentPlayer().getFreeAdjacentTiles();
                         if (!freeAdjacentTiles.isEmpty() && !freeAdjacentTiles.contains(targetTile)) {
                             System.err.println("Greenery not adjacent to your other tiles");
+                            return;
+                        }
+                    }
+                    if (type == Tile.Type.MINING_AREA) {
+                        final Set<Tile> freeAdjacentTiles = game.getCurrentPlayer().getFreeAdjacentTiles();
+                        if (freeAdjacentTiles.isEmpty() || !freeAdjacentTiles.contains(targetTile)) {
+                            System.err.println("Mining Area not adjacent to your other tiles");
+                            return;
+                        }
+                        if (targetTile.getProperties() == null || (targetTile.getProperties().getSteel() == 0 && targetTile.getProperties().getTitanium() == 0)) {
+                            System.err.println("Mining Area must be placed on steel or titanium");
                             return;
                         }
                     }
@@ -149,6 +166,7 @@ public class PlaceTileAction implements Action {
 
         @Override
         public void complete() {
+            owner = targetTile.getOwner();
             placeTile(game, targetTile, type);
             cancel();
         }
@@ -156,7 +174,7 @@ public class PlaceTileAction implements Action {
         @Override
         public void undo() {
             targetTile.setType(null);
-            targetTile.setOwner(null);
+            targetTile.setOwner(owner);
             game.repaint();
         }
 
@@ -219,6 +237,9 @@ public class PlaceTileAction implements Action {
                 resources = new Resources(sum);
             } else {
                 resources = new Resources(sum, p.getSteel(), p.getTitanium(), p.getPlants(), 0, 0);
+                if (type == Tile.Type.MINING_AREA) {
+                    game.getActionHandler().addPendingAction(new IncomeDeltaAction(p.getSteel() > 0 ? Resources.STEEL : Resources.TITANIUM));
+                }
             }
             final Action bonusAction = new ResourceDeltaAction(resources);
             if (bonusAction.check(game)) {

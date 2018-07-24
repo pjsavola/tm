@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.sun.istack.internal.Nullable;
+
 public class Tile {
 
     public enum Type {
@@ -16,6 +18,7 @@ public class Tile {
         CITY("images/city.png"),
         CAPITAL("images/city.png"),
         MANGROVE("images/forest.png"),
+        MINING_AREA("images/city.png"),
         MISC("images/city.png");
 
         private final BufferedImage image;
@@ -93,12 +96,12 @@ public class Tile {
         return type == Type.WATER || type == Type.MANGROVE;
     }
 
-    public void setOwner(Player player) {
+    public void setOwner(@Nullable Player player) {
         if (player == null && owner != null) {
             owner.ownedTiles.remove(this);
         }
         owner = player;
-        if (player != null) {
+        if (player != null && type != null) {
             player.ownedTiles.add(this);
         }
     }
