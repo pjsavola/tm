@@ -23,11 +23,6 @@ public class ElectroCatapult extends Card {
         }
 
         @Override
-        public boolean check(Game game) {
-            return game.getCurrentPlayer().canAdjustResources(Resources.STEEL.negate());
-        }
-
-        @Override
         protected Action getAction(Game game) {
             return new ResourceDeltaAction(new Resources(7, -1, 0, 0, 0, 0));
         }
@@ -37,11 +32,6 @@ public class ElectroCatapult extends Card {
         @Override
         public ActionType getType() {
             return ActionType.ELECTRO_CATAPULT_2;
-        }
-
-        @Override
-        public boolean check(Game game) {
-            return game.getCurrentPlayer().canAdjustResources(Resources.PLANT.negate());
         }
 
         @Override

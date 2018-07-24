@@ -85,9 +85,11 @@ import tm.card.SearchForLife;
 import tm.card.SecurityFleet;
 import tm.card.SmallAnimals;
 import tm.card.SpaceElevator;
+import tm.card.SpaceMirrors;
 import tm.card.SpaceStation;
 import tm.card.Sponsors;
 import tm.card.Tardigrades;
+import tm.card.TowingComet;
 import tm.card.Trees;
 import tm.card.UndergroundCity;
 import tm.card.VestaShipyard;
@@ -140,6 +142,8 @@ public class Game extends JPanel {
         deck.add(new Birds());
         deck.add(new MarsUniversity());
         deck.add(new ViralEnhancers());
+        deck.add(new TowingComet());
+        deck.add(new SpaceMirrors());
         ///
         deck.add(new ColonizerTrainingCamp());
         deck.add(new AsteroidMiningConsortium());

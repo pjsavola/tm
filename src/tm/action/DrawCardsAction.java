@@ -22,6 +22,11 @@ public class DrawCardsAction implements Action {
     }
 
     @Override
+    public boolean check(Game game) {
+        return amount <= 0 || game.canDrawCard();
+    }
+
+    @Override
     public Completable begin(Game game) {
         final List<Card> drawnCards = new ArrayList<>(amount);
         while (drawnCards.size() < amount) {

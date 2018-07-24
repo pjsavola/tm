@@ -25,7 +25,7 @@ public class SearchForLife extends CardWithMarkers {
 
         @Override
         public boolean check(Game game) {
-            return game.canDrawCard();
+            return game.canDrawCard() && super.check(game);
         }
 
         @Override
