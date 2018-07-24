@@ -30,5 +30,8 @@ public enum ActionType {
     ANTS,
     TARDIGRADES,
     FISH,
-    SMALL_ANIMALS
+    SMALL_ANIMALS,
+    ELECTRO_CATAPULT_1,
+    ELECTRO_CATAPULT_2,
+    BIRDS
 }

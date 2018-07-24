@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 import tm.action.Action;
+import tm.card.AdvancedAlloys;
+import tm.card.EarthCatapult;
 import tm.card.ResearchOutpost;
 import tm.card.SpaceStation;
 import tm.card.WaterImportFromEuropa;
@@ -102,14 +104,22 @@ public class Player {
     }
 
     public int getSteelValue() {
-        return 2;
+        int value = 2;
+        if (playedCards.stream().anyMatch(c -> c instanceof AdvancedAlloys)) {
+            value++;
+        }
+        return value;
     }
 
     public int getTitaniumValue() {
+        int value = 3;
         if (corporation instanceof Phoblog) {
-            return 4;
+            value++;
         }
-        return 3;
+        if (playedCards.stream().anyMatch(c -> c instanceof AdvancedAlloys)) {
+            value++;
+        }
+        return value;
     }
 
     public int getDiscount(Card card) {
@@ -123,10 +133,13 @@ public class Player {
         if (playedCards.stream().anyMatch(c -> c instanceof ResearchOutpost)) {
             discount += 1;
         }
+        if (playedCards.stream().anyMatch(c -> c instanceof EarthCatapult)) {
+            discount += 2;
+        }
         if (card.getTags().has(Tags.Type.SPACE) && playedCards.stream().anyMatch(c -> c instanceof SpaceStation)) {
             discount += 2;
         }
-        return discount;
+        return Math.min(card.getCost(), discount);
     }
 
     public boolean fulfillsRequirements(Card card, Planet planet) {

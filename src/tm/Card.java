@@ -10,7 +10,7 @@ import java.util.List;
 import com.sun.istack.internal.Nullable;
 import tm.action.Action;
 
-public class Card {
+public abstract class Card {
 
     public static final int WIDTH = 200;
     public static final int TITLE_HEIGHT = 19;
@@ -23,11 +23,11 @@ public class Card {
     private final Tags tags;
     private final boolean effect;
 
-    public Card(String name, int cost, Tags tags) {
+    protected Card(String name, int cost, Tags tags) {
         this(name, cost, tags, false);
     }
 
-    public Card(String name, int cost, Tags tags, boolean effect) {
+    protected Card(String name, int cost, Tags tags, boolean effect) {
         this.name = name;
         this.cost = cost;
         this.tags = tags;

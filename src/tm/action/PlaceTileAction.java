@@ -126,6 +126,12 @@ public class PlaceTileAction implements Action {
                             return;
                         }
                     }
+                    if (type == Tile.Type.MINING_RIGHTS) {
+                        if (targetTile.getProperties() == null || (targetTile.getProperties().getSteel() == 0 && targetTile.getProperties().getTitanium() == 0)) {
+                            System.err.println("Mining Rights must be placed on steel or titanium");
+                            return;
+                        }
+                    }
                     game.getActionHandler().completed(PlaceTileCompletable.this);
                 }
             }
@@ -237,7 +243,7 @@ public class PlaceTileAction implements Action {
                 resources = new Resources(sum);
             } else {
                 resources = new Resources(sum, p.getSteel(), p.getTitanium(), p.getPlants(), 0, 0);
-                if (type == Tile.Type.MINING_AREA) {
+                if (type == Tile.Type.MINING_AREA || type == Tile.Type.MINING_RIGHTS) {
                     game.getActionHandler().addPendingAction(new IncomeDeltaAction(p.getSteel() > 0 ? Resources.STEEL : Resources.TITANIUM));
                 }
             }

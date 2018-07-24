@@ -19,6 +19,7 @@ public class Tile {
         CAPITAL("images/city.png"),
         MANGROVE("images/forest.png"),
         MINING_AREA("images/city.png"),
+        MINING_RIGHTS("images/city.png"),
         MISC("images/city.png");
 
         private final BufferedImage image;

@@ -9,6 +9,7 @@ import tm.Game;
 import tm.Player;
 import tm.Resources;
 import tm.Tags;
+import tm.card.MarsUniversity;
 import tm.card.OptimalAerobraking;
 import tm.card.RoverConstruction;
 import tm.completable.Completable;
@@ -79,6 +80,7 @@ public class PlayCardAction implements Action {
             final boolean jovian = selectedCard.getTags().has(Tags.Type.JOVIAN);
             final boolean space = selectedCard.getTags().has(Tags.Type.SPACE);
             final boolean city = selectedCard.getTags().has(Tags.Type.CITY);
+            final boolean science = selectedCard.getTags().has(Tags.Type.SCIENCE);
             if (event && player.getCorporation() instanceof InterplanetaryCinematics) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
             }
@@ -93,6 +95,51 @@ public class PlayCardAction implements Action {
             }
             if (city && player.getPlayedCards().stream().anyMatch(c -> c instanceof RoverConstruction)) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
+            }
+            if (science && !player.getCards().isEmpty() && player.getPlayedCards().stream().anyMatch(c -> c instanceof MarsUniversity)) {
+                game.getActionHandler().addPendingAction(new Action() {
+                    @Override
+                    public Completable begin(Game game) {
+                        return new SelectCardsCompletable(game, player.getCards()) {
+                            @Nullable
+                            private Card selectedCard;
+
+                            @Override
+                            public boolean check() {
+                                return true;
+                            }
+
+                            @Override
+                            public int maxSelection() {
+                                return 1;
+                            }
+
+                            @Override
+                            public String getTitle() {
+                                return "You may discard 1 card to draw 1 card";
+                            }
+
+                            @Override
+                            public void complete() {
+                                selectedCard = selectedCards.isEmpty() ? null : selectedCards.iterator().next();
+                                if (selectedCard != null) {
+                                    game.getCurrentPlayer().getCards().remove(selectedCard);
+                                    game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(1, false, false));
+                                }
+                                cancel();
+                            }
+
+                            @Override
+                            public void undo() {
+                                // Can only be done if card wasn't selected, so nothing happens
+                            }
+
+                            @Override
+                            public void redo() {
+                            }
+                        };
+                    }
+                });
             }
             if (action != null) {
                 game.getActionHandler().addPendingAction(action);
