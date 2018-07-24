@@ -38,7 +38,7 @@ public class EosChasmaNationalPark extends Card {
         return new ActionChain(
             new IncomeDeltaAction(new Resources(2)),
             new ResourceDeltaAction(Resources.PLANT_3),
-            new AddMarkerAction() {
+            new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {
                 @Override
                 protected Stream<CardWithMarkers> filter(Stream<CardWithMarkers> stream) {
                     return stream.filter(card -> card.getTags().has(Tags.Type.ANIMAL));

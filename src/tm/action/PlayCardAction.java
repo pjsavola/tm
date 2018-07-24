@@ -1,6 +1,7 @@
 package tm.action;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.sun.istack.internal.Nullable;
@@ -12,6 +13,7 @@ import tm.Tags;
 import tm.card.MarsUniversity;
 import tm.card.OptimalAerobraking;
 import tm.card.RoverConstruction;
+import tm.card.ViralEnhancers;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
 import tm.corporation.Credicor;
@@ -81,6 +83,9 @@ public class PlayCardAction implements Action {
             final boolean space = selectedCard.getTags().has(Tags.Type.SPACE);
             final boolean city = selectedCard.getTags().has(Tags.Type.CITY);
             final boolean science = selectedCard.getTags().has(Tags.Type.SCIENCE);
+            final boolean animal = selectedCard.getTags().has(Tags.Type.ANIMAL);
+            final boolean plant = selectedCard.getTags().has(Tags.Type.PLANT);
+            final boolean microbe = selectedCard.getTags().has(Tags.Type.MICROBE);
             if (event && player.getCorporation() instanceof InterplanetaryCinematics) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
             }
@@ -98,6 +103,19 @@ public class PlayCardAction implements Action {
             }
             if (science && !player.getCards().isEmpty() && (selectedCard instanceof MarsUniversity || player.getPlayedCards().stream().anyMatch(c -> c instanceof MarsUniversity))) {
                 game.getActionHandler().addPendingAction(new MarsUniversity.Effect(player));
+            }
+            if ((animal || plant || microbe && (selectedCard instanceof ViralEnhancers || player.getPlayedCards().stream().anyMatch(c -> c instanceof ViralEnhancers)))) {
+                game.getActionHandler().addPendingAction(new AddMarkerAction(Collections.singletonList(selectedCard)) {
+                    @Override
+                    protected String getTitle() {
+                        return "Select card for marker or gain 1 plant";
+                    }
+
+                    @Override
+                    protected Action onEmptySelection() {
+                        return new ResourceDeltaAction(Resources.PLANT);
+                    }
+                });
             }
             if (action != null) {
                 game.getActionHandler().addPendingAction(action);

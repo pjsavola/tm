@@ -91,6 +91,7 @@ import tm.card.Tardigrades;
 import tm.card.Trees;
 import tm.card.UndergroundCity;
 import tm.card.VestaShipyard;
+import tm.card.ViralEnhancers;
 import tm.card.Virus;
 import tm.card.WaterImportFromEuropa;
 import tm.corporation.Credicor;
@@ -138,6 +139,7 @@ public class Game extends JPanel {
         deck.add(new AdvancedAlloys());
         deck.add(new Birds());
         deck.add(new MarsUniversity());
+        deck.add(new ViralEnhancers());
         ///
         deck.add(new ColonizerTrainingCamp());
         deck.add(new AsteroidMiningConsortium());

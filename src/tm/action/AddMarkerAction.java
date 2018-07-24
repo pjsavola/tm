@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.sun.istack.internal.Nullable;
+import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
 import tm.completable.Completable;
@@ -12,6 +13,16 @@ import tm.completable.InstantCompletable;
 import tm.completable.SelectCardsCompletable;
 
 public class AddMarkerAction implements Action {
+
+    private final List<CardWithMarkers> cards;
+
+    public AddMarkerAction(List<Card> cards) {
+        this.cards = filter(cards
+            .stream()
+            .filter(card -> card instanceof CardWithMarkers)
+            .map(card -> (CardWithMarkers) card)
+        ).collect(Collectors.toList());
+    }
 
     protected String getTitle() {
         return "Add markers to card...";
@@ -32,15 +43,7 @@ public class AddMarkerAction implements Action {
 
     @Override
     public Completable begin(Game game) {
-        final List<CardWithMarkers> cards = filter(game
-            .getCurrentPlayer()
-            .getPlayedCards()
-            .stream()
-            .filter(card -> card instanceof CardWithMarkers)
-            .map(card -> (CardWithMarkers) card)
-        ).collect(Collectors.toList());
         if (cards.isEmpty()) {
-            // Always take 3 plants
             return new InstantCompletable(game) {
                 @Override
                 public void complete() {
