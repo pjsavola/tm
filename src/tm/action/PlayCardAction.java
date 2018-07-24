@@ -6,13 +6,12 @@ import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
+import tm.Cards;
 import tm.Game;
 import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.card.MarsUniversity;
-import tm.card.OptimalAerobraking;
-import tm.card.RoverConstruction;
 import tm.card.ViralEnhancers;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
@@ -95,16 +94,16 @@ public class PlayCardAction implements Action {
                     game.getActionHandler().addPendingAction(new IncomeDeltaAction(Resources.MONEY, saturnSystemPlayer));
                 }
             }
-            if (space && event && player.getPlayedCards().stream().anyMatch(c -> c instanceof OptimalAerobraking)) {
+            if (space && event && Cards.OPTIMAL_AEROBRAKING.getOwner() == player) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(3, 0, 0, 0, 0, 3)));
             }
-            if (city && player.getPlayedCards().stream().anyMatch(c -> c instanceof RoverConstruction)) {
+            if (city && Cards.ROVER_CONSTRUCTION.getOwner() == player) {
                 game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
             }
-            if (science && !player.getCards().isEmpty() && (selectedCard instanceof MarsUniversity || player.getPlayedCards().stream().anyMatch(c -> c instanceof MarsUniversity))) {
+            if (science && !player.getCards().isEmpty() && (selectedCard instanceof MarsUniversity || Cards.MARS_UNIVERSITY.getOwner() == player)) {
                 game.getActionHandler().addPendingAction(new MarsUniversity.Effect(player));
             }
-            if ((animal || plant || microbe && (selectedCard instanceof ViralEnhancers || player.getPlayedCards().stream().anyMatch(c -> c instanceof ViralEnhancers)))) {
+            if ((animal || plant || microbe && (selectedCard instanceof ViralEnhancers || Cards.VIRAL_ENHANCERS.getOwner() == player))) {
                 game.getActionHandler().addPendingAction(new AddMarkerAction(Collections.singletonList(selectedCard)) {
                     @Override
                     protected String getTitle() {
@@ -127,7 +126,7 @@ public class PlayCardAction implements Action {
         public void complete() {
             player.addTags(selectedCard.getTags());
             player.getCards().remove(selectedCard);
-            player.getPlayedCards().add(selectedCard);
+            player.playCard(selectedCard);
             cancel();
         }
 
@@ -136,7 +135,7 @@ public class PlayCardAction implements Action {
             player.removeTags(selectedCard.getTags());
             player.getCards().clear();
             player.getCards().addAll(hand);
-            player.getPlayedCards().remove(selectedCard);
+            player.unplayCard(selectedCard);
             game.repaint();
         }
 
@@ -144,7 +143,7 @@ public class PlayCardAction implements Action {
         public void redo() {
             player.addTags(selectedCard.getTags());
             player.getCards().remove(selectedCard);
-            player.getPlayedCards().add(selectedCard);
+            player.playCard(selectedCard);
             game.repaint();
         }
 

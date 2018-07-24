@@ -22,6 +22,8 @@ public abstract class Card {
     private final int cost;
     private final Tags tags;
     private final boolean effect;
+    @Nullable
+    private Player owner;
 
     protected Card(String name, int cost, Tags tags) {
         this(name, cost, tags, false);
@@ -44,6 +46,15 @@ public abstract class Card {
         } else {
             return new Color(0x00BB00);
         }
+    }
+
+    public void setOwner(@Nullable Player player) {
+        owner = player;
+    }
+
+    @Nullable
+    public Player getOwner() {
+        return owner;
     }
 
     public String getName() {

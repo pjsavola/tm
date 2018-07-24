@@ -12,7 +12,6 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
 
-// Decrease any heat income by 1 is done from dummy player
 public class ArcticAlgae extends Card {
 
     public ArcticAlgae() {

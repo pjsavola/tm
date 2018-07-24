@@ -10,11 +10,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 import tm.action.Action;
-import tm.card.AdvancedAlloys;
-import tm.card.EarthCatapult;
-import tm.card.QuantumExtractor;
-import tm.card.ResearchOutpost;
-import tm.card.SpaceStation;
 import tm.card.WaterImportFromEuropa;
 import tm.corporation.Inventrix;
 import tm.corporation.Phoblog;
@@ -88,6 +83,16 @@ public class Player {
         return cards;
     }
 
+    public void playCard(Card card) {
+        card.setOwner(this);
+        playedCards.add(card);
+    }
+
+    public void unplayCard(Card card) {
+        card.setOwner(null);
+        playedCards.remove(card);
+    }
+
     public List<Card> getPlayedCards() {
         return playedCards;
     }
@@ -106,7 +111,7 @@ public class Player {
 
     public int getSteelValue() {
         int value = 2;
-        if (playedCards.stream().anyMatch(c -> c instanceof AdvancedAlloys)) {
+        if (Cards.ADVANCED_ALLOYS.getOwner() == this) {
             value++;
         }
         return value;
@@ -117,7 +122,7 @@ public class Player {
         if (corporation instanceof Phoblog) {
             value++;
         }
-        if (playedCards.stream().anyMatch(c -> c instanceof AdvancedAlloys)) {
+        if (Cards.ADVANCED_ALLOYS.getOwner() == this) {
             value++;
         }
         return value;
@@ -131,16 +136,16 @@ public class Player {
         if (card.getTags().has(Tags.Type.EARTH) && corporation instanceof Teractor) {
             discount += 3;
         }
-        if (playedCards.stream().anyMatch(c -> c instanceof ResearchOutpost)) {
+        if (Cards.RESEARCH_OUTPOST.getOwner() == this) {
             discount += 1;
         }
-        if (playedCards.stream().anyMatch(c -> c instanceof EarthCatapult)) {
+        if (Cards.EARTH_CATAPULT.getOwner() == this) {
             discount += 2;
         }
-        if (card.getTags().has(Tags.Type.SPACE) && playedCards.stream().anyMatch(c -> c instanceof SpaceStation)) {
+        if (card.getTags().has(Tags.Type.SPACE) && Cards.SPACE_STATION.getOwner() == this) {
             discount += 2;
         }
-        if (card.getTags().has(Tags.Type.SPACE) && playedCards.stream().anyMatch(c -> c instanceof QuantumExtractor)) {
+        if (card.getTags().has(Tags.Type.SPACE) && Cards.QUANTUM_EXTRACTOR.getOwner() == this) {
             discount += 2;
         }
         return Math.min(card.getCost(), discount);
