@@ -20,6 +20,7 @@ public class Tile {
         MANGROVE("images/forest.png"),
         MINING_AREA("images/city.png"),
         MINING_RIGHTS("images/city.png"),
+        COMMERCIAL_DISTRICT("images/city.png"),
         MISC("images/city.png");
 
         private final BufferedImage image;

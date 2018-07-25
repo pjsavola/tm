@@ -7,14 +7,15 @@ import java.util.List;
 import tm.ActionType;
 import tm.Card;
 import tm.Game;
+import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddWaterAction;
 import tm.action.CardActionWithCost;
-import tm.effect.JovianEffect;
+import tm.effect.ScoringEffect;
 
-public class WaterImportFromEuropa extends Card implements JovianEffect {
+public class WaterImportFromEuropa extends Card implements ScoringEffect {
 
     private final Action action = new CardActionWithCost(true, new Resources(-12), Resources.EMPTY, true) {
         @Override
@@ -45,5 +46,10 @@ public class WaterImportFromEuropa extends Card implements JovianEffect {
     @Override
     protected List<String> getContents() {
         return Arrays.asList("Action:", "Pay 12 money to for an ocean", "(titanium may be used)", "", "1 VP for each jovian tag");
+    }
+
+    @Override
+    public int getVPs(Player player) {
+        return (int) player.getPlayedCards().stream().filter(card -> card.getTags().has(Tags.Type.JOVIAN)).count();
     }
 }

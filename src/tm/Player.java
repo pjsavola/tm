@@ -9,11 +9,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.sun.istack.internal.Nullable;
 import tm.action.Action;
 import tm.corporation.Inventrix;
 import tm.effect.DiscountEffect;
-import tm.effect.JovianEffect;
 import tm.effect.PlayCardEffect;
+import tm.effect.ScoringEffect;
 import tm.effect.ValueEffect;
 
 public class Player {
@@ -214,12 +215,21 @@ public class Player {
             .stream()
             .filter(tile -> tile.getType() == Tile.Type.GREENERY)
             .count());
-        total.addAndGet(playedCards.stream().filter(card -> card.getTags().has(Tags.Type.JOVIAN)).count() * getJovianValue());
+        for (Card playedCard : playedCards) {
+            if (playedCard instanceof ScoringEffect) {
+                total.addAndGet(((ScoringEffect) playedCard).getVPs(this));
+            }
+        }
         return total.intValue();
     }
 
-    public long getJovianValue() {
-        return playedCards.stream().filter(card -> card instanceof JovianEffect).count();
+    @Nullable
+    public Tile getCommercialDistrict() {
+        return ownedTiles
+            .stream()
+            .filter(tile -> tile.getType() == Tile.Type.COMMERCIAL_DISTRICT)
+            .findAny()
+            .orElse(null);
     }
 
     public Set<Tile> getFreeAdjacentTiles() {
