@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Resources {
-    public static final Resources MONEY = new Resources(0);
+    public static final Resources MONEY = new Resources(1);
     public static final Resources STEEL = new Resources(0, 1, 0, 0, 0, 0);
     public static final Resources STEEL_2 = new Resources(0, 2, 0, 0, 0, 0);
     public static final Resources TITANIUM = new Resources(0, 0, 1, 0, 0, 0);

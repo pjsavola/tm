@@ -12,9 +12,9 @@ import java.util.concurrent.atomic.AtomicLong;
 import tm.action.Action;
 import tm.card.WaterImportFromEuropa;
 import tm.corporation.Inventrix;
-import tm.corporation.Phoblog;
-import tm.corporation.Teractor;
-import tm.corporation.Thorgate;
+import tm.effect.DiscountEffect;
+import tm.effect.PlayCardEffect;
+import tm.effect.ValueEffect;
 
 public class Player {
     private static final Font font = new Font("Arial", Font.BOLD, 12);
@@ -83,6 +83,23 @@ public class Player {
         return cards;
     }
 
+    public void cardPlayEffects(Game game, Card selectedCard) {
+        if (corporation instanceof PlayCardEffect) {
+            final Action action = ((PlayCardEffect) corporation).cardPlayed(selectedCard);
+            if (action != null) {
+                game.getActionHandler().addPendingAction(action);
+            }
+        }
+        playedCards.forEach(card -> {
+            if (card instanceof PlayCardEffect) {
+                final Action action = ((PlayCardEffect) card).cardPlayed(selectedCard);
+                if (action != null) {
+                    game.getActionHandler().addPendingAction(action);
+                }
+            }
+        });
+    }
+
     public void playCard(Card card) {
         card.setOwner(this);
         playedCards.add(card);
@@ -111,42 +128,39 @@ public class Player {
 
     public int getSteelValue() {
         int value = 2;
-        if (Cards.ADVANCED_ALLOYS.getOwner() == this) {
-            value++;
+        if (corporation instanceof ValueEffect) {
+            value += ((ValueEffect) corporation).getSteelDelta();
+        }
+        for (Card card : playedCards) {
+            if (card instanceof ValueEffect) {
+                value += ((ValueEffect) card).getSteelDelta();
+            }
         }
         return value;
     }
 
     public int getTitaniumValue() {
         int value = 3;
-        if (corporation instanceof Phoblog) {
-            value++;
+        if (corporation instanceof ValueEffect) {
+            value += ((ValueEffect) corporation).getTitaniumDelta();
         }
-        if (Cards.ADVANCED_ALLOYS.getOwner() == this) {
-            value++;
+        for (Card card : playedCards) {
+            if (card instanceof ValueEffect) {
+                value += ((ValueEffect) card).getTitaniumDelta();
+            }
         }
         return value;
     }
 
     public int getDiscount(Card card) {
         int discount = 0;
-        if (card.getTags().has(Tags.Type.POWER) && corporation instanceof Thorgate) {
-            discount += 3;
+        if (corporation instanceof DiscountEffect) {
+            discount += ((DiscountEffect) corporation).getDiscount(card);
         }
-        if (card.getTags().has(Tags.Type.EARTH) && corporation instanceof Teractor) {
-            discount += 3;
-        }
-        if (Cards.RESEARCH_OUTPOST.getOwner() == this) {
-            discount += 1;
-        }
-        if (Cards.EARTH_CATAPULT.getOwner() == this) {
-            discount += 2;
-        }
-        if (card.getTags().has(Tags.Type.SPACE) && Cards.SPACE_STATION.getOwner() == this) {
-            discount += 2;
-        }
-        if (card.getTags().has(Tags.Type.SPACE) && Cards.QUANTUM_EXTRACTOR.getOwner() == this) {
-            discount += 2;
+        for (Card playedCard : playedCards) {
+            if (playedCard instanceof DiscountEffect) {
+                discount += ((DiscountEffect) playedCard).getDiscount(card);
+            }
         }
         return Math.min(card.getCost(), discount);
     }

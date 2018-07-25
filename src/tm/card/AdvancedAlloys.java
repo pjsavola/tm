@@ -5,8 +5,9 @@ import java.util.List;
 
 import tm.Card;
 import tm.Tags;
+import tm.effect.ValueEffect;
 
-public class AdvancedAlloys extends Card {
+public class AdvancedAlloys extends Card implements ValueEffect {
 
     public AdvancedAlloys() {
         super("Advanced Alloys", 9, Tags.SCIENCE, true);
@@ -15,5 +16,15 @@ public class AdvancedAlloys extends Card {
     @Override
     protected List<String> getContents() {
         return Arrays.asList("Steel value +1", "Titanium value +1");
+    }
+
+    @Override
+    public int getSteelDelta() {
+        return 1;
+    }
+
+    @Override
+    public int getTitaniumDelta() {
+        return 1;
     }
 }

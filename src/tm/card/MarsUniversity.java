@@ -12,8 +12,9 @@ import tm.action.Action;
 import tm.action.DrawCardsAction;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
+import tm.effect.PlayCardEffect;
 
-public class MarsUniversity extends Card {
+public class MarsUniversity extends Card implements PlayCardEffect {
 
     public MarsUniversity() {
         super("Mars University", 8, Tags.SCIENCE.combine(Tags.BUILDING), true);
@@ -29,53 +30,55 @@ public class MarsUniversity extends Card {
         return Arrays.asList("Effect:", "When playing card with science tag", "(including this)", "you may discard a card to draw a card");
     }
 
-    public static class Effect implements Action {
-        private final Player player;
-
-        public Effect(Player player) {
-            this.player = player;
-        }
-
-        @Override
-        public Completable begin(Game game) {
-            return new SelectCardsCompletable(game, player.getCards()) {
-                @Nullable
-                private Card selectedCard;
-
+    @Nullable
+    @Override
+    public Action cardPlayed(Card card) {
+        if (card.getTags().has(Tags.Type.SCIENCE)) {
+            return new Action() {
                 @Override
-                public boolean check() {
-                    return true;
-                }
+                public Completable begin(Game game) {
+                    final Player player = game.getCurrentPlayer();
+                    return new SelectCardsCompletable(game, player.getCards()) {
+                        @Nullable
+                        private Card selectedCard;
 
-                @Override
-                public int maxSelection() {
-                    return 1;
-                }
+                        @Override
+                        public boolean check() {
+                            return true;
+                        }
 
-                @Override
-                public String getTitle() {
-                    return "You may discard 1 card to draw 1 card";
-                }
+                        @Override
+                        public int maxSelection() {
+                            return 1;
+                        }
 
-                @Override
-                public void complete() {
-                    selectedCard = selectedCards.isEmpty() ? null : selectedCards.iterator().next();
-                    if (selectedCard != null) {
-                        game.getCurrentPlayer().getCards().remove(selectedCard);
-                        game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(1, false, false));
-                    }
-                    cancel();
-                }
+                        @Override
+                        public String getTitle() {
+                            return "You may discard 1 card to draw 1 card";
+                        }
 
-                @Override
-                public void undo() {
-                    // Can only be done if card wasn't selected, so nothing happens
-                }
+                        @Override
+                        public void complete() {
+                            selectedCard = selectedCards.isEmpty() ? null : selectedCards.iterator().next();
+                            if (selectedCard != null) {
+                                game.getCurrentPlayer().getCards().remove(selectedCard);
+                                game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(1, false, false));
+                            }
+                            cancel();
+                        }
 
-                @Override
-                public void redo() {
+                        @Override
+                        public void undo() {
+                            // Can only be done if card wasn't selected, so nothing happens
+                        }
+
+                        @Override
+                        public void redo() {
+                        }
+                    };
                 }
             };
         }
+        return null;
     }
 }

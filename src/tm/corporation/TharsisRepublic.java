@@ -3,6 +3,8 @@ package tm.corporation;
 import java.util.Arrays;
 import java.util.List;
 
+import com.sun.istack.internal.Nullable;
+import tm.Card;
 import tm.Corporation;
 import tm.Game;
 import tm.Resources;
@@ -13,8 +15,11 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.action.ResourceDeltaAction;
+import tm.card.PhobosSpaceHaven;
+import tm.effect.PlaceTileEffect;
+import tm.effect.PlayCardEffect;
 
-public class TharsisRepublic extends Corporation {
+public class TharsisRepublic extends Corporation implements PlaceTileEffect, PlayCardEffect {
 
     public TharsisRepublic() {
         super("Tharsis Republic", Tags.BUILDING);
@@ -31,5 +36,26 @@ public class TharsisRepublic extends Corporation {
     @Override
     protected List<String> getContents() {
         return Arrays.asList("40 money", "3 money for each city you play", "1 money income for each city");
+    }
+
+    @Nullable
+    @Override
+    public Action tilePlaced(Tile tile) {
+        if (Tile.isCity(tile.getType())) {
+            return new ActionChain(
+                new ResourceDeltaAction(new Resources(3)),
+                new IncomeDeltaAction(Resources.MONEY)
+            );
+        }
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public Action cardPlayed(Card card) {
+        if (card instanceof PhobosSpaceHaven) {
+            return new ResourceDeltaAction(new Resources(3));
+        }
+        return null;
     }
 }

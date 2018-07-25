@@ -3,6 +3,8 @@ package tm.corporation;
 import java.util.Arrays;
 import java.util.List;
 
+import com.sun.istack.internal.Nullable;
+import tm.Card;
 import tm.Corporation;
 import tm.Game;
 import tm.Resources;
@@ -11,8 +13,9 @@ import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
+import tm.effect.PlayCardEffect;
 
-public class SaturnSystems extends Corporation {
+public class SaturnSystems extends Corporation implements PlayCardEffect {
 
     public SaturnSystems() {
         super("Saturn Systems", Tags.JOVIAN);
@@ -28,5 +31,14 @@ public class SaturnSystems extends Corporation {
     @Override
     protected List<String> getContents() {
         return Arrays.asList("42 money", "1 titanium income", "1 money income for each Jovian tag");
+    }
+
+    @Nullable
+    @Override
+    public Action cardPlayed(Card card) {
+        if (card.getTags().has(Tags.Type.JOVIAN)) {
+            return new IncomeDeltaAction(Resources.MONEY);
+        }
+        return null;
     }
 }

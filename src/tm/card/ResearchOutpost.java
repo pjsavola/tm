@@ -9,8 +9,9 @@ import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
 import tm.action.PlaceTileAction;
+import tm.effect.DiscountEffect;
 
-public class ResearchOutpost extends Card {
+public class ResearchOutpost extends Card implements DiscountEffect {
 
     public ResearchOutpost() {
         super("Research Outpost", 18, Tags.SCIENCE.combine(Tags.BUILDING).combine(Tags.CITY), true);
@@ -24,5 +25,10 @@ public class ResearchOutpost extends Card {
     @Override
     protected List<String> getContents() {
         return Arrays.asList("1 money discount for all cards", "Place next to no other tile!");
+    }
+
+    @Override
+    public int getDiscount(Card card) {
+        return 1;
     }
 }

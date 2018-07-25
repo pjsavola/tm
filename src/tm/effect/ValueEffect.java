@@ -1,6 +1,12 @@
 package tm.effect;
 
 public interface ValueEffect {
-    int getSteelDelta();
-    int getTitaniumDelta();
+
+    default int getSteelDelta() {
+        return 0;
+    }
+
+    default int getTitaniumDelta() {
+        return 0;
+    }
 }

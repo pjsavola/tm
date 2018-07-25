@@ -11,8 +11,9 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.effect.DiscountEffect;
 
-public class QuantumExtractor extends Card {
+public class QuantumExtractor extends Card implements DiscountEffect {
 
     public QuantumExtractor() {
         super("Quantum Extractor", 13, Tags.SCIENCE.combine(Tags.POWER), true);
@@ -36,5 +37,13 @@ public class QuantumExtractor extends Card {
     @Override
     protected List<String> getContents() {
         return Arrays.asList("Effect:", "Space cards cost 2 less", "", "4 energy income");
+    }
+
+    @Override
+    public int getDiscount(Card card) {
+        if (card.getTags().has(Tags.Type.SPACE)) {
+            return 2;
+        }
+        return 0;
     }
 }

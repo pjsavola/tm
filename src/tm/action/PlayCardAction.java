@@ -1,23 +1,16 @@
 package tm.action;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
-import tm.Cards;
 import tm.Game;
 import tm.Player;
 import tm.Resources;
 import tm.Tags;
-import tm.card.MarsUniversity;
-import tm.card.ViralEnhancers;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
-import tm.corporation.Credicor;
-import tm.corporation.InterplanetaryCinematics;
-import tm.corporation.SaturnSystems;
 
 public class PlayCardAction implements Action {
 
@@ -74,48 +67,6 @@ public class PlayCardAction implements Action {
                 return false;
             }
             game.getActionHandler().addPendingAction(paymentAction);
-            if (selectedCard.getCost() >= 20 && player.getCorporation() instanceof Credicor) {
-                game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(4)));
-            }
-            final boolean event = selectedCard.getTags().has(Tags.Type.EVENT);
-            final boolean jovian = selectedCard.getTags().has(Tags.Type.JOVIAN);
-            final boolean space = selectedCard.getTags().has(Tags.Type.SPACE);
-            final boolean city = selectedCard.getTags().has(Tags.Type.CITY);
-            final boolean science = selectedCard.getTags().has(Tags.Type.SCIENCE);
-            final boolean animal = selectedCard.getTags().has(Tags.Type.ANIMAL);
-            final boolean plant = selectedCard.getTags().has(Tags.Type.PLANT);
-            final boolean microbe = selectedCard.getTags().has(Tags.Type.MICROBE);
-            if (event && player.getCorporation() instanceof InterplanetaryCinematics) {
-                game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
-            }
-            if (jovian) {
-                final Player saturnSystemPlayer = game.getPlayer(SaturnSystems.class);
-                if (saturnSystemPlayer != null) {
-                    game.getActionHandler().addPendingAction(new IncomeDeltaAction(Resources.MONEY, saturnSystemPlayer));
-                }
-            }
-            if (space && event && Cards.OPTIMAL_AEROBRAKING.getOwner() == player) {
-                game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(3, 0, 0, 0, 0, 3)));
-            }
-            if (city && Cards.ROVER_CONSTRUCTION.getOwner() == player) {
-                game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(2)));
-            }
-            if (science && !player.getCards().isEmpty() && (selectedCard instanceof MarsUniversity || Cards.MARS_UNIVERSITY.getOwner() == player)) {
-                game.getActionHandler().addPendingAction(new MarsUniversity.Effect(player));
-            }
-            if ((animal || plant || microbe && (selectedCard instanceof ViralEnhancers || Cards.VIRAL_ENHANCERS.getOwner() == player))) {
-                game.getActionHandler().addPendingAction(new AddMarkerAction(Collections.singletonList(selectedCard)) {
-                    @Override
-                    protected String getTitle() {
-                        return "Select card for marker or gain 1 plant";
-                    }
-
-                    @Override
-                    protected Action onEmptySelection() {
-                        return new ResourceDeltaAction(Resources.PLANT);
-                    }
-                });
-            }
             if (action != null) {
                 game.getActionHandler().addPendingAction(action);
             }
@@ -127,6 +78,7 @@ public class PlayCardAction implements Action {
             player.addTags(selectedCard.getTags());
             player.getCards().remove(selectedCard);
             player.playCard(selectedCard);
+            player.cardPlayEffects(game, selectedCard);
             cancel();
         }
 
