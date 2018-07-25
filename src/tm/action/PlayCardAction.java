@@ -56,7 +56,7 @@ public class PlayCardAction implements Action {
                 System.err.println("Card requirements not fulfilled");
                 return false;
             }
-            final Action paymentAction = new ResourceDeltaAction(payment.getResources());
+            final Action paymentAction = new ResourceDeltaAction(payment.getResourceDelta());
             if (!paymentAction.check(game)) {
                 System.err.println("Not enough money to pay for the card");
                 return false;
@@ -101,8 +101,8 @@ public class PlayCardAction implements Action {
 
         @Override
         public void cancel() {
-            player.setResourcesDelta(new Resources(0));
-            player.setIncomeDelta(new Resources(0));
+            player.setResourcesDelta(Resources.EMPTY);
+            player.setIncomeDelta(Resources.EMPTY);
             payment = null;
             super.cancel();
         }
@@ -113,28 +113,9 @@ public class PlayCardAction implements Action {
         }
 
         @Override
-        public boolean pressKey(char key) {
-            if (payment != null) {
-                if (key == '-') {
-                    payment.decrement();
-                    return true;
-                } else if (key == '+') {
-                    payment.increment();
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
         public boolean adjustPayment(boolean steel, boolean increment) {
-            if (payment != null && payment.steel == steel && payment.titanium == !steel) {
-                if (increment) {
-                    payment.increment();
-                } else {
-                    payment.decrement();
-                }
-                return true;
+            if (payment != null) {
+                return payment.adjust(steel, increment);
             }
             return false;
         }
@@ -157,23 +138,26 @@ public class PlayCardAction implements Action {
         private final Player player;
         final boolean steel;
         final boolean titanium;
-        private final int costAfterDiscounts;
+        private final Resources resourceDeltaAfterDiscounts;
+        private final Resources incomeDelta;
         private final int materialValue;
         private final int materialMax;
         private int materialsUsed;
 
         private Payment(Player player, Card card) {
-            this(player, card.getTags().has(Tags.Type.BUILDING), card.getTags().has(Tags.Type.SPACE), card.getCost(), player.getDiscount(card));
+            this(player, card.getTags().has(Tags.Type.BUILDING), card.getTags().has(Tags.Type.SPACE), new Resources(-card.getCost()), Resources.EMPTY, player.getDiscount(card));
         }
 
-        public Payment(Player player, boolean steel, boolean titanium, int cost, int discount) {
+        public Payment(Player player, boolean steel, boolean titanium, Resources resourceDelta, Resources incomeDelta, int discount) {
             this.player = player;
             this.steel = steel;
             this.titanium = titanium;
-            costAfterDiscounts = cost - discount;
+            this.incomeDelta = incomeDelta;
+            resourceDeltaAfterDiscounts = resourceDelta.combine(new Resources(discount));
+            final int cost = -resourceDeltaAfterDiscounts.getMoney();
             if (steel) {
                 materialValue = player.getSteelValue();
-                materialsUsed = Math.min(player.getSteel(), costAfterDiscounts / materialValue);
+                materialsUsed = Math.min(player.getSteel(), cost / materialValue);
                 if (player.getSteel() > materialsUsed && cost % materialValue != 0) {
                     materialMax = materialsUsed + 1;
                 } else {
@@ -181,7 +165,7 @@ public class PlayCardAction implements Action {
                 }
             } else if (titanium) {
                 materialValue = player.getTitaniumValue();
-                materialsUsed = Math.min(player.getTitanium(), costAfterDiscounts / materialValue);
+                materialsUsed = Math.min(player.getTitanium(), cost / materialValue);
                 if (player.getTitanium() > materialsUsed && cost % materialValue != 0) {
                     materialMax = materialsUsed + 1;
                 } else {
@@ -194,28 +178,36 @@ public class PlayCardAction implements Action {
             updateDelta();
         }
 
-        public void increment() {
-            materialsUsed = Math.min(materialsUsed + 1, materialMax);
-            updateDelta();
+        public boolean adjust(boolean steel, boolean increment) {
+            if (this.steel == steel && titanium == !steel) {
+                if (increment) {
+                    materialsUsed = Math.min(materialsUsed + 1, materialMax);
+                } else {
+                    materialsUsed = Math.max(0, materialsUsed - 1);
+                }
+                updateDelta();
+                return true;
+            }
+            return false;
         }
 
-        public void decrement() {
-            materialsUsed = Math.max(0, materialsUsed - 1);
-            updateDelta();
-        }
-
-        public Resources getResources() {
+        public Resources getResourceDelta() {
             if (steel) {
-                return new Resources(materialsUsed * materialValue - costAfterDiscounts, -materialsUsed, 0, 0, 0, 0);
+                return resourceDeltaAfterDiscounts.combine(new Resources(materialsUsed * materialValue, -materialsUsed, 0, 0, 0, 0));
             } else if (titanium) {
-                return new Resources(materialsUsed * materialValue - costAfterDiscounts, 0, -materialsUsed, 0, 0, 0);
+                return resourceDeltaAfterDiscounts.combine(new Resources(materialsUsed * materialValue, 0, -materialsUsed, 0, 0, 0));
             } else {
-                return new Resources(-costAfterDiscounts);
+                return resourceDeltaAfterDiscounts;
             }
         }
 
+        public Resources getIncomeDelta() {
+            return incomeDelta;
+        }
+
         private void updateDelta() {
-            player.setResourcesDelta(getResources());
+            player.setResourcesDelta(getResourceDelta());
+            player.setIncomeDelta(incomeDelta);
         }
     }
 }

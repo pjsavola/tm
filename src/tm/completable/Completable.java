@@ -18,10 +18,6 @@ public interface Completable {
 
     void redo();
 
-    default boolean pressKey(char c) {
-        return false;
-    }
-
     default boolean adjustPayment(boolean steel, boolean increment) {
         return false;
     }

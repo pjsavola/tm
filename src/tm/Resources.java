@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Resources {
+    public static final Resources EMPTY = new Resources(0);
     public static final Resources MONEY = new Resources(1);
     public static final Resources STEEL = new Resources(0, 1, 0, 0, 0, 0);
     public static final Resources STEEL_2 = new Resources(0, 2, 0, 0, 0, 0);
@@ -54,6 +55,10 @@ public class Resources {
 
     public Resources getTurnIncome(int terraformingRating, Resources leftOverResources) {
         return new Resources(money + terraformingRating, steel, titanium, plants, energy, heat + leftOverResources.energy);
+    }
+
+    public int getMoney() {
+        return money;
     }
 
     public int getSteel() {

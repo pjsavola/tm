@@ -8,15 +8,21 @@ import tm.completable.Completable;
 
 public abstract class CardActionWithCost extends CardAction {
 
-    private final int cost;
+    private final Resources resourceDelta;
+    private final Resources incomeDelta;
     private final boolean titanium;
     @Nullable
     private PlayCardAction.Payment payment;
 
     public CardActionWithCost(boolean undoable, int cost, boolean titanium) {
+        this(undoable, new Resources(-cost), Resources.EMPTY, titanium);
+    }
+
+    public CardActionWithCost(boolean undoable, Resources resourceDelta, Resources incomeDelta, boolean titainum) {
         super(undoable);
-        this.cost = cost;
-        this.titanium = titanium;
+        this.resourceDelta = resourceDelta;
+        this.incomeDelta = incomeDelta;
+        this.titanium = titainum;
     }
 
     @Override
@@ -26,33 +32,27 @@ public abstract class CardActionWithCost extends CardAction {
         }
         final Player player = game.getCurrentPlayer();
         final int totalTitaniumValue = titanium ? player.getTitanium() * player.getTitaniumValue() : 0;
-        return player.canAdjustResources(new Resources(totalTitaniumValue - cost));
+        if (!player.canAdjustResources(resourceDelta.combine(new Resources(totalTitaniumValue)))) {
+            return false;
+        }
+        return player.canAdjustIncome(incomeDelta);
     }
 
     public void initPayment(Player player) {
-        payment = new PlayCardAction.Payment(player, false, titanium, cost, 0);
+        payment = new PlayCardAction.Payment(player, false, titanium, resourceDelta, incomeDelta, 0);
     }
 
     public void resetPayment(Player player) {
         payment = null;
-        player.setResourcesDelta(new Resources(0));
-        player.setIncomeDelta(new Resources(0));
+        player.setResourcesDelta(Resources.EMPTY);
+        player.setIncomeDelta(Resources.EMPTY);
     }
 
     public boolean adjustPayment(boolean steel, boolean increment) {
-        if (payment != null && payment.steel == steel && payment.titanium == !steel) {
-            if (increment) {
-                payment.increment();
-            } else {
-                payment.decrement();
-            }
-            return true;
+        if (payment != null) {
+            payment.adjust(steel, increment);
         }
         return false;
-    }
-
-    public Resources getResources() {
-        return payment.getResources();
     }
 
     @Override
@@ -60,7 +60,10 @@ public abstract class CardActionWithCost extends CardAction {
         return new CardActionCompletable(game, this) {
             @Override
             public void complete() {
-                game.getActionHandler().addPendingAction(new ResourceDeltaAction(getResources()));
+                game.getActionHandler().addPendingAction(new ActionChain(
+                    new ResourceDeltaAction(payment.getResourceDelta()),
+                    new IncomeDeltaAction(payment.getIncomeDelta())
+                ));
                 super.complete();
             }
         };

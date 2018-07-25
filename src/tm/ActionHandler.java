@@ -178,7 +178,7 @@ public class ActionHandler {
             @Override
             public void keyTyped(KeyEvent arg0) {
                 final char c = arg0.getKeyChar();
-                if (current == null || !current.pressKey(c)) {
+                if (current == null) {
                     if (c == 'u') {
                         undo();
                     } else if (c == 'r') {

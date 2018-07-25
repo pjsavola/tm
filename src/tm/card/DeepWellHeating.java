@@ -1,6 +1,7 @@
 package tm.card;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -30,6 +31,11 @@ public class DeepWellHeating extends Card {
             new IncomeDeltaAction(Resources.ENERGY),
             new AddTemperatureAction()
         );
+    }
+
+    @Override
+    public List<String> getRequirements() {
+        return Collections.singletonList("Requires steel income");
     }
 
     @Override

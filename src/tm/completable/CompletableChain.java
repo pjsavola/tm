@@ -62,16 +62,6 @@ public class CompletableChain implements Completable {
     }
 
     @Override
-    public boolean pressKey(char c) {
-        for (Completable completable : completables) {
-            if (completable.pressKey(c)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean adjustPayment(boolean steel, boolean increment) {
         for (Completable completable : completables) {
             if (completable.adjustPayment(steel, increment)) {
