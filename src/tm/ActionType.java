@@ -35,5 +35,7 @@ public enum ActionType {
     ELECTRO_CATAPULT_2,
     BIRDS,
     SPACE_MIRRORS,
-    PHYSICS_COMPLEX
+    PHYSICS_COMPLEX,
+    IRONWORKS,
+    STEELWORKS
 }
