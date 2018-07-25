@@ -14,8 +14,16 @@ public abstract class CardActionWithCost extends CardAction {
     @Nullable
     private PlayCardAction.Payment payment;
 
-    public CardActionWithCost(boolean undoable, int cost, boolean titanium) {
-        this(undoable, new Resources(-cost), Resources.EMPTY, titanium);
+    public CardActionWithCost(boolean undoable, int cost) {
+        this(undoable, new Resources(-cost));
+    }
+
+    public CardActionWithCost(boolean undoable, Resources resourceDelta) {
+        this(undoable, resourceDelta, Resources.EMPTY, false);
+    }
+
+    public CardActionWithCost(boolean undoable, Resources resourceDelta, Resources incomeDelta) {
+        this(undoable, resourceDelta, incomeDelta, false);
     }
 
     public CardActionWithCost(boolean undoable, Resources resourceDelta, Resources incomeDelta, boolean titainum) {

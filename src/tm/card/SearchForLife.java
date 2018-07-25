@@ -9,6 +9,7 @@ import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
 import tm.Planet;
+import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardActionWithCost;
@@ -17,7 +18,7 @@ import tm.completable.SelectCardsCompletable;
 
 public class SearchForLife extends CardWithMarkers {
 
-    private final Action action = new CardActionWithCost(false, 1, false) {
+    private final Action action = new CardActionWithCost(false, Resources.MONEY.negate()) {
         @Override
         public ActionType getType() {
             return ActionType.SEARCH_FOR_LIFE;

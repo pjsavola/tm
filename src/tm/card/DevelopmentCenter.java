@@ -10,14 +10,17 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.CardAction;
+import tm.action.CardActionWithCost;
 import tm.action.DrawCardsAction;
-import tm.action.ResourceDeltaAction;
 
 public class DevelopmentCenter extends Card {
 
-    private final Action action = new CardAction(false) {
+    private final Action action = new CardActionWithCost(false, Resources.ENERGY.negate()) {
+        @Override
+        public ActionType getType() {
+            return ActionType.DEVELOPMENT_CENTER;
+        }
+
         @Override
         protected Action getAction(Game game) {
             return new DrawCardsAction(1, false, false);
@@ -30,12 +33,7 @@ public class DevelopmentCenter extends Card {
 
     @Override
     public List<Action> getActions() {
-        return Collections.singletonList(new ActionChain(
-            ActionType.DEVELOPMENT_CENTER,
-            getName(),
-            new ResourceDeltaAction(new Resources(0, 0, 0, 0, -1, 0)),
-            action
-        ));
+        return Collections.singletonList(action);
     }
 
     @Override

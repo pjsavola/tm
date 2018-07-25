@@ -7,6 +7,7 @@ import java.util.List;
 import tm.ActionType;
 import tm.Card;
 import tm.Game;
+import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddWaterAction;
@@ -14,7 +15,7 @@ import tm.action.CardActionWithCost;
 
 public class WaterImportFromEuropa extends Card {
 
-    private final Action action = new CardActionWithCost(true, 12, true) {
+    private final Action action = new CardActionWithCost(true, new Resources(-12), Resources.EMPTY, true) {
         @Override
         public ActionType getType() {
             return ActionType.WATER_IMPORT_FROM_EUROPA;
