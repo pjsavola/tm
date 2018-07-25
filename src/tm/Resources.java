@@ -69,6 +69,10 @@ public class Resources {
         return titanium;
     }
 
+    public int getEnergy() {
+        return energy;
+    }
+
     // Rendering code below
 
     private static final Color MONEY_COLOR = new Color(0xFFFF00);

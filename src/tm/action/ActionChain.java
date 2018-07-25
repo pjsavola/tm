@@ -14,9 +14,9 @@ import tm.completable.CompletableChain;
 public class ActionChain implements Action {
 
     @Nullable
-    final ActionType type;
-    final String description;
-    final Action[] actions;
+    private final ActionType type;
+    private final String description;
+    private final Action[] actions;
 
     public ActionChain(Action... actions) {
         this(null, "", actions);
@@ -58,5 +58,21 @@ public class ActionChain implements Action {
             }
         }
         return new CompletableChain(game, completables.toArray(new Completable[completables.size()]));
+    }
+
+    @Nullable
+    public static IncomeDeltaAction findIncomeAction(@Nullable Action action) {
+        IncomeDeltaAction result = null;
+        if (action instanceof IncomeDeltaAction) {
+            result = (IncomeDeltaAction) action;
+        } else if (action instanceof ActionChain) {
+            for (Action a : ((ActionChain) action).actions) {
+                result = findIncomeAction(a);
+                if (result != null) {
+                    break;
+                }
+            }
+        }
+        return result;
     }
 }

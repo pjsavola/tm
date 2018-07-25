@@ -71,6 +71,7 @@ import tm.card.QuantumExtractor;
 import tm.card.RegolithEaters;
 import tm.card.ReleaseOfInertGases;
 import tm.card.ResearchOutpost;
+import tm.card.RoboticWorkforce;
 import tm.card.RoverConstruction;
 import tm.card.SearchForLife;
 import tm.card.SecurityFleet;
@@ -176,6 +177,7 @@ public abstract class Cards {
     public static final Card GIANT_SPACE_MIRROR = new GiantSpaceMirror();
     public static final Card TRANS_NEPTUNE_PROBE = new TransNeptuneProbe();
     public static final Card COMMERCIAL_DISTRICT = new CommercialDistrict();
+    public static final Card ROBOTIC_WORKFORCE = new RoboticWorkforce();
 
     public static Deque<Card> buildDeck() {
         final Deque<Card> deck = new ArrayDeque<>();
