@@ -12,8 +12,9 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.AddWaterAction;
 import tm.action.CardActionWithCost;
+import tm.effect.JovianEffect;
 
-public class WaterImportFromEuropa extends Card {
+public class WaterImportFromEuropa extends Card implements JovianEffect {
 
     private final Action action = new CardActionWithCost(true, new Resources(-12), Resources.EMPTY, true) {
         @Override

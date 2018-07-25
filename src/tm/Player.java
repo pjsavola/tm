@@ -10,9 +10,9 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 import tm.action.Action;
-import tm.card.WaterImportFromEuropa;
 import tm.corporation.Inventrix;
 import tm.effect.DiscountEffect;
+import tm.effect.JovianEffect;
 import tm.effect.PlayCardEffect;
 import tm.effect.ValueEffect;
 
@@ -214,8 +214,12 @@ public class Player {
             .stream()
             .filter(tile -> tile.getType() == Tile.Type.GREENERY)
             .count());
-        playedCards.stream().filter(card -> card instanceof WaterImportFromEuropa).findAny().ifPresent(_card -> total.addAndGet(tags.getCount(Tags.Type.JOVIAN)));
+        total.addAndGet(playedCards.stream().filter(card -> card.getTags().has(Tags.Type.JOVIAN)).count() * getJovianValue());
         return total.intValue();
+    }
+
+    public long getJovianValue() {
+        return playedCards.stream().filter(card -> card instanceof JovianEffect).count();
     }
 
     public Set<Tile> getFreeAdjacentTiles() {

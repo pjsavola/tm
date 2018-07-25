@@ -43,6 +43,8 @@ public class RoverConstruction extends Card implements PlaceTileEffect, PlayCard
     public Action cardPlayed(Card card) {
         if (card instanceof PhobosSpaceHaven) {
             return new ResourceDeltaAction(new Resources(2));
+        } else if (card instanceof GanymedeColony) {
+            return new ResourceDeltaAction(new Resources(3));
         }
         return null;
     }

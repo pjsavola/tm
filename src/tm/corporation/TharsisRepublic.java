@@ -15,6 +15,7 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.action.ResourceDeltaAction;
+import tm.card.GanymedeColony;
 import tm.card.PhobosSpaceHaven;
 import tm.effect.PlaceTileEffect;
 import tm.effect.PlayCardEffect;
@@ -54,6 +55,8 @@ public class TharsisRepublic extends Corporation implements PlaceTileEffect, Pla
     @Override
     public Action cardPlayed(Card card) {
         if (card instanceof PhobosSpaceHaven) {
+            return new ResourceDeltaAction(new Resources(3));
+        } else if (card instanceof GanymedeColony) {
             return new ResourceDeltaAction(new Resources(3));
         }
         return null;

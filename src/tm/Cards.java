@@ -35,6 +35,7 @@ import tm.card.EquatorialMagnetizer;
 import tm.card.Fish;
 import tm.card.FoodFactory;
 import tm.card.GHGProducingBacteria;
+import tm.card.GanymedeColony;
 import tm.card.GiantIceAsteroid;
 import tm.card.GreatEscarpmentConsortium;
 import tm.card.IceAsteroid;
@@ -166,6 +167,7 @@ public abstract class Cards {
     public static final Card ICE_ASTEROID = new IceAsteroid();
     public static final Card QUANTUM_EXTRACTOR = new QuantumExtractor();
     public static final Card GIANT_ICE_ASTEROID = new GiantIceAsteroid();
+    public static final Card GANYMEDE_COLONY = new GanymedeColony();
 
     public static Deque<Card> buildDeck() {
         final Deque<Card> deck = new ArrayDeque<>();
