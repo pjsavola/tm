@@ -14,20 +14,15 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 
-public class Trees extends Card {
+public class Heather extends Card {
 
-    public Trees() {
-        super("Trees", 13, Tags.PLANT);
+    public Heather() {
+        super("Heather", 6, Tags.PLANT);
     }
 
     @Override
     public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= -4 - 2 * tolerance;
-    }
-
-    @Override
-    public int getVPs() {
-        return 1;
+        return planet.getTemperature() >= -14 - 2 * tolerance;
     }
 
     @Override
@@ -36,11 +31,12 @@ public class Trees extends Card {
             new ResourceDeltaAction(Resources.PLANT),
             new IncomeDeltaAction(Resources.PLANT)
         );
+
     }
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("Requires -4C or warmer");
+        return Collections.singletonList("Requires -14C or warmer");
     }
 
     @Override
