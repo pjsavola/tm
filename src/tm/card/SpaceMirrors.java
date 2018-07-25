@@ -10,14 +10,12 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.CardAction;
+import tm.action.CardActionWithCost;
 import tm.action.IncomeDeltaAction;
-import tm.action.ResourceDeltaAction;
 
 public class SpaceMirrors extends Card {
 
-    private final Action action = new CardAction(true) {
+    private final Action action = new CardActionWithCost(true, 7, false) {
         @Override
         public ActionType getType() {
             return ActionType.SPACE_MIRRORS;
@@ -25,10 +23,7 @@ public class SpaceMirrors extends Card {
 
         @Override
         protected Action getAction(Game game) {
-            return new ActionChain(
-                new ResourceDeltaAction(new Resources(-5)),
-                new IncomeDeltaAction(Resources.ENERGY)
-            );
+            return new IncomeDeltaAction(Resources.ENERGY);
         }
     };
 
