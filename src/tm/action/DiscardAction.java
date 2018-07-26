@@ -1,9 +1,7 @@
 package tm.action;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.completable.Completable;
@@ -18,8 +16,7 @@ public class DiscardAction implements Action {
 
     @Override
     public Completable begin(Game game) {
-        final List<Card> hand = new ArrayList<>(game.getCurrentPlayer().getCards());
-        return new SelectCardsCompletable(game, game.getCurrentPlayer().getCards()) {
+        return new SelectCardsCompletable(game, new ArrayList<>(game.getCurrentPlayer().getCards())) {
 
             @Override
             public int maxSelection() {
@@ -45,8 +42,7 @@ public class DiscardAction implements Action {
 
             @Override
             public void undo() {
-                game.getCurrentPlayer().getCards().clear();
-                game.getCurrentPlayer().getCards().addAll(hand);
+                game.getCurrentPlayer().getCards().addAll(selectedCards);
                 game.getDiscardDeck().removeAll(selectedCards);
                 game.repaint();
             }

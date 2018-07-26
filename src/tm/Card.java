@@ -10,7 +10,7 @@ import java.util.List;
 import com.sun.istack.internal.Nullable;
 import tm.action.Action;
 
-public abstract class Card {
+public abstract class Card implements Comparable<Card> {
 
     public static final int WIDTH = 200;
     public static final int TITLE_HEIGHT = 19;
@@ -162,5 +162,21 @@ public abstract class Card {
 
     protected List<String> getContents() {
         return Collections.emptyList();
+    }
+
+    @Override
+    public int compareTo(Card card) {
+        return name.compareTo(card.name);
+    }
+
+    @Override
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+    public boolean equals(Object other) {
+        return name.equals(other);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }

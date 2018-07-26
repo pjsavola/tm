@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.sun.istack.internal.Nullable;
@@ -28,7 +29,7 @@ public class Player {
     private int savedRating = 20;
     private final Color color = new Color(0xFF0000);
     final Set<Tile> ownedTiles = new HashSet<>();
-    final List<Card> cards = new ArrayList<>();
+    final Set<Card> cards = new TreeSet<>();
     private final List<Card> playedCards = new ArrayList<>();
     Corporation corporation;
 
@@ -80,7 +81,7 @@ public class Player {
         return corporation;
     }
 
-    public List<Card> getCards() {
+    public Set<Card> getCards() {
         return cards;
     }
 

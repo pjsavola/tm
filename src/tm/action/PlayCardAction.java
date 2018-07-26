@@ -1,7 +1,6 @@
 package tm.action;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
@@ -28,15 +27,13 @@ public class PlayCardAction implements Action {
 
         private final Game game;
         private final Player player;
-        private final List<Card> hand;
         @Nullable
         private Card selectedCard;
         @Nullable
         private Payment payment;
 
         public PlayCardCompletable(Game game) {
-            super(game, game.getCurrentPlayer().getCards());
-            hand = new ArrayList<>(game.getCurrentPlayer().getCards());
+            super(game, new ArrayList<>(game.getCurrentPlayer().getCards()));
             player = game.getCurrentPlayer();
             this.game = game;
         }
@@ -85,8 +82,7 @@ public class PlayCardAction implements Action {
         @Override
         public void undo() {
             player.removeTags(selectedCard.getTags());
-            player.getCards().clear();
-            player.getCards().addAll(hand);
+            player.getCards().add(selectedCard);
             player.unplayCard(selectedCard);
             game.repaint();
         }

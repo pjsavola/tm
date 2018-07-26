@@ -1,5 +1,6 @@
 package tm.card;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class MarsUniversity extends Card implements PlayCardEffect {
                 @Override
                 public Completable begin(Game game) {
                     final Player player = game.getCurrentPlayer();
-                    return new SelectCardsCompletable(game, player.getCards()) {
+                    return new SelectCardsCompletable(game, new ArrayList<>(player.getCards())) {
                         @Nullable
                         private Card selectedCard;
 
