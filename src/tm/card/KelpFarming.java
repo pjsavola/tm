@@ -22,7 +22,7 @@ public class KelpFarming extends Card {
 
     @Override
     public boolean check(Planet planet, int tolerance) {
-        return planet.getWaterCount() >= 6 - tolerance;
+        return planet.getWaterPlaced() >= 6 - tolerance;
     }
 
     @Override

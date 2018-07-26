@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,30 +11,34 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
 
-// Decrease any heat income by 1 is done from dummy player
-public class CloudSeeding extends Card {
+public class GreatDam extends Card {
 
-    public CloudSeeding() {
-        super("Cloud Seeding", 11, Tags.EMPTY);
+    public GreatDam() {
+        super("Great Dam", 12, Tags.BUILDING.combine(Tags.POWER));
+    }
+
+    @Override
+    public int getVPs() {
+        return 1;
     }
 
     @Override
     public boolean check(Planet planet, int tolerance) {
-        return planet.getWaterPlaced() >= 3 - tolerance;
+        return planet.getWaterPlaced() >= 4 - tolerance;
     }
 
     @Override
     public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(-1, 0, 0, 2, 0, 0));
+        return new IncomeDeltaAction(new Resources(0, 0, 0, 0, 2, 0));
     }
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 3 ocean tiles");
+        return Collections.singletonList("Requires 4 ocean tiles");
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("-1 money income", "2 plant income");
+        return Collections.singletonList("2 energy income");
     }
 }

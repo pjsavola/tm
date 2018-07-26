@@ -22,7 +22,7 @@ public class Moss extends Card {
 
     @Override
     public boolean check(Planet planet, int tolerance) {
-        return planet.getWaterCount() >= 3 - tolerance;
+        return planet.getWaterPlaced() >= 3 - tolerance;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class AddTemperatureAction implements Action {
                     }
                 }
                 if (game.getPlanet().getTemperature() == 0) {
-                    if (game.getPlanet().getWaterCount() > 0) {
+                    if (game.getPlanet().getWaterRemaining() > 0) {
                         game.getActionHandler().addPendingAction(new AddWaterAction());
                     }
                 }

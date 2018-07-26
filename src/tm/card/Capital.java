@@ -23,7 +23,7 @@ public class Capital extends Card {
 
     @Override
     public boolean check(Planet planet, int tolerance) {
-        return planet.getWaterCount() >= 4 - tolerance;
+        return planet.getWaterPlaced() >= 4 - tolerance;
     }
 
     @Override

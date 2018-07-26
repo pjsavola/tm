@@ -22,7 +22,7 @@ public class Algae extends Card {
 
     @Override
     public boolean check(Planet planet, int tolerance) {
-        return planet.getWaterCount() >= 5 - tolerance;
+        return planet.getWaterPlaced() >= 5 - tolerance;
     }
 
     @Override

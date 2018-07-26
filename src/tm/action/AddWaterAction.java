@@ -19,7 +19,7 @@ public class AddWaterAction implements Action {
 
     @Override
     public boolean check(Game game) {
-        return game.getPlanet().getWaterCount() > 0;
+        return game.getPlanet().getWaterRemaining() > 0;
     }
 
     @Override
@@ -27,20 +27,20 @@ public class AddWaterAction implements Action {
         return new InstantCompletable(game) {
             @Override
             public void complete() {
-                game.getPlanet().adjustWaterCount(-1);
+                game.getPlanet().adjustWaterRemaining(-1);
                 game.getCurrentPlayer().adjustRating(1);
                 game.getActionHandler().addPendingAction(new PlaceTileAction(type));
             }
 
             @Override
             public void undo() {
-                game.getPlanet().adjustWaterCount(1);
+                game.getPlanet().adjustWaterRemaining(1);
                 game.getCurrentPlayer().adjustRating(-1);
             }
 
             @Override
             public void redo() {
-                game.getPlanet().adjustWaterCount(-1);
+                game.getPlanet().adjustWaterRemaining(-1);
                 game.getCurrentPlayer().adjustRating(1);
             }
         };

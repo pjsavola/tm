@@ -6,13 +6,17 @@ import java.awt.Graphics;
 
 public class Planet {
     private static final Font font = new Font("Arial", Font.BOLD, 16);
-    private int waterCount = 9;
+    private int waterRemaining = 9;
     private int temperature = -30;
     private int oxygen = 0;
     private int round = 1;
 
-    public int getWaterCount() {
-        return waterCount;
+    public int getWaterPlaced() {
+        return 9 - waterRemaining;
+    }
+
+    public int getWaterRemaining() {
+        return waterRemaining;
     }
 
     public int getOxygen() {
@@ -23,8 +27,8 @@ public class Planet {
         return temperature;
     }
 
-    public void adjustWaterCount(int delta) {
-        waterCount += delta;
+    public void adjustWaterRemaining(int delta) {
+        waterRemaining += delta;
     }
 
     public int adjustOxygen(int delta) {
@@ -62,7 +66,7 @@ public class Planet {
         g.setColor(getColor(0, oxygen, 14, new Color(0x8B4513), new Color(0xBBBBFF)));
         g.drawString(Integer.toString(oxygen), 680, 52);
         g.setColor(new Color(0x4444FF));
-        g.drawString(Integer.toString(waterCount), 680, 78);
+        g.drawString(Integer.toString(waterRemaining), 680, 78);
         g.setColor(oldColor);
     }
 
