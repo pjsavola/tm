@@ -11,6 +11,7 @@ import tm.card.Algae;
 import tm.card.Ants;
 import tm.card.Archaebacteria;
 import tm.card.ArcticAlgae;
+import tm.card.ArtificialPhotosynthesis;
 import tm.card.Asteroid;
 import tm.card.AsteroidMining;
 import tm.card.AsteroidMiningConsortium;
@@ -18,6 +19,8 @@ import tm.card.BeamFromThoriumAsteroid;
 import tm.card.BigAsteroid;
 import tm.card.Birds;
 import tm.card.BlackPolarDust;
+import tm.card.BreathingFilters;
+import tm.card.BribedCommittee;
 import tm.card.BuildingIndustries;
 import tm.card.BusinessContracts;
 import tm.card.BusinessNetwork;
@@ -97,6 +100,7 @@ import tm.card.RoverConstruction;
 import tm.card.SearchForLife;
 import tm.card.SecurityFleet;
 import tm.card.SmallAnimals;
+import tm.card.SolarPower;
 import tm.card.SolarWindPower;
 import tm.card.SpaceElevator;
 import tm.card.SpaceMirrors;
@@ -118,8 +122,6 @@ import tm.card.WaterImportFromEuropa;
 // Game deck is built from this class with reflection. There's a single instance of each card
 // through this class.
 public abstract class Cards {
-    public static final Card BUSINESS_CONTRACTS = new BusinessContracts();
-
     public static final Card COLONIZER_TRAINING_CAMP = new ColonizerTrainingCamp();
     public static final Card ASTEROID_MINING_CONSORTIUM = new AsteroidMiningConsortium();
     public static final Card DEEP_WELL_HEATING = new DeepWellHeating();
@@ -229,6 +231,11 @@ public abstract class Cards {
     public static final Card OPEN_CITY = new OpenCity();
     public static final Card MEDIA_GROUP = new MediaGroup();
     public static final Card BUSINESS_NETWORK = new BusinessNetwork();
+    public static final Card BUSINESS_CONTRACTS = new BusinessContracts();
+    public static final Card BRIBED_COMMITTEE = new BribedCommittee();
+    public static final Card SOLAR_POWER = new SolarPower();
+    public static final Card BREATHING_FILTERS = new BreathingFilters();
+    public static final Card ARTIFICIAL_PHOTOSYNTHESIS = new ArtificialPhotosynthesis();
 
     public static Deque<Card> buildDeck() {
         final Deque<Card> deck = new ArrayDeque<>();

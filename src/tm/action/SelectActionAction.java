@@ -27,7 +27,7 @@ public class SelectActionAction implements Action {
         return new SelectActionCompletable(game, selectableActions);
     }
 
-    private static class SelectActionCompletable implements Completable {
+    public static class SelectActionCompletable implements Completable {
         private final Game game;
         private final List<Action> selectableActions;
         protected static final int TOP_MARGIN = 80;
