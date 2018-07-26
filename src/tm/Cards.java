@@ -9,6 +9,7 @@ import tm.card.AdaptedLichen;
 import tm.card.AdvancedAlloys;
 import tm.card.AdvancedEcosystems;
 import tm.card.Algae;
+import tm.card.AntiGravityTechnology;
 import tm.card.Ants;
 import tm.card.Archaebacteria;
 import tm.card.ArcticAlgae;
@@ -26,6 +27,7 @@ import tm.card.BribedCommittee;
 import tm.card.BuildingIndustries;
 import tm.card.BusinessContracts;
 import tm.card.BusinessNetwork;
+import tm.card.CEOsFavouriteProject;
 import tm.card.CallistoPenalMines;
 import tm.card.Capital;
 import tm.card.CarbonateProcessing;
@@ -71,6 +73,7 @@ import tm.card.HiredRaiders;
 import tm.card.IceAsteroid;
 import tm.card.ImportedHydrogen;
 import tm.card.IndustrialCenter;
+import tm.card.Insects;
 import tm.card.InterstellarColonyShip;
 import tm.card.InventorsGuild;
 import tm.card.IoMiningIndustries;
@@ -300,6 +303,9 @@ public abstract class Cards {
     public static final Card TECTONIC_STRESS_POWER = new TectonicStressPower();
     public static final Card NITROPHILIC_MOSS = new NitrophilicMoss();
     public static final Card HERBIVORES = new Herbivores();
+    public static final Card INSECTS = new Insects();
+    public static final Card CEOS_FAVORITE_PROJECT = new CEOsFavouriteProject();
+    public static final Card ANTI_GRAVITY_TECHNOLOGY = new AntiGravityTechnology();
 
     public static Deque<Card> buildDeck() {
         final Deque<Card> deck = new ArrayDeque<>();
