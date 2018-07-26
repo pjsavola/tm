@@ -15,12 +15,7 @@ import tm.action.IncomeDeltaAction;
 
 public class SpaceMirrors extends Card {
 
-    private final Action action = new CardActionWithCost(true, 7) {
-        @Override
-        public ActionType getType() {
-            return ActionType.SPACE_MIRRORS;
-        }
-
+    private final Action action = new CardActionWithCost(true, ActionType.SPACE_MIRRORS, new Resources(-7)) {
         @Override
         protected Action getAction(Game game) {
             return new IncomeDeltaAction(Resources.ENERGY);

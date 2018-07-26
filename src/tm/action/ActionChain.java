@@ -60,6 +60,16 @@ public class ActionChain implements Action {
         return new CompletableChain(game, completables.toArray(new Completable[completables.size()]));
     }
 
+    @Override
+    public boolean isUndoable() {
+        for (Action action : actions) {
+            if (!action.isUndoable()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Nullable
     public static IncomeDeltaAction findIncomeAction(@Nullable Action action) {
         IncomeDeltaAction result = null;

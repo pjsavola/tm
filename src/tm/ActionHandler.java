@@ -86,18 +86,18 @@ public class ActionHandler {
     }
 
     public void addPendingAction(Action action) {
-        if (pendingActions == null) {
-            pendingActions = new ArrayList<>();
-            pendingActionCount = 0;
+        if (action.isUndoable()) {
+            if (pendingActions == null) {
+                pendingActions = new ArrayList<>();
+                pendingActionCount = 0;
+            }
+            pendingActions.add(action);
+        } else {
+            if (pendingIrreversibleActions == null) {
+                pendingIrreversibleActions = new ArrayList<>();
+            }
+            pendingIrreversibleActions.add(action);
         }
-        pendingActions.add(action);
-    }
-
-    public void addPendingIrreversibleAction(Action action) {
-        if (pendingIrreversibleActions == null) {
-            pendingIrreversibleActions = new ArrayList<>();
-        }
-        pendingIrreversibleActions.add(action);
     }
 
     public void reprocess(Completable completable) {

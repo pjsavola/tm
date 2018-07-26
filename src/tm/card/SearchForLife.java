@@ -18,11 +18,7 @@ import tm.completable.SelectCardsCompletable;
 
 public class SearchForLife extends CardWithMarkers {
 
-    private final Action action = new CardActionWithCost(false, Resources.MONEY.negate()) {
-        @Override
-        public ActionType getType() {
-            return ActionType.SEARCH_FOR_LIFE;
-        }
+    private final Action action = new CardActionWithCost(false, ActionType.SEARCH_FOR_LIFE, Resources.MONEY.negate()) {
 
         @Override
         public boolean check(Game game) {

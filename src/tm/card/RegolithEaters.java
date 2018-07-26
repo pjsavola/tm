@@ -15,22 +15,17 @@ import tm.action.MarkerDeltaAction;
 
 public class RegolithEaters extends CardWithMarkers {
 
-    private final CardAction action1 = new CardAction(true) {
-        @Override
-        public ActionType getType() {
-            return ActionType.REGOLITH_EATERS_1;
-        }
-
+    private final CardAction action1 = new CardAction(true, ActionType.REGOLITH_EATERS_1) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, RegolithEaters.this);
         }
     };
 
-    private final CardAction action2 = new CardAction(true) {
+    private final CardAction action2 = new CardAction(true, ActionType.REGOLITH_EATERS_2) {
         @Override
         protected Action getAction(Game game) {
-            return new AddOxygenAction();
+            return new ActionChain(new AddOxygenAction(), new MarkerDeltaAction(-2, RegolithEaters.this));
         }
     };
 
@@ -42,15 +37,7 @@ public class RegolithEaters extends CardWithMarkers {
 
     @Override
     public List<Action> getActions() {
-        return Arrays.asList(
-            action1,
-            new ActionChain(
-                ActionType.REGOLITH_EATERS_2,
-                getName(),
-                new MarkerDeltaAction(-2, this),
-                action2
-            )
-        );
+        return Arrays.asList(action1, action2);
     }
 
     @Override

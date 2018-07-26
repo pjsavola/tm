@@ -14,12 +14,7 @@ import tm.action.MarkerDeltaAction;
 
 public class Tardigrades extends CardWithMarkers {
 
-    private final CardAction action = new CardAction(true) {
-        @Override
-        public ActionType getType() {
-            return ActionType.TARDIGRADES;
-        }
-
+    private final CardAction action = new CardAction(true, ActionType.TARDIGRADES) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, Tardigrades.this);

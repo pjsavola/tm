@@ -15,12 +15,7 @@ import tm.action.CardActionWithCost;
 
 public class EquatorialMagnetizer extends Card {
 
-    private final Action action = new CardActionWithCost(true, Resources.EMPTY, Resources.ENERGY.negate()) {
-        @Override
-        public ActionType getType() {
-            return ActionType.EQUATORIAL_MAGNETIZER;
-        }
-
+    private final Action action = new CardActionWithCost(true, ActionType.EQUATORIAL_MAGNETIZER, Resources.EMPTY, Resources.ENERGY.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new AddTerraformingRatingAction();

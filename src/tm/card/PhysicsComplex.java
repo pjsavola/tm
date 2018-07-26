@@ -15,12 +15,7 @@ import tm.action.MarkerDeltaAction;
 
 public class PhysicsComplex extends CardWithMarkers {
 
-    private final Action action = new CardActionWithCost(true, new Resources(0, 0, 0, 0, -6, 0)) {
-        @Override
-        public ActionType getType() {
-            return ActionType.PHYSICS_COMPLEX;
-        }
-
+    private final Action action = new CardActionWithCost(true, ActionType.PHYSICS_COMPLEX, new Resources(0, 0, 0, 0, -6, 0)) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, PhysicsComplex.this);

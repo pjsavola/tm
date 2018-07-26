@@ -16,12 +16,7 @@ import tm.action.IncomeDeltaAction;
 
 public class BusinessNetwork extends Card {
 
-    private final Action action = new CardAction(false) {
-        @Override
-        public ActionType getType() {
-            return ActionType.BUSINESS_NETWORK;
-        }
-
+    private final Action action = new CardAction(false, ActionType.BUSINESS_NETWORK) {
         @Override
         protected Action getAction(Game game) {
             return new DrawCardsAction(1, true, false);
@@ -32,6 +27,7 @@ public class BusinessNetwork extends Card {
         super("Business Network", 4, Tags.EARTH);
     }
 
+    @Override
     public Action getInitialAction(Game game) {
         return new IncomeDeltaAction(Resources.MONEY.negate());
     }

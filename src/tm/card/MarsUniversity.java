@@ -63,7 +63,7 @@ public class MarsUniversity extends Card implements PlayCardEffect {
                             selectedCard = selectedCards.isEmpty() ? null : selectedCards.iterator().next();
                             if (selectedCard != null) {
                                 game.getCurrentPlayer().getCards().remove(selectedCard);
-                                game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(1, false, false));
+                                game.getActionHandler().addPendingAction(new DrawCardsAction(1, false, false));
                             }
                             cancel();
                         }

@@ -16,12 +16,7 @@ import tm.action.ResourceDeltaAction;
 
 public class SpaceElevator extends Card {
 
-    private final Action action = new CardActionWithCost(true, Resources.STEEL.negate()) {
-        @Override
-        public ActionType getType() {
-            return ActionType.SPACE_ELEVATOR;
-        }
-
+    private final Action action = new CardActionWithCost(true, ActionType.SPACE_ELEVATOR, Resources.STEEL.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new ResourceDeltaAction(new Resources(5));

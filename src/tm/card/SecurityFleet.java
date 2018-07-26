@@ -16,12 +16,7 @@ import tm.action.MarkerDeltaAction;
 // Removing 1 animal is done from dummy player
 public class SecurityFleet extends CardWithMarkers {
 
-    private final Action action = new CardActionWithCost(true, Resources.TITANIUM.negate()) {
-        @Override
-        public ActionType getType() {
-            return ActionType.SECURITY_FLEET;
-        }
-
+    private final Action action = new CardActionWithCost(true, ActionType.SECURITY_FLEET, Resources.TITANIUM.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, SecurityFleet.this);

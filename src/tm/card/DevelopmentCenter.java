@@ -15,12 +15,7 @@ import tm.action.DrawCardsAction;
 
 public class DevelopmentCenter extends Card {
 
-    private final Action action = new CardActionWithCost(false, Resources.ENERGY.negate()) {
-        @Override
-        public ActionType getType() {
-            return ActionType.DEVELOPMENT_CENTER;
-        }
-
+    private final Action action = new CardActionWithCost(false, ActionType.DEVELOPMENT_CENTER, Resources.ENERGY.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new DrawCardsAction(1, false, false);

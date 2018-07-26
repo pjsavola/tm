@@ -16,12 +16,7 @@ import tm.action.MarkerDeltaAction;
 // Removing 1 plant income is done from dummy player
 public class SmallAnimals extends CardWithMarkers {
 
-    private final Action action = new CardAction(true) {
-        @Override
-        public ActionType getType() {
-            return ActionType.SMALL_ANIMALS;
-        }
-
+    private final Action action = new CardAction(true, ActionType.SMALL_ANIMALS) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, SmallAnimals.this);

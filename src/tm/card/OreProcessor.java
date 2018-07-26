@@ -17,7 +17,7 @@ import tm.action.ResourceDeltaAction;
 
 public class OreProcessor extends CardWithMarkers {
 
-    private final Action action = new CardActionWithCost(true, new Resources(0, 0, 0, 0, -4, 0)) {
+    private final Action action = new CardActionWithCost(true, ActionType.ORE_PROCESSOR, new Resources(0, 0, 0, 0, -4, 0)) {
         @Override
         public ActionType getType() {
             return ActionType.ORE_PROCESSOR;
@@ -25,10 +25,7 @@ public class OreProcessor extends CardWithMarkers {
 
         @Override
         protected Action getAction(Game game) {
-            return new ActionChain(
-                new AddOxygenAction(),
-                new ResourceDeltaAction(Resources.TITANIUM)
-            );
+            return new ActionChain(new AddOxygenAction(), new ResourceDeltaAction(Resources.TITANIUM));
         }
     };
 

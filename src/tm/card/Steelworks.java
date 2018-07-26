@@ -17,18 +17,10 @@ import tm.action.ResourceDeltaAction;
 
 public class Steelworks extends CardWithMarkers {
 
-    private final Action action = new CardActionWithCost(true, new Resources(0, 0, 0, 0, -4, 0)) {
-        @Override
-        public ActionType getType() {
-            return ActionType.STEELWORKS;
-        }
-
+    private final Action action = new CardActionWithCost(true, ActionType.STEELWORKS, new Resources(0, 0, 0, 0, -4, 0)) {
         @Override
         protected Action getAction(Game game) {
-            return new ActionChain(
-                new AddOxygenAction(),
-                new ResourceDeltaAction(Resources.STEEL_2)
-            );
+            return new ActionChain(new AddOxygenAction(), new ResourceDeltaAction(Resources.STEEL_2));
         }
     };
 

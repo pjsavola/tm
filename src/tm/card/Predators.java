@@ -16,12 +16,7 @@ import tm.action.MarkerDeltaAction;
 // Removing 1 animal is done from dummy player
 public class Predators extends CardWithMarkers {
 
-    private final Action action = new CardAction(true) {
-        @Override
-        public ActionType getType() {
-            return ActionType.PREDATORS;
-        }
-
+    private final Action action = new CardAction(true, ActionType.PREDATORS) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, Predators.this);

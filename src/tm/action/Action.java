@@ -19,4 +19,8 @@ public interface Action {
     default boolean isOptional() {
         return false;
     }
+
+    default boolean isUndoable() {
+        return true;
+    }
 }

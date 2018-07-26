@@ -17,12 +17,7 @@ import tm.effect.ScoringEffect;
 
 public class WaterImportFromEuropa extends Card implements ScoringEffect {
 
-    private final Action action = new CardActionWithCost(true, new Resources(-12), Resources.EMPTY, true) {
-        @Override
-        public ActionType getType() {
-            return ActionType.WATER_IMPORT_FROM_EUROPA;
-        }
-
+    private final Action action = new CardActionWithCost(true, ActionType.WATER_IMPORT_FROM_EUROPA, new Resources(-12), Resources.EMPTY, true) {
         @Override
         public boolean check(Game game) {
             return game.getPlanet().getWaterCount() > 0 && super.check(game);

@@ -17,22 +17,17 @@ import tm.action.MarkerDeltaAction;
 
 public class GHGProducingBacteria extends CardWithMarkers {
 
-    private final CardAction action1 = new CardAction(true) {
-        @Override
-        public ActionType getType() {
-            return ActionType.GHG_PRODUCING_BACTERIA_1;
-        }
-
+    private final CardAction action1 = new CardAction(true, ActionType.GHG_PRODUCING_BACTERIA_1) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, GHGProducingBacteria.this);
         }
     };
 
-    private final CardAction action2 = new CardAction(true) {
+    private final CardAction action2 = new CardAction(true, ActionType.GHG_PRODUCING_BACTERIA_2) {
         @Override
         protected Action getAction(Game game) {
-            return new AddTemperatureAction();
+            return new ActionChain(new AddTemperatureAction(), new MarkerDeltaAction(-2, GHGProducingBacteria.this));
         }
     };
 
@@ -49,15 +44,7 @@ public class GHGProducingBacteria extends CardWithMarkers {
 
     @Override
     public List<Action> getActions() {
-        return Arrays.asList(
-            action1,
-            new ActionChain(
-                ActionType.GHG_PRODUCING_BACTERIA_2,
-                getName(),
-                new MarkerDeltaAction(-2, this),
-                action2
-            )
-        );
+        return Arrays.asList(action1, action2);
     }
 
     @Override

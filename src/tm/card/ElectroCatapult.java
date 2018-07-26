@@ -17,24 +17,14 @@ import tm.action.ResourceDeltaAction;
 
 public class ElectroCatapult extends Card {
 
-    private final CardAction action1 = new CardActionWithCost(true, Resources.STEEL.negate()) {
-        @Override
-        public ActionType getType() {
-            return ActionType.ELECTRO_CATAPULT_1;
-        }
-
+    private final CardAction action1 = new CardActionWithCost(true, ActionType.ELECTRO_CATAPULT_1, Resources.STEEL.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new ResourceDeltaAction(new Resources(7));
         }
     };
 
-    private final CardAction action2 = new CardActionWithCost(true, Resources.PLANT.negate()) {
-        @Override
-        public ActionType getType() {
-            return ActionType.ELECTRO_CATAPULT_2;
-        }
-
+    private final CardAction action2 = new CardActionWithCost(true, ActionType.ELECTRO_CATAPULT_2, Resources.PLANT.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new ResourceDeltaAction(new Resources(7));

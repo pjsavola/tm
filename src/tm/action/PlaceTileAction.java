@@ -233,7 +233,7 @@ public class PlaceTileAction implements Action {
                 game.getActionHandler().addPendingAction(bonusAction);
             }
             if (p != null && p.getCards() > 0) {
-                game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(p.getCards(), false, false));
+                game.getActionHandler().addPendingAction(new DrawCardsAction(p.getCards(), false, false));
             }
         }
         if (game.getCurrentPlayer().getCorporation() instanceof PlaceTileEffect) {

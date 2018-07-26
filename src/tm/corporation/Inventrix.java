@@ -20,7 +20,7 @@ public class Inventrix extends Corporation {
     @Override
     public boolean start(final Game game) {
         if (super.start(game)) {
-            game.getActionHandler().addPendingIrreversibleAction(new DrawCardsAction(3, false, false));
+            game.getActionHandler().addPendingAction(new DrawCardsAction(3, false, false));
             return true;
         }
         return false;

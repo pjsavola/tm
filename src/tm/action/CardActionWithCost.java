@@ -1,6 +1,7 @@
 package tm.action;
 
 import com.sun.istack.internal.Nullable;
+import tm.ActionType;
 import tm.Game;
 import tm.Player;
 import tm.Resources;
@@ -14,20 +15,16 @@ public abstract class CardActionWithCost extends CardAction {
     @Nullable
     private PlayCardAction.Payment payment;
 
-    public CardActionWithCost(boolean undoable, int cost) {
-        this(undoable, new Resources(-cost));
+    public CardActionWithCost(boolean undoable, ActionType type, Resources resourceDelta) {
+        this(undoable, type, resourceDelta, Resources.EMPTY, false);
     }
 
-    public CardActionWithCost(boolean undoable, Resources resourceDelta) {
-        this(undoable, resourceDelta, Resources.EMPTY, false);
+    public CardActionWithCost(boolean undoable, ActionType type, Resources resourceDelta, Resources incomeDelta) {
+        this(undoable, type, resourceDelta, incomeDelta, false);
     }
 
-    public CardActionWithCost(boolean undoable, Resources resourceDelta, Resources incomeDelta) {
-        this(undoable, resourceDelta, incomeDelta, false);
-    }
-
-    public CardActionWithCost(boolean undoable, Resources resourceDelta, Resources incomeDelta, boolean titainum) {
-        super(undoable);
+    public CardActionWithCost(boolean undoable, ActionType type, Resources resourceDelta, Resources incomeDelta, boolean titainum) {
+        super(undoable, type);
         this.resourceDelta = resourceDelta;
         this.incomeDelta = incomeDelta;
         this.titanium = titainum;

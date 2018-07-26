@@ -35,6 +35,11 @@ public class DrawCardsAction implements Action {
     }
 
     @Override
+    public boolean isUndoable() {
+        return false;
+    }
+
+    @Override
     public Completable begin(Game game) {
         final List<Card> drawnCards = new ArrayList<>(amount);
         while (drawnCards.size() < amount) {
