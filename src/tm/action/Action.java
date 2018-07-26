@@ -10,6 +10,10 @@ public interface Action {
         throw new UnsupportedOperationException();
     }
 
+    default String getDescription() {
+        return getType().toString();
+    }
+
     default boolean check(Game game) {
         return true;
     }

@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Arrays;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -27,14 +26,14 @@ public class ArtificialPhotosynthesis extends Card {
                 return new SelectActionAction.SelectActionCompletable(game, Arrays.asList(
                     new IncomeDeltaAction(Resources.PLANT) {
                         @Override
-                        public ActionType getType() {
-                            return ActionType.ARTIFICIAL_PHOTOSYNTHESIS_1;
+                        public String getDescription() {
+                            return "Gain 1 plant";
                         }
                     },
                     new IncomeDeltaAction(new Resources(0, 0, 0, 0, 2, 0)) {
                         @Override
-                        public ActionType getType() {
-                            return ActionType.ARTIFICIAL_PHOTOSYNTHESIS_2;
+                        public String getDescription() {
+                            return "Gain 2 energy";
                         }
                     }
                 ));

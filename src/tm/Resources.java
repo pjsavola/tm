@@ -73,6 +73,10 @@ public class Resources {
         return energy;
     }
 
+    public int getHeat() {
+        return heat;
+    }
+
     // Rendering code below
 
     private static final Color MONEY_COLOR = new Color(0xFFFF00);

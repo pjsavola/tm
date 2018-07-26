@@ -127,7 +127,7 @@ public class SelectActionAction implements Action {
                     g.drawRect(LEFT_MARGIN - 1, TOP_MARGIN + CARD_HEIGHT * (i + 1) - 1, Card.WIDTH + 2, Card.TITLE_HEIGHT + 2);
                 }
                 final boolean selectable = selectableActions.get(i).check(game);
-                String name = selectableActions.get(i).getType().toString();
+                String name = selectableActions.get(i).getDescription();
                 if (!selectable) {
                     name = "(" + name + ")";
                 }

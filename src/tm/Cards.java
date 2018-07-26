@@ -74,8 +74,10 @@ import tm.card.IceAsteroid;
 import tm.card.ImportedHydrogen;
 import tm.card.IndustrialCenter;
 import tm.card.Insects;
+import tm.card.Insulation;
 import tm.card.InterstellarColonyShip;
 import tm.card.InventorsGuild;
+import tm.card.InvestmentLoan;
 import tm.card.IoMiningIndustries;
 import tm.card.Ironworks;
 import tm.card.KelpFarming;
@@ -306,6 +308,8 @@ public abstract class Cards {
     public static final Card INSECTS = new Insects();
     public static final Card CEOS_FAVORITE_PROJECT = new CEOsFavouriteProject();
     public static final Card ANTI_GRAVITY_TECHNOLOGY = new AntiGravityTechnology();
+    public static final Card INVESTMENT_LOAN = new InvestmentLoan();
+    public static final Card INSULATION = new Insulation();
 
     public static Deque<Card> buildDeck() {
         final Deque<Card> deck = new ArrayDeque<>();
