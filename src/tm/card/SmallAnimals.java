@@ -34,7 +34,7 @@ public class SmallAnimals extends CardWithMarkers {
 
     @Override
     public int getVPs() {
-        return getMarkerCount();
+        return getMarkerCount() / 2;
     }
 
     @Override

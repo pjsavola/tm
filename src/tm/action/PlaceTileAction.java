@@ -147,6 +147,10 @@ public class PlaceTileAction implements Action {
                             return;
                         }
                     }
+                    if (type == Tile.Type.LAVA_FLOWS && (targetTile.getProperties() == null || !targetTile.getProperties().isVolcano())) {
+                        System.err.println("Lava flows must be placed on volcano");
+                        return;
+                    }
                     game.getActionHandler().completed(PlaceTileCompletable.this);
                 }
             }

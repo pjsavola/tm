@@ -26,6 +26,8 @@ public class Tile {
         URBANIZED_AREA("images/city.png"),
         INDUSTRIAL_CENTER("images/city.png"),
         ECOLOGICAL_ZONE("images/forest.png"),
+        LAVA_FLOWS("images/forest.png"),
+        MOHOLE_AREA("images/mohole_area.png"),
         MISC("images/city.png");
 
         private final BufferedImage image;
@@ -108,7 +110,7 @@ public class Tile {
     }
 
     public static boolean isPlacedOnWater(Tile.Type type) {
-        return type == Type.WATER || type == Type.MANGROVE;
+        return type == Type.WATER || type == Type.MANGROVE || type == Type.MOHOLE_AREA;
     }
 
     public void setOwner(@Nullable Player player) {

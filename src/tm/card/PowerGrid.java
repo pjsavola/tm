@@ -18,7 +18,7 @@ public class PowerGrid extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        final int energy = (int) game.getCurrentPlayer().getPlayedCards().stream().filter(card -> card.getTags().has(Tags.Type.POWER)).count();
+        final int energy = game.getCurrentPlayer().getTags().getCount(Tags.Type.POWER);
         return new IncomeDeltaAction(new Resources(-1, 0, 0, 0, energy + 1, 0));
     }
 

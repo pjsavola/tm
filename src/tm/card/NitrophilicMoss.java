@@ -10,32 +10,36 @@ import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
+import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
+import tm.action.ResourceDeltaAction;
 
-public class Worms extends Card {
+public class NitrophilicMoss extends Card {
 
-    public Worms() {
-        super("Worms", 8, Tags.MICROBE);
+    public NitrophilicMoss() {
+        super("Moss", 8, Tags.PLANT);
     }
 
     @Override
     public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 4 - tolerance;
+        return planet.getWaterPlaced() >= 3 - tolerance;
     }
 
     @Override
     public Action getInitialAction(Game game) {
-        final int microbeCount = game.getCurrentPlayer().getTags().getCount(Tags.Type.MICROBE);
-        return new IncomeDeltaAction(new Resources(0, 0, 0,  (microbeCount + 1) / 2, 0, 0));
+        return new ActionChain(
+            new ResourceDeltaAction(Resources.PLANT_2.negate()),
+            new IncomeDeltaAction(Resources.PLANT_2)
+        );
     }
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("Oxygen must be at least 4%");
+        return Collections.singletonList("Requires 3 ocean tiles");
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 plant income for each 2 microbe tags", "(including this)");
+        return Arrays.asList("-2 plants", "2 plant income");
     }
 }

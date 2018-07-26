@@ -45,6 +45,6 @@ public class WaterImportFromEuropa extends Card implements ScoringEffect {
 
     @Override
     public int getVPs(Player player) {
-        return (int) player.getPlayedCards().stream().filter(card -> card.getTags().has(Tags.Type.JOVIAN)).count();
+        return player.getTags().getCount(Tags.Type.JOVIAN);
     }
 }

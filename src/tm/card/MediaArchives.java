@@ -18,7 +18,7 @@ public class MediaArchives extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new ResourceDeltaAction(new Resources((int) game.getCurrentPlayer().getPlayedCards().stream().filter(card -> card.getTags().has(Tags.Type.EVENT)).count()));
+        return new ResourceDeltaAction(new Resources(game.getCurrentPlayer().getTags().getCount(Tags.Type.EVENT)));
     }
 
     @Override
