@@ -7,6 +7,16 @@ import tm.completable.InstantCompletable;
 
 public class AddWaterAction implements Action {
 
+    private final Tile.Type type;
+
+    public AddWaterAction() {
+        this(Tile.Type.WATER);
+    }
+
+    public AddWaterAction(Tile.Type type) {
+        this.type = type;
+    }
+
     @Override
     public boolean check(Game game) {
         return game.getPlanet().getWaterCount() > 0;
@@ -19,7 +29,7 @@ public class AddWaterAction implements Action {
             public void complete() {
                 game.getPlanet().adjustWaterCount(-1);
                 game.getCurrentPlayer().adjustRating(1);
-                game.getActionHandler().addPendingAction(new PlaceTileAction(Tile.Type.WATER));
+                game.getActionHandler().addPendingAction(new PlaceTileAction(type));
             }
 
             @Override

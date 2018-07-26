@@ -22,6 +22,9 @@ public class Tile {
         MINING_RIGHTS("images/city.png"),
         COMMERCIAL_DISTRICT("images/city.png"),
         NUCLEAR_ZONE("images/city.png"),
+        ARTIFICIAL_LAKE("images/water.png"),
+        URBANIZED_AREA("images/city.png"),
+        INDUSTRIAL_CENTER("images/city.png"),
         MISC("images/city.png");
 
         private final BufferedImage image;
@@ -92,7 +95,7 @@ public class Tile {
     }
 
     public static boolean isCity(Tile.Type type) {
-        return type == Type.CITY || type == Type.CAPITAL;
+        return type == Type.CITY || type == Type.CAPITAL || type == Type.URBANIZED_AREA;
     }
 
     public static boolean isPlacedOnWater(Tile.Type type) {

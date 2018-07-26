@@ -94,7 +94,12 @@ public class PlaceTileAction implements Action {
                         System.err.println("Reserved for Noctis City");
                         return;
                     }
-                    if (Tile.isCity(type)) {
+                    if (type == Tile.Type.URBANIZED_AREA) {
+                        if (targetTile.getNeighbors().stream().filter(tile -> Tile.isCity(tile.getType())).count() < 2) {
+                            System.err.println("Need at least 2 adjacent cities");
+                            return;
+                        }
+                    } else if (Tile.isCity(type)) {
                         if (targetTile.getNeighbors().stream().anyMatch(tile -> Tile.isCity(tile.getType()))) {
                             System.err.println("Too close to another city");
                             return;
@@ -127,6 +132,12 @@ public class PlaceTileAction implements Action {
                     if (type == Tile.Type.MINING_RIGHTS) {
                         if (targetTile.getProperties() == null || (targetTile.getProperties().getSteel() == 0 && targetTile.getProperties().getTitanium() == 0)) {
                             System.err.println("Mining Rights must be placed on steel or titanium");
+                            return;
+                        }
+                    }
+                    if (type == Tile.Type.INDUSTRIAL_CENTER) {
+                        if (targetTile.getNeighbors().stream().filter(tile -> Tile.isCity(tile.getType())).count() < 1) {
+                            System.err.println("Need at least 1 adjacent city");
                             return;
                         }
                     }
