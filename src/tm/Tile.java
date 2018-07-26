@@ -25,6 +25,7 @@ public class Tile {
         ARTIFICIAL_LAKE("images/water.png"),
         URBANIZED_AREA("images/city.png"),
         INDUSTRIAL_CENTER("images/city.png"),
+        ECOLOGICAL_ZONE("images/forest.png"),
         MISC("images/city.png");
 
         private final BufferedImage image;
@@ -94,8 +95,16 @@ public class Tile {
         return isCity(type);
     }
 
+    public boolean isGreenery() {
+        return isGreenery(type);
+    }
+
     public static boolean isCity(Tile.Type type) {
         return type == Type.CITY || type == Type.CAPITAL || type == Type.URBANIZED_AREA;
+    }
+
+    public static boolean isGreenery(Tile.Type type) {
+        return type == Type.GREENERY || type == Type.MANGROVE;
     }
 
     public static boolean isPlacedOnWater(Tile.Type type) {

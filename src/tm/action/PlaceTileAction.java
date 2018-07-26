@@ -95,12 +95,12 @@ public class PlaceTileAction implements Action {
                         return;
                     }
                     if (type == Tile.Type.URBANIZED_AREA) {
-                        if (targetTile.getNeighbors().stream().filter(tile -> Tile.isCity(tile.getType())).count() < 2) {
+                        if (targetTile.getNeighbors().stream().filter(Tile::isCity).count() < 2) {
                             System.err.println("Need at least 2 adjacent cities");
                             return;
                         }
                     } else if (Tile.isCity(type)) {
-                        if (targetTile.getNeighbors().stream().anyMatch(tile -> Tile.isCity(tile.getType()))) {
+                        if (targetTile.getNeighbors().stream().anyMatch(Tile::isCity)) {
                             System.err.println("Too close to another city");
                             return;
                         }
@@ -136,8 +136,14 @@ public class PlaceTileAction implements Action {
                         }
                     }
                     if (type == Tile.Type.INDUSTRIAL_CENTER) {
-                        if (targetTile.getNeighbors().stream().filter(tile -> Tile.isCity(tile.getType())).count() < 1) {
+                        if (targetTile.getNeighbors().stream().filter(Tile::isCity).count() < 1) {
                             System.err.println("Need at least 1 adjacent city");
+                            return;
+                        }
+                    }
+                    if (type == Tile.Type.ECOLOGICAL_ZONE) {
+                        if (targetTile.getNeighbors().stream().filter(Tile::isGreenery).count() < 1) {
+                            System.err.println("Need at least 1 adjacent greenery");
                             return;
                         }
                     }
