@@ -7,38 +7,36 @@ import java.util.List;
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.CardWithMarkers;
-import tm.Game;
+import tm.Planet;
 import tm.Tags;
-import tm.Tile;
 import tm.action.Action;
 import tm.action.MarkerDeltaAction;
-import tm.action.PlaceTileAction;
 import tm.effect.PlayCardEffect;
 
-public class EcologicalZone extends CardWithMarkers implements PlayCardEffect {
+public class Decomposers extends CardWithMarkers implements PlayCardEffect {
 
-    public EcologicalZone() {
-        super("Ecological Zone", 12, Tags.PLANT.combine(Tags.ANIMAL));
+    public Decomposers() {
+        super("Decomposers", 5, Tags.MICROBE, true);
     }
 
     @Override
     public int getVPs() {
-        return getMarkerCount() / 2;
+        return getMarkerCount() / 3;
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new PlaceTileAction(Tile.Type.ECOLOGICAL_ZONE);
+    public boolean check(Planet planet, int tolerance) {
+        return planet.getOxygen() >= 3 - tolerance;
     }
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("Place next to greenery tile");
+        return Collections.singletonList("Oxygen must be at least 3%");
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Effect:", "When you play card with", "plant or animal tag", "(including these 2)", "Place marker on this card", "1 vp for each 2 markers", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Effect:", "When you play card with", "plant, animal or microbe tag", "(including this)", "Place marker on this card", "1 vp for each 3 markers", "Currently " + getMarkerCount() + " markers");
     }
 
     @Nullable
@@ -49,6 +47,9 @@ public class EcologicalZone extends CardWithMarkers implements PlayCardEffect {
             markers++;
         }
         if (card.getTags().has(Tags.Type.PLANT)) {
+            markers++;
+        }
+        if (card.getTags().has(Tags.Type.MICROBE)) {
             markers++;
         }
         if (markers > 0) {

@@ -7,6 +7,7 @@ import java.util.Deque;
 import tm.card.AcquiredCompany;
 import tm.card.AdaptedLichen;
 import tm.card.AdvancedAlloys;
+import tm.card.AdvancedEcosystems;
 import tm.card.Algae;
 import tm.card.Ants;
 import tm.card.Archaebacteria;
@@ -33,6 +34,7 @@ import tm.card.ColonizerTrainingCamp;
 import tm.card.Comet;
 import tm.card.CommercialDistrict;
 import tm.card.CupolaCity;
+import tm.card.Decomposers;
 import tm.card.DeepWellHeating;
 import tm.card.DeimosDown;
 import tm.card.DevelopmentCenter;
@@ -44,10 +46,12 @@ import tm.card.EcologicalZone;
 import tm.card.ElectroCatapult;
 import tm.card.EosChasmaNationalPark;
 import tm.card.EquatorialMagnetizer;
+import tm.card.ExtremeColdFungus;
 import tm.card.Farming;
 import tm.card.Fish;
 import tm.card.FoodFactory;
 import tm.card.FueledGenerators;
+import tm.card.FusionPower;
 import tm.card.GHGFactories;
 import tm.card.GHGProducingBacteria;
 import tm.card.GanymedeColony;
@@ -119,6 +123,7 @@ import tm.card.SpaceStation;
 import tm.card.Sponsors;
 import tm.card.Steelworks;
 import tm.card.SubterraneanReservoir;
+import tm.card.SymbioticFungus;
 import tm.card.Tardigrades;
 import tm.card.TollStation;
 import tm.card.TowingComet;
@@ -131,6 +136,8 @@ import tm.card.VestaShipyard;
 import tm.card.ViralEnhancers;
 import tm.card.Virus;
 import tm.card.WaterImportFromEuropa;
+import tm.card.Worms;
+import tm.card.Zeppelins;
 
 // Game deck is built from this class with reflection. There's a single instance of each card
 // through this class.
@@ -262,6 +269,13 @@ public abstract class Cards {
     public static final Card GHG_FACTORIES = new GHGFactories();
     public static final Card SUBTERRANEAN_RESERVOIR = new SubterraneanReservoir();
     public static final Card ECOLOGICAL_ZONE = new EcologicalZone();
+    public static final Card ZEPPELINS = new Zeppelins();
+    public static final Card WORMS = new Worms();
+    public static final Card DECOMPOSERS = new Decomposers();
+    public static final Card FUSION_POWER = new FusionPower();
+    public static final Card SYMBIOTIC_FUNGUS = new SymbioticFungus();
+    public static final Card EXTREME_COLD_FUNGUS = new ExtremeColdFungus();
+    public static final Card ADVANCED_ECOYSTEMS = new AdvancedEcosystems();
 
     public static Deque<Card> buildDeck() {
         final Deque<Card> deck = new ArrayDeque<>();
