@@ -19,6 +19,7 @@ import tm.card.BigAsteroid;
 import tm.card.Birds;
 import tm.card.BlackPolarDust;
 import tm.card.BuildingIndustries;
+import tm.card.BusinessContracts;
 import tm.card.BusinessNetwork;
 import tm.card.CallistoPenalMines;
 import tm.card.Capital;
@@ -117,6 +118,8 @@ import tm.card.WaterImportFromEuropa;
 // Game deck is built from this class with reflection. There's a single instance of each card
 // through this class.
 public abstract class Cards {
+    public static final Card BUSINESS_CONTRACTS = new BusinessContracts();
+
     public static final Card COLONIZER_TRAINING_CAMP = new ColonizerTrainingCamp();
     public static final Card ASTEROID_MINING_CONSORTIUM = new AsteroidMiningConsortium();
     public static final Card DEEP_WELL_HEATING = new DeepWellHeating();

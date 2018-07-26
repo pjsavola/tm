@@ -22,6 +22,11 @@ public class DiscardAction implements Action {
         return new SelectCardsCompletable(game, game.getCurrentPlayer().getCards()) {
 
             @Override
+            public int maxSelection() {
+                return selection.size();
+            }
+
+            @Override
             public boolean check() {
                 if (selectedCards.isEmpty()) {
                     System.err.println("You must discard at least one card");

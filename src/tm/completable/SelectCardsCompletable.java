@@ -82,9 +82,7 @@ public abstract class SelectCardsCompletable implements Completable {
     protected void selectionChanged() {
     }
 
-    public int maxSelection() {
-        return Integer.MAX_VALUE;
-    }
+    public abstract int maxSelection();
 
     public abstract boolean check();
 

@@ -11,14 +11,22 @@ import tm.completable.SelectCardsCompletable;
 
 public class DrawCardsAction implements Action {
 
-    final int amount;
-    final boolean choice;
-    final boolean initial;
+    private final int amount;
+    private int min;
+    private int max;
+    private final boolean initial;
+    private final boolean pay;
 
     public DrawCardsAction(int amount, boolean choice, boolean initial) {
+        this(amount, choice ? 0 : amount, amount, initial, choice);
+    }
+
+    public DrawCardsAction(int amount, int min, int max, boolean initial, boolean pay) {
         this.amount = amount;
-        this.choice = choice;
+        this.min = min;
+        this.max = max;
         this.initial = initial;
+        this.pay = pay;
     }
 
     @Override
@@ -37,20 +45,39 @@ public class DrawCardsAction implements Action {
             }
             drawnCards.add(card);
         }
-        if (choice) {
+        if (drawnCards.size() < amount) {
+            min = Math.min(min, amount);
+            max = amount;
+        }
+        if (min < amount) {
             return new SelectCardsCompletable(game, drawnCards) {
                 private List<Card> discardedCards;
 
                 @Override
+                public int maxSelection() {
+                    return max;
+                }
+
+                @Override
                 public boolean check() {
-                    final Action action = new ResourceDeltaAction(new Resources(-3 * selectedCards.size()));
-                    if (initial || action.check(game)) {
-                        game.getActionHandler().addPendingAction(action);
-                        return true;
-                    } else {
-                        System.err.println("Not enough money to keep the cards");
+                    if (selectedCards.size() < min) {
+                        System.err.println("You should select at least " + min + " cards");
                         return false;
                     }
+                    if (selectedCards.size() > max) {
+                        System.err.println("You should select at most " + max + " cards");
+                        return false;
+                    }
+                    if (pay) {
+                        final Action action = new ResourceDeltaAction(new Resources(-3 * selectedCards.size()));
+                        if (initial || action.check(game)) {
+                            game.getActionHandler().addPendingAction(action);
+                        } else {
+                            System.err.println("Not enough money to keep the cards");
+                            return false;
+                        }
+                    }
+                    return true;
                 }
 
                 @Override
@@ -83,7 +110,11 @@ public class DrawCardsAction implements Action {
 
                 @Override
                 public String getTitle() {
-                    return "Select cards to keep";
+                    if (min == max) {
+                        return "Select " + min + " cards to keep";
+                    } else {
+                        return "Select " + min + "-" + max + " cards to keep";
+                    }
                 }
             };
         } else {
