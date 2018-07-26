@@ -23,7 +23,7 @@ public class Greenhouses extends Card {
         if (Cards.PHOBOS_SPACE_HAVEN.getOwner() != null) {
             cityCount++;
         }
-        if (Cards.GANYMEDE_COLONY != null) {
+        if (Cards.GANYMEDE_COLONY.getOwner() != null) {
             cityCount++;
         }
         return new ResourceDeltaAction(new Resources(0, 0, 0, cityCount, 0, 0));

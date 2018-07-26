@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import tm.card.AcquiredCompany;
 import tm.card.AdaptedLichen;
 import tm.card.AdvancedAlloys;
 import tm.card.Algae;
@@ -18,6 +19,7 @@ import tm.card.BigAsteroid;
 import tm.card.Birds;
 import tm.card.BlackPolarDust;
 import tm.card.BuildingIndustries;
+import tm.card.BusinessNetwork;
 import tm.card.CallistoPenalMines;
 import tm.card.Capital;
 import tm.card.CarbonateProcessing;
@@ -31,6 +33,7 @@ import tm.card.DeimosDown;
 import tm.card.DevelopmentCenter;
 import tm.card.DomedCrater;
 import tm.card.EarthCatapult;
+import tm.card.EarthOffice;
 import tm.card.ElectroCatapult;
 import tm.card.EosChasmaNationalPark;
 import tm.card.EquatorialMagnetizer;
@@ -61,6 +64,8 @@ import tm.card.Mangrove;
 import tm.card.MarsUniversity;
 import tm.card.MartianRail;
 import tm.card.MassConverter;
+import tm.card.MediaArchives;
+import tm.card.MediaGroup;
 import tm.card.MethaneFromTitan;
 import tm.card.Mine;
 import tm.card.MineralDeposit;
@@ -73,7 +78,9 @@ import tm.card.NitrogenRichAsteroid;
 import tm.card.NoctisCity;
 import tm.card.NuclearPower;
 import tm.card.NuclearZone;
+import tm.card.OpenCity;
 import tm.card.OptimalAerobraking;
+import tm.card.OreProcessor;
 import tm.card.PeroxidePower;
 import tm.card.PhobosSpaceHaven;
 import tm.card.PhysicsComplex;
@@ -107,6 +114,8 @@ import tm.card.ViralEnhancers;
 import tm.card.Virus;
 import tm.card.WaterImportFromEuropa;
 
+// Game deck is built from this class with reflection. There's a single instance of each card
+// through this class.
 public abstract class Cards {
     public static final Card COLONIZER_TRAINING_CAMP = new ColonizerTrainingCamp();
     public static final Card ASTEROID_MINING_CONSORTIUM = new AsteroidMiningConsortium();
@@ -210,6 +219,13 @@ public abstract class Cards {
     public static final Card IRONWORKS = new Ironworks();
     public static final Card POWER_GRID = new PowerGrid();
     public static final Card STEELWORKS = new Steelworks();
+    public static final Card ORE_PROCESSOR = new OreProcessor();
+    public static final Card EARTH_OFFICE = new EarthOffice();
+    public static final Card ACQUIRED_COMPANY = new AcquiredCompany();
+    public static final Card MEDIA_ARCHIVES = new MediaArchives();
+    public static final Card OPEN_CITY = new OpenCity();
+    public static final Card MEDIA_GROUP = new MediaGroup();
+    public static final Card BUSINESS_NETWORK = new BusinessNetwork();
 
     public static Deque<Card> buildDeck() {
         final Deque<Card> deck = new ArrayDeque<>();
