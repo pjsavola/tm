@@ -18,7 +18,7 @@ import tm.requirement.OceanRequirement;
 public class Capital extends Card {
 
     public Capital() {
-        super("Capital", 26, Tags.BUILDING.combine(Tags.CITY), new OceanRequirement(4, true));
+        super("Capital", 26, Tags.BUILDING_CITY, new OceanRequirement(4, true));
     }
 
     @Override

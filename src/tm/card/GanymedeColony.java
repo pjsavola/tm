@@ -11,7 +11,7 @@ import tm.effect.ScoringEffect;
 public class GanymedeColony extends Card implements ScoringEffect {
 
     public GanymedeColony() {
-        super("Ganymede Colony", 20, Tags.SPACE.combine(Tags.CITY).combine(Tags.JOVIAN));
+        super("Ganymede Colony", 20, Tags.SPACE_JOVIAN.combine(Tags.CITY));
     }
 
     @Override

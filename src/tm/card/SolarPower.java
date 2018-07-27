@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class SolarPower extends Card {
 
     public SolarPower() {
-        super("Solar Power", 11, Tags.BUILDING.combine(Tags.POWER));
+        super("Solar Power", 11, Tags.BUILDING_POWER);
     }
 
     @Override

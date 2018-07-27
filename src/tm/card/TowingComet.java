@@ -16,7 +16,7 @@ import tm.action.ResourceDeltaAction;
 public class TowingComet extends Card {
 
     public TowingComet() {
-        super("Towing Comet", 23, Tags.SPACE.combine(Tags.EVENT));
+        super("Towing Comet", 23, Tags.SPACE_EVENT);
     }
 
     @Override

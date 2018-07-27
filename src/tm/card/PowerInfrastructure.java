@@ -42,7 +42,7 @@ public class PowerInfrastructure extends Card {
     };
 
     public PowerInfrastructure() {
-        super("Power Infrastructure", 4, Tags.BUILDING.combine(Tags.POWER));
+        super("Power Infrastructure", 4, Tags.BUILDING_POWER);
     }
 
     @Override

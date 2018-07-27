@@ -17,7 +17,7 @@ import tm.action.IncomeDeltaAction;
 public class AerobrakedAmmoniaAsteroid extends Card {
 
     public AerobrakedAmmoniaAsteroid() {
-        super("Aerobraked Ammonia Asteroid", 26, Tags.SPACE.combine(Tags.EVENT));
+        super("Aerobraked Ammonia Asteroid", 26, Tags.SPACE_EVENT);
     }
 
     @Override

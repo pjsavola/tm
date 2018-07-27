@@ -14,7 +14,7 @@ import tm.action.IncomeDeltaAction;
 public class HeatTrappers extends Card {
 
     public HeatTrappers() {
-        super("Heat Trappers", 6, Tags.BUILDING.combine(Tags.POWER));
+        super("Heat Trappers", 6, Tags.BUILDING_POWER);
     }
 
     @Override

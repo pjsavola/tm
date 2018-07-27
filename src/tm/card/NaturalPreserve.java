@@ -18,7 +18,7 @@ import tm.requirement.OxygenRequirement;
 public class NaturalPreserve extends Card {
 
     public NaturalPreserve() {
-        super("Natural Preserve", 9, Tags.SCIENCE.combine(Tags.BUILDING), new OxygenRequirement(4, false));
+        super("Natural Preserve", 9, Tags.SCIENCE_BUILDING, new OxygenRequirement(4, false));
     }
 
     @Override

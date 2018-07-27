@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class MedicalLab extends Card {
 
     public MedicalLab() {
-        super("Medical Lab", 13, Tags.SCIENCE.combine(Tags.BUILDING));
+        super("Medical Lab", 13, Tags.SCIENCE_BUILDING);
     }
 
     @Override

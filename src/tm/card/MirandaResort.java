@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class MirandaResort extends Card {
 
     public MirandaResort() {
-        super("Miranda Resort", 12, Tags.SPACE.combine(Tags.JOVIAN));
+        super("Miranda Resort", 12, Tags.SPACE_JOVIAN);
     }
 
     @Override

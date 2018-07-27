@@ -24,7 +24,7 @@ public class SpaceElevator extends Card {
     };
 
     public SpaceElevator() {
-        super("Space Elevator", 27, Tags.BUILDING.combine(Tags.SCIENCE));
+        super("Space Elevator", 27, Tags.SCIENCE_BUILDING);
     }
 
     @Override

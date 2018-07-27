@@ -17,7 +17,7 @@ import tm.requirement.TagRequirement;
 public class TectonicStressPower extends Card {
 
     public TectonicStressPower() {
-        super("Tectonic Stress Power", 18, Tags.BUILDING.combine(Tags.POWER), new TagRequirement(Tags.Type.SCIENCE.createTags(2)));
+        super("Tectonic Stress Power", 18, Tags.BUILDING_POWER, new TagRequirement(Tags.SCIENCE_2));
     }
 
     @Override

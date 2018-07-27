@@ -18,7 +18,7 @@ import tm.action.ResourceDeltaAction;
 public class ImportedNitrogen extends Card {
 
     public ImportedNitrogen() {
-        super("Imported Nitrogen", 23, Tags.SPACE.combine(Tags.EARTH).combine(Tags.EVENT));
+        super("Imported Nitrogen", 23, Tags.SPACE_EARTH_EVENT);
     }
 
     @Override

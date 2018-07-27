@@ -15,7 +15,7 @@ import tm.action.AddWaterAction;
 public class GiantIceAsteroid extends Card {
 
     public GiantIceAsteroid() {
-        super("Giant Ice Asteroid", 36, Tags.SPACE.combine(Tags.EVENT));
+        super("Giant Ice Asteroid", 36, Tags.SPACE_EVENT);
     }
 
     @Override

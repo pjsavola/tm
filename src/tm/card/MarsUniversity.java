@@ -18,7 +18,7 @@ import tm.effect.PlayCardEffect;
 public class MarsUniversity extends Card implements PlayCardEffect {
 
     public MarsUniversity() {
-        super("Mars University", 8, Tags.SCIENCE.combine(Tags.BUILDING), null, true);
+        super("Mars University", 8, Tags.SCIENCE_BUILDING, null, true);
     }
 
     @Override

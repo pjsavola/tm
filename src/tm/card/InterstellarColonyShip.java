@@ -10,7 +10,7 @@ import tm.requirement.TagRequirement;
 public class InterstellarColonyShip extends Card {
 
     public InterstellarColonyShip() {
-        super("Interstellar Colony Ship", 24, Tags.SPACE.combine(Tags.EARTH).combine(Tags.EVENT), new TagRequirement(Tags.Type.SCIENCE.createTags(5)));
+        super("Interstellar Colony Ship", 24, Tags.SPACE_EARTH_EVENT, new TagRequirement(Tags.Type.SCIENCE.createTags(5)));
     }
 
     @Override

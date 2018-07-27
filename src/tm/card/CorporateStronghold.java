@@ -17,7 +17,7 @@ import tm.action.PlaceTileAction;
 public class CorporateStronghold extends Card {
 
     public CorporateStronghold() {
-        super("Corporate Stronghold", 11, Tags.BUILDING.combine(Tags.CITY));
+        super("Corporate Stronghold", 11, Tags.BUILDING_CITY);
     }
 
     @Override

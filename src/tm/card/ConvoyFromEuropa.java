@@ -14,7 +14,7 @@ import tm.action.DrawCardsAction;
 public class ConvoyFromEuropa extends Card {
 
     public ConvoyFromEuropa() {
-        super("Convoy From Europa", 15, Tags.SPACE.combine(Tags.EVENT));
+        super("Convoy From Europa", 15, Tags.SPACE_EVENT);
     }
 
     @Override

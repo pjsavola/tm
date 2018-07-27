@@ -15,7 +15,7 @@ import tm.action.ResourceDeltaAction;
 public class ImportedGHG extends Card {
 
     public ImportedGHG() {
-        super("Imported GHG", 7, Tags.SPACE.combine(Tags.EARTH).combine(Tags.EVENT));
+        super("Imported GHG", 7, Tags.SPACE_EARTH_EVENT);
     }
 
     @Override

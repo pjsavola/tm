@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class FueledGenerators extends Card {
 
     public FueledGenerators() {
-        super("Fueled Generators", 1, Tags.BUILDING.combine(Tags.POWER));
+        super("Fueled Generators", 1, Tags.BUILDING_POWER);
     }
 
     @Override

@@ -16,7 +16,7 @@ import tm.requirement.TagRequirement;
 public class Plantation extends Card {
 
     public Plantation() {
-        super("Plantation", 15, Tags.PLANT, new TagRequirement(Tags.Type.SCIENCE.createTags(2)));
+        super("Plantation", 15, Tags.PLANT, new TagRequirement(Tags.SCIENCE_2));
     }
 
     @Override

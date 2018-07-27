@@ -23,7 +23,7 @@ public class DevelopmentCenter extends Card {
     };
 
     public DevelopmentCenter() {
-        super("Development Center", 11, Tags.BUILDING.combine(Tags.SCIENCE));
+        super("Development Center", 11, Tags.SCIENCE_BUILDING);
     }
 
     @Override

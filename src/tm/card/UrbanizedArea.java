@@ -17,7 +17,7 @@ import tm.action.PlaceTileAction;
 public class UrbanizedArea extends Card {
 
     public UrbanizedArea() {
-        super("Urbanized Area", 10, Tags.BUILDING.combine(Tags.CITY));
+        super("Urbanized Area", 10, Tags.BUILDING_CITY);
     }
 
     @Override

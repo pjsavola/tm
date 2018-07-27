@@ -11,7 +11,7 @@ import tm.effect.ScoringEffect;
 public class IoMiningIndustries extends Card implements ScoringEffect {
 
     public IoMiningIndustries() {
-        super("Io Mining Industries", 41, Tags.SPACE.combine(Tags.JOVIAN));
+        super("Io Mining Industries", 41, Tags.SPACE_JOVIAN);
     }
 
     @Override

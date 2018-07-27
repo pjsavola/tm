@@ -19,7 +19,7 @@ import tm.requirement.OxygenRequirement;
 public class OpenCity extends Card {
 
     public OpenCity() {
-        super("Open City", 23, Tags.BUILDING.combine(Tags.CITY), new OxygenRequirement(12, true));
+        super("Open City", 23, Tags.BUILDING_CITY, new OxygenRequirement(12, true));
     }
 
     @Override

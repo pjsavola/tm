@@ -14,7 +14,7 @@ import tm.requirement.OceanRequirement;
 public class GreatDam extends Card {
 
     public GreatDam() {
-        super("Great Dam", 12, Tags.BUILDING.combine(Tags.POWER), new OceanRequirement(4, true));
+        super("Great Dam", 12, Tags.BUILDING_POWER, new OceanRequirement(4, true));
     }
 
     @Override

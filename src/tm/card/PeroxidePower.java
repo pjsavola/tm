@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class PeroxidePower extends Card {
 
     public PeroxidePower() {
-        super("Peroxide Power", 7, Tags.BUILDING.combine(Tags.POWER));
+        super("Peroxide Power", 7, Tags.BUILDING_POWER);
     }
 
     @Override

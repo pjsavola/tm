@@ -19,7 +19,7 @@ import tm.requirement.OxygenRequirement;
 public class DomedCrater extends Card {
 
     public DomedCrater() {
-        super("Domed Crater", 24, Tags.BUILDING.combine(Tags.CITY), new OxygenRequirement(7, false));
+        super("Domed Crater", 24, Tags.BUILDING_CITY, new OxygenRequirement(7, false));
     }
 
     @Override

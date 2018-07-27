@@ -14,7 +14,7 @@ import tm.effect.DiscountEffect;
 public class ResearchOutpost extends Card implements DiscountEffect {
 
     public ResearchOutpost() {
-        super("Research Outpost", 18, Tags.SCIENCE.combine(Tags.BUILDING).combine(Tags.CITY), null, true);
+        super("Research Outpost", 18, Tags.SCIENCE.combine(Tags.BUILDING_CITY), null, true);
     }
 
     @Override

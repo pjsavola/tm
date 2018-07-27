@@ -15,7 +15,7 @@ import tm.requirement.OxygenRequirement;
 public class BiomassCombustors extends Card {
 
     public BiomassCombustors() {
-        super("Biomass Combustors", 4, Tags.BUILDING.combine(Tags.POWER), new OxygenRequirement(6, true));
+        super("Biomass Combustors", 4, Tags.BUILDING_POWER, new OxygenRequirement(6, true));
     }
 
     @Override

@@ -14,7 +14,7 @@ import tm.requirement.TagRequirement;
 public class GeneRepair extends Card {
 
     public GeneRepair() {
-        super("Gene Repair", 12, Tags.SCIENCE, new TagRequirement(Tags.Type.SCIENCE.createTags(3)));
+        super("Gene Repair", 12, Tags.SCIENCE, new TagRequirement(Tags.SCIENCE_3));
     }
 
     @Override

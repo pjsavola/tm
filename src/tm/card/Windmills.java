@@ -14,7 +14,7 @@ import tm.requirement.OxygenRequirement;
 public class Windmills extends Card {
 
     public Windmills() {
-        super("Windmills", 6, Tags.BUILDING.combine(Tags.POWER), new OxygenRequirement(7, true));
+        super("Windmills", 6, Tags.BUILDING_POWER, new OxygenRequirement(7, true));
     }
 
     @Override

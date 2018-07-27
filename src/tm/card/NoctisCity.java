@@ -18,7 +18,7 @@ import tm.completable.InstantCompletable;
 public class NoctisCity extends Card {
 
     public NoctisCity() {
-        super("Noctis City", 18, Tags.BUILDING.combine(Tags.CITY));
+        super("Noctis City", 18, Tags.BUILDING_CITY);
     }
 
     @Override

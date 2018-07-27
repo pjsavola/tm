@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class ImportOfAdvancedGHG extends Card {
 
     public ImportOfAdvancedGHG() {
-        super("Import of Advanced GHG", 9, Tags.SPACE.combine(Tags.EARTH).combine(Tags.EVENT));
+        super("Import of Advanced GHG", 9, Tags.SPACE_EARTH_EVENT);
     }
 
     @Override

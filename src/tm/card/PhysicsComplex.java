@@ -23,7 +23,7 @@ public class PhysicsComplex extends CardWithMarkers {
     };
 
     public PhysicsComplex() {
-        super("Physics Complex", 12, Tags.SCIENCE.combine(Tags.BUILDING));
+        super("Physics Complex", 12, Tags.SCIENCE_BUILDING);
     }
 
     @Override

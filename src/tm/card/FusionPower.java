@@ -14,7 +14,7 @@ import tm.requirement.TagRequirement;
 public class FusionPower extends Card {
 
     public FusionPower() {
-        super("Fusion Power", 14, Tags.SCIENCE.combine(Tags.BUILDING).combine(Tags.POWER), new TagRequirement(Tags.Type.POWER.createTags(2)));
+        super("Fusion Power", 14, Tags.SCIENCE.combine(Tags.BUILDING_POWER), new TagRequirement(Tags.Type.POWER.createTags(2)));
     }
 
     @Override

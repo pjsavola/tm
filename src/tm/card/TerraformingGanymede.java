@@ -12,7 +12,7 @@ import tm.action.AddTerraformingRatingAction;
 public class TerraformingGanymede extends Card {
 
     public TerraformingGanymede() {
-        super("Terraforming Ganymede", 33, Tags.SPACE.combine(Tags.JOVIAN));
+        super("Terraforming Ganymede", 33, Tags.SPACE_JOVIAN);
     }
 
     @Override

@@ -13,7 +13,7 @@ import tm.action.AddWaterAction;
 public class IceAsteroid extends Card {
 
     public IceAsteroid() {
-        super("Ice Asteroid", 23, Tags.SPACE.combine(Tags.EVENT));
+        super("Ice Asteroid", 23, Tags.SPACE_EVENT);
     }
 
     @Override

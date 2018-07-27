@@ -19,7 +19,7 @@ import tm.effect.PlayCardEffect;
 public class ImmigrantCity extends Card implements PlaceTileEffect, PlayCardEffect {
 
     public ImmigrantCity() {
-        super("Immigrant City", 13, Tags.BUILDING.combine(Tags.CITY), null, true);
+        super("Immigrant City", 13, Tags.BUILDING_CITY, null, true);
     }
 
     @Override

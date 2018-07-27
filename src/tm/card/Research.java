@@ -12,7 +12,7 @@ import tm.action.DrawCardsAction;
 public class Research extends Card {
 
     public Research() {
-        super("Research", 11, Tags.Type.SCIENCE.createTags(2));
+        super("Research", 11, Tags.SCIENCE_2);
     }
 
     @Override

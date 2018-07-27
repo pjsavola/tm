@@ -18,7 +18,7 @@ import tm.action.ResourceDeltaAction;
 public class ImportedHydrogen extends Card {
 
     public ImportedHydrogen() {
-        super("Imported Hydrogen", 16, Tags.SPACE.combine(Tags.EARTH).combine(Tags.EVENT));
+        super("Imported Hydrogen", 16, Tags.SPACE_EARTH_EVENT);
     }
 
     @Override

@@ -18,7 +18,7 @@ import tm.requirement.OxygenRequirement;
 public class CupolaCity extends Card {
 
     public CupolaCity() {
-        super("Cupola City", 16, Tags.BUILDING.combine(Tags.CITY), new OxygenRequirement(9, false));
+        super("Cupola City", 16, Tags.BUILDING_CITY, new OxygenRequirement(9, false));
     }
 
     @Override

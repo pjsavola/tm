@@ -30,7 +30,7 @@ public class WaterImportFromEuropa extends Card implements ScoringEffect {
     };
 
     public WaterImportFromEuropa() {
-        super("Water Import From Europa", 25, Tags.SPACE.combine(Tags.JOVIAN));
+        super("Water Import From Europa", 25, Tags.SPACE_JOVIAN);
     }
 
     @Override

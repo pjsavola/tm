@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class GeothermalPower extends Card {
 
     public GeothermalPower() {
-        super("Geothermal Power", 11, Tags.BUILDING.combine(Tags.POWER));
+        super("Geothermal Power", 11, Tags.BUILDING_POWER);
     }
 
     @Override

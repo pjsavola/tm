@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class NuclearPower extends Card {
 
     public NuclearPower() {
-        super("Nuclear Power", 10, Tags.BUILDING.combine(Tags.POWER));
+        super("Nuclear Power", 10, Tags.BUILDING_POWER);
     }
 
     @Override

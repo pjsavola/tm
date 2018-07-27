@@ -13,7 +13,7 @@ import tm.action.IncomeDeltaAction;
 public class CallistoPenalMines extends Card {
 
     public CallistoPenalMines() {
-        super("Callisto Penal Mines", 24, Tags.SPACE.combine(Tags.JOVIAN));
+        super("Callisto Penal Mines", 24, Tags.SPACE_JOVIAN);
     }
 
     @Override

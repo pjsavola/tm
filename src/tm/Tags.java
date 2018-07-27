@@ -51,6 +51,16 @@ public class Tags {
     public static final Tags ANIMAL = Type.ANIMAL.createTag();
     public static final Tags MICROBE = Type.MICROBE.createTag();
 
+    // Common combos
+    public static final Tags SCIENCE_2 = Type.SCIENCE.createTags(2);
+    public static final Tags SCIENCE_3 = Type.SCIENCE.createTags(3);
+    public static final Tags SCIENCE_BUILDING = SCIENCE.combine(BUILDING);
+    public static final Tags BUILDING_CITY = BUILDING.combine(CITY);
+    public static final Tags BUILDING_POWER = BUILDING.combine(POWER);
+    public static final Tags SPACE_JOVIAN = SPACE.combine(JOVIAN);
+    public static final Tags SPACE_EVENT = SPACE.combine(EVENT);
+    public static final Tags SPACE_EARTH_EVENT = SPACE_EVENT.combine(EARTH);
+
     private final int[] tagCounts = new int[Type.values().length];
 
     private Tags() {

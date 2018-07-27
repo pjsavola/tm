@@ -12,7 +12,7 @@ import tm.action.DrawCardsAction;
 public class TechnologyDemonstration extends Card {
 
     public TechnologyDemonstration() {
-        super("Technology Demonstration", 5, Tags.SCIENCE.combine(Tags.SPACE).combine(Tags.EVENT));
+        super("Technology Demonstration", 5, Tags.SCIENCE.combine(Tags.SPACE_EVENT));
     }
 
     @Override

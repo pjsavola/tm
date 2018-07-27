@@ -15,7 +15,7 @@ import tm.requirement.TagRequirement;
 public class LightningHarvest extends Card {
 
     public LightningHarvest() {
-        super("LightningHarvest", 8, Tags.POWER, new TagRequirement(Tags.Type.SCIENCE.createTags(3)));
+        super("LightningHarvest", 8, Tags.POWER, new TagRequirement(Tags.SCIENCE_3));
     }
 
     @Override

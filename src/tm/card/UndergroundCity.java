@@ -16,7 +16,7 @@ import tm.action.PlaceTileAction;
 public class UndergroundCity extends Card {
 
     public UndergroundCity() {
-        super("Underground City", 18, Tags.BUILDING.combine(Tags.CITY));
+        super("Underground City", 18, Tags.BUILDING_CITY);
     }
 
     @Override

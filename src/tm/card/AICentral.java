@@ -25,7 +25,7 @@ public class AICentral extends Card {
     };
 
     public AICentral() {
-        super("AI Central", 21, Tags.SCIENCE.combine(Tags.BUILDING), new TagRequirement(Tags.Type.SCIENCE.createTags(3)));
+        super("AI Central", 21, Tags.SCIENCE_BUILDING, new TagRequirement(Tags.SCIENCE_3));
     }
 
     @Override

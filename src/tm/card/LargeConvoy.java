@@ -19,7 +19,7 @@ import tm.action.ResourceDeltaAction;
 public class LargeConvoy extends Card {
 
     public LargeConvoy() {
-        super("Large Convoy", 36, Tags.SPACE.combine(Tags.EARTH).combine(Tags.EVENT));
+        super("Large Convoy", 36, Tags.SPACE_EARTH_EVENT);
     }
 
     @Override
