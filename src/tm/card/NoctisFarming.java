@@ -9,38 +9,42 @@ import tm.Game;
 import tm.Planet;
 import tm.Resources;
 import tm.Tags;
-import tm.Tile;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
-import tm.action.PlaceTileAction;
+import tm.action.ResourceDeltaAction;
 
-public class NaturalPreserve extends Card {
+public class NoctisFarming extends Card {
 
-    public NaturalPreserve() {
-        super("Natural Preserve", 9, Tags.SCIENCE.combine(Tags.BUILDING));
+    public NoctisFarming() {
+        super("Noctis Farming", 10, Tags.BUILDING.combine(Tags.PLANT));
     }
 
     @Override
     public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() <= 4 + tolerance;
+        return planet.getTemperature() >= -20 - 2 * tolerance;
+    }
+
+    @Override
+    public int getVPs() {
+        return 1;
     }
 
     @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(
-            new PlaceTileAction(Tile.Type.NATURAL_PRESERVE, true),
+            new ResourceDeltaAction(Resources.PLANT_2),
             new IncomeDeltaAction(Resources.MONEY)
         );
     }
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("Oxygen must be 4% or less");
+        return Collections.singletonList("Requires -20C or warmer");
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 money income", "Place tile next to no other tile");
+        return Arrays.asList("2 plants", "1 money income");
     }
 }

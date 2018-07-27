@@ -28,7 +28,8 @@ public class Tile {
         ECOLOGICAL_ZONE("images/forest.png"),
         LAVA_FLOWS("images/forest.png"),
         MOHOLE_AREA("images/forest.png"),
-        MISC("images/city.png");
+        RESTRICTED_AREA("images/forest.png"),
+        NATURAL_PRESERVE("images/forest.png");
 
         private final BufferedImage image;
 

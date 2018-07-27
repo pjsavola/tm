@@ -128,6 +128,10 @@ public class Player {
         return resources.getTitanium();
     }
 
+    public int getEnergy() {
+        return resources.getEnergy();
+    }
+
     public int getSteelValue() {
         int value = 2;
         if (corporation instanceof ValueEffect) {
@@ -154,8 +158,8 @@ public class Player {
         return value;
     }
 
-    public int getDiscount(Card card) {
-        int discount = 0;
+    public int getDiscount(Card card, int extraDiscount) {
+        int discount = extraDiscount;
         if (corporation instanceof DiscountEffect) {
             discount += ((DiscountEffect) corporation).getDiscount(card);
         }
@@ -167,8 +171,8 @@ public class Player {
         return Math.min(card.getCost(), discount);
     }
 
-    public boolean fulfillsRequirements(Card card, Planet planet) {
-        int tolerance = 0;
+    public boolean fulfillsRequirements(Card card, Game game, int extraTolerance) {
+        int tolerance = extraTolerance;
         if (corporation instanceof RequirementEffect) {
             tolerance += ((RequirementEffect) corporation).getTolerance();
         }
@@ -177,7 +181,7 @@ public class Player {
                 tolerance += ((RequirementEffect) playedCard).getTolerance();
             }
         }
-        return card.check(planet, tolerance) && card.check(this);
+        return card.check(game.getPlanet(), tolerance) && card.check(this) && card.check(game, tolerance);
     }
 
     public void addTags(Tags tags) {
@@ -230,6 +234,11 @@ public class Player {
             }
         }
         return total.intValue();
+    }
+
+    // Nasty hack...
+    public int getCityCount() {
+        return (int) ownedTiles.stream().filter(Tile::isCity).count() + 2;
     }
 
     @Nullable

@@ -7,17 +7,15 @@ import java.util.List;
 import tm.ActionType;
 import tm.Card;
 import tm.Game;
-import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddWaterAction;
 import tm.action.CardActionWithCost;
-import tm.effect.ScoringEffect;
 
-public class WaterImportFromEuropa extends Card implements ScoringEffect {
+public class AquiferPumping extends Card {
 
-    private final Action action = new CardActionWithCost(true, ActionType.WATER_IMPORT_FROM_EUROPA, new Resources(-12), Resources.EMPTY, false, true) {
+    private final Action action = new CardActionWithCost(true, ActionType.AQUIFER_PUMPING, new Resources(-8), Resources.EMPTY, true, false) {
         @Override
         public boolean check(Game game) {
             return game.getPlanet().getWaterRemaining() > 0 && super.check(game);
@@ -29,8 +27,8 @@ public class WaterImportFromEuropa extends Card implements ScoringEffect {
         }
     };
 
-    public WaterImportFromEuropa() {
-        super("Water Import From Europa", 25, Tags.SPACE.combine(Tags.JOVIAN));
+    public AquiferPumping() {
+        super("Aquifer Pumping", 18, Tags.BUILDING);
     }
 
     @Override
@@ -40,11 +38,6 @@ public class WaterImportFromEuropa extends Card implements ScoringEffect {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Pay 12 money for an ocean", "(titanium may be used)", "", "1 VP for each jovian tag");
-    }
-
-    @Override
-    public int getVPs(Player player) {
-        return player.getTags().getCount(Tags.Type.JOVIAN);
+        return Arrays.asList("Action:", "Pay 8 money for an ocean", "(steel may be used)");
     }
 }

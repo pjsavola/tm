@@ -11,22 +11,24 @@ public abstract class CardActionWithCost extends CardAction {
 
     private final Resources resourceDelta;
     private final Resources incomeDelta;
+    private final boolean steel;
     private final boolean titanium;
     @Nullable
     private PlayCardAction.Payment payment;
 
     public CardActionWithCost(boolean undoable, ActionType type, Resources resourceDelta) {
-        this(undoable, type, resourceDelta, Resources.EMPTY, false);
+        this(undoable, type, resourceDelta, Resources.EMPTY, false, false);
     }
 
     public CardActionWithCost(boolean undoable, ActionType type, Resources resourceDelta, Resources incomeDelta) {
-        this(undoable, type, resourceDelta, incomeDelta, false);
+        this(undoable, type, resourceDelta, incomeDelta, false, false);
     }
 
-    public CardActionWithCost(boolean undoable, ActionType type, Resources resourceDelta, Resources incomeDelta, boolean titainum) {
+    public CardActionWithCost(boolean undoable, ActionType type, Resources resourceDelta, Resources incomeDelta, boolean steel, boolean titainum) {
         super(undoable, type);
         this.resourceDelta = resourceDelta;
         this.incomeDelta = incomeDelta;
+        this.steel = steel;
         this.titanium = titainum;
     }
 
@@ -36,15 +38,22 @@ public abstract class CardActionWithCost extends CardAction {
             return false;
         }
         final Player player = game.getCurrentPlayer();
-        final int totalTitaniumValue = titanium ? player.getTitanium() * player.getTitaniumValue() : 0;
-        if (!player.canAdjustResources(resourceDelta.combine(new Resources(totalTitaniumValue)))) {
+        final int resourceValue;
+        if (steel) {
+            resourceValue = player.getSteel() * player.getSteelValue();
+        } else if (titanium) {
+            resourceValue = player.getTitanium() * player.getTitaniumValue();
+        } else {
+            resourceValue = 0;
+        }
+        if (!player.canAdjustResources(resourceDelta.combine(new Resources(resourceValue)))) {
             return false;
         }
         return player.canAdjustIncome(incomeDelta);
     }
 
     public void initPayment(Player player) {
-        payment = new PlayCardAction.Payment(player, false, titanium, resourceDelta, incomeDelta, 0);
+        payment = new PlayCardAction.Payment(player, steel, titanium, resourceDelta, incomeDelta, 0);
     }
 
     public void resetPayment(Player player) {

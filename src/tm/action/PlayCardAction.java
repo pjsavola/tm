@@ -13,6 +13,18 @@ import tm.completable.SelectCardsCompletable;
 
 public class PlayCardAction implements Action {
 
+    private final int discount;
+    private final int tolerance;
+
+    public PlayCardAction() {
+        this(0, 0);
+    }
+
+    public PlayCardAction(int discount, int tolerance) {
+        this.discount = discount;
+        this.tolerance = tolerance;
+    }
+
     @Override
     public boolean check(Game game) {
         return !game.getCurrentPlayer().getCards().isEmpty();
@@ -20,7 +32,7 @@ public class PlayCardAction implements Action {
 
     @Override
     public Completable begin(Game game) {
-        return new PlayCardCompletable(game);
+        return new PlayCardCompletable(game, discount, tolerance);
     }
 
     private static class PlayCardCompletable extends SelectCardsCompletable {
@@ -31,11 +43,15 @@ public class PlayCardAction implements Action {
         private Card selectedCard;
         @Nullable
         private Payment payment;
+        private final int discount;
+        private final int tolerance;
 
-        public PlayCardCompletable(Game game) {
+        public PlayCardCompletable(Game game, int discount, int tolerance) {
             super(game, new ArrayList<>(game.getCurrentPlayer().getCards()));
             player = game.getCurrentPlayer();
             this.game = game;
+            this.discount = discount;
+            this.tolerance = tolerance;
         }
 
         @Override
@@ -49,7 +65,7 @@ public class PlayCardAction implements Action {
                 System.err.println("You must select a card to play it");
                 return false;
             }
-            if (!player.fulfillsRequirements(selectedCard, game.getPlanet())) {
+            if (!player.fulfillsRequirements(selectedCard, game, tolerance)) {
                 System.err.println("Card requirements not fulfilled");
                 return false;
             }
@@ -120,7 +136,14 @@ public class PlayCardAction implements Action {
         protected void selectionChanged() {
             if (!selectedCards.isEmpty()) {
                 selectedCard = selectedCards.iterator().next();
-                payment = new Payment(player, selectedCard);
+                payment = new Payment(
+                    player,
+                    selectedCard.getTags().has(Tags.Type.BUILDING),
+                    selectedCard.getTags().has(Tags.Type.SPACE),
+                    new Resources(-selectedCard.getCost()),
+                    Resources.EMPTY,
+                    player.getDiscount(selectedCard, discount)
+                );
             } else {
                 player.setResourcesDelta(new Resources(0));
                 player.setIncomeDelta(new Resources(0));
@@ -139,10 +162,6 @@ public class PlayCardAction implements Action {
         private final int materialValue;
         private final int materialMax;
         private int materialsUsed;
-
-        private Payment(Player player, Card card) {
-            this(player, card.getTags().has(Tags.Type.BUILDING), card.getTags().has(Tags.Type.SPACE), new Resources(-card.getCost()), Resources.EMPTY, player.getDiscount(card));
-        }
 
         public Payment(Player player, boolean steel, boolean titanium, Resources resourceDelta, Resources incomeDelta, int discount) {
             this.player = player;

@@ -19,7 +19,7 @@ public class Cartel extends Card {
     @Override
     public Action getInitialAction(Game game) {
         final int earthCount = game.getCurrentPlayer().getTags().getCount(Tags.Type.EARTH);
-        return new IncomeDeltaAction(new Resources(earthCount));
+        return new IncomeDeltaAction(new Resources(earthCount + 1));
     }
 
     @Override

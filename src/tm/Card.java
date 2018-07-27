@@ -77,6 +77,10 @@ public abstract class Card implements Comparable<Card> {
         return true;
     }
 
+    public boolean check(Game game, int tolerance) {
+        return true;
+    }
+
     public int getVPs() {
         return 0;
     }
