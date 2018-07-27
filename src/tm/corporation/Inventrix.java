@@ -10,8 +10,9 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.DrawCardsAction;
 import tm.action.ResourceDeltaAction;
+import tm.effect.RequirementEffect;
 
-public class Inventrix extends Corporation {
+public class Inventrix extends Corporation implements RequirementEffect {
 
     public Inventrix() {
         super("Inventrix", Tags.SCIENCE);
@@ -34,5 +35,10 @@ public class Inventrix extends Corporation {
     @Override
     protected List<String> getContents() {
         return Arrays.asList("45 money", "3 cards", "Has +/- 2 to card requirements");
+    }
+
+    @Override
+    public int getTolerance() {
+        return 2;
     }
 }

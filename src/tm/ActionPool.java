@@ -20,49 +20,150 @@ import tm.action.PlayCardAction;
 import tm.action.ResourceDeltaAction;
 import tm.action.SelectActionAction;
 import tm.action.SwitchRoundAction;
+import tm.card.StandardTechnology;
 import tm.completable.Completable;
+import tm.corporation.Ecoline;
+import tm.corporation.Thorgate;
+import tm.standard.StandardAction;
 
 public class ActionPool {
     private static final Font font = new Font("Arial", Font.BOLD, 12);
     private final Game game;
-    private final List<ActionChain> standardActions = new ArrayList<>();
+    private final List<StandardAction> standardActions = new ArrayList<>();
     private static final Color ENABLED_COLOR = new Color(0xFFFFFF);
     private static final Color DISABLED_COLOR = new Color(0x666666);
 
     public ActionPool(Game game) {
         this.game = game;
-        standardActions.add(new ActionChain(ActionType.DISCARD, "Discard",
-            new DiscardAction()));
-        standardActions.add(new ActionChain(ActionType.ENERGY, "Energy income",
-            new ResourceDeltaAction(new Resources(-11)),
-            new IncomeDeltaAction(new Resources(0, 0, 0, 0, 1, 0))));
-        standardActions.add(new ActionChain(ActionType.TEMPERATURE, "Temperature",
-            new ResourceDeltaAction(new Resources(-14)),
-            new AddTemperatureAction()));
-        standardActions.add(new ActionChain(ActionType.WATER, "Water",
-            new ResourceDeltaAction(new Resources(-18)),
-            new AddWaterAction()));
-        standardActions.add(new ActionChain(ActionType.GREENERY, "Greenery",
-            new ResourceDeltaAction(new Resources(-23)),
-            new PlaceTileAction(Tile.Type.GREENERY),
-            new AddOxygenAction()));
-        standardActions.add(new ActionChain(ActionType.CITY, "City",
-            new ResourceDeltaAction(new Resources(-25)),
-            new PlaceTileAction(Tile.Type.CITY),
-            new IncomeDeltaAction(Resources.MONEY)));
-        standardActions.add(new ActionChain(ActionType.PLANT_TO_GREENERY, "Plant",
-            new ResourceDeltaAction(new Resources(0, 0, 0, -8, 0, 0)),
-            new PlaceTileAction(Tile.Type.GREENERY),
-            new AddOxygenAction()));
-        standardActions.add(new ActionChain(ActionType.HEAT_TO_TEMPERATURE, "Heat",
-            new ResourceDeltaAction(new Resources(0, 0, 0, 0, 0, -8)),
-            new AddTemperatureAction()));
-        standardActions.add(new ActionChain(ActionType.PASS, "Pass",
-            new SwitchRoundAction()));
-        standardActions.add(new ActionChain(ActionType.PLAY, "Play card",
-            new PlayCardAction()));
-        standardActions.add(new ActionChain(ActionType.CUSTOM, "Select action",
-            new SelectActionAction()));
+        standardActions.add(new StandardAction("Sell patents", ActionType.DISCARD) {
+            @Override
+            public Action getInitialAction(Game game) {
+                return new DiscardAction();
+            }
+        });
+        standardActions.add(new StandardAction("Power plant", ActionType.ENERGY) {
+            @Override
+            public Action getInitialAction(Game game) {
+                int cost = -11;
+                if (game.getCurrentPlayer().getCorporation() instanceof Thorgate) {
+                    cost += 3;
+                }
+                int reward = 0;
+                if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof StandardTechnology)) {
+                    reward += 3;
+                }
+                return new ActionChain(
+                    new ResourceDeltaAction(new Resources(cost)),
+                    new IncomeDeltaAction(Resources.ENERGY),
+                    new ResourceDeltaAction(new Resources(reward))
+                );
+            }
+        });
+        standardActions.add(new StandardAction("Asteroid", ActionType.TEMPERATURE) {
+            @Override
+            public Action getInitialAction(Game game) {
+                int reward = 0;
+                if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof StandardTechnology)) {
+                    reward += 3;
+                }
+                return new ActionChain(
+                    new ResourceDeltaAction(new Resources(-14)),
+                    new AddTemperatureAction(),
+                    new ResourceDeltaAction(new Resources(reward))
+                );
+            }
+        });
+        standardActions.add(new StandardAction("Aquifer", ActionType.WATER) {
+            @Override
+            public Action getInitialAction(Game game) {
+                int reward = 0;
+                if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof StandardTechnology)) {
+                    reward += 3;
+                }
+                return new ActionChain(
+                    new ResourceDeltaAction(new Resources(-18)),
+                    new AddWaterAction(),
+                    new ResourceDeltaAction(new Resources(reward))
+                );
+            }
+        });
+        standardActions.add(new StandardAction("Greenery", ActionType.GREENERY) {
+            @Override
+            public Action getInitialAction(Game game) {
+                int reward = 0;
+                if (game.getCurrentPlayer().getCorporation() instanceof Thorgate) {
+                    reward += 4;
+                }
+                if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof StandardTechnology)) {
+                    reward += 3;
+                }
+                return new ActionChain(
+                    new ResourceDeltaAction(new Resources(-23)),
+                    new PlaceTileAction(Tile.Type.GREENERY),
+                    new AddOxygenAction(),
+                    new ResourceDeltaAction(new Resources(reward))
+                );
+            }
+        });
+        standardActions.add(new StandardAction("City", ActionType.CITY) {
+            @Override
+            public Action getInitialAction(Game game) {
+                int reward = 0;
+                if (game.getCurrentPlayer().getCorporation() instanceof Thorgate) {
+                    reward += 4;
+                }
+                if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof StandardTechnology)) {
+                    reward += 3;
+                }
+                return new ActionChain(
+                    new ResourceDeltaAction(new Resources(-25)),
+                    new PlaceTileAction(Tile.Type.CITY),
+                    new IncomeDeltaAction(Resources.MONEY),
+                    new ResourceDeltaAction(new Resources(reward))
+                );
+            }
+        });
+        standardActions.add(new StandardAction("Plant", ActionType.PLANT_TO_GREENERY) {
+            @Override
+            public Action getInitialAction(Game game) {
+                int cost = -8;
+                if (game.getCurrentPlayer().getCorporation() instanceof Ecoline) {
+                    cost++;
+                }
+                return new ActionChain(
+                    new ResourceDeltaAction(new Resources(0, 0, 0, cost, 0, 0)),
+                    new PlaceTileAction(Tile.Type.GREENERY),
+                    new AddOxygenAction()
+                );
+            }
+        });
+        standardActions.add(new StandardAction("Heat", ActionType.HEAT_TO_TEMPERATURE) {
+            @Override
+            public Action getInitialAction(Game game) {
+                return new ActionChain(
+                    new ResourceDeltaAction(new Resources(0, 0, 0, 0, 0, -8)),
+                    new AddTemperatureAction()
+                );
+            }
+        });
+        standardActions.add(new StandardAction("Pass", ActionType.PASS) {
+            @Override
+            public Action getInitialAction(Game game) {
+                return new SwitchRoundAction();
+            }
+        });
+        standardActions.add(new StandardAction("Play card", ActionType.PLAY) {
+            @Override
+            public Action getInitialAction(Game game) {
+                return new PlayCardAction();
+            }
+        });
+        standardActions.add(new StandardAction("Select action", ActionType.CUSTOM) {
+            @Override
+            public Action getInitialAction(Game game) {
+                return new SelectActionAction();
+            }
+        });
     }
 
     @Nullable
@@ -72,9 +173,12 @@ public class ActionPool {
                 return action.begin(game);
             }
         }
-        for (Action action : standardActions) {
-            if (action.getType() == type && action.check(game)) {
-                return action.begin(game);
+        for (StandardAction standardAction : standardActions) {
+            if (standardAction.getType() == type) {
+                final Action action = standardAction.getInitialAction(game);
+                if (action.check(game)) {
+                    return action.begin(game);
+                }
             }
         }
         return null;
@@ -85,10 +189,6 @@ public class ActionPool {
         final boolean canAct = game.getActionHandler().canAct();
         g.setFont(font);
         int i = 13;
-        for (final ActionChain action : standardActions) {
-            //g.setColor(canAct && action.check(game) ? ENABLED_COLOR : DISABLED_COLOR);
-            //renderText(g, action.getKey() + ": " + action.getDescription(), i--);
-        }
         g.setColor(game.getActionHandler().canUndo() ? ENABLED_COLOR : DISABLED_COLOR);
         renderText(g, "u: Undo", 2);
         g.setColor(game.getActionHandler().canRedo() ? ENABLED_COLOR : DISABLED_COLOR);

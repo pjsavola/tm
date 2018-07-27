@@ -27,7 +27,7 @@ public class Tile {
         INDUSTRIAL_CENTER("images/city.png"),
         ECOLOGICAL_ZONE("images/forest.png"),
         LAVA_FLOWS("images/forest.png"),
-        MOHOLE_AREA("images/mohole_area.png"),
+        MOHOLE_AREA("images/forest.png"),
         MISC("images/city.png");
 
         private final BufferedImage image;

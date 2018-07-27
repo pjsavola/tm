@@ -1,10 +1,8 @@
 package tm.corporation;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Corporation;
 import tm.Game;
@@ -27,14 +25,6 @@ public class Thorgate extends Corporation implements DiscountEffect {
         return new ActionChain(
             new ResourceDeltaAction(new Resources(48)),
             new IncomeDeltaAction(Resources.ENERGY));
-    }
-
-    @Override
-    public List<Action> getActions() {
-        return Collections.singletonList(new ActionChain(ActionType.ENERGY, "Energy income",
-            new ResourceDeltaAction(new Resources(-8)),
-            new IncomeDeltaAction(Resources.ENERGY)
-        ));
     }
 
     @Override

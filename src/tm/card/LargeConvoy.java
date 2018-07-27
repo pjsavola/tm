@@ -13,6 +13,7 @@ import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddMarkerAction;
 import tm.action.AddWaterAction;
+import tm.action.DrawCardsAction;
 import tm.action.ResourceDeltaAction;
 
 public class LargeConvoy extends Card {
@@ -50,7 +51,8 @@ public class LargeConvoy extends Card {
                     return 4;
                 }
             },
-            new AddWaterAction()
+            new AddWaterAction(),
+            new DrawCardsAction(2, false, false)
         );
     }
 

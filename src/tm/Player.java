@@ -12,9 +12,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import com.sun.istack.internal.Nullable;
 import tm.action.Action;
-import tm.corporation.Inventrix;
 import tm.effect.DiscountEffect;
 import tm.effect.PlayCardEffect;
+import tm.effect.RequirementEffect;
 import tm.effect.ScoringEffect;
 import tm.effect.ValueEffect;
 
@@ -168,7 +168,15 @@ public class Player {
     }
 
     public boolean fulfillsRequirements(Card card, Planet planet) {
-        int tolerance = corporation instanceof Inventrix ? 2 : 0;
+        int tolerance = 0;
+        if (corporation instanceof RequirementEffect) {
+            tolerance += ((RequirementEffect) corporation).getTolerance();
+        }
+        for (Card playedCard : playedCards) {
+            if (playedCard instanceof RequirementEffect) {
+                tolerance += ((RequirementEffect) playedCard).getTolerance();
+            }
+        }
         return card.check(planet, tolerance) && card.check(this);
     }
 
