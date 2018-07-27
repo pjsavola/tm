@@ -14,15 +14,15 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 
-public class Farming extends Card {
+public class TundraFarming extends Card {
 
-    public Farming() {
-        super("Farming", 16, Tags.MICROBE);
+    public TundraFarming() {
+        super("Tundra Farming", 16, Tags.PLANT);
     }
 
     @Override
     public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= 4 - 2 * tolerance;
+        return planet.getTemperature() >= -6 - 2 * tolerance;
     }
 
     @Override
@@ -33,18 +33,18 @@ public class Farming extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(
-            new ResourceDeltaAction(Resources.PLANT_2),
-            new IncomeDeltaAction(new Resources(2, 0, 0, 2, 0, 0))
+            new ResourceDeltaAction(Resources.PLANT),
+            new IncomeDeltaAction(new Resources(2, 0, 0, 1, 0, 0))
         );
     }
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("Requires +4C or warmer");
+        return Collections.singletonList("Requires -6C or warmer");
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("2 plants", "2 money income", "2 plant income");
+        return Arrays.asList("1 plant", "2 money income", "1 plant income");
     }
 }

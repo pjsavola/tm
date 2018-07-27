@@ -44,12 +44,14 @@ public class AddMarkerAction implements Action {
     @Override
     public Completable begin(Game game) {
         if (cards.isEmpty()) {
+            System.err.println("Empty");
             return new InstantCompletable(game) {
                 @Override
                 public void complete() {
                     final Action action = onEmptySelection();
+                    System.err.println("Empty selection " + action);
                     if (action != null) {
-                        game.getActionHandler().addPendingAction(onEmptySelection());
+                        game.getActionHandler().addPendingAction(action);
                     }
                 }
 
@@ -89,7 +91,7 @@ public class AddMarkerAction implements Action {
                 if (selectedCard == null) {
                     final Action action = onEmptySelection();
                     if (action != null) {
-                        game.getActionHandler().addPendingAction(onEmptySelection());
+                        game.getActionHandler().addPendingAction(action);
                     }
                 } else {
                     selectedCard.adjustMarkers(getMarkerCount(selectedCard));
