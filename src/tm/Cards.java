@@ -75,7 +75,9 @@ import tm.card.Heather;
 import tm.card.Herbivores;
 import tm.card.HiredRaiders;
 import tm.card.IceAsteroid;
+import tm.card.ImportedGHG;
 import tm.card.ImportedHydrogen;
+import tm.card.ImportedNitrogen;
 import tm.card.IndustrialCenter;
 import tm.card.IndustrialMicrobes;
 import tm.card.Insects;
@@ -328,7 +330,9 @@ public abstract class Cards {
     public static final Card LICHEN = new Lichen();
     public static final Card POWER_SUPPLY_CONSORTIUM = new PowerSupplyConsortium();
     public static final Card CONVOY_FROM_EUROPA = new ConvoyFromEuropa();
-    
+    public static final Card IMPORTED_GHG = new ImportedGHG();
+    public static final Card IMPORTED_NITROGEN = new ImportedNitrogen();
+
     public static Deque<Card> buildDeck() {
         final Deque<Card> deck = new ArrayDeque<>();
         final Field[] fields = Cards.class.getDeclaredFields();
