@@ -7,12 +7,12 @@ import java.util.List;
 import tm.ActionType;
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddTerraformingRatingAction;
 import tm.action.CardActionWithCost;
+import tm.requirement.TemperatureRequirement;
 
 public class CaretakerContract extends Card {
 
@@ -24,12 +24,7 @@ public class CaretakerContract extends Card {
     };
 
     public CaretakerContract() {
-        super("Caretaker Contract", 3, Tags.EMPTY);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= - 2 * tolerance;
+        super("Caretaker Contract", 3, Tags.EMPTY, new TemperatureRequirement(0, true));
     }
 
     @Override

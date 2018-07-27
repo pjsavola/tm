@@ -20,85 +20,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.sun.istack.internal.Nullable;
-import tm.card.AdaptedLichen;
-import tm.card.AdvancedAlloys;
-import tm.card.Algae;
-import tm.card.Ants;
-import tm.card.Archaebacteria;
-import tm.card.ArcticAlgae;
-import tm.card.Asteroid;
-import tm.card.AsteroidMining;
-import tm.card.AsteroidMiningConsortium;
-import tm.card.BeamFromThoriumAsteroid;
-import tm.card.BigAsteroid;
-import tm.card.Birds;
-import tm.card.BlackPolarDust;
-import tm.card.BuildingIndustries;
-import tm.card.Capital;
-import tm.card.CarbonateProcessing;
-import tm.card.CloudSeeding;
-import tm.card.ColonizerTrainingCamp;
-import tm.card.Comet;
-import tm.card.CupolaCity;
-import tm.card.DeepWellHeating;
-import tm.card.DeimosDown;
-import tm.card.DevelopmentCenter;
-import tm.card.DomedCrater;
-import tm.card.EarthCatapult;
-import tm.card.ElectroCatapult;
-import tm.card.EosChasmaNationalPark;
-import tm.card.EquatorialMagnetizer;
-import tm.card.Fish;
-import tm.card.FoodFactory;
-import tm.card.GHGProducingBacteria;
-import tm.card.GiantIceAsteroid;
-import tm.card.GreatEscarpmentConsortium;
-import tm.card.IceAsteroid;
-import tm.card.ImportedHydrogen;
-import tm.card.InterstellarColonyShip;
-import tm.card.InventorsGuild;
-import tm.card.KelpFarming;
-import tm.card.LakeMarineris;
-import tm.card.LandClaim;
-import tm.card.LightningHarvest;
-import tm.card.LunarBeam;
-import tm.card.Mangrove;
-import tm.card.MarsUniversity;
-import tm.card.MartianRail;
-import tm.card.MethaneFromTitan;
-import tm.card.Mine;
-import tm.card.MineralDeposit;
-import tm.card.MiningArea;
-import tm.card.MiningExpedition;
-import tm.card.MirandaResort;
-import tm.card.NaturalPreserve;
-import tm.card.NitrogenRichAsteroid;
-import tm.card.NoctisCity;
-import tm.card.NuclearPower;
-import tm.card.OptimalAerobraking;
-import tm.card.PhobosSpaceHaven;
-import tm.card.Predators;
-import tm.card.QuantumExtractor;
-import tm.card.RegolithEaters;
-import tm.card.ReleaseOfInertGases;
-import tm.card.ResearchOutpost;
-import tm.card.RoverConstruction;
-import tm.card.SearchForLife;
-import tm.card.SecurityFleet;
-import tm.card.SmallAnimals;
-import tm.card.SolarWindPower;
-import tm.card.SpaceElevator;
-import tm.card.SpaceMirrors;
-import tm.card.SpaceStation;
-import tm.card.Sponsors;
-import tm.card.Tardigrades;
-import tm.card.TowingComet;
-import tm.card.Trees;
-import tm.card.UndergroundCity;
-import tm.card.VestaShipyard;
-import tm.card.ViralEnhancers;
-import tm.card.Virus;
-import tm.card.WaterImportFromEuropa;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
 import tm.corporation.Helion;
@@ -194,11 +115,21 @@ public class Game extends JPanel {
 
         g.drawImage(ImageCache.getImage("images/icon_city.png"), 650, 90, null);
         g.setColor(Color.LIGHT_GRAY);
-        g.drawString(Long.toString(getCityCount()), 680, 110);
+        g.drawString(Long.toString(getCityCount(false)), 680, 110);
     }
 
-    public int getCityCount() {
-        return (int) grid.values().stream().filter(Tile::isCity).count();
+    public int getCityCount(boolean onMarsOnly) {
+        int cityCount = (int) grid.values().stream().filter(Tile::isCity).count();
+        if (onMarsOnly) {
+            return cityCount;
+        }
+        if (Cards.PHOBOS_SPACE_HAVEN.getOwner() != null) {
+            cityCount++;
+        }
+        if (Cards.GANYMEDE_COLONY.getOwner() != null) {
+            cityCount++;
+        }
+        return cityCount;
     }
 
     public ActionHandler getActionHandler() {

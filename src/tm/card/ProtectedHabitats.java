@@ -7,6 +7,6 @@ import tm.Tags;
 public class ProtectedHabitats extends Card {
 
     public ProtectedHabitats() {
-        super("Protected Habitats", 5, Tags.EMPTY, true);
+        super("Protected Habitats", 5, Tags.EMPTY, null, true);
     }
 }

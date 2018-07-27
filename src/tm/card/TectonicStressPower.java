@@ -6,23 +6,18 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddTerraformingRatingAction;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.TagRequirement;
 
 public class TectonicStressPower extends Card {
 
     public TectonicStressPower() {
-        super("Tectonic Stress Power", 18, Tags.BUILDING.combine(Tags.POWER));
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getTags().hasAll(Tags.Type.SCIENCE.createTags(2));
+        super("Tectonic Stress Power", 18, Tags.BUILDING.combine(Tags.POWER), new TagRequirement(Tags.Type.SCIENCE.createTags(2)));
     }
 
     @Override

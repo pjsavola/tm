@@ -9,13 +9,13 @@ import tm.ActionType;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddMarkerAction;
 import tm.action.CardAction;
 import tm.action.ResourceDeltaAction;
+import tm.requirement.TemperatureRequirement;
 
 public class ExtremeColdFungus extends Card {
 
@@ -42,12 +42,7 @@ public class ExtremeColdFungus extends Card {
     };
 
     public ExtremeColdFungus() {
-        super("Extreme-Cold Fungus", 13, Tags.MICROBE);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() <= -10 + tolerance * 2;
+        super("Extreme-Cold Fungus", 13, Tags.MICROBE, new TemperatureRequirement(-10, false));
     }
 
     @Override

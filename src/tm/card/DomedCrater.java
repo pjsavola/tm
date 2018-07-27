@@ -6,7 +6,6 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -15,16 +14,12 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.action.ResourceDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 public class DomedCrater extends Card {
 
     public DomedCrater() {
-        super("Domed Crater", 24, Tags.BUILDING.combine(Tags.CITY));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() <= 7 + tolerance;
+        super("Domed Crater", 24, Tags.BUILDING.combine(Tags.CITY), new OxygenRequirement(7, false));
     }
 
     @Override

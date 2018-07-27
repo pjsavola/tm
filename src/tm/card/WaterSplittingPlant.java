@@ -7,12 +7,12 @@ import java.util.List;
 import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddOxygenAction;
 import tm.action.CardActionWithCost;
+import tm.requirement.OceanRequirement;
 
 public class WaterSplittingPlant extends CardWithMarkers {
 
@@ -23,13 +23,8 @@ public class WaterSplittingPlant extends CardWithMarkers {
         }
     };
 
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getWaterPlaced() >= 2 - tolerance;
-    }
-
     public WaterSplittingPlant() {
-        super("Water Splitting Plant", 12, Tags.BUILDING);
+        super("Water Splitting Plant", 12, Tags.BUILDING, new OceanRequirement(2, true));
     }
 
     @Override

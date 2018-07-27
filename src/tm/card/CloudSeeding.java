@@ -6,22 +6,17 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.OceanRequirement;
 
 // Decrease any heat income by 1 is done from dummy player
 public class CloudSeeding extends Card {
 
     public CloudSeeding() {
-        super("Cloud Seeding", 11, Tags.EMPTY);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getWaterPlaced() >= 3 - tolerance;
+        super("Cloud Seeding", 11, Tags.EMPTY, new OceanRequirement(3, true));
     }
 
     @Override

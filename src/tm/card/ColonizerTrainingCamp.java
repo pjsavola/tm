@@ -4,18 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Planet;
 import tm.Tags;
+import tm.requirement.OxygenRequirement;
 
 public class ColonizerTrainingCamp extends Card {
 
     public ColonizerTrainingCamp() {
-        super("Colonizer Training Camp", 8, Tags.BUILDING.combine(Tags.JOVIAN));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() <= 5 + tolerance;
+        super("Colonizer Training Camp", 8, Tags.BUILDING.combine(Tags.JOVIAN), new OxygenRequirement(5, false));
     }
 
     @Override

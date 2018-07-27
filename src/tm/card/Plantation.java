@@ -5,23 +5,18 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Player;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddOxygenAction;
 import tm.action.PlaceTileAction;
+import tm.requirement.TagRequirement;
 
 public class Plantation extends Card {
 
     public Plantation() {
-        super("Plantation", 15, Tags.PLANT);
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getTags().hasAll(Tags.Type.SCIENCE.createTags(2));
+        super("Plantation", 15, Tags.PLANT, new TagRequirement(Tags.Type.SCIENCE.createTags(2)));
     }
 
     @Override

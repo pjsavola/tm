@@ -14,11 +14,12 @@ import tm.action.Action;
 import tm.action.MarkerDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.effect.PlayCardEffect;
+import tm.requirement.GreeneryRequirement;
 
 public class EcologicalZone extends CardWithMarkers implements PlayCardEffect {
 
     public EcologicalZone() {
-        super("Ecological Zone", 12, Tags.PLANT.combine(Tags.ANIMAL));
+        super("Ecological Zone", 12, Tags.PLANT.combine(Tags.ANIMAL), new GreeneryRequirement());
     }
 
     @Override
@@ -33,7 +34,7 @@ public class EcologicalZone extends CardWithMarkers implements PlayCardEffect {
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("Place next to greenery tile");
+        return Collections.singletonList("Must have greenery tile, place next to greenery tile");
     }
 
     @Override

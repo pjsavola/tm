@@ -5,21 +5,16 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.TagRequirement;
 
 public class GeneRepair extends Card {
 
     public GeneRepair() {
-        super("Gene Repair", 12, Tags.SCIENCE);
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getTags().hasAll(Tags.Type.SCIENCE.createTags(3));
+        super("Gene Repair", 12, Tags.SCIENCE, new TagRequirement(Tags.Type.SCIENCE.createTags(3)));
     }
 
     @Override

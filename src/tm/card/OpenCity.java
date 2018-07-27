@@ -6,7 +6,6 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -15,21 +14,17 @@ import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.action.ResourceDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 public class OpenCity extends Card {
 
     public OpenCity() {
-        super("Open City", 23, Tags.BUILDING.combine(Tags.CITY));
+        super("Open City", 23, Tags.BUILDING.combine(Tags.CITY), new OxygenRequirement(12, true));
     }
 
     @Override
     public int getVPs() {
         return 1;
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 12 - tolerance;
     }
 
     @Override

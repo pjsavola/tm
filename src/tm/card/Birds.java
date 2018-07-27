@@ -7,11 +7,11 @@ import java.util.List;
 import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
 import tm.action.MarkerDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 // Removing 2 plant income is done from dummy player
 public class Birds extends CardWithMarkers {
@@ -24,12 +24,7 @@ public class Birds extends CardWithMarkers {
     };
 
     public Birds() {
-        super("Birds", 10, Tags.ANIMAL);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 13 - tolerance;
+        super("Birds", 10, Tags.ANIMAL, new OxygenRequirement(13, true));
     }
 
     @Override

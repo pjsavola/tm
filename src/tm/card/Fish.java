@@ -7,11 +7,11 @@ import java.util.List;
 import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
 import tm.action.MarkerDeltaAction;
+import tm.requirement.TemperatureRequirement;
 
 // Removing 1 plant income is done from dummy player
 public class Fish extends CardWithMarkers {
@@ -24,12 +24,7 @@ public class Fish extends CardWithMarkers {
     };
 
     public Fish() {
-        super("Fish", 9, Tags.ANIMAL);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= 2 - 2 * tolerance;
+        super("Fish", 9, Tags.ANIMAL, new TemperatureRequirement(2, true));
     }
 
     @Override

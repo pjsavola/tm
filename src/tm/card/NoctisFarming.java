@@ -6,23 +6,18 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
+import tm.requirement.TemperatureRequirement;
 
 public class NoctisFarming extends Card {
 
     public NoctisFarming() {
-        super("Noctis Farming", 10, Tags.BUILDING.combine(Tags.PLANT));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= -20 - 2 * tolerance;
+        super("Noctis Farming", 10, Tags.BUILDING.combine(Tags.PLANT), new TemperatureRequirement(-20, true));
     }
 
     @Override

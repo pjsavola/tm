@@ -7,13 +7,13 @@ import java.util.List;
 import tm.ActionType;
 import tm.Card;
 import tm.Game;
-import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
 import tm.action.DrawCardsAction;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.TagRequirement;
 
 public class AICentral extends Card {
 
@@ -25,12 +25,7 @@ public class AICentral extends Card {
     };
 
     public AICentral() {
-        super("AI Central", 21, Tags.SCIENCE.combine(Tags.BUILDING));
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getTags().hasAll(Tags.Type.SCIENCE.createTags(3));
+        super("AI Central", 21, Tags.SCIENCE.combine(Tags.BUILDING), new TagRequirement(Tags.Type.SCIENCE.createTags(3)));
     }
 
     @Override

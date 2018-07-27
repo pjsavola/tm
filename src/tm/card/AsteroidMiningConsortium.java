@@ -5,22 +5,17 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.ProductionRequirement;
 
 // Decrease any titanium income by 1 is done from dummy player
 public class AsteroidMiningConsortium extends Card {
 
     public AsteroidMiningConsortium() {
-        super("Asteroid Mining Cons.", 13, Tags.JOVIAN);
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getIncome().getTitanium() > 0;
+        super("Asteroid Mining Cons.", 13, Tags.JOVIAN, new ProductionRequirement(Resources.TITANIUM));
     }
 
     @Override

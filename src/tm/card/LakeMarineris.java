@@ -5,22 +5,17 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddWaterAction;
+import tm.requirement.TemperatureRequirement;
 
 // Decrease any 3 plants is done from dummy player
 public class LakeMarineris extends Card {
 
     public LakeMarineris() {
-        super("Lake Marineris", 18, Tags.EMPTY);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= 0 - 2 * tolerance;
+        super("Lake Marineris", 18, Tags.EMPTY, new TemperatureRequirement(0, true));
     }
 
     @Override

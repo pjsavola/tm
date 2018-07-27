@@ -20,7 +20,7 @@ import tm.effect.PlayCardEffect;
 public class OlympusConference extends CardWithMarkers implements PlayCardEffect {
 
     public OlympusConference() {
-        super("Olympus Conference", 10, Tags.SCIENCE.combine(Tags.BUILDING).combine(Tags.EARTH), true);
+        super("Olympus Conference", 10, Tags.SCIENCE.combine(Tags.BUILDING).combine(Tags.EARTH), null, true);
     }
 
     @Override

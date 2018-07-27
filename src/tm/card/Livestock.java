@@ -7,13 +7,13 @@ import java.util.List;
 import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
 import tm.action.IncomeDeltaAction;
 import tm.action.MarkerDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 public class Livestock extends CardWithMarkers {
 
@@ -25,12 +25,7 @@ public class Livestock extends CardWithMarkers {
     };
 
     public Livestock() {
-        super("Livestock", 13, Tags.ANIMAL);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 9 - tolerance;
+        super("Livestock", 13, Tags.ANIMAL, new OxygenRequirement(9, true));
     }
 
     @Override

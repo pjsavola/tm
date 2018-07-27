@@ -7,13 +7,13 @@ import java.util.List;
 import tm.ActionType;
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 import tm.action.ResourceDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 public class ElectroCatapult extends Card {
 
@@ -32,14 +32,9 @@ public class ElectroCatapult extends Card {
     };
 
     public ElectroCatapult() {
-        super("Electro Catapult", 17, Tags.BUILDING);
+        super("Electro Catapult", 17, Tags.BUILDING, new OxygenRequirement(8, false));
         action1.setAlternativeAction(action2);
         action2.setAlternativeAction(action1);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() <= 8 + tolerance;
     }
 
     @Override

@@ -6,21 +6,16 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 public class MethaneFromTitan extends Card {
 
     public MethaneFromTitan() {
-        super("Methane From Titan", 28, Tags.SPACE.combine(Tags.JOVIAN));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 2 - tolerance;
+        super("Methane From Titan", 28, Tags.SPACE.combine(Tags.JOVIAN), new OxygenRequirement(2, true));
     }
 
     @Override

@@ -5,26 +5,21 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.OceanRequirement;
 
 public class GreatDam extends Card {
 
     public GreatDam() {
-        super("Great Dam", 12, Tags.BUILDING.combine(Tags.POWER));
+        super("Great Dam", 12, Tags.BUILDING.combine(Tags.POWER), new OceanRequirement(4, true));
     }
 
     @Override
     public int getVPs() {
         return 1;
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getWaterPlaced() >= 4 - tolerance;
     }
 
     @Override

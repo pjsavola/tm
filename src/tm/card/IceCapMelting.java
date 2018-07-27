@@ -5,20 +5,15 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddWaterAction;
+import tm.requirement.TemperatureRequirement;
 
 public class IceCapMelting extends Card {
 
     public IceCapMelting() {
-        super("Ice Cap Melting", 5, Tags.EVENT);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= 2 - 2 * tolerance;
+        super("Ice Cap Melting", 5, Tags.EVENT, new TemperatureRequirement(2, true));
     }
 
     @Override

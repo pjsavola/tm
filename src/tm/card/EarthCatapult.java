@@ -10,7 +10,7 @@ import tm.effect.DiscountEffect;
 public class EarthCatapult extends Card implements DiscountEffect {
 
     public EarthCatapult() {
-        super("Earth Catapult", 23, Tags.EARTH, true);
+        super("Earth Catapult", 23, Tags.EARTH, null, true);
     }
 
     @Override

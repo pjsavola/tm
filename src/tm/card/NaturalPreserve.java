@@ -6,7 +6,6 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -14,16 +13,12 @@ import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
+import tm.requirement.OxygenRequirement;
 
 public class NaturalPreserve extends Card {
 
     public NaturalPreserve() {
-        super("Natural Preserve", 9, Tags.SCIENCE.combine(Tags.BUILDING));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() <= 4 + tolerance;
+        super("Natural Preserve", 9, Tags.SCIENCE.combine(Tags.BUILDING), new OxygenRequirement(4, false));
     }
 
     @Override

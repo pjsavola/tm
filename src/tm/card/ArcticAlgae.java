@@ -7,7 +7,6 @@ import java.util.List;
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -15,16 +14,12 @@ import tm.action.Action;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 import tm.effect.PlaceTileEffect;
+import tm.requirement.TemperatureRequirement;
 
 public class ArcticAlgae extends Card implements PlaceTileEffect {
 
     public ArcticAlgae() {
-        super("Arctic Algae", 12, Tags.PLANT, true);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() <= -12 + tolerance * 2;
+        super("Arctic Algae", 12, Tags.PLANT, new TemperatureRequirement(-12, false), true);
     }
 
     @Override

@@ -5,21 +5,16 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.TemperatureRequirement;
 
 public class DesignedMicroorganisms extends Card {
 
     public DesignedMicroorganisms() {
-        super("Designed Microorganisms", 16, Tags.SCIENCE.combine(Tags.MICROBE));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() <= -14 + tolerance * 2;
+        super("Designed Microorganisms", 16, Tags.SCIENCE.combine(Tags.MICROBE), new TemperatureRequirement(-14, false));
     }
 
     @Override

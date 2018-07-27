@@ -6,22 +6,17 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
 import tm.effect.DiscountEffect;
+import tm.requirement.TagRequirement;
 
 public class MassConverter extends Card implements DiscountEffect {
 
     public MassConverter() {
-        super("Mass Converter", 8, Tags.SCIENCE.combine(Tags.POWER), true);
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getTags().hasAll(Tags.Type.SCIENCE.createTags(5));
+        super("Mass Converter", 8, Tags.SCIENCE.combine(Tags.POWER), new TagRequirement(Tags.Type.SCIENCE.createTags(5)),true);
     }
 
     @Override

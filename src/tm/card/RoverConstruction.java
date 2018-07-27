@@ -16,7 +16,7 @@ import tm.effect.PlayCardEffect;
 public class RoverConstruction extends Card implements PlaceTileEffect, PlayCardEffect {
 
     public RoverConstruction() {
-        super("Rover Construction", 8, Tags.BUILDING, true);
+        super("Rover Construction", 8, Tags.BUILDING, null, true);
     }
 
     @Override

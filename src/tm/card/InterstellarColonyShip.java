@@ -4,18 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Player;
 import tm.Tags;
+import tm.requirement.TagRequirement;
 
 public class InterstellarColonyShip extends Card {
 
     public InterstellarColonyShip() {
-        super("Interstellar Colony Ship", 24, Tags.SPACE.combine(Tags.EARTH).combine(Tags.EVENT));
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getTags().hasAll(Tags.Type.SCIENCE.createTags(5));
+        super("Interstellar Colony Ship", 24, Tags.SPACE.combine(Tags.EARTH).combine(Tags.EVENT), new TagRequirement(Tags.Type.SCIENCE.createTags(5)));
     }
 
     @Override

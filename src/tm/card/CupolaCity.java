@@ -6,7 +6,6 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -14,16 +13,12 @@ import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
+import tm.requirement.OxygenRequirement;
 
 public class CupolaCity extends Card {
 
     public CupolaCity() {
-        super("Cupola City", 16, Tags.BUILDING.combine(Tags.CITY));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() <= 9 + tolerance;
+        super("Cupola City", 16, Tags.BUILDING.combine(Tags.CITY), new OxygenRequirement(9, false));
     }
 
     @Override

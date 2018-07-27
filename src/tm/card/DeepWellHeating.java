@@ -1,12 +1,10 @@
 package tm.card;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -21,21 +19,11 @@ public class DeepWellHeating extends Card {
     }
 
     @Override
-    public boolean check(Player player) {
-        return player.getIncome().getSteel() > 0;
-    }
-
-    @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(
             new IncomeDeltaAction(Resources.ENERGY),
             new AddTemperatureAction()
         );
-    }
-
-    @Override
-    public List<String> getRequirements() {
-        return Collections.singletonList("Requires steel income");
     }
 
     @Override

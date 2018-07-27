@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Cards;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
@@ -19,14 +18,7 @@ public class Greenhouses extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        int cityCount = game.getCityCount();
-        if (Cards.PHOBOS_SPACE_HAVEN.getOwner() != null) {
-            cityCount++;
-        }
-        if (Cards.GANYMEDE_COLONY.getOwner() != null) {
-            cityCount++;
-        }
-        return new ResourceDeltaAction(new Resources(0, 0, 0, cityCount, 0, 0));
+        return new ResourceDeltaAction(new Resources(0, 0, 0, game.getCityCount(false), 0, 0));
     }
 
     @Override

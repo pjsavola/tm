@@ -16,7 +16,7 @@ import tm.effect.PlayCardEffect;
 public class ViralEnhancers extends Card implements PlayCardEffect {
 
     public ViralEnhancers() {
-        super("Viral Enhancers", 8, Tags.SCIENCE.combine(Tags.MICROBE), true);
+        super("Viral Enhancers", 8, Tags.SCIENCE.combine(Tags.MICROBE), null, true);
     }
 
     @Override

@@ -10,7 +10,7 @@ import tm.effect.ValueEffect;
 public class AdvancedAlloys extends Card implements ValueEffect {
 
     public AdvancedAlloys() {
-        super("Advanced Alloys", 9, Tags.SCIENCE, true);
+        super("Advanced Alloys", 9, Tags.SCIENCE, null, true);
     }
 
     @Override

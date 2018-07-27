@@ -6,21 +6,16 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.TagRequirement;
 
 public class LightningHarvest extends Card {
 
     public LightningHarvest() {
-        super("LightningHarvest", 8, Tags.POWER);
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getTags().hasAll(Tags.Type.SCIENCE.createTags(3));
+        super("LightningHarvest", 8, Tags.POWER, new TagRequirement(Tags.Type.SCIENCE.createTags(3)));
     }
 
     @Override

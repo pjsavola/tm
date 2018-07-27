@@ -4,20 +4,15 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Player;
 import tm.Tags;
+import tm.requirement.TagRequirement;
 
 public class AdvancedEcosystems extends Card {
 
     private static final Tags tags = Tags.ANIMAL.combine(Tags.MICROBE).combine(Tags.PLANT);
 
     public AdvancedEcosystems() {
-        super("Advanced Ecosystems", 11, tags);
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getTags().hasAll(tags);
+        super("Advanced Ecosystems", 11, tags, new TagRequirement(tags));
     }
 
     @Override

@@ -5,19 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Player;
 import tm.Tags;
 import tm.effect.DiscountEffect;
 
 public class SpaceStation extends Card implements DiscountEffect {
 
     public SpaceStation() {
-        super("Space Station", 10, Tags.SPACE, true);
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getTags().has(Tags.Type.MICROBE);
+        super("Space Station", 10, Tags.SPACE, null, true);
     }
 
     @Override

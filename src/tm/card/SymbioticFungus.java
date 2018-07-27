@@ -9,11 +9,11 @@ import tm.ActionType;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddMarkerAction;
 import tm.action.CardAction;
+import tm.requirement.TemperatureRequirement;
 
 public class SymbioticFungus extends Card {
 
@@ -35,12 +35,7 @@ public class SymbioticFungus extends Card {
     };
 
     public SymbioticFungus() {
-        super("Symbiotic Fungus", 4, Tags.MICROBE);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= -14 - tolerance * 2;
+        super("Symbiotic Fungus", 4, Tags.MICROBE, new TemperatureRequirement(-14, true));
     }
 
     @Override

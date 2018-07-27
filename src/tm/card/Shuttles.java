@@ -6,22 +6,17 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
 import tm.effect.DiscountEffect;
+import tm.requirement.OxygenRequirement;
 
 public class Shuttles extends Card implements DiscountEffect {
 
     public Shuttles() {
-        super("Shuttles", 10, Tags.SPACE, true);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 5 - 2 * tolerance;
+        super("Shuttles", 10, Tags.SPACE, new OxygenRequirement(5, true), true);
     }
 
     @Override

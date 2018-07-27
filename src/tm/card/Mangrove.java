@@ -6,23 +6,18 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddOxygenAction;
 import tm.action.PlaceTileAction;
+import tm.requirement.TemperatureRequirement;
 
 public class Mangrove extends Card {
 
     public Mangrove() {
-        super("Mangrove", 12, Tags.PLANT);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= 4 - 2 * tolerance;
+        super("Mangrove", 12, Tags.PLANT, new TemperatureRequirement(4, true));
     }
 
     @Override

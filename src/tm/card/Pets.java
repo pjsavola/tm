@@ -17,7 +17,7 @@ import tm.effect.PlayCardEffect;
 public class Pets extends CardWithMarkers implements PlaceTileEffect, PlayCardEffect {
 
     public Pets() {
-        super("Pets", 10, Tags.ANIMAL.combine(Tags.EARTH), true);
+        super("Pets", 10, Tags.ANIMAL.combine(Tags.EARTH), null, true);
     }
 
     @Override

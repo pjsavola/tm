@@ -5,7 +5,6 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -20,11 +19,6 @@ public class NoctisCity extends Card {
 
     public NoctisCity() {
         super("Noctis City", 18, Tags.BUILDING.combine(Tags.CITY));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() <= 7 + tolerance;
     }
 
     @Override

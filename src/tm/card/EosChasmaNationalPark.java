@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -16,16 +15,12 @@ import tm.action.ActionChain;
 import tm.action.AddMarkerAction;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
+import tm.requirement.TemperatureRequirement;
 
 public class EosChasmaNationalPark extends Card {
 
     public EosChasmaNationalPark() {
-        super("Eos Chasma National Park", 16, Tags.BUILDING.combine(Tags.PLANT));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() <= -12 + tolerance * 2;
+        super("Eos Chasma National Park", 16, Tags.BUILDING.combine(Tags.PLANT), new TemperatureRequirement(-12, true));
     }
 
     @Override
@@ -49,7 +44,7 @@ public class EosChasmaNationalPark extends Card {
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("It must be -12C or colder");
+        return Collections.singletonList("It must be -12C or warmer");
     }
 
     @Override

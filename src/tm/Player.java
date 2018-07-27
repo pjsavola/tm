@@ -17,6 +17,7 @@ import tm.effect.PlayCardEffect;
 import tm.effect.RequirementEffect;
 import tm.effect.ScoringEffect;
 import tm.effect.ValueEffect;
+import tm.requirement.Requirement;
 
 public class Player {
     private static final Font font = new Font("Arial", Font.BOLD, 12);
@@ -172,6 +173,10 @@ public class Player {
     }
 
     public boolean fulfillsRequirements(Card card, Game game, int extraTolerance) {
+        final Requirement requirement = card.getRequirement();
+        if (requirement == null) {
+            return true;
+        }
         int tolerance = extraTolerance;
         if (corporation instanceof RequirementEffect) {
             tolerance += ((RequirementEffect) corporation).getTolerance();
@@ -181,7 +186,7 @@ public class Player {
                 tolerance += ((RequirementEffect) playedCard).getTolerance();
             }
         }
-        return card.check(game.getPlanet(), tolerance) && card.check(this) && card.check(game, tolerance);
+        return requirement.check(game, tolerance);
     }
 
     public void addTags(Tags tags) {
@@ -224,16 +229,17 @@ public class Player {
                     .count());
             });
         playedCards.forEach(card -> total.addAndGet(card.getVPs()));
-        total.addAndGet(ownedTiles
-            .stream()
-            .filter(tile -> tile.getType() == Tile.Type.GREENERY)
-            .count());
+        total.addAndGet(getGreeneryCount());
         for (Card playedCard : playedCards) {
             if (playedCard instanceof ScoringEffect) {
                 total.addAndGet(((ScoringEffect) playedCard).getVPs(this));
             }
         }
         return total.intValue();
+    }
+
+    public int getGreeneryCount() {
+        return (int) ownedTiles.stream().filter(Tile::isGreenery).count();
     }
 
     // Nasty hack...

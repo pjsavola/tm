@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.ActionType;
+import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
-import tm.CardWithMarkers;
 import tm.action.MarkerDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 // Removing 1 animal is done from dummy player
 public class Predators extends CardWithMarkers {
@@ -24,12 +24,7 @@ public class Predators extends CardWithMarkers {
     };
 
     public Predators() {
-        super("Predators", 14, Tags.ANIMAL);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 11 - tolerance;
+        super("Predators", 14, Tags.ANIMAL, new OxygenRequirement(11, true));
     }
 
     @Override

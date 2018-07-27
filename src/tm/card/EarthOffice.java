@@ -10,7 +10,7 @@ import tm.effect.DiscountEffect;
 public class EarthOffice extends Card implements DiscountEffect {
 
     public EarthOffice() {
-        super("Earth Office", 1, Tags.EARTH, true);
+        super("Earth Office", 1, Tags.EARTH, null, true);
     }
 
     @Override

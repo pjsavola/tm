@@ -5,22 +5,17 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 // Plant income is removed from dummy player
 public class BiomassCombustors extends Card {
 
     public BiomassCombustors() {
-        super("Biomass Combustors", 4, Tags.BUILDING.combine(Tags.POWER));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 6 - 2 * tolerance;
+        super("Biomass Combustors", 4, Tags.BUILDING.combine(Tags.POWER), new OxygenRequirement(6, true));
     }
 
     @Override

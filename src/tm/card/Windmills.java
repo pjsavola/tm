@@ -5,21 +5,16 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 public class Windmills extends Card {
 
     public Windmills() {
-        super("Windmills", 6, Tags.BUILDING.combine(Tags.POWER));
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 7 - 2 * tolerance;
+        super("Windmills", 6, Tags.BUILDING.combine(Tags.POWER), new OxygenRequirement(7, true));
     }
 
     @Override

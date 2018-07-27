@@ -5,21 +5,16 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.TemperatureRequirement;
 
 public class Lichen extends Card {
 
     public Lichen() {
-        super("Lichen", 7, Tags.PLANT);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= -24 - 2 * tolerance;
+        super("Lichen", 7, Tags.PLANT, new TemperatureRequirement(-24, true));
     }
 
     @Override

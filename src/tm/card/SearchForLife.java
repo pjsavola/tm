@@ -8,13 +8,13 @@ import tm.ActionType;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardActionWithCost;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
+import tm.requirement.OxygenRequirement;
 
 public class SearchForLife extends CardWithMarkers {
 
@@ -77,12 +77,7 @@ public class SearchForLife extends CardWithMarkers {
     };
 
     public SearchForLife() {
-        super("Search For Life", 3, Tags.SCIENCE);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() <= 6 + tolerance;
+        super("Search For Life", 3, Tags.SCIENCE, new OxygenRequirement(6, false));
     }
 
     @Override

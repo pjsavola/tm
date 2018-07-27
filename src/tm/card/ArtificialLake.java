@@ -5,26 +5,21 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
 import tm.action.AddWaterAction;
+import tm.requirement.TemperatureRequirement;
 
 public class ArtificialLake extends Card {
 
     public ArtificialLake() {
-        super("Artificial Lake", 15, Tags.BUILDING);
+        super("Artificial Lake", 15, Tags.BUILDING, new TemperatureRequirement(-6, true));
     }
 
     @Override
     public int getVPs() {
         return 1;
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= -6 - 2 * tolerance;
     }
 
     @Override

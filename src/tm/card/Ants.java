@@ -7,11 +7,11 @@ import java.util.List;
 import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
 import tm.action.MarkerDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 // Microbe is removed from dummy player
 public class Ants extends CardWithMarkers {
@@ -24,12 +24,7 @@ public class Ants extends CardWithMarkers {
     };
 
     public Ants() {
-        super("Ants", 9, Tags.MICROBE);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 4 - tolerance;
+        super("Ants", 9, Tags.MICROBE, new OxygenRequirement(4, true));
     }
 
     @Override

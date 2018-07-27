@@ -1,5 +1,8 @@
 package tm;
 
+import com.sun.istack.internal.Nullable;
+import tm.requirement.Requirement;
+
 public abstract class CardWithMarkers extends Card {
 
     private int markers;
@@ -8,8 +11,12 @@ public abstract class CardWithMarkers extends Card {
         super(name, cost, tags);
     }
 
-    public CardWithMarkers(String name, int cost, Tags tags, boolean effect) {
-        super(name, cost, tags, effect);
+    public CardWithMarkers(String name, int cost, Tags tags, @Nullable Requirement requirement) {
+        super(name, cost, tags, requirement, false);
+    }
+
+    public CardWithMarkers(String name, int cost, Tags tags, @Nullable Requirement requirement, boolean effect) {
+        super(name, cost, tags, requirement, effect);
     }
 
     public int getMarkerCount() {

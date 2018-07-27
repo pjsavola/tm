@@ -14,7 +14,7 @@ import tm.effect.PlayCardEffect;
 public class OptimalAerobraking extends Card implements PlayCardEffect {
 
     public OptimalAerobraking() {
-        super("Optimal Aerobraking", 7, Tags.SPACE, true);
+        super("Optimal Aerobraking", 7, Tags.SPACE, null, true);
     }
 
     @Override

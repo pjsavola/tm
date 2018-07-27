@@ -5,16 +5,16 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 public class Zeppelins extends Card {
 
     public Zeppelins() {
-        super("Zeppelins", 13, Tags.EMPTY);
+        super("Zeppelins", 13, Tags.EMPTY, new OxygenRequirement(5, true));
     }
 
     @Override
@@ -23,13 +23,8 @@ public class Zeppelins extends Card {
     }
 
     @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 5 - tolerance;
-    }
-
-    @Override
     public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(game.getCityCount()));
+        return new IncomeDeltaAction(new Resources(game.getCityCount(true)));
     }
 
 

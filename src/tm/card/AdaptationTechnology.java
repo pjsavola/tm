@@ -10,7 +10,7 @@ import tm.effect.RequirementEffect;
 public class AdaptationTechnology extends Card implements RequirementEffect {
 
     public AdaptationTechnology() {
-        super("Adaptation Technology", 12, Tags.SCIENCE, true);
+        super("Adaptation Technology", 12, Tags.SCIENCE, null, true);
     }
 
     @Override

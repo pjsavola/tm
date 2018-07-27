@@ -6,21 +6,16 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
+import tm.requirement.OxygenRequirement;
 
 public class Worms extends Card {
 
     public Worms() {
-        super("Worms", 8, Tags.MICROBE);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 4 - tolerance;
+        super("Worms", 8, Tags.MICROBE, new OxygenRequirement(4, true));
     }
 
     @Override

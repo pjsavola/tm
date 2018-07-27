@@ -6,23 +6,18 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
+import tm.requirement.TemperatureRequirement;
 
 public class TundraFarming extends Card {
 
     public TundraFarming() {
-        super("Tundra Farming", 16, Tags.PLANT);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getTemperature() >= -6 - 2 * tolerance;
+        super("Tundra Farming", 16, Tags.PLANT, new TemperatureRequirement(-6, true));
     }
 
     @Override

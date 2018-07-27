@@ -6,23 +6,18 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
+import tm.requirement.OceanRequirement;
 
 public class Algae extends Card {
 
     public Algae() {
-        super("Algae", 10, Tags.PLANT);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getWaterPlaced() >= 5 - tolerance;
+        super("Algae", 10, Tags.PLANT, new OceanRequirement(5, true));
     }
 
     @Override

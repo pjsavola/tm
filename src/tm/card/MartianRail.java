@@ -18,7 +18,7 @@ public class MartianRail extends Card {
     private final Action action = new CardActionWithCost(true, ActionType.MARTIAN_RAIL, Resources.ENERGY.negate()) {
         @Override
         protected Action getAction(Game game) {
-            return new ResourceDeltaAction(new Resources(game.getCityCount()));
+            return new ResourceDeltaAction(new Resources(game.getCityCount(true)));
         }
     };
 

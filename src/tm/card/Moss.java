@@ -6,23 +6,18 @@ import java.util.List;
 
 import tm.Card;
 import tm.Game;
-import tm.Planet;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
+import tm.requirement.OceanRequirement;
 
 public class Moss extends Card {
 
     public Moss() {
-        super("Moss", 4, Tags.PLANT);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getWaterPlaced() >= 3 - tolerance;
+        super("Moss", 4, Tags.PLANT, new OceanRequirement(3, true));
     }
 
     @Override

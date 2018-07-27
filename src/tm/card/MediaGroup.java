@@ -13,7 +13,7 @@ import tm.effect.PlayCardEffect;
 public class MediaGroup extends Card implements PlayCardEffect {
 
     public MediaGroup() {
-        super("Media Group", 6, Tags.EARTH, true);
+        super("Media Group", 6, Tags.EARTH, null, true);
     }
 
     @Override

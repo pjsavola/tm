@@ -7,23 +7,18 @@ import java.util.List;
 import com.sun.istack.internal.Nullable;
 import tm.CardWithMarkers;
 import tm.Game;
-import tm.Planet;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
 import tm.action.MarkerDeltaAction;
 import tm.effect.PlaceTileEffect;
+import tm.requirement.OxygenRequirement;
 
 // Removing 1 plant income is done from dummy player
 public class Herbivores extends CardWithMarkers implements PlaceTileEffect {
 
     public Herbivores() {
-        super("Herbivores", 12, Tags.ANIMAL, true);
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 8 - tolerance;
+        super("Herbivores", 12, Tags.ANIMAL, new OxygenRequirement(8, true), true);
     }
 
     @Override

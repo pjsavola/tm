@@ -5,18 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Player;
 import tm.Tags;
+import tm.requirement.TagRequirement;
 
 public class BeamFromThoriumAsteroid extends Card {
 
     public BeamFromThoriumAsteroid() {
-        super("Beam From Thorium Asteroid", 32, Tags.SPACE.combine(Tags.JOVIAN).combine(Tags.POWER));
-    }
-
-    @Override
-    public boolean check(Player player) {
-        return player.getTags().has(Tags.Type.JOVIAN);
+        super("Beam From Thorium Asteroid", 32, Tags.SPACE.combine(Tags.JOVIAN).combine(Tags.POWER), new TagRequirement(Tags.JOVIAN));
     }
 
     @Override

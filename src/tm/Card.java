@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.action.Action;
+import tm.requirement.Requirement;
 
 public abstract class Card implements Comparable<Card> {
 
@@ -21,18 +22,25 @@ public abstract class Card implements Comparable<Card> {
     private final String name;
     private final int cost;
     private final Tags tags;
+    @Nullable
+    private final Requirement requirement;
     private final boolean effect;
     @Nullable
     private Player owner;
 
     protected Card(String name, int cost, Tags tags) {
-        this(name, cost, tags, false);
+        this(name, cost, tags, null, false);
     }
 
-    protected Card(String name, int cost, Tags tags, boolean effect) {
+    protected Card(String name, int cost, Tags tags, @Nullable Requirement requirement) {
+        this(name, cost, tags, requirement, false);
+    }
+
+    protected Card(String name, int cost, Tags tags, @Nullable Requirement requirement, boolean effect) {
         this.name = name;
         this.cost = cost;
         this.tags = tags;
+        this.requirement = requirement;
         this.effect = effect;
     }
 
@@ -69,16 +77,9 @@ public abstract class Card implements Comparable<Card> {
         return tags;
     }
 
-    public boolean check(Planet planet, int tolerance) {
-        return true;
-    }
-
-    public boolean check(Player player) {
-        return true;
-    }
-
-    public boolean check(Game game, int tolerance) {
-        return true;
+    @Nullable
+    public Requirement getRequirement() {
+        return requirement;
     }
 
     public int getVPs() {

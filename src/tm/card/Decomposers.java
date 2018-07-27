@@ -7,26 +7,21 @@ import java.util.List;
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.CardWithMarkers;
-import tm.Planet;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.MarkerDeltaAction;
 import tm.effect.PlayCardEffect;
+import tm.requirement.OxygenRequirement;
 
 public class Decomposers extends CardWithMarkers implements PlayCardEffect {
 
     public Decomposers() {
-        super("Decomposers", 5, Tags.MICROBE, true);
+        super("Decomposers", 5, Tags.MICROBE, new OxygenRequirement(3, true), true);
     }
 
     @Override
     public int getVPs() {
         return getMarkerCount() / 3;
-    }
-
-    @Override
-    public boolean check(Planet planet, int tolerance) {
-        return planet.getOxygen() >= 3 - tolerance;
     }
 
     @Override

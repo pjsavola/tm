@@ -9,7 +9,7 @@ import tm.Tags;
 public class StandardTechnology extends Card {
 
     public StandardTechnology() {
-        super("Standard Technology", 6, Tags.SCIENCE, true);
+        super("Standard Technology", 6, Tags.SCIENCE, null, true);
     }
 
     @Override
