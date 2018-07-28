@@ -1,16 +1,12 @@
 package tm.action;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.sun.istack.internal.Nullable;
 import tm.ActionType;
 import tm.Game;
 import tm.completable.Completable;
-import tm.completable.CompletableChain;
+import tm.completable.InstantCompletable;
 
-// TODO: ActionChain inside ActionChain probably does not work. Work around it by using pending actions.
 public class ActionChain implements Action {
 
     @Nullable
@@ -51,13 +47,27 @@ public class ActionChain implements Action {
 
     @Override
     public Completable begin(Game game) {
-        final List<Completable> completables = new ArrayList<>();
-        for (Action action : actions) {
-            if (!action.isOptional() || action.check(game)) {
-                completables.add(action.begin(game));
-            }
+        if (actions.length == 1) {
+            return actions[0].begin(game);
         }
-        return new CompletableChain(game, completables.toArray(new Completable[completables.size()]));
+        return new InstantCompletable(game) {
+            @Override
+            public void complete() {
+                for (Action action : actions) {
+                    if (action.check(game)) {
+                        game.getActionHandler().addPendingAction(action);
+                    }
+                }
+            }
+
+            @Override
+            public void undo() {
+            }
+
+            @Override
+            public void redo() {
+            }
+        };
     }
 
     @Override
