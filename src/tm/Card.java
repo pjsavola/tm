@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.action.Action;
+import tm.effect.ScoringEffect;
 import tm.requirement.Requirement;
 
 public abstract class Card implements Comparable<Card> {
@@ -19,6 +20,7 @@ public abstract class Card implements Comparable<Card> {
     private static final Color TEXT_COLOR = new Color(0xFFFFFF);
     private static final Color BG_COLOR = new Color(0x333333);
     public static final Font FONT = new Font("Arial", Font.BOLD, 12);
+    public static final Font VP_FONT = new Font("Arial", Font.BOLD, 18);
     private final String name;
     private final int cost;
     private final Tags tags;
@@ -125,9 +127,10 @@ public abstract class Card implements Comparable<Card> {
         if (cost > 0) {
             final String costString = Integer.toString(cost);
             final int costWidth = metrics.stringWidth(costString);
-            g.drawImage(ImageCache.getImage("images/icon_money.png"), x + 2, y + 2, null);
+            g.setColor(new Color(0xCCAA00));
+            g.fillRect(x + 1, y + 1, 17, 17);
             g.setColor(Color.BLACK);
-            g.drawString(costString, x + (18 - costWidth) / 2, y + 14);
+            g.drawString(costString, x + (19 - costWidth) / 2, y + 14);
         }
 
         // Draw tags
@@ -171,10 +174,19 @@ public abstract class Card implements Comparable<Card> {
         }
 
         // Draw VPS
-        if (getVPs() > 0) {
-            g.drawImage(ImageCache.getImage("images/icon_vp.png"), x + WIDTH - 18, y + CARD_HEIGHT - 18, null);
-            g.setColor(Color.BLACK);
-            g.drawString(Integer.toString(getVPs()), x + WIDTH - 13, y + CARD_HEIGHT - 6);
+        final int vp = getVPs();
+        if (vp > 0 || this instanceof ScoringEffect) {
+            g.setColor(new Color(0x8B4513));
+            g.fillOval(x + WIDTH - 28, y + CARD_HEIGHT - 28, 24, 24);
+            if (vp > 0) {
+                g.setFont(VP_FONT);
+                g.setColor(Color.BLACK);
+                final String vpString = Integer.toString(getVPs());
+                final int vpWidth = g.getFontMetrics().stringWidth(vpString);
+                g.drawString(vpString, x + WIDTH - 28 + (24 - vpWidth) / 2, y + CARD_HEIGHT - 9);
+            } else {
+                ((ScoringEffect) this).render(g, x + WIDTH - 24, y + CARD_HEIGHT - 24);
+            }
         }
     }
 

@@ -1,10 +1,12 @@
 package tm.card;
 
+import java.awt.Graphics;
 import java.util.Arrays;
 import java.util.List;
 
 import tm.Card;
 import tm.Game;
+import tm.ImageCache;
 import tm.Player;
 import tm.Resources;
 import tm.Tags;
@@ -36,11 +38,16 @@ public class CommercialDistrict extends Card implements ScoringEffect {
 
     @Override
     public int getVPs(Player player) {
-        final Tile tile = player.getCommercialDistrict();
+        final Tile tile = player.findTile(Tile.Type.COMMERCIAL_DISTRICT);
         if (tile != null) {
             return (int) tile.getNeighbors().stream().filter(Tile::isCity).count();
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public void render(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/tag_city.png"), x, y, null);
     }
 }

@@ -1,11 +1,13 @@
 package tm.card;
 
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
 import tm.Cards;
 import tm.Game;
+import tm.ImageCache;
 import tm.Player;
 import tm.Resources;
 import tm.Tags;
@@ -37,5 +39,10 @@ public class ImmigrationShuttles extends Card implements ScoringEffect {
             cityCount++;
         }
         return cityCount / 3;
+    }
+
+    @Override
+    public void render(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/tag_city.png"), x, y, null);
     }
 }

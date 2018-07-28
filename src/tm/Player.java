@@ -217,17 +217,6 @@ public class Player {
                     .filter(neighborTile -> neighborTile.getType() == Tile.Type.GREENERY)
                     .count());
             });
-        ownedTiles
-            .stream()
-            .filter(tile -> tile.getType() == Tile.Type.CAPITAL)
-            .findAny()
-            .ifPresent(capital -> {
-                total.addAndGet(capital
-                    .getNeighbors()
-                    .stream()
-                    .filter(neighborTile -> neighborTile.getType() == Tile.Type.WATER)
-                    .count());
-            });
         playedCards.forEach(card -> total.addAndGet(card.getVPs()));
         total.addAndGet(getGreeneryCount());
         for (Card playedCard : playedCards) {
@@ -248,10 +237,10 @@ public class Player {
     }
 
     @Nullable
-    public Tile getCommercialDistrict() {
+    public Tile findTile(Tile.Type type) {
         return ownedTiles
             .stream()
-            .filter(tile -> tile.getType() == Tile.Type.COMMERCIAL_DISTRICT)
+            .filter(tile -> tile.getType() == type)
             .findAny()
             .orElse(null);
     }
