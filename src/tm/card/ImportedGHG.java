@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -22,10 +19,5 @@ public class ImportedGHG extends Card {
     @Override
     public Resources getIncomeDelta(Game game) {
         return Resources.HEAT;
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("3 heat", "1 heat income");
     }
 }

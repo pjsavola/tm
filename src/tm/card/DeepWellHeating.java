@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -28,6 +28,6 @@ public class DeepWellHeating extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 enery income", "1 temperature");
+        return Collections.singletonList("1 temperature");
     }
 }

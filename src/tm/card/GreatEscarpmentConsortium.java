@@ -25,9 +25,4 @@ public class GreatEscarpmentConsortium extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires steel income");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 steel income");
-    }
 }

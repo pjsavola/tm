@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,10 +24,5 @@ public class CloudSeeding extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 3 ocean tiles");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("-1 money income", "2 plant income");
     }
 }

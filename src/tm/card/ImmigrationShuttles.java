@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -24,7 +24,7 @@ public class ImmigrationShuttles extends Card implements ScoringEffect {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("5 money income", "1 vp for each 3 cities");
+        return Collections.singletonList("1 vp for each 3 cities");
     }
 
     @Override

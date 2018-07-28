@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,10 +28,5 @@ public class Grass extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires -16C or warmer");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("3 plants", "1 plant income");
     }
 }

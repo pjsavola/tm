@@ -59,6 +59,6 @@ public class ElectroCatapult extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action 1:", "7 money, -1 steel", "", "Action 2:", "7 money, -1 plant", "", "-1 energy income");
+        return Arrays.asList("Action 1:", "7 money, -1 steel", "", "Action 2:", "7 money, -1 plant");
     }
 }

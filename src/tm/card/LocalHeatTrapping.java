@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -51,6 +51,6 @@ public class LocalHeatTrapping extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("4 plants OR 2 animals", "-5 heat");
+        return Collections.singletonList("4 plants OR 2 animals");
     }
 }

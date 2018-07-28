@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,6 +35,6 @@ public class NaturalPreserve extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 money income", "Place tile next to no other tile");
+        return Collections.singletonList("Place tile next to no other tile");
     }
 }

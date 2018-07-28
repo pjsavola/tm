@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -29,6 +29,6 @@ public class Asteroid extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("2 titanium", "1 temperature");
+        return Collections.singletonList("1 temperature");
     }
 }

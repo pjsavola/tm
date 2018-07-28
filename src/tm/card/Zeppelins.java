@@ -29,9 +29,4 @@ public class Zeppelins extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Oxygen must be at least 5%");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 money income for each city");
-    }
 }

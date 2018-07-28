@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,10 +31,5 @@ public class CupolaCity extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Oxygen must be 9% or less");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("3 money income", "-1 energy income");
     }
 }

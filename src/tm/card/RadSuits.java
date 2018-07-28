@@ -30,9 +30,4 @@ public class RadSuits extends Card {
         return Collections.singletonList("Requires 2 or more cities");
     }
 
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 money income");
-    }
-
 }

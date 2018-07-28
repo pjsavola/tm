@@ -38,6 +38,6 @@ public class BusinessNetwork extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Draw card and discard or buy it", "", "-1 money income");
+        return Arrays.asList("Action:", "Draw card and discard or buy it");
     }
 }

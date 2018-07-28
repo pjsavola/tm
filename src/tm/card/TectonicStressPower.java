@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,6 +39,6 @@ public class TectonicStressPower extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("3 energy income", "1 TR");
+        return Collections.singletonList("1 TR");
     }
 }

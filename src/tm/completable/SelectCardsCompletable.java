@@ -111,7 +111,7 @@ public abstract class SelectCardsCompletable implements Completable {
         g.drawString("Confirm", LEFT_MARGIN, TOP_MARGIN + CARD_HEIGHT * (selection.size() + 2) + 12);
         if (cardToRender != null) {
             cardToRender.renderTitle(g, LEFT_MARGIN + Card.WIDTH + VISIBLE_SPACING, TOP_MARGIN + CARD_HEIGHT);
-            cardToRender.renderContent(g, LEFT_MARGIN + Card.WIDTH + VISIBLE_SPACING, TOP_MARGIN + CARD_HEIGHT + Card.TITLE_HEIGHT);
+            cardToRender.renderContent(g, LEFT_MARGIN + Card.WIDTH + VISIBLE_SPACING, TOP_MARGIN + CARD_HEIGHT + Card.TITLE_HEIGHT, game);
         }
         g.setColor(oldColor);
     }

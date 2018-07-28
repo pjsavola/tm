@@ -29,9 +29,4 @@ public class Windmills extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires at least 7% oxygen");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 energy income");
-    }
 }

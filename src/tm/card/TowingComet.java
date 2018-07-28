@@ -30,6 +30,6 @@ public class TowingComet extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("2 plants", "1 oxygen", "1 water");
+        return Arrays.asList("1 oxygen", "1 water");
     }
 }

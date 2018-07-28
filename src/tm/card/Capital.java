@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,10 +31,5 @@ public class Capital extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 4 ocean tiles");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("5 money income", "-2 energy income");
     }
 }

@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,10 +33,5 @@ public class KelpFarming extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 6 ocean tiles");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("2 plants", "2 money income", "3 plant income");
     }
 }

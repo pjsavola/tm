@@ -33,7 +33,7 @@ public class ArcticAlgae extends Card implements PlaceTileEffect {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 plant", "2 plants for each ocean");
+        return Arrays.asList("Effect: ", "2 plants for each ocean");
     }
 
     @Nullable

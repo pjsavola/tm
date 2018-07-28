@@ -49,6 +49,6 @@ public class AICentral extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Draw 2 cards", "", "-1 energy income");
+        return Arrays.asList("Action:", "Draw 2 cards");
     }
 }

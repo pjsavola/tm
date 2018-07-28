@@ -66,6 +66,6 @@ public class ImportedNitrogen extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("4 plants", "1 TR", "3 microbes", "2 animals");
+        return Arrays.asList("1 TR", "3 microbes", "2 animals");
     }
 }

@@ -24,9 +24,4 @@ public class Archaebacteria extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("It must be -18C or colder");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 plant income");
-    }
 }

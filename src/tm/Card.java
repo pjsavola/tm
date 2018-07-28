@@ -136,7 +136,7 @@ public abstract class Card implements Comparable<Card> {
 
     // x: top-left corner
     // y: top-right corner
-    public void renderContent(Graphics g, int x, int y) {
+    public void renderContent(Graphics g, int x, int y, Game game) {
         // Draw background
         g.setColor(BG_COLOR);
         g.fillRect(x, y, WIDTH, CARD_HEIGHT);
@@ -144,6 +144,15 @@ public abstract class Card implements Comparable<Card> {
         // Draw border
         g.setColor(getBorderColor());
         g.drawRect(x, y, WIDTH, CARD_HEIGHT);
+
+        // Draw requirements
+        if (requirement != null) {
+            requirement.render(g, x, y + TITLE_HEIGHT);
+        }
+
+        // Draw resources and income
+        int offset = getResourceDelta(game).render(g, x, y + TITLE_HEIGHT + 20, false);
+        getIncomeDelta(game).render(g, x, y + TITLE_HEIGHT + 20 + offset, true);
 
         // Draw requirements
         g.setColor(Color.RED);

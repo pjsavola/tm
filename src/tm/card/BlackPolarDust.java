@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -28,6 +28,6 @@ public class BlackPolarDust extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("-2 money income", "3 heat income", "1 water");
+        return Collections.singletonList("1 ocean");
     }
 }

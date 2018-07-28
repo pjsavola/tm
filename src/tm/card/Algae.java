@@ -30,9 +30,4 @@ public class Algae extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 5 ocean tiles");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("1 plant", "2 plant income");
-    }
 }

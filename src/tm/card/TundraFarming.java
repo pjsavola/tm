@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,10 +33,5 @@ public class TundraFarming extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires -6C or warmer");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("1 plant", "2 money income", "1 plant income");
     }
 }

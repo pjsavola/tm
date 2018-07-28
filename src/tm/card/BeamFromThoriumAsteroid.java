@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,10 +28,5 @@ public class BeamFromThoriumAsteroid extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires jovian tag");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("3 energy income", "3 heat income");
     }
 }

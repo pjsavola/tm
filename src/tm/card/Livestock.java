@@ -49,6 +49,6 @@ public class Livestock extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Add 1 marker", "Each marker is worth 1 VP", "Currently " + getMarkerCount() + " markers", "", "2 money income", "-1 plant income");
+        return Arrays.asList("Action:", "Add 1 marker", "Each marker is worth 1 VP", "Currently " + getMarkerCount() + " markers");
     }
 }

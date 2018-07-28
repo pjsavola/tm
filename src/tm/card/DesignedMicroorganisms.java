@@ -24,9 +24,4 @@ public class DesignedMicroorganisms extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("It must be -14C or colder");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("2 plant income");
-    }
 }

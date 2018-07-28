@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -29,6 +29,6 @@ public class MoholeArea extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Place tile on ocean space", "4 heat income");
+        return Collections.singletonList("Place tile on ocean space");
     }
 }

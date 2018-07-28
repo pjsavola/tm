@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -28,6 +28,6 @@ public class MagneticFieldGenerators extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("2 plant income", "-4 energy income", "3 TR");
+        return Collections.singletonList("3 TR");
     }
 }

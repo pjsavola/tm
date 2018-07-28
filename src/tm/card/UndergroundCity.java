@@ -26,9 +26,4 @@ public class UndergroundCity extends Card {
     public Action getInitialAction(Game game) {
         return new PlaceTileAction(Tile.Type.CITY);
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("2 steel income", "-2 energy income");
-    }
 }

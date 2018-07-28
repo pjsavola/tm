@@ -1,9 +1,6 @@
 
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -31,10 +28,5 @@ public class CorporateStronghold extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new PlaceTileAction(Tile.Type.CITY);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("3 money income", "-1 energy income");
     }
 }

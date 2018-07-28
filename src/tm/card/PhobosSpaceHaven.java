@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -26,6 +26,6 @@ public class PhobosSpaceHaven extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 titanium income", "City to Phobos");
+        return Collections.singletonList("City to Phobos");
     }
 }

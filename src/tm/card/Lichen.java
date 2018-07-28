@@ -24,9 +24,4 @@ public class Lichen extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires -24C or warmer");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 plant income");
-    }
 }

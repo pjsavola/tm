@@ -1,7 +1,6 @@
 package tm.card;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -17,11 +16,6 @@ public class SpaceStation extends Card implements DiscountEffect {
     @Override
     public int getVPs() {
         return 1;
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires microbe tag");
     }
 
     @Override

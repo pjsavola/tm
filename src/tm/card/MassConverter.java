@@ -29,7 +29,7 @@ public class MassConverter extends Card implements DiscountEffect {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Effect:", "Space cards cost 2 less", "", "6 energy income");
+        return Arrays.asList("Effect:", "Space cards cost 2 less");
     }
 
     @Override

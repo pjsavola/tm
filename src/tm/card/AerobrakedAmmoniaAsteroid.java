@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -45,6 +45,6 @@ public class AerobrakedAmmoniaAsteroid extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 plant income", "3 heat income", "2 microbes");
+        return Collections.singletonList("2 microbes");
     }
 }

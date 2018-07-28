@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,10 +28,5 @@ public class MethaneFromTitan extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 2% oxygen");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("2 plant income", "2 heat income");
     }
 }

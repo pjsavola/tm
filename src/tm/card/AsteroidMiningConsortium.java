@@ -30,9 +30,4 @@ public class AsteroidMiningConsortium extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires titanium income");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 titanium income");
-    }
 }

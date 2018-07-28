@@ -33,7 +33,7 @@ public class ImmigrantCity extends Card implements PlaceTileEffect, PlayCardEffe
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Effect:", "1 money income for each city", "(including this)", "-4 money income", "-1 energy income");
+        return Arrays.asList("Effect:", "1 money income for each city", "(including this)");
     }
 
     @Nullable

@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,10 +23,5 @@ public class LightningHarvest extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 3 science tags");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("1 money income", "1 energy income");
     }
 }

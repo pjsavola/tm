@@ -32,6 +32,6 @@ public class ProtectedValley extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("2 money income", "Place greenery on ocean space", "(1 oxygen)");
+        return Arrays.asList("Place greenery on ocean space", "(1 oxygen)");
     }
 }

@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -23,7 +23,7 @@ public class IoMiningIndustries extends Card implements ScoringEffect {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("2 money income", "2 titanium income", "1 vp per jovian tag");
+        return Collections.singletonList("1 vp per jovian tag");
     }
 
     @Override

@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -29,6 +29,6 @@ public class StripMine extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("2 steel income", "1 titanium income", "-1 power income", "2 oxygen");
+        return Collections.singletonList("2 oxygen");
     }
 }

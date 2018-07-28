@@ -24,9 +24,4 @@ public class Insects extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 6% oxygen");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 plant income for each plant tag");
-    }
 }

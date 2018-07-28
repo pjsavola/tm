@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -30,6 +30,6 @@ public class BigAsteroid extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("4 titanium", "2 temperature");
+        return Collections.singletonList("2 temperature");
     }
 }

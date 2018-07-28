@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,10 +30,5 @@ public class UrbanizedArea extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Place next to at least 2 city tiles");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("2 money income", "-1 energy income");
     }
 }

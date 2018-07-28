@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,10 +23,5 @@ public class Worms extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Oxygen must be at least 4%");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("1 plant income for each 2 microbe tags", "(including this)");
     }
 }

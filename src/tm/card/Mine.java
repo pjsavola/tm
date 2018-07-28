@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -17,10 +14,5 @@ public class Mine extends Card {
     @Override
     public Resources getIncomeDelta(Game game) {
         return Resources.STEEL;
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 steel income");
     }
 }

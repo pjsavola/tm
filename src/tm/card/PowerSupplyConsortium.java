@@ -25,9 +25,4 @@ public class PowerSupplyConsortium extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 2 power tags");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 energy income");
-    }
 }

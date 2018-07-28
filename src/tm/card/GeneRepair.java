@@ -29,9 +29,4 @@ public class GeneRepair extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 3 science tags");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("2 money income");
-    }
 }

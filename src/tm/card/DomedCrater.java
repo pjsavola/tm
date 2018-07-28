@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,10 +41,5 @@ public class DomedCrater extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Oxygen must be 7% or less");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("3 plants", "3 money income", "-1 energy income");
     }
 }

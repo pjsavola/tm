@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -28,6 +28,6 @@ public class MagneticFieldDome extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 plant income", "-2 energy income", "1 TR");
+        return Collections.singletonList("1 TR");
     }
 }

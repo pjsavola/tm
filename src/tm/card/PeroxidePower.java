@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -17,10 +14,5 @@ public class PeroxidePower extends Card {
     @Override
     public Resources getIncomeDelta(Game game) {
         return new Resources(-1, 0, 0, 0, 2, 0);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("-1 money income", "2 energy income");
     }
 }

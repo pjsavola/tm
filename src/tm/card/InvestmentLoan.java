@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -22,10 +19,5 @@ public class InvestmentLoan extends Card {
     @Override
     public Resources getIncomeDelta(Game game) {
         return Resources.MONEY.negate();
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("10 money", "-1 money income");
     }
 }

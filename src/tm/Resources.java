@@ -86,6 +86,35 @@ public class Resources {
     private static final Color ENERGY_COLOR = new Color(0x6600FF);
     private static final Color HEAT_COLOR = new Color(0xFF9900);
 
+    public int render(Graphics g, int x, int y, boolean income) {
+        int offset = 2;
+        if (money != 0) {
+            renderMoney(g, x + 2, y + offset, income);
+            offset += 18;
+        }
+        if (steel != 0) {
+            renderSteel(g, x + 2, y + offset, income);
+            offset += 18;
+        }
+        if (titanium != 0) {
+            renderTitanium(g, x + 2, y + offset, income);
+            offset += 18;
+        }
+        if (plants != 0) {
+            renderPlants(g, x + 2, y + offset, income);
+            offset += 18;
+        }
+        if (energy != 0) {
+            renderEnergy(g, x + 2, y + offset, income);
+            offset += 18;
+        }
+        if (heat != 0) {
+            renderHeat(g, x + 2, y + offset, income);
+            offset += 18;
+        }
+        return offset;
+    }
+
     public void renderMoney(Graphics g, int x, int y, boolean income) {
         renderField(g, x, y, "images/icon_money.png", money, income, MONEY_COLOR);
     }

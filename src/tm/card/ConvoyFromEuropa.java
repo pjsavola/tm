@@ -27,6 +27,6 @@ public class ConvoyFromEuropa extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 ocean", "1 cards");
+        return Arrays.asList("1 ocean", "1 card");
     }
 }

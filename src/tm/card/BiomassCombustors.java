@@ -30,9 +30,4 @@ public class BiomassCombustors extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires at least 6% oxygen");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("2 energy income");
-    }
 }

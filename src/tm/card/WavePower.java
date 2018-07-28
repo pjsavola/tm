@@ -29,9 +29,4 @@ public class WavePower extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 3 ocean tiles");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("2 energy income");
-    }
 }

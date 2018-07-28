@@ -29,9 +29,4 @@ public class GreatDam extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 4 ocean tiles");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("2 energy income");
-    }
 }

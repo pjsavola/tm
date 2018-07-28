@@ -43,6 +43,6 @@ public class SpaceElevator extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "5 money", "-1 steel", "", "1 titanium income");
+        return Arrays.asList("Action:", "5 money", "-1 steel");
     }
 }
