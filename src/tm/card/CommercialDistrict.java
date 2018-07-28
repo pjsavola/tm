@@ -10,8 +10,6 @@ import tm.Resources;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.effect.ScoringEffect;
 
@@ -22,11 +20,13 @@ public class CommercialDistrict extends Card implements ScoringEffect {
     }
 
     @Override
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(4, 0, 0, 0, -1, 0);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new PlaceTileAction(Tile.Type.COMMERCIAL_DISTRICT),
-            new IncomeDeltaAction(new Resources(4, 0, 0, 0, -1, 0))
-        );
+        return new PlaceTileAction(Tile.Type.COMMERCIAL_DISTRICT);
     }
 
     @Override

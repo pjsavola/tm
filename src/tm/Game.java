@@ -140,15 +140,6 @@ public class Game extends JPanel {
         return currentPlayer;
     }
 
-    @Nullable
-    public Player getPlayer(Class<? extends Corporation> corporation) {
-        if (currentPlayer.getCorporation().getClass().equals(corporation)) {
-            return currentPlayer;
-        } else {
-            return null;
-        }
-    }
-
     public Planet getPlanet() {
         return planet;
     }

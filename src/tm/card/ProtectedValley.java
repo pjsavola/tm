@@ -11,7 +11,6 @@ import tm.Tile;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddOxygenAction;
-import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 
 public class ProtectedValley extends Card {
@@ -21,12 +20,13 @@ public class ProtectedValley extends Card {
     }
 
     @Override
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(2);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new PlaceTileAction(Tile.Type.MANGROVE),
-            new AddOxygenAction(),
-            new IncomeDeltaAction(new Resources(2))
-        );
+        return new ActionChain(new PlaceTileAction(Tile.Type.MANGROVE), new AddOxygenAction());
 
     }
 

@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.ResourceDeltaAction;
 
 public class Greenhouses extends Card {
 
@@ -17,8 +15,8 @@ public class Greenhouses extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new ResourceDeltaAction(new Resources(0, 0, 0, game.getCityCount(false), 0, 0));
+    public Resources getResourceDelta(Game game) {
+        return new Resources(0, 0, 0, game.getCityCount(false), 0, 0);
     }
 
     @Override

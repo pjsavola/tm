@@ -8,9 +8,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddTerraformingRatingAction;
-import tm.action.IncomeDeltaAction;
 
 public class MagneticFieldGenerators extends Card {
 
@@ -19,15 +17,17 @@ public class MagneticFieldGenerators extends Card {
     }
 
     @Override
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(0, 0, 0, 2, -4, 0);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new IncomeDeltaAction(new Resources(0, 0, 0, 2, -4, 0)),
-            new AddTerraformingRatingAction(3)
-        );
+        return new AddTerraformingRatingAction(3);
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("2 plan income", "-4 energy income", "3 TR");
+        return Arrays.asList("2 plant income", "-4 energy income", "3 TR");
     }
 }

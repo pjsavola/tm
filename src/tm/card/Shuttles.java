@@ -8,8 +8,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.effect.DiscountEffect;
 import tm.requirement.OxygenRequirement;
 
@@ -25,8 +23,8 @@ public class Shuttles extends Card implements DiscountEffect {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(2, 0, 0, 0, -1, 0));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(2, 0, 0, 0, -1, 0);
     }
 
     @Override

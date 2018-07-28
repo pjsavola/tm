@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class PowerGrid extends Card {
 
@@ -17,9 +15,8 @@ public class PowerGrid extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        final int energy = game.getCurrentPlayer().getTags().getCount(Tags.Type.POWER);
-        return new IncomeDeltaAction(new Resources(-1, 0, 0, 0, energy + 1, 0));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(0, 0, 0, 0, game.getCurrentPlayer().getTags().getCount(Tags.Type.POWER) + 1, 0);
     }
 
     @Override

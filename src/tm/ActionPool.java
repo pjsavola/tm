@@ -22,6 +22,7 @@ import tm.action.SelectActionAction;
 import tm.action.SwitchRoundAction;
 import tm.card.StandardTechnology;
 import tm.completable.Completable;
+import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
 import tm.corporation.Thorgate;
 import tm.standard.StandardAction;
@@ -91,7 +92,7 @@ public class ActionPool {
             @Override
             public Action getInitialAction(Game game) {
                 int reward = 0;
-                if (game.getCurrentPlayer().getCorporation() instanceof Thorgate) {
+                if (game.getCurrentPlayer().getCorporation() instanceof Credicor) {
                     reward += 4;
                 }
                 if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof StandardTechnology)) {
@@ -109,7 +110,7 @@ public class ActionPool {
             @Override
             public Action getInitialAction(Game game) {
                 int reward = 0;
-                if (game.getCurrentPlayer().getCorporation() instanceof Thorgate) {
+                if (game.getCurrentPlayer().getCorporation() instanceof Credicor) {
                     reward += 4;
                 }
                 if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof StandardTechnology)) {

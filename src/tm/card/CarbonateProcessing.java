@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class CarbonateProcessing extends Card {
 
@@ -22,12 +20,12 @@ public class CarbonateProcessing extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(0, 0, 0, 0, -1, 4));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(5, 0, 0, 0, -1, 3);
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("-1 energy income", "4 heat income");
+        return Arrays.asList("-1 energy income", "3 heat income");
     }
 }

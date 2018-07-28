@@ -9,8 +9,6 @@ import tm.Game;
 import tm.Player;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.effect.ScoringEffect;
 
 public class ImmigrationShuttles extends Card implements ScoringEffect {
@@ -20,8 +18,8 @@ public class ImmigrationShuttles extends Card implements ScoringEffect {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(5));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(5);
     }
 
     @Override

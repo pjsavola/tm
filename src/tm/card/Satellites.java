@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class Satellites extends Card {
 
@@ -17,9 +15,8 @@ public class Satellites extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        final int spaceCount = game.getCurrentPlayer().getTags().getCount(Tags.Type.SPACE);
-        return new IncomeDeltaAction(new Resources(spaceCount + 1));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(game.getCurrentPlayer().getTags().getCount(Tags.Type.SPACE) + 1);
     }
 
     @Override

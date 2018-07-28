@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import tm.Card;
+import tm.Game;
 import tm.Player;
+import tm.Resources;
 import tm.Tags;
 import tm.effect.ScoringEffect;
 
@@ -12,6 +14,11 @@ public class IoMiningIndustries extends Card implements ScoringEffect {
 
     public IoMiningIndustries() {
         super("Io Mining Industries", 41, Tags.SPACE_JOVIAN);
+    }
+
+    @Override
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(2, 0, 2, 0, 0, 0);
     }
 
     @Override

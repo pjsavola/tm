@@ -10,10 +10,7 @@ import tm.Resources;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
-import tm.action.ResourceDeltaAction;
 import tm.requirement.OxygenRequirement;
 
 public class OpenCity extends Card {
@@ -28,12 +25,18 @@ public class OpenCity extends Card {
     }
 
     @Override
+    public Resources getResourceDelta(Game game) {
+        return Resources.PLANT_2;
+    }
+
+    @Override
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(4, 0, 0, 0, -1, 0);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new PlaceTileAction(Tile.Type.CITY),
-            new ResourceDeltaAction(Resources.PLANT_2),
-            new IncomeDeltaAction(new Resources(4, 0, 0, 0, -1, 0))
-        );
+        return new PlaceTileAction(Tile.Type.CITY);
     }
 
     @Override

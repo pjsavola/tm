@@ -7,10 +7,7 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
-// TODO: What everything is affected by cities outside mars vs. inside mars?
 public class PhobosSpaceHaven extends Card {
 
     public PhobosSpaceHaven() {
@@ -23,8 +20,8 @@ public class PhobosSpaceHaven extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.TITANIUM);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.TITANIUM;
     }
 
     @Override

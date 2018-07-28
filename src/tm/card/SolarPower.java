@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class SolarPower extends Card {
 
@@ -22,8 +20,8 @@ public class SolarPower extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.ENERGY);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.ENERGY;
     }
 
     @Override

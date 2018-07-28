@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.requirement.OxygenRequirement;
 
 public class Zeppelins extends Card {
@@ -23,10 +21,9 @@ public class Zeppelins extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(game.getCityCount(true)));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(game.getCityCount(true));
     }
-
 
     @Override
     protected List<String> getRequirements() {

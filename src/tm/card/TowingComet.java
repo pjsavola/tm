@@ -11,7 +11,6 @@ import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddOxygenAction;
 import tm.action.AddWaterAction;
-import tm.action.ResourceDeltaAction;
 
 public class TowingComet extends Card {
 
@@ -20,12 +19,13 @@ public class TowingComet extends Card {
     }
 
     @Override
+    public Resources getResourceDelta(Game game) {
+        return Resources.PLANT_2;
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new ResourceDeltaAction(Resources.PLANT_2),
-            new AddOxygenAction(),
-            new AddWaterAction()
-        );
+        return new ActionChain(new AddOxygenAction(), new AddWaterAction());
     }
 
     @Override

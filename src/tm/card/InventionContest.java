@@ -12,7 +12,7 @@ import tm.action.DrawCardsAction;
 public class InventionContest extends Card {
 
     public InventionContest() {
-        super("Invention Contest", 2, Tags.SCIENCE);
+        super("Invention Contest", 2, Tags.SCIENCE.combine(Tags.EVENT));
     }
 
     @Override

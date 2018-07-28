@@ -7,10 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.IncomeDeltaAction;
-import tm.action.ResourceDeltaAction;
 
 public class SolarWindPower extends Card {
 
@@ -19,11 +15,13 @@ public class SolarWindPower extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new ResourceDeltaAction(Resources.TITANIUM_2),
-            new IncomeDeltaAction(Resources.ENERGY)
-        );
+    public Resources getResourceDelta(Game game) {
+        return Resources.TITANIUM_2;
+    }
+
+    @Override
+    public Resources getIncomeDelta(Game game) {
+        return Resources.ENERGY;
     }
 
     @Override

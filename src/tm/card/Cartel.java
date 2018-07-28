@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class Cartel extends Card {
 
@@ -17,9 +15,8 @@ public class Cartel extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        final int earthCount = game.getCurrentPlayer().getTags().getCount(Tags.Type.EARTH);
-        return new IncomeDeltaAction(new Resources(earthCount + 1));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(game.getCurrentPlayer().getTags().getCount(Tags.Type.EARTH) + 1);
     }
 
     @Override

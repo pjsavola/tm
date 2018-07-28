@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.requirement.TemperatureRequirement;
 
 public class DesignedMicroorganisms extends Card {
@@ -18,8 +16,8 @@ public class DesignedMicroorganisms extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.PLANT_2);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.PLANT_2;
     }
 
     @Override

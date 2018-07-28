@@ -90,6 +90,14 @@ public abstract class Card implements Comparable<Card> {
         return Collections.emptyList();
     }
 
+    public Resources getResourceDelta(Game game) {
+        return Resources.EMPTY;
+    }
+
+    public Resources getIncomeDelta(Game game) {
+        return Resources.EMPTY;
+    }
+
     @Nullable
     public Action getInitialAction(Game game) {
         return null;

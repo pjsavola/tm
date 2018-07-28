@@ -7,13 +7,11 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class VestaShipyard extends Card {
 
     public VestaShipyard() {
-        super("Vesta Shipyard", 15, Tags.SPACE);
+        super("Vesta Shipyard", 15, Tags.SPACE_JOVIAN);
     }
 
     @Override
@@ -22,8 +20,8 @@ public class VestaShipyard extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.TITANIUM);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.TITANIUM;
     }
 
     @Override

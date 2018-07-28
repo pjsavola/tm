@@ -13,7 +13,6 @@ import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddMarkerAction;
 import tm.action.AddTerraformingRatingAction;
-import tm.action.ResourceDeltaAction;
 
 public class ImportedNitrogen extends Card {
 
@@ -22,9 +21,13 @@ public class ImportedNitrogen extends Card {
     }
 
     @Override
+    public Resources getResourceDelta(Game game) {
+        return new Resources(0, 0, 0, 4, 0, 0);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(
-            new ResourceDeltaAction(new Resources(0, 0, 0, 4, 0, 0)),
             new AddTerraformingRatingAction(),
             new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {
                 @Override

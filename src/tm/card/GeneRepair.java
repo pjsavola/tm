@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.requirement.TagRequirement;
 
 public class GeneRepair extends Card {
@@ -23,8 +21,8 @@ public class GeneRepair extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(2));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(2);
     }
 
     @Override

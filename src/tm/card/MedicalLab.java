@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class MedicalLab extends Card {
 
@@ -22,9 +20,8 @@ public class MedicalLab extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        final int buildingCount = game.getCurrentPlayer().getTags().getCount(Tags.Type.BUILDING);
-        return new IncomeDeltaAction(new Resources((buildingCount + 1) / 2));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources((game.getCurrentPlayer().getTags().getCount(Tags.Type.BUILDING) + 1) / 2);
     }
 
     @Override

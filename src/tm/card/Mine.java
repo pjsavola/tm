@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class Mine extends Card {
 
@@ -17,8 +15,8 @@ public class Mine extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.STEEL);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.STEEL;
     }
 
     @Override

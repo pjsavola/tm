@@ -12,7 +12,6 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
 import tm.action.DrawCardsAction;
-import tm.action.IncomeDeltaAction;
 
 public class BusinessNetwork extends Card {
 
@@ -28,8 +27,8 @@ public class BusinessNetwork extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.MONEY.negate());
+    public Resources getIncomeDelta(Game game) {
+        return Resources.MONEY.negate();
     }
 
     @Override

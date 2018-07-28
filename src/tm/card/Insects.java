@@ -7,20 +7,17 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.requirement.OxygenRequirement;
 
 public class Insects extends Card {
 
     public Insects() {
-        super("Insects", 8, Tags.MICROBE, new OxygenRequirement(6, true));
+        super("Insects", 9, Tags.MICROBE, new OxygenRequirement(6, true));
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        final int plantCount = game.getCurrentPlayer().getTags().getCount(Tags.Type.PLANT);
-        return new IncomeDeltaAction(new Resources(0, 0, 0, plantCount, 0, 0));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(0, 0, 0, game.getCurrentPlayer().getTags().getCount(Tags.Type.PLANT), 0, 0);
     }
 
     @Override

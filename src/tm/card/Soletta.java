@@ -7,18 +7,16 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class Soletta extends Card {
 
     public Soletta() {
-        super("Soletta", 15, Tags.SPACE);
+        super("Soletta", 35, Tags.SPACE);
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(0, 0, 0, 0, 0, 7));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(0, 0, 0, 0, 0, 7);
     }
 
     @Override

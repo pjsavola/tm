@@ -10,21 +10,21 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
 import tm.action.AddOxygenAction;
-import tm.action.IncomeDeltaAction;
 
 public class StripMine extends Card {
 
     public StripMine() {
-        super("Strip Mine", 4, Tags.BUILDING);
+        super("Strip Mine", 25, Tags.BUILDING);
+    }
+
+    @Override
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(0, 2, 1, 0, -1, 0);
     }
 
     @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new IncomeDeltaAction(new Resources(0, 2, 1, 0, -1, 0)),
-            new AddOxygenAction(),
-            new AddOxygenAction()
-        );
+        return new ActionChain(new AddOxygenAction(), new AddOxygenAction());
     }
 
     @Override

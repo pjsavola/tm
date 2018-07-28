@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.requirement.OxygenRequirement;
 
 // Plant income is removed from dummy player
@@ -24,8 +22,8 @@ public class BiomassCombustors extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(0, 0, 0, 0, 2, 0));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(0, 0, 0, 0, 2, 0);
     }
 
     @Override

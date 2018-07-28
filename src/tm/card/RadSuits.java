@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.requirement.CityRequirement;
 
 public class RadSuits extends Card {
@@ -23,8 +21,8 @@ public class RadSuits extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.MONEY);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.MONEY;
     }
 
     @Override

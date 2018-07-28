@@ -8,9 +8,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddTemperatureAction;
-import tm.action.ResourceDeltaAction;
 
 // Decrease any 3 plants is done from dummy player
 public class Asteroid extends Card {
@@ -20,11 +18,13 @@ public class Asteroid extends Card {
     }
 
     @Override
+    public Resources getResourceDelta(Game game) {
+        return Resources.TITANIUM_2;
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new ResourceDeltaAction(Resources.TITANIUM_2),
-            new AddTemperatureAction()
-        );
+        return new AddTemperatureAction();
     }
 
     @Override

@@ -11,7 +11,6 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
-import tm.action.IncomeDeltaAction;
 import tm.action.MarkerDeltaAction;
 import tm.requirement.OxygenRequirement;
 
@@ -34,8 +33,8 @@ public class Livestock extends CardWithMarkers {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(2, 0, 0, -1, 0, 0));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(2, 0, 0, -1, 0, 0);
     }
 
     @Override

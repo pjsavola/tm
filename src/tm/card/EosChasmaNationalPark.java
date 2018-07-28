@@ -11,10 +11,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddMarkerAction;
-import tm.action.IncomeDeltaAction;
-import tm.action.ResourceDeltaAction;
 import tm.requirement.TemperatureRequirement;
 
 public class EosChasmaNationalPark extends Card {
@@ -29,17 +26,23 @@ public class EosChasmaNationalPark extends Card {
     }
 
     @Override
+    public Resources getResourceDelta(Game game) {
+        return Resources.PLANT_3;
+    }
+
+    @Override
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(2);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new IncomeDeltaAction(new Resources(2)),
-            new ResourceDeltaAction(Resources.PLANT_3),
-            new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {
-                @Override
-                protected Stream<CardWithMarkers> filter(Stream<CardWithMarkers> stream) {
-                    return stream.filter(card -> card.getTags().has(Tags.Type.ANIMAL));
-                }
+        return new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {
+            @Override
+            protected Stream<CardWithMarkers> filter(Stream<CardWithMarkers> stream) {
+                return stream.filter(card -> card.getTags().has(Tags.Type.ANIMAL));
             }
-        );
+        };
     }
 
     @Override

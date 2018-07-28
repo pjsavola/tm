@@ -8,9 +8,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddOxygenAction;
-import tm.action.ResourceDeltaAction;
 
 // Remove 2 plants is done from dummy player
 public class MiningExpedition extends Card {
@@ -20,11 +18,13 @@ public class MiningExpedition extends Card {
     }
 
     @Override
+    public Resources getIncomeDelta(Game game) {
+        return Resources.STEEL_2;
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new ResourceDeltaAction(Resources.STEEL_2),
-            new AddOxygenAction()
-        );
+        return new AddOxygenAction();
     }
 
     @Override

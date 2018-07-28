@@ -43,8 +43,8 @@ public class ElectroCatapult extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new ResourceDeltaAction(Resources.ENERGY.negate());
+    public Resources getIncomeDelta(Game game) {
+        return Resources.ENERGY.negate();
     }
 
     @Override

@@ -8,10 +8,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.IncomeDeltaAction;
-import tm.action.ResourceDeltaAction;
 import tm.requirement.TemperatureRequirement;
 
 public class Trees extends Card {
@@ -26,11 +22,13 @@ public class Trees extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new ResourceDeltaAction(Resources.PLANT),
-            new IncomeDeltaAction(Resources.PLANT)
-        );
+    public Resources getResourceDelta(Game game) {
+        return Resources.PLANT;
+    }
+
+    @Override
+    public Resources getIncomeDelta(Game game) {
+        return Resources.PLANT_3;
     }
 
     @Override
@@ -40,6 +38,6 @@ public class Trees extends Card {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 plant", "1 plant income");
+        return Arrays.asList("1 plant", "3 plant income");
     }
 }

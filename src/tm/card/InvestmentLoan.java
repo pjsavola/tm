@@ -7,10 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.IncomeDeltaAction;
-import tm.action.ResourceDeltaAction;
 
 public class InvestmentLoan extends Card {
 
@@ -19,11 +15,13 @@ public class InvestmentLoan extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new IncomeDeltaAction(Resources.MONEY.negate()),
-            new ResourceDeltaAction(new Resources(10))
-        );
+    public Resources getResourceDelta(Game game) {
+        return new Resources(10);
+    }
+
+    @Override
+    public Resources getIncomeDelta(Game game) {
+        return Resources.MONEY.negate();
     }
 
     @Override

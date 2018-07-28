@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class MicroMills extends Card {
 
@@ -17,10 +15,9 @@ public class MicroMills extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.HEAT);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.HEAT;
     }
-
     @Override
     protected List<String> getContents() {
         return Collections.singletonList("1 heat income");

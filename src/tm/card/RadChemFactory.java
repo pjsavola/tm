@@ -8,9 +8,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddTerraformingRatingAction;
-import tm.action.IncomeDeltaAction;
 
 public class RadChemFactory extends Card {
 
@@ -19,11 +17,13 @@ public class RadChemFactory extends Card {
     }
 
     @Override
+    public Resources getIncomeDelta(Game game) {
+        return Resources.ENERGY.negate();
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new IncomeDeltaAction(Resources.ENERGY.negate()),
-            new AddTerraformingRatingAction(2)
-        );
+        return new AddTerraformingRatingAction(2);
     }
 
     @Override

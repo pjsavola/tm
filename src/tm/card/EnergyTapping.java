@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 // Remove 1 energy income is done from dummy opponent
 public class EnergyTapping extends Card {
@@ -23,8 +21,8 @@ public class EnergyTapping extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.ENERGY);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.ENERGY;
     }
 
     @Override

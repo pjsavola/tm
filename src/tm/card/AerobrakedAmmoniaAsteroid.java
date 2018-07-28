@@ -10,9 +10,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddMarkerAction;
-import tm.action.IncomeDeltaAction;
 
 public class AerobrakedAmmoniaAsteroid extends Card {
 
@@ -21,26 +19,28 @@ public class AerobrakedAmmoniaAsteroid extends Card {
     }
 
     @Override
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(0, 0, 0, 1, 0, 3);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new IncomeDeltaAction(new Resources(0, 0, 0, 1, 0, 3)),
-            new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {
-                @Override
-                protected String getTitle() {
-                    return "Select microbe card to gain 2 markers";
-                }
-
-                @Override
-                protected Stream<CardWithMarkers> filter(Stream<CardWithMarkers> stream) {
-                    return stream.filter(card -> card.getTags().has(Tags.Type.MICROBE));
-                }
-
-                @Override
-                protected int getMarkerCount(CardWithMarkers card) {
-                    return 2;
-                }
+        return new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {
+            @Override
+            protected String getTitle() {
+                return "Select microbe card to gain 2 markers";
             }
-        );
+
+            @Override
+            protected Stream<CardWithMarkers> filter(Stream<CardWithMarkers> stream) {
+                return stream.filter(card -> card.getTags().has(Tags.Type.MICROBE));
+            }
+
+            @Override
+            protected int getMarkerCount(CardWithMarkers card) {
+                return 2;
+            }
+        };
     }
 
     @Override

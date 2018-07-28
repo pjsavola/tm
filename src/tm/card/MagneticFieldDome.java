@@ -8,9 +8,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddTerraformingRatingAction;
-import tm.action.IncomeDeltaAction;
 
 public class MagneticFieldDome extends Card {
 
@@ -19,11 +17,13 @@ public class MagneticFieldDome extends Card {
     }
 
     @Override
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(0, 0, 0, 1, -2, 0);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new IncomeDeltaAction(new Resources(0, 0, 0, 1, -2, 0)),
-            new AddTerraformingRatingAction()
-        );
+        return new AddTerraformingRatingAction();
     }
 
     @Override

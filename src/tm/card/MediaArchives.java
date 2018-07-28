@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.ResourceDeltaAction;
 
 public class MediaArchives extends Card {
 
@@ -17,8 +15,8 @@ public class MediaArchives extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new ResourceDeltaAction(new Resources(game.getCurrentPlayer().getTags().getCount(Tags.Type.EVENT)));
+    public Resources getResourceDelta(Game game) {
+        return new Resources(game.getCurrentPlayer().getTags().getCount(Tags.Type.EVENT));
     }
 
     @Override

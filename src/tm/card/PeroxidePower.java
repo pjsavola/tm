@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class PeroxidePower extends Card {
 
@@ -17,8 +15,8 @@ public class PeroxidePower extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(-1, 0, 0, 0, 2, 0));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(-1, 0, 0, 0, 2, 0);
     }
 
     @Override

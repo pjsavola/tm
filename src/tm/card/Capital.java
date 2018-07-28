@@ -10,8 +10,6 @@ import tm.Resources;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 import tm.requirement.OceanRequirement;
 
@@ -22,11 +20,13 @@ public class Capital extends Card {
     }
 
     @Override
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(5, 0, 0, 0, -2, 0);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new PlaceTileAction(Tile.Type.CAPITAL),
-            new IncomeDeltaAction(new Resources(5, 0, 0, 0, -2, 0))
-        );
+        return new PlaceTileAction(Tile.Type.CAPITAL);
     }
 
     @Override

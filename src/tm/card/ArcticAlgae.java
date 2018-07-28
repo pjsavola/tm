@@ -11,7 +11,6 @@ import tm.Resources;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 import tm.effect.PlaceTileEffect;
 import tm.requirement.TemperatureRequirement;
@@ -23,8 +22,8 @@ public class ArcticAlgae extends Card implements PlaceTileEffect {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.PLANT);
+    public Resources getResourceDelta(Game game) {
+        return Resources.PLANT;
     }
 
     @Override

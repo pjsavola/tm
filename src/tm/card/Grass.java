@@ -8,10 +8,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.IncomeDeltaAction;
-import tm.action.ResourceDeltaAction;
 import tm.requirement.TemperatureRequirement;
 
 public class Grass extends Card {
@@ -21,12 +17,13 @@ public class Grass extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new ResourceDeltaAction(Resources.PLANT_3),
-            new IncomeDeltaAction(Resources.PLANT)
-        );
+    public Resources getResourceDelta(Game game) {
+        return Resources.PLANT_3;
+    }
 
+    @Override
+    public Resources getIncomeDelta(Game game) {
+        return Resources.PLANT;
     }
 
     @Override

@@ -9,8 +9,6 @@ import tm.Resources;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 
 public class MoholeArea extends Card {
@@ -20,12 +18,13 @@ public class MoholeArea extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new PlaceTileAction(Tile.Type.MOHOLE_AREA),
-            new IncomeDeltaAction(new Resources(0, 0, 0, 0, 0, 4))
-        );
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(0, 0, 0, 0, 0, 4);
+    }
 
+    @Override
+    public Action getInitialAction(Game game) {
+        return new PlaceTileAction(Tile.Type.MOHOLE_AREA);
     }
 
     @Override

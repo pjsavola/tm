@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 // Removes 2 money income from dummy opponent
 public class Hackers extends Card {
@@ -23,8 +21,8 @@ public class Hackers extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(2, 0, 0, 0, -1, 0));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(2, 0, 0, 0, -1, 0);
     }
 
     @Override

@@ -7,8 +7,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 
 public class MirandaResort extends Card {
 
@@ -22,8 +20,8 @@ public class MirandaResort extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(game.getCurrentPlayer().getTags().getCount(Tags.Type.EARTH)));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(game.getCurrentPlayer().getTags().getCount(Tags.Type.EARTH));
     }
 
     @Override

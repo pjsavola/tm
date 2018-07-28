@@ -11,7 +11,6 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.CardActionWithCost;
-import tm.action.IncomeDeltaAction;
 import tm.action.ResourceDeltaAction;
 
 public class SpaceElevator extends Card {
@@ -33,8 +32,8 @@ public class SpaceElevator extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.TITANIUM);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.TITANIUM;
     }
 
     @Override

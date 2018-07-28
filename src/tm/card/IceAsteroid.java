@@ -18,10 +18,7 @@ public class IceAsteroid extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new AddWaterAction(),
-            new AddWaterAction()
-        );
+        return new ActionChain(new AddWaterAction(), new AddWaterAction());
     }
 
     @Override

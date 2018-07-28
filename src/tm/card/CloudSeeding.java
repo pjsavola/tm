@@ -8,8 +8,6 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.requirement.OceanRequirement;
 
 // Decrease any heat income by 1 is done from dummy player
@@ -20,8 +18,8 @@ public class CloudSeeding extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(-1, 0, 0, 2, 0, 0));
+    public Resources getIncomeDelta(Game game) {
+        return new Resources(-1, 0, 0, 2, 0, 0);
     }
 
     @Override

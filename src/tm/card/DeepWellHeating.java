@@ -8,9 +8,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddTemperatureAction;
-import tm.action.IncomeDeltaAction;
 
 public class DeepWellHeating extends Card {
 
@@ -19,11 +17,13 @@ public class DeepWellHeating extends Card {
     }
 
     @Override
+    public Resources getIncomeDelta(Game game) {
+        return Resources.ENERGY;
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new IncomeDeltaAction(Resources.ENERGY),
-            new AddTemperatureAction()
-        );
+        return new AddTemperatureAction();
     }
 
     @Override

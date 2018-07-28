@@ -12,7 +12,6 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.CardAction;
 import tm.action.DrawCardsAction;
-import tm.action.IncomeDeltaAction;
 import tm.requirement.TagRequirement;
 
 public class AICentral extends Card {
@@ -34,8 +33,8 @@ public class AICentral extends Card {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.ENERGY.negate());
+    public Resources getIncomeDelta(Game game) {
+        return Resources.ENERGY.negate();
     }
 
     @Override
