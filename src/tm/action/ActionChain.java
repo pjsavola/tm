@@ -69,20 +69,4 @@ public class ActionChain implements Action {
         }
         return true;
     }
-
-    @Nullable
-    public static IncomeDeltaAction findIncomeAction(@Nullable Action action) {
-        IncomeDeltaAction result = null;
-        if (action instanceof IncomeDeltaAction) {
-            result = (IncomeDeltaAction) action;
-        } else if (action instanceof ActionChain) {
-            for (Action a : ((ActionChain) action).actions) {
-                result = findIncomeAction(a);
-                if (result != null) {
-                    break;
-                }
-            }
-        }
-        return result;
-    }
 }

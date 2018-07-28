@@ -10,9 +10,9 @@ import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
+import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
 import tm.completable.Completable;
 import tm.completable.SelectCardsCompletable;
@@ -26,26 +26,26 @@ public class RoboticWorkforce extends CardWithMarkers {
     @Nullable
     @Override
     public Action getInitialAction(Game game) {
-        final Map<Card, IncomeDeltaAction> actionMap = new HashMap<>();
+        final Map<Card, Resources> incomeMap = new HashMap<>();
         for (Card card : game.getCurrentPlayer().getPlayedCards()) {
-            final IncomeDeltaAction action = ActionChain.findIncomeAction(card.getInitialAction(game));
-            if (action != null) {
-                actionMap.put(card, action);
+            final Resources income = card.getIncomeDelta(game);
+            if (income != Resources.EMPTY) {
+                incomeMap.put(card, income);
             }
         }
-        if (actionMap.isEmpty()) {
+        if (incomeMap.isEmpty()) {
             return null;
-        } else if (actionMap.size() == 1) {
-            final Action action = actionMap.values().iterator().next();
-            if (action.check(game)) {
-                return action;
+        } else if (incomeMap.size() == 1) {
+            final Resources income = incomeMap.values().iterator().next();
+            if (game.getCurrentPlayer().canAdjustIncome(income)) {
+                return new IncomeDeltaAction(income);
             }
             return null;
         } else {
             return new Action() {
                 @Override
                 public Completable begin(Game game) {
-                    return new SelectCardsCompletable(game, new ArrayList<>(actionMap.keySet())) {
+                    return new SelectCardsCompletable(game, new ArrayList<>(incomeMap.keySet())) {
                         @Nullable
                         private Card selectedCard;
 
@@ -56,8 +56,8 @@ public class RoboticWorkforce extends CardWithMarkers {
                                 return false;
                             }
                             selectedCard = selectedCards.iterator().next();
-                            final IncomeDeltaAction action = actionMap.get(selectedCard);
-                            if (!action.check(game)) {
+                            final Resources income = incomeMap.get(selectedCard);
+                            if (!game.getCurrentPlayer().canAdjustIncome(income)) {
                                 System.err.println("Cannot select this card");
                                 return false;
                             }
@@ -76,7 +76,7 @@ public class RoboticWorkforce extends CardWithMarkers {
 
                         @Override
                         public void complete() {
-                            game.getActionHandler().addPendingAction(actionMap.get(selectedCard));
+                            game.getActionHandler().addPendingAction(new IncomeDeltaAction(incomeMap.get(selectedCard)));
                             cancel();
                         }
 
