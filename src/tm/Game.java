@@ -2,6 +2,7 @@ package tm;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -16,8 +17,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.WindowConstants;
 
 import com.sun.istack.internal.Nullable;
 import tm.corporation.Credicor;
@@ -200,7 +206,80 @@ public class Game extends JPanel {
         return properties == null || (!properties.isWater() && !properties.isNoctis());
     }
 
+    public static class Test extends JPanel {
+        public Card card;
+
+        @Override
+        public void paintComponent(Graphics g) {
+            if (card != null) {
+                card.renderTitle(g, 0, 0);
+                card.renderContent(g, 0, 22, null);
+            }
+        }
+    }
+
+    public static void test() {
+        JFrame f = new JFrame();
+        final DefaultListModel<Card> listModel = new DefaultListModel<>();
+        listModel.addElement(Cards.ACQUIRED_COMPANY);
+        listModel.addElement(Cards.ADAPTED_LICHEN);
+        listModel.addElement(Cards.ADAPTED_LICHEN);
+        listModel.addElement(Cards.ADAPTED_LICHEN);
+        listModel.addElement(Cards.ADAPTED_LICHEN);
+        listModel.addElement(Cards.ADAPTED_LICHEN);
+        /*listModel.addElement(Cards.ADAPTED_LICHEN);
+        listModel.addElement(Cards.ADAPTED_LICHEN);
+        listModel.addElement(Cards.ADAPTED_LICHEN);
+        listModel.addElement(Cards.ADAPTED_LICHEN);
+        listModel.addElement(Cards.ADAPTED_LICHEN);*/
+        final JList<Card> cardList = new JList<>(listModel);
+        cardList.setFixedCellHeight(23);
+        cardList.setFixedCellWidth(204);
+        final JScrollPane scrollPane = new JScrollPane(cardList);
+        final Test cardPanel = new Test();
+        cardPanel.setBackground(Color.BLACK);
+        cardPanel.setPreferredSize(new Dimension(202, 224));
+        cardPanel.setSize(202, 202);
+        FlowLayout layout = new FlowLayout();
+        layout.setAlignment(FlowLayout.LEFT);
+        f.setLayout(layout);
+        f.add(scrollPane);
+        f.add(cardPanel);
+        scrollPane.setPreferredSize(new Dimension(224, 224));
+        f.pack();
+        cardList.setCellRenderer((selection, card, index, isSelected, cellHasFocus) -> new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                if (isSelected) {
+                    g.setColor(cellHasFocus ? Color.WHITE : Color.YELLOW);
+                    g.drawRect(0, 0, 202, 21);
+                }
+                if (cellHasFocus) {
+                    cardPanel.card = card;
+                    cardPanel.repaint();
+                }
+                card.renderTitle(g, 1, 1);
+            }
+        });
+        cardList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        f.setTitle("Play 1 card");
+        //f.setSize(410, 202);
+        f.setLocationRelativeTo(null);
+        scrollPane.setForeground(Color.GRAY);
+        scrollPane.setBackground(Color.BLACK);
+        scrollPane.setBorder(null);
+        cardList.setBackground(Color.BLACK);
+        f.setBackground(Color.BLACK);
+        f.getContentPane().setBackground(Color.BLACK);
+        f.setVisible(true);
+    }
+
     public static void main(String[] args) {
+        if (true) {
+            test();
+            return;
+        }
         JFrame f = new JFrame();
         Game g = new Game();
         g.addMouseListener(new MouseListener() {
