@@ -31,6 +31,9 @@ public class ActionHandler {
     public ActionHandler(Game game) {
         this.game = game;
         this.pool = new ActionPool(game);
+    }
+
+    public void start() {
         final Action initialDraw = new DrawCardsAction(10, true, true);
         reprocess(initialDraw.begin(game));
     }

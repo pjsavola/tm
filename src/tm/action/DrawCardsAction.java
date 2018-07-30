@@ -102,7 +102,6 @@ public class DrawCardsAction implements Action {
                     game.getCurrentPlayer().getCards().removeAll(selectedCards);
                     game.getDiscardDeck().removeAll(discardedCards);
                     game.getActionHandler().reprocess(this);
-                    game.addMouseListener(mouseListener);
                     game.repaint();
                 }
 
@@ -145,7 +144,6 @@ public class DrawCardsAction implements Action {
                 public void undo() {
                     game.getCurrentPlayer().getCards().removeAll(selection);
                     game.getActionHandler().reprocess(this);
-                    game.addMouseListener(mouseListener);
                     game.repaint();
                 }
 

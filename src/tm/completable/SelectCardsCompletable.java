@@ -1,82 +1,127 @@
 package tm.completable;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.WindowConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import tm.Card;
 import tm.Game;
 
-public abstract class SelectCardsCompletable implements Completable {
+public abstract class SelectCardsCompletable extends JPanel implements Completable {
 
-    protected static final int TOP_MARGIN = 80;
-    protected static final int LEFT_MARGIN = 100;
-    protected static final int CARD_SPACING = 4;
-    protected static final int CARD_HEIGHT = Card.TITLE_HEIGHT + CARD_SPACING;
-    protected static final int VISIBLE_SPACING = 100;
-    private static final Color TITLE_COLOR = new Color(0xFFFFFF);
-    private static final Color HIGHLIGHT_COLOR = new Color(0xFFFF00);
     private final Game game;
     protected final Set<Card> selectedCards = new HashSet<>();
     protected final List<? extends Card> selection;
-    Card cardToRender;
+    private Card cardToRender;
 
-    protected final MouseListener mouseListener = new MouseListener() {
-        @Override
-        public void mouseReleased(MouseEvent arg0) {
-        }
+    private static class SelectionWindow extends JFrame {
+        private Card cardToRender;
+        private Set<Card> selectedCards = new HashSet<>();
 
-        @Override
-        public void mousePressed(MouseEvent arg0) {
-        }
-
-        @Override
-        public void mouseExited(MouseEvent arg0) {
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent arg0) {
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            final int x = e.getX();
-            final int y = e.getY();
-            for (int i = 0; i < selection.size(); i++) {
-                if (x >= LEFT_MARGIN && x <= LEFT_MARGIN + Card.WIDTH && y >= TOP_MARGIN + CARD_HEIGHT * (i + 1) && y <= TOP_MARGIN + CARD_HEIGHT * (i + 2)) {
-                    cardToRender = selection.get(i);
-                    final int max = maxSelection();
-                    if (max > 0) {
-                        if (max == 1 && !selectedCards.isEmpty() && !selectedCards.contains(cardToRender)) {
-                            selectedCards.clear();
-                        }
-                        if (!selectedCards.add(cardToRender)) {
-                            selectedCards.remove(cardToRender);
-                            cardToRender = null;
-                        }
+        public SelectionWindow(List<? extends Card> selection) {
+            // Create panel which renders last selected card
+            final JPanel cardPanel = new JPanel() {
+                @Override
+                public void paintComponent(Graphics g) {
+                    if (cardToRender != null) {
+                        cardToRender.renderTitle(g, 0, 0);
+                        cardToRender.renderContent(g, 0, 22, null);
                     }
-                    selectionChanged();
-                    game.repaint();
-                    break;
                 }
+            };
+            cardPanel.setPreferredSize(new Dimension(202, 230));
+            cardPanel.setBackground(Color.BLACK);
+
+            // Create list which contains the selection
+            final DefaultListModel<Card> listModel = new DefaultListModel<>();
+            for (Card card : selection) {
+                listModel.addElement(card);
             }
-            if (x >= LEFT_MARGIN && x <= LEFT_MARGIN + Card.WIDTH && y >= TOP_MARGIN + CARD_HEIGHT * (selection.size() + 2) && y <= TOP_MARGIN + CARD_HEIGHT * (selection.size() + 3)) {
-                if (check()) {
-                    game.getActionHandler().completed(SelectCardsCompletable.this);
+            final JList<Card> cardList = new JList<>(listModel);
+            cardList.setFixedCellHeight(23);
+            cardList.setFixedCellWidth(204);
+            cardList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+            cardList.setBackground(Color.BLACK);
+            cardList.setCellRenderer((_selection, card, index, isSelected, cellHasFocus) -> new JPanel() {
+                @Override
+                public void paintComponent(Graphics g) {
+                    if (isSelected) {
+                        g.setColor(cellHasFocus ? Color.WHITE : Color.YELLOW);
+                        g.drawRect(0, 0, 202, 21);
+                    }
+                    if (cellHasFocus) {
+                        cardToRender = card;
+                        cardPanel.repaint();
+                    }
+                    card.renderTitle(g, 1, 1);
                 }
-            }
+            });
+            cardList.addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    final int[] indices = ((JList<?>) e.getSource()).getSelectedIndices();
+                    selectedCards.clear();
+                    for (int i : indices) {
+                        selectedCards.add(selection.get(i));
+                    }
+                }
+            });
+
+            // Add scroll bar to the list if needed
+            final JScrollPane scrollPane = new JScrollPane(cardList);
+            scrollPane.setPreferredSize(new Dimension(224, 280));
+            scrollPane.setBorder(null);
+
+            // Create a panel with two buttons
+            final JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new FlowLayout());
+            buttonPanel.add(new JButton("Confirm"));
+            buttonPanel.add(new JButton("Cancel"));
+            buttonPanel.setBackground(Color.BLACK);
+
+            // Create a panel which contains selected card and buttons
+            final JPanel cardAndButtonsPanel = new JPanel();
+            final BoxLayout boxLayout = new BoxLayout(cardAndButtonsPanel, BoxLayout.Y_AXIS);
+            cardAndButtonsPanel.add(cardPanel);
+            cardAndButtonsPanel.add(buttonPanel);
+            cardAndButtonsPanel.setBackground(Color.BLACK);
+            cardAndButtonsPanel.setPreferredSize(new Dimension(202, 280));
+
+            // Finally, add the created panels to the frame
+            setLayout(new FlowLayout());
+            add(scrollPane);
+            add(cardAndButtonsPanel);
+            pack();
+            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            setTitle("Play 1 card");
+            setLocationRelativeTo(null);
+            setAlwaysOnTop(true);
+            getContentPane().setBackground(Color.BLACK);
+            setVisible(true);
         }
-    };
+    }
 
     protected SelectCardsCompletable(Game game, List<? extends Card> selection) {
         this.game = game;
         this.selection = selection;
-        game.addMouseListener(mouseListener);
-        game.repaint();
+        new SelectionWindow(selection);
+
     }
 
     protected void selectionChanged() {
@@ -88,31 +133,8 @@ public abstract class SelectCardsCompletable implements Completable {
 
     @Override
     public void cancel() {
-        game.removeMouseListener(mouseListener);
-        game.repaint();
     }
 
     public abstract String getTitle();
 
-    @Override
-    public void paint(Graphics g) {
-        final Color oldColor = g.getColor();
-        g.setColor(TITLE_COLOR);
-        final String title = getTitle();
-        g.drawString(title, LEFT_MARGIN, TOP_MARGIN);
-        for (int i = 0; i < selection.size(); i++) {
-            if (selectedCards.contains(selection.get(i))) {
-                g.setColor(HIGHLIGHT_COLOR);
-                g.drawRect(LEFT_MARGIN - 1, TOP_MARGIN + CARD_HEIGHT * (i + 1) - 1, Card.WIDTH + 2, Card.TITLE_HEIGHT + 2);
-            }
-            selection.get(i).renderTitle(g, LEFT_MARGIN, TOP_MARGIN + CARD_HEIGHT * (i + 1));
-        }
-        g.setColor(TITLE_COLOR);
-        g.drawString("Confirm", LEFT_MARGIN, TOP_MARGIN + CARD_HEIGHT * (selection.size() + 2) + 12);
-        if (cardToRender != null) {
-            cardToRender.renderTitle(g, LEFT_MARGIN + Card.WIDTH + VISIBLE_SPACING, TOP_MARGIN + CARD_HEIGHT);
-            cardToRender.renderContent(g, LEFT_MARGIN + Card.WIDTH + VISIBLE_SPACING, TOP_MARGIN + CARD_HEIGHT + Card.TITLE_HEIGHT, game);
-        }
-        g.setColor(oldColor);
-    }
 }
