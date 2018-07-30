@@ -20,10 +20,12 @@ public class DiscardAction implements Action {
     public Completable begin(Game game) {
         final List<Card> hand = new ArrayList<>(game.getCurrentPlayer().getCards());
         return new SelectCardsCompletable(game, hand, 1, hand.size(), "Select cards to discard") {
+            private Resources resources;
 
             @Override
             public void complete() {
-                game.getActionHandler().addPendingAction(new ResourceDeltaAction(new Resources(selectedCards.size())));
+                resources = new Resources(selectedCards.size());
+                game.getCurrentPlayer().adjustResources(resources);
                 game.getCurrentPlayer().getCards().removeAll(selectedCards);
                 game.getDiscardDeck().addAll(selectedCards);
                 game.repaint();
@@ -31,6 +33,7 @@ public class DiscardAction implements Action {
 
             @Override
             public void undo() {
+                game.getCurrentPlayer().adjustResources(resources.negate());
                 game.getCurrentPlayer().getCards().addAll(selectedCards);
                 game.getDiscardDeck().removeAll(selectedCards);
                 game.repaint();
@@ -38,6 +41,7 @@ public class DiscardAction implements Action {
 
             @Override
             public void redo() {
+                game.getCurrentPlayer().adjustResources(resources);
                 game.getCurrentPlayer().getCards().removeAll(selectedCards);
                 game.getDiscardDeck().addAll(selectedCards);
                 game.repaint();

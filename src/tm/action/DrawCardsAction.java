@@ -55,19 +55,18 @@ public class DrawCardsAction implements Action {
             max = amount;
         }
         if (min < amount) {
-            final String title;
-            if (min == max) {
-                title = "Select " + min + " cards to keep";
-            } else {
-                title = "Select " + min + "-" + max + " cards to keep";
+            String title = pay ? "Buy " : "Select ";
+            title += min;
+            if (min < max) {
+                title += "-" + max;
             }
+            title += " cards";
             return new SelectCardsCompletable(game, drawnCards, min, max, title) {
                 private List<Card> discardedCards;
 
                 @Override
                 public boolean check() {
                     if (pay && !initial && !game.getCurrentPlayer().canAdjustResources(new Resources(-3 * selectedCards.size()))) {
-                        System.err.println("Not enough money to keep " + selectedCards.size() + " the cards");
                         return false;
                     }
                     return true;
@@ -122,8 +121,7 @@ public class DrawCardsAction implements Action {
 
                 @Override
                 public void redo() {
-                    game.getCurrentPlayer().getCards().addAll(selection);
-                    game.repaint();
+                    throw new UnsupportedOperationException();
                 }
             };
         }
