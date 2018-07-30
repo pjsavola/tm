@@ -34,12 +34,7 @@ public class SearchForLife extends CardWithMarkers {
             return new Action() {
                 @Override
                 public Completable begin(Game game) {
-                    return new SelectCardsCompletable(game, Collections.singletonList(card)) {
-
-                        @Override
-                        public int maxSelection() {
-                            return 0;
-                        }
+                    return new SelectCardsCompletable(game, Collections.singletonList(card), 0, 0, "Search For Life") {
 
                         @Override
                         public boolean check() {
@@ -49,12 +44,13 @@ public class SearchForLife extends CardWithMarkers {
                         @Override
                         public void complete() {
                             game.getDiscardDeck().add(card);
-                            cancel();
+                            game.repaint();
                         }
 
                         @Override
                         public void undo() {
                             game.getDiscardDeck().remove(card);
+                            createWindow();
                             game.getActionHandler().reprocess(this);
                             game.repaint();
                         }
@@ -62,12 +58,6 @@ public class SearchForLife extends CardWithMarkers {
                         @Override
                         public void redo() {
                             game.getDiscardDeck().add(card);
-                            cancel();
-                        }
-
-                        @Override
-                        public String getTitle() {
-                            return "Search For Life";
                         }
                     };
                 }

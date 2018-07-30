@@ -1,7 +1,9 @@
 package tm.action;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.completable.Completable;
@@ -16,12 +18,8 @@ public class DiscardAction implements Action {
 
     @Override
     public Completable begin(Game game) {
-        return new SelectCardsCompletable(game, new ArrayList<>(game.getCurrentPlayer().getCards())) {
-
-            @Override
-            public int maxSelection() {
-                return selection.size();
-            }
+        final List<Card> hand = new ArrayList<>(game.getCurrentPlayer().getCards());
+        return new SelectCardsCompletable(game, hand, 1, hand.size(), "Select cards to discard") {
 
             @Override
             public boolean check() {
@@ -37,7 +35,7 @@ public class DiscardAction implements Action {
             public void complete() {
                 game.getCurrentPlayer().getCards().removeAll(selectedCards);
                 game.getDiscardDeck().addAll(selectedCards);
-                cancel();
+                game.repaint();
             }
 
             @Override
@@ -52,11 +50,6 @@ public class DiscardAction implements Action {
                 game.getCurrentPlayer().getCards().removeAll(selectedCards);
                 game.getDiscardDeck().addAll(selectedCards);
                 game.repaint();
-            }
-
-            @Override
-            public String getTitle() {
-                return "Select cards to discard";
             }
         };
     }

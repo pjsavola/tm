@@ -45,7 +45,7 @@ public class RoboticWorkforce extends CardWithMarkers {
             return new Action() {
                 @Override
                 public Completable begin(Game game) {
-                    return new SelectCardsCompletable(game, new ArrayList<>(incomeMap.keySet())) {
+                    return new SelectCardsCompletable(game, new ArrayList<>(incomeMap.keySet()), 0, 1, "Select income to duplicate") {
                         @Nullable
                         private Card selectedCard;
 
@@ -62,16 +62,6 @@ public class RoboticWorkforce extends CardWithMarkers {
                                 return false;
                             }
                             return true;
-                        }
-
-                        @Override
-                        public int maxSelection() {
-                            return 1;
-                        }
-
-                        @Override
-                        public String getTitle() {
-                            return "Select income to duplicate";
                         }
 
                         @Override

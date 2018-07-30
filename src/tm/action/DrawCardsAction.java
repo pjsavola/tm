@@ -55,13 +55,14 @@ public class DrawCardsAction implements Action {
             max = amount;
         }
         if (min < amount) {
-            return new SelectCardsCompletable(game, drawnCards) {
+            final String title;
+            if (min == max) {
+                title = "Select " + min + " cards to keep";
+            } else {
+                title = "Select " + min + "-" + max + " cards to keep";
+            }
+            return new SelectCardsCompletable(game, drawnCards, min, max, title) {
                 private List<Card> discardedCards;
-
-                @Override
-                public int maxSelection() {
-                    return max;
-                }
 
                 @Override
                 public boolean check() {
@@ -94,13 +95,13 @@ public class DrawCardsAction implements Action {
                     if (initial) {
                         game.getActionHandler().addPendingAction(new PlayCorporationAction());
                     }
-                    cancel();
                 }
 
                 @Override
                 public void undo() {
                     game.getCurrentPlayer().getCards().removeAll(selectedCards);
                     game.getDiscardDeck().removeAll(discardedCards);
+                    createWindow();
                     game.getActionHandler().reprocess(this);
                     game.repaint();
                 }
@@ -109,25 +110,11 @@ public class DrawCardsAction implements Action {
                 public void redo() {
                     game.getCurrentPlayer().getCards().addAll(selectedCards);
                     game.getDiscardDeck().addAll(discardedCards);
-                    cancel();
-                }
-
-                @Override
-                public String getTitle() {
-                    if (min == max) {
-                        return "Select " + min + " cards to keep";
-                    } else {
-                        return "Select " + min + "-" + max + " cards to keep";
-                    }
+                    game.repaint();
                 }
             };
         } else {
-            return new SelectCardsCompletable(game, drawnCards) {
-
-                @Override
-                public int maxSelection() {
-                    return 0;
-                }
+            return new SelectCardsCompletable(game, drawnCards, 0, 0, "You got these cards") {
 
                 @Override
                 public boolean check() {
@@ -137,12 +124,13 @@ public class DrawCardsAction implements Action {
                 @Override
                 public void complete() {
                     game.getCurrentPlayer().getCards().addAll(selection);
-                    cancel();
+                    game.repaint();
                 }
 
                 @Override
                 public void undo() {
                     game.getCurrentPlayer().getCards().removeAll(selection);
+                    createWindow();
                     game.getActionHandler().reprocess(this);
                     game.repaint();
                 }
@@ -150,12 +138,7 @@ public class DrawCardsAction implements Action {
                 @Override
                 public void redo() {
                     game.getCurrentPlayer().getCards().addAll(selection);
-                    cancel();
-                }
-
-                @Override
-                public String getTitle() {
-                    return "You got these cards";
+                    game.repaint();
                 }
             };
         }

@@ -39,7 +39,7 @@ public class MarsUniversity extends Card implements PlayCardEffect {
                 @Override
                 public Completable begin(Game game) {
                     final Player player = game.getCurrentPlayer();
-                    return new SelectCardsCompletable(game, new ArrayList<>(player.getCards())) {
+                    return new SelectCardsCompletable(game, new ArrayList<>(player.getCards()), 0, 1, "You may discard 1 card to draw 1 card") {
                         @Nullable
                         private Card selectedCard;
 
@@ -49,23 +49,12 @@ public class MarsUniversity extends Card implements PlayCardEffect {
                         }
 
                         @Override
-                        public int maxSelection() {
-                            return 1;
-                        }
-
-                        @Override
-                        public String getTitle() {
-                            return "You may discard 1 card to draw 1 card";
-                        }
-
-                        @Override
                         public void complete() {
                             selectedCard = selectedCards.isEmpty() ? null : selectedCards.iterator().next();
                             if (selectedCard != null) {
                                 game.getCurrentPlayer().getCards().remove(selectedCard);
                                 game.getActionHandler().addPendingAction(new DrawCardsAction(1, false, false));
                             }
-                            cancel();
                         }
 
                         @Override

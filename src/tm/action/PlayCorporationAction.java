@@ -18,12 +18,7 @@ public class PlayCorporationAction implements Action {
     public Completable begin(Game game) {
         final Deque<Card> deck = game.getCorporationDeck();
         final List<Card> corporations = new ArrayList<>(deck);
-        return new SelectCardsCompletable(game, corporations) {
-
-            @Override
-            public int maxSelection() {
-                return 1;
-            }
+        return new SelectCardsCompletable(game, corporations, 1, 1, "Select your corporation") {
 
             @Override
             public boolean check() {
@@ -43,7 +38,7 @@ public class PlayCorporationAction implements Action {
             public void complete() {
                 game.getCurrentPlayer().addTags(corporation.getTags());
                 game.getCurrentPlayer().setCorporation(corporation);
-                cancel();
+                game.repaint();
             }
 
             @Override
@@ -56,11 +51,6 @@ public class PlayCorporationAction implements Action {
             @Override
             public void redo() {
                 throw new UnsupportedOperationException();
-            }
-
-            @Override
-            public String getTitle() {
-                return "Select your corporation";
             }
         };
 

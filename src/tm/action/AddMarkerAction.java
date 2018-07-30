@@ -64,23 +64,13 @@ public class AddMarkerAction implements Action {
                 }
             };
         }
-        return new SelectCardsCompletable(game, cards) {
+        return new SelectCardsCompletable(game, cards, 0, 1, AddMarkerAction.this.getTitle()) {
             @Nullable
             private CardWithMarkers selectedCard;
 
             @Override
             public boolean check() {
                 return true;
-            }
-
-            @Override
-            public int maxSelection() {
-                return 1;
-            }
-
-            @Override
-            public String getTitle() {
-                return AddMarkerAction.this.getTitle();
             }
 
             @Override
@@ -96,7 +86,6 @@ public class AddMarkerAction implements Action {
                 } else {
                     selectedCard.adjustMarkers(getMarkerCount(selectedCard));
                 }
-                cancel();
             }
 
             @Override

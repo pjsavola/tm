@@ -47,16 +47,11 @@ public class PlayCardAction implements Action {
         private final int tolerance;
 
         public PlayCardCompletable(Game game, int discount, int tolerance) {
-            super(game, new ArrayList<>(game.getCurrentPlayer().getCards()));
+            super(game, new ArrayList<>(game.getCurrentPlayer().getCards()), 1, 1, "Select card to play");
             player = game.getCurrentPlayer();
             this.game = game;
             this.discount = discount;
             this.tolerance = tolerance;
-        }
-
-        @Override
-        public int maxSelection() {
-            return 1;
         }
 
         @Override
@@ -69,30 +64,32 @@ public class PlayCardAction implements Action {
                 System.err.println("Card requirements not fulfilled");
                 return false;
             }
-            final Action paymentAction = new ResourceDeltaAction(payment.getResourceDelta());
-            if (!paymentAction.check(game)) {
-                System.err.println("Not enough money to pay for the card");
-                return false;
-            }
-            final Action action = selectedCard.getInitialAction(game);
-            if (action != null && !action.check(game)) {
+            if (!game.getCurrentPlayer().canAdjustResources(payment.getResourceDelta())) {
                 System.err.println("Not enough resources to play the card");
                 return false;
             }
-            game.getActionHandler().addPendingAction(paymentAction);
-            if (action != null) {
-                game.getActionHandler().addPendingAction(action);
+            if (!game.getCurrentPlayer().canAdjustIncome(payment.getIncomeDelta())) {
+                System.err.println("Not enough income to play the card");
+                return false;
             }
             return true;
         }
 
         @Override
         public void complete() {
+            game.getActionHandler().addPendingAction(new ResourceDeltaAction(payment.getResourceDelta()));
+            game.getActionHandler().addPendingAction(new IncomeDeltaAction(payment.getIncomeDelta()));
+            final Action action = selectedCard.getInitialAction(game);
+            if (action != null) {
+                game.getActionHandler().addPendingAction(action);
+            }
             player.addTags(selectedCard.getTags());
             player.getCards().remove(selectedCard);
             player.playCard(selectedCard);
             player.cardPlayEffects(game, selectedCard);
-            cancel();
+            player.setResourcesDelta(Resources.EMPTY);
+            player.setIncomeDelta(Resources.EMPTY);
+            payment = null;
         }
 
         @Override
@@ -100,7 +97,6 @@ public class PlayCardAction implements Action {
             player.removeTags(selectedCard.getTags());
             player.getCards().add(selectedCard);
             player.unplayCard(selectedCard);
-            game.repaint();
         }
 
         @Override
@@ -108,20 +104,6 @@ public class PlayCardAction implements Action {
             player.addTags(selectedCard.getTags());
             player.getCards().remove(selectedCard);
             player.playCard(selectedCard);
-            game.repaint();
-        }
-
-        @Override
-        public void cancel() {
-            player.setResourcesDelta(Resources.EMPTY);
-            player.setIncomeDelta(Resources.EMPTY);
-            payment = null;
-            super.cancel();
-        }
-
-        @Override
-        public String getTitle() {
-            return "Select card to play";
         }
 
         @Override

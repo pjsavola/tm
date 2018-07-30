@@ -121,6 +121,10 @@ public class ActionHandler {
         return current == null || cancelEnabled;
     }
 
+    public boolean isCancelEnabled() {
+        return cancelEnabled;
+    }
+
     public void undo() {
         if (current != null) {
             cancel();
