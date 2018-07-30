@@ -71,12 +71,16 @@ public abstract class CardAction implements Action {
 
         @Override
         public void undo() {
-            action.usedOnRound = game.getPlanet().getRound() - 1;
+            if (action.isUndoable()) {
+                action.usedOnRound = game.getPlanet().getRound() - 1;
+            }
         }
 
         @Override
         public void redo() {
-            action.usedOnRound = game.getPlanet().getRound();
+            if (action.isUndoable()) {
+                action.usedOnRound = game.getPlanet().getRound();
+            }
         }
     }
 }

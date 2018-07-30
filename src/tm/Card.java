@@ -204,9 +204,11 @@ public abstract class Card implements Comparable<Card> {
     }
 
     @Override
-    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     public boolean equals(Object other) {
-        return name.equals(other);
+        if (other instanceof Card) {
+            return name.equals(((Card) other).name);
+        }
+        return false;
     }
 
     @Override

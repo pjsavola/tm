@@ -80,7 +80,7 @@ public class PlayCardAction implements Action {
             game.getActionHandler().addPendingAction(new ResourceDeltaAction(payment.getResourceDelta()));
             game.getActionHandler().addPendingAction(new IncomeDeltaAction(payment.getIncomeDelta()));
             final Action action = selectedCard.getInitialAction(game);
-            if (action != null) {
+            if (action != null && action.check(game)) {
                 game.getActionHandler().addPendingAction(action);
             }
             player.addTags(selectedCard.getTags());
@@ -104,6 +104,14 @@ public class PlayCardAction implements Action {
             player.addTags(selectedCard.getTags());
             player.getCards().remove(selectedCard);
             player.playCard(selectedCard);
+        }
+
+        @Override
+        public void cancel() {
+            player.setResourcesDelta(Resources.EMPTY);
+            player.setIncomeDelta(Resources.EMPTY);
+            payment = null;
+            super.cancel();
         }
 
         @Override
@@ -144,6 +152,7 @@ public class PlayCardAction implements Action {
         private final int materialValue;
         private final int materialMax;
         private int materialsUsed;
+        private final int cost;
 
         public Payment(Player player, boolean steel, boolean titanium, Resources resourceDelta, Resources incomeDelta, int discount) {
             this.player = player;
@@ -151,7 +160,7 @@ public class PlayCardAction implements Action {
             this.titanium = titanium;
             this.incomeDelta = incomeDelta;
             resourceDeltaAfterDiscounts = resourceDelta.combine(new Resources(discount));
-            final int cost = -resourceDeltaAfterDiscounts.getMoney();
+            cost = -resourceDeltaAfterDiscounts.getMoney();
             if (steel) {
                 materialValue = player.getSteelValue();
                 materialsUsed = Math.min(player.getSteel(), cost / materialValue);
@@ -190,9 +199,9 @@ public class PlayCardAction implements Action {
 
         public Resources getResourceDelta() {
             if (steel) {
-                return resourceDeltaAfterDiscounts.combine(new Resources(materialsUsed * materialValue, -materialsUsed, 0, 0, 0, 0));
+                return resourceDeltaAfterDiscounts.combine(new Resources(Math.min(cost, materialsUsed * materialValue), -materialsUsed, 0, 0, 0, 0));
             } else if (titanium) {
-                return resourceDeltaAfterDiscounts.combine(new Resources(materialsUsed * materialValue, 0, -materialsUsed, 0, 0, 0));
+                return resourceDeltaAfterDiscounts.combine(new Resources(Math.min(cost, materialsUsed * materialValue), 0, -materialsUsed, 0, 0, 0));
             } else {
                 return resourceDeltaAfterDiscounts;
             }

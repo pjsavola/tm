@@ -50,7 +50,7 @@ public class SearchForLife extends CardWithMarkers {
                         @Override
                         public void undo() {
                             game.getDiscardDeck().remove(card);
-                            createWindow();
+                            openWindow();
                             game.getActionHandler().reprocess(this);
                             game.repaint();
                         }

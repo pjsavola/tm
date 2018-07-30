@@ -95,13 +95,13 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
             final JList<Card> cardList = new JList<>(listModel);
             cardList.setFixedCellHeight(23);
             cardList.setFixedCellWidth(204);
-            final int selectionMode = max > 1 ? ListSelectionModel.MULTIPLE_INTERVAL_SELECTION : ListSelectionModel.SINGLE_SELECTION;
+            final int selectionMode = (max == 1 && min == 1) ? ListSelectionModel.SINGLE_SELECTION : ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
             cardList.setSelectionMode(selectionMode);
             cardList.setBackground(Color.BLACK);
             cardList.setCellRenderer((_selection, card, index, isSelected, cellHasFocus) -> new JPanel() {
                 @Override
                 public void paintComponent(Graphics g) {
-                    if (isSelected) {
+                    if (isSelected && (max > 0)) {
                         g.setColor(cellHasFocus ? Color.WHITE : Color.YELLOW);
                         g.drawRect(0, 0, 202, 21);
                     }
@@ -122,7 +122,7 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
                     }
                     selectionChanged();
                     game.repaint();
-                    confirmButton.setEnabled(indices.length >= min && indices.length <= max);
+                    confirmButton.setEnabled(max == 0 || (indices.length >= min && indices.length <= max));
                     //confirmButton.setEnabled(check());
                 }
             });
@@ -134,7 +134,7 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
 
             // Create a panel which contains selected card and buttons
             final JPanel cardAndButtonsPanel = new JPanel();
-            new BoxLayout(cardAndButtonsPanel, BoxLayout.Y_AXIS);
+            final BoxLayout boxLayout = new BoxLayout(cardAndButtonsPanel, BoxLayout.Y_AXIS);
             cardAndButtonsPanel.add(cardPanel);
             cardAndButtonsPanel.add(buttonPanel);
             cardAndButtonsPanel.setBackground(Color.BLACK);
@@ -159,11 +159,13 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
         this.min = min;
         this.max = max;
         this.title = title;
-        createWindow();
+        openWindow();
     }
 
-    protected void createWindow() {
-        window = new SelectionWindow(game, selection, min, max, title);
+    protected void openWindow() {
+        if (window == null) {
+            window = new SelectionWindow(game, selection, min, max, title);
+        }
         window.setVisible(true);
     }
 
@@ -176,8 +178,6 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
     public void cancel() {
         if (window != null) {
             window.setVisible(false);
-            window.dispose();
-            window = null;
         }
     }
 }

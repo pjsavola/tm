@@ -101,7 +101,7 @@ public class DrawCardsAction implements Action {
                 public void undo() {
                     game.getCurrentPlayer().getCards().removeAll(selectedCards);
                     game.getDiscardDeck().removeAll(discardedCards);
-                    createWindow();
+                    openWindow();
                     game.getActionHandler().reprocess(this);
                     game.repaint();
                 }
@@ -130,7 +130,7 @@ public class DrawCardsAction implements Action {
                 @Override
                 public void undo() {
                     game.getCurrentPlayer().getCards().removeAll(selection);
-                    createWindow();
+                    openWindow();
                     game.getActionHandler().reprocess(this);
                     game.repaint();
                 }

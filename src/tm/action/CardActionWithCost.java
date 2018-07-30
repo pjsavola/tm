@@ -74,12 +74,29 @@ public abstract class CardActionWithCost extends CardAction {
         return new CardActionCompletable(game, this) {
             @Override
             public void complete() {
-                game.getActionHandler().addPendingAction(new ActionChain(
-                    new ResourceDeltaAction(payment.getResourceDelta()),
-                    new IncomeDeltaAction(payment.getIncomeDelta())
-                ));
+                game.getCurrentPlayer().adjustResources(payment.getResourceDelta());
+                game.getCurrentPlayer().adjustIncome(payment.getIncomeDelta());
                 super.complete();
             }
+
+            @Override
+            public void undo() {
+                if (isUndoable()) {
+                    super.undo();
+                    game.getCurrentPlayer().adjustResources(payment.getResourceDelta().negate());
+                    game.getCurrentPlayer().adjustIncome(payment.getIncomeDelta().negate());
+                }
+            }
+
+            @Override
+            public void redo() {
+                if (isUndoable()) {
+                    game.getCurrentPlayer().adjustResources(payment.getResourceDelta());
+                    game.getCurrentPlayer().adjustIncome(payment.getIncomeDelta());
+                    super.redo();
+                }
+            }
+
         };
     }
 }
