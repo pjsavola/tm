@@ -1,6 +1,6 @@
 package tm.corporation;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.sun.istack.internal.Nullable;
@@ -20,13 +20,13 @@ public class InterplanetaryCinematics extends Corporation implements PlayCardEff
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new ResourceDeltaAction(new Resources(30, 20, 0, 0, 0, 0));
+    public Resources getResourceDelta(Game game) {
+        return new Resources(30, 20, 0, 0, 0, 0);
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("30 money", "20 steel", "Get 2 money for each event you play");
+        return Collections.singletonList("Get 2 money for each event you play");
     }
 
     @Nullable

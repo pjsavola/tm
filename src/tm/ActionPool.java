@@ -46,7 +46,7 @@ public class ActionPool {
             @Override
             public Action getInitialAction(Game game) {
                 int cost = -11;
-                if (game.getCurrentPlayer().getCorporation() instanceof Thorgate) {
+                if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof Thorgate)) {
                     cost += 3;
                 }
                 int reward = 0;
@@ -92,7 +92,7 @@ public class ActionPool {
             @Override
             public Action getInitialAction(Game game) {
                 int reward = 0;
-                if (game.getCurrentPlayer().getCorporation() instanceof Credicor) {
+                if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof Credicor)) {
                     reward += 4;
                 }
                 if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof StandardTechnology)) {
@@ -110,7 +110,7 @@ public class ActionPool {
             @Override
             public Action getInitialAction(Game game) {
                 int reward = 0;
-                if (game.getCurrentPlayer().getCorporation() instanceof Credicor) {
+                if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof Credicor)) {
                     reward += 4;
                 }
                 if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof StandardTechnology)) {
@@ -128,7 +128,7 @@ public class ActionPool {
             @Override
             public Action getInitialAction(Game game) {
                 int cost = -8;
-                if (game.getCurrentPlayer().getCorporation() instanceof Ecoline) {
+                if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof Ecoline)) {
                     cost++;
                 }
                 return new ActionChain(
@@ -169,11 +169,6 @@ public class ActionPool {
 
     @Nullable
     public Completable getCompletable(@Nullable ActionType type) {
-        for (Action action : game.getCurrentPlayer().getActions()) {
-            if (action.getType() == type && action.check(game)) {
-                return action.begin(game);
-            }
-        }
         for (StandardAction standardAction : standardActions) {
             if (standardAction.getType() == type) {
                 final Action action = standardAction.getInitialAction(game);

@@ -66,28 +66,18 @@ public class DrawCardsAction implements Action {
 
                 @Override
                 public boolean check() {
-                    if (selectedCards.size() < min) {
-                        System.err.println("You should select at least " + min + " cards");
+                    if (pay && !initial && !game.getCurrentPlayer().canAdjustResources(new Resources(-3 * selectedCards.size()))) {
+                        System.err.println("Not enough money to keep " + selectedCards.size() + " the cards");
                         return false;
-                    }
-                    if (selectedCards.size() > max) {
-                        System.err.println("You should select at most " + max + " cards");
-                        return false;
-                    }
-                    if (pay) {
-                        final Action action = new ResourceDeltaAction(new Resources(-3 * selectedCards.size()));
-                        if (initial || action.check(game)) {
-                            game.getActionHandler().addPendingAction(action);
-                        } else {
-                            System.err.println("Not enough money to keep the cards");
-                            return false;
-                        }
                     }
                     return true;
                 }
 
                 @Override
                 public void complete() {
+                    if (pay) {
+                        game.getCurrentPlayer().adjustResources(new Resources(-3 * selectedCards.size()));
+                    }
                     discardedCards = new ArrayList<>(selection);
                     discardedCards.removeAll(selectedCards);
                     game.getCurrentPlayer().getCards().addAll(selectedCards);
@@ -99,6 +89,9 @@ public class DrawCardsAction implements Action {
 
                 @Override
                 public void undo() {
+                    if (pay) {
+                        game.getCurrentPlayer().adjustResources(new Resources(3 * selectedCards.size()));
+                    }
                     game.getCurrentPlayer().getCards().removeAll(selectedCards);
                     game.getDiscardDeck().removeAll(discardedCards);
                     openWindow();
@@ -108,19 +101,11 @@ public class DrawCardsAction implements Action {
 
                 @Override
                 public void redo() {
-                    game.getCurrentPlayer().getCards().addAll(selectedCards);
-                    game.getDiscardDeck().addAll(discardedCards);
-                    game.repaint();
+                    throw new UnsupportedOperationException();
                 }
             };
         } else {
             return new SelectCardsCompletable(game, drawnCards, 0, 0, "You got these cards") {
-
-                @Override
-                public boolean check() {
-                    return true;
-                }
-
                 @Override
                 public void complete() {
                     game.getCurrentPlayer().getCards().addAll(selection);

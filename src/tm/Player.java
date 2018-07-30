@@ -32,7 +32,7 @@ public class Player {
     final Set<Tile> ownedTiles = new HashSet<>();
     final Set<Card> cards = new TreeSet<>();
     private final List<Card> playedCards = new ArrayList<>();
-    Corporation corporation;
+    public Corporation corporation;
 
     public Color getColor() {
         return color;
@@ -74,25 +74,11 @@ public class Player {
         income = income.combine(delta);
     }
 
-    public void setCorporation(Corporation corporation) {
-        this.corporation = corporation;
-    }
-
-    public Corporation getCorporation() {
-        return corporation;
-    }
-
     public Set<Card> getCards() {
         return cards;
     }
 
     public void cardPlayEffects(Game game, Card selectedCard) {
-        if (corporation instanceof PlayCardEffect) {
-            final Action action = ((PlayCardEffect) corporation).cardPlayed(selectedCard);
-            if (action != null) {
-                game.getActionHandler().addPendingAction(action);
-            }
-        }
         playedCards.forEach(card -> {
             if (card instanceof PlayCardEffect) {
                 final Action action = ((PlayCardEffect) card).cardPlayed(selectedCard);
@@ -135,9 +121,6 @@ public class Player {
 
     public int getSteelValue() {
         int value = 2;
-        if (corporation instanceof ValueEffect) {
-            value += ((ValueEffect) corporation).getSteelDelta();
-        }
         for (Card card : playedCards) {
             if (card instanceof ValueEffect) {
                 value += ((ValueEffect) card).getSteelDelta();
@@ -148,9 +131,6 @@ public class Player {
 
     public int getTitaniumValue() {
         int value = 3;
-        if (corporation instanceof ValueEffect) {
-            value += ((ValueEffect) corporation).getTitaniumDelta();
-        }
         for (Card card : playedCards) {
             if (card instanceof ValueEffect) {
                 value += ((ValueEffect) card).getTitaniumDelta();
@@ -161,9 +141,6 @@ public class Player {
 
     public int getDiscount(Card card, int extraDiscount) {
         int discount = extraDiscount;
-        if (corporation instanceof DiscountEffect) {
-            discount += ((DiscountEffect) corporation).getDiscount(card);
-        }
         for (Card playedCard : playedCards) {
             if (playedCard instanceof DiscountEffect) {
                 discount += ((DiscountEffect) playedCard).getDiscount(card);
@@ -178,9 +155,6 @@ public class Player {
             return true;
         }
         int tolerance = extraTolerance;
-        if (corporation instanceof RequirementEffect) {
-            tolerance += ((RequirementEffect) corporation).getTolerance();
-        }
         for (Card playedCard : playedCards) {
             if (playedCard instanceof RequirementEffect) {
                 tolerance += ((RequirementEffect) playedCard).getTolerance();
@@ -199,10 +173,6 @@ public class Player {
 
     public Tags getTags() {
         return tags;
-    }
-
-    public List<Action> getActions() {
-        return corporation.getActions();
     }
 
     public int getPoints() {

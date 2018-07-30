@@ -69,11 +69,6 @@ public class AddMarkerAction implements Action {
             private CardWithMarkers selectedCard;
 
             @Override
-            public boolean check() {
-                return true;
-            }
-
-            @Override
             public void complete() {
                 if (!selectedCards.isEmpty()) {
                     selectedCard = (CardWithMarkers) selectedCards.iterator().next();

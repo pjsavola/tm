@@ -21,8 +21,8 @@ public class UnitedNationsMarsInitiative extends Corporation {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new ResourceDeltaAction(new Resources(40));
+    public Resources getResourceDelta(Game game) {
+        return new Resources(40);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class UnitedNationsMarsInitiative extends Corporation {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("40 money", "May increase TR for 3 money if TR has been increased this turn");
+        return Arrays.asList("May increase TR for 3 money", "if TR has been increased this turn");
     }
 }

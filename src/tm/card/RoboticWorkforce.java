@@ -30,39 +30,22 @@ public class RoboticWorkforce extends CardWithMarkers {
         for (Card card : game.getCurrentPlayer().getPlayedCards()) {
             final Resources income = card.getIncomeDelta(game);
             if (income != Resources.EMPTY) {
-                incomeMap.put(card, income);
+                if (game.getCurrentPlayer().canAdjustIncome(income)) {
+                    incomeMap.put(card, income);
+                }
             }
         }
         if (incomeMap.isEmpty()) {
             return null;
         } else if (incomeMap.size() == 1) {
-            final Resources income = incomeMap.values().iterator().next();
-            if (game.getCurrentPlayer().canAdjustIncome(income)) {
-                return new IncomeDeltaAction(income);
-            }
-            return null;
+            return new IncomeDeltaAction(incomeMap.values().iterator().next());
         } else {
             return new Action() {
                 @Override
                 public Completable begin(Game game) {
-                    return new SelectCardsCompletable(game, new ArrayList<>(incomeMap.keySet()), 0, 1, "Select income to duplicate") {
+                    return new SelectCardsCompletable(game, new ArrayList<>(incomeMap.keySet()), 1, 1, "Select income to duplicate") {
                         @Nullable
                         private Card selectedCard;
-
-                        @Override
-                        public boolean check() {
-                            if (selectedCards.isEmpty()) {
-                                System.err.println("You must select income to duplicate");
-                                return false;
-                            }
-                            selectedCard = selectedCards.iterator().next();
-                            final Resources income = incomeMap.get(selectedCard);
-                            if (!game.getCurrentPlayer().canAdjustIncome(income)) {
-                                System.err.println("Cannot select this card");
-                                return false;
-                            }
-                            return true;
-                        }
 
                         @Override
                         public void complete() {

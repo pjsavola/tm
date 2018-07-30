@@ -43,14 +43,13 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
         public SelectionWindow(Game game, List<? extends Card> selection, int min, int max, String title) {
             // Create confirm button
             final JButton confirmButton = new JButton("Confirm");
+            confirmButton.setEnabled(min == 0 && check());
             confirmButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (check()) {
-                        game.getActionHandler().completed(SelectCardsCompletable.this);
-                        game.repaint();
-                        cancel();
-                    }
+                    game.getActionHandler().completed(SelectCardsCompletable.this);
+                    game.repaint();
+                    cancel();
                 }
             });
 
@@ -122,8 +121,7 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
                     }
                     selectionChanged();
                     game.repaint();
-                    confirmButton.setEnabled(max == 0 || (indices.length >= min && indices.length <= max));
-                    //confirmButton.setEnabled(check());
+                    confirmButton.setEnabled((max == 0 || (indices.length >= min && indices.length <= max)) && check());
                 }
             });
 
@@ -172,7 +170,9 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
     protected void selectionChanged() {
     }
 
-    public abstract boolean check();
+    public boolean check() {
+        return true;
+    }
 
     @Override
     public void cancel() {

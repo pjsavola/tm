@@ -12,39 +12,40 @@ import tm.completable.SelectCardsCompletable;
 
 public class PlayCorporationAction implements Action {
 
-    private Corporation corporation;
-
     @Override
     public Completable begin(Game game) {
         final Deque<Card> deck = game.getCorporationDeck();
         final List<Card> corporations = new ArrayList<>(deck);
         return new SelectCardsCompletable(game, corporations, 1, 1, "Select your corporation") {
 
+            private Card getSelectedCard() {
+                return selectedCards.iterator().next();
+            }
+
             @Override
             public boolean check() {
-                if (selectedCards.isEmpty()) {
-                    System.err.println("You must select one of the corporations");
-                    return false;
-                }
-                corporation = (Corporation) selectedCards.iterator().next();
-                if (!corporation.start(game)) {
-                    System.err.println("Not enough money to pay for the initial cards");
-                    return false;
-                }
-                return true;
+                return game.getCurrentPlayer().canAdjustResources(getSelectedCard().getResourceDelta(game));
             }
 
             @Override
             public void complete() {
+                final Corporation corporation = (Corporation) getSelectedCard();
+                final Action action = corporation.getInitialAction(game);
+                if (action != null) {
+                    game.getActionHandler().addPendingAction(corporation.getInitialAction(game));
+                }
+                game.getCurrentPlayer().adjustResources(corporation.getResourceDelta(game));
                 game.getCurrentPlayer().addTags(corporation.getTags());
-                game.getCurrentPlayer().setCorporation(corporation);
+                game.getCurrentPlayer().corporation = corporation;
                 game.repaint();
             }
 
             @Override
             public void undo() {
+                final Corporation corporation = (Corporation) getSelectedCard();
+                game.getCurrentPlayer().adjustResources(corporation.getResourceDelta(game).negate());
                 game.getCurrentPlayer().removeTags(corporation.getTags());
-                game.getCurrentPlayer().setCorporation(null);
+                game.getCurrentPlayer().corporation = null;
                 game.repaint();
             }
 
@@ -53,6 +54,5 @@ public class PlayCorporationAction implements Action {
                 throw new UnsupportedOperationException();
             }
         };
-
     }
 }

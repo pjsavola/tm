@@ -257,12 +257,6 @@ public class PlaceTileAction implements Action {
                 game.getActionHandler().addPendingAction(new DrawCardsAction(p.getCards(), false, false));
             }
         }
-        if (game.getCurrentPlayer().getCorporation() instanceof PlaceTileEffect) {
-            final Action action = ((PlaceTileEffect) game.getCurrentPlayer().getCorporation()).tilePlaced(targetTile);
-            if (action != null) {
-                game.getActionHandler().addPendingAction(action);
-            }
-        }
         game.getCurrentPlayer().getPlayedCards().forEach(card -> {
             if (card instanceof PlaceTileEffect) {
                 final Action action = ((PlaceTileEffect) card).tilePlaced(targetTile);

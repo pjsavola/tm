@@ -56,10 +56,6 @@ public class PlayCardAction implements Action {
 
         @Override
         public boolean check() {
-            if (selectedCard == null) {
-                System.err.println("You must select a card to play it");
-                return false;
-            }
             if (!player.fulfillsRequirements(selectedCard, game, tolerance)) {
                 System.err.println("Card requirements not fulfilled");
                 return false;

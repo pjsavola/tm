@@ -10,9 +10,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
-import tm.action.ResourceDeltaAction;
 import tm.effect.PlayCardEffect;
 
 public class SaturnSystems extends Corporation implements PlayCardEffect {
@@ -22,15 +20,18 @@ public class SaturnSystems extends Corporation implements PlayCardEffect {
     }
 
     @Override
+    public Resources getResourceDelta(Game game) {
+        return new Resources(42);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new ResourceDeltaAction(new Resources(42)),
-            new IncomeDeltaAction(new Resources(1, 0, 1, 0, 0, 0)));
+        return new IncomeDeltaAction(new Resources(1, 0, 1, 0, 0, 0));
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("42 money", "1 titanium income", "1 money income for each Jovian tag");
+        return Arrays.asList("1 titanium income", "1 money income for each Jovian tag");
     }
 
     @Nullable

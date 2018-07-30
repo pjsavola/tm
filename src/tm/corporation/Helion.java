@@ -21,10 +21,13 @@ public class Helion extends Corporation {
     }
 
     @Override
+    public Resources getResourceDelta(Game game) {
+        return new Resources(42);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new ResourceDeltaAction(new Resources(42)),
-            new IncomeDeltaAction(new Resources(0, 0, 0, 0, 0, 3)));
+        return new IncomeDeltaAction(new Resources(0, 0, 0, 0, 0, 3));
     }
 
     @Override
@@ -36,6 +39,6 @@ public class Helion extends Corporation {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("42 money", "3 heat income", "May convert heat to money");
+        return Arrays.asList("3 heat income", "May convert heat to money");
     }
 }

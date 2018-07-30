@@ -11,9 +11,7 @@ import tm.Tags;
 import tm.Tile;
 import tm.TileProperties;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.IncomeDeltaAction;
-import tm.action.ResourceDeltaAction;
 import tm.effect.PlaceTileEffect;
 
 public class MiningGuild extends Corporation implements PlaceTileEffect {
@@ -23,16 +21,18 @@ public class MiningGuild extends Corporation implements PlaceTileEffect {
     }
 
     @Override
+    public Resources getResourceDelta(Game game) {
+        return new Resources(30, 5, 0, 0, 0, 0);
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new ResourceDeltaAction(new Resources(30, 5, 0, 0, 0, 0)),
-            new IncomeDeltaAction(Resources.STEEL)
-        );
+        return new IncomeDeltaAction(Resources.STEEL);
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("30 money", "5 steel", "1 steel income", "Get 1 steel income for covering steel or titanium");
+        return Arrays.asList("1 steel income", "Get 1 steel income for covering steel or titanium");
     }
 
     @Nullable

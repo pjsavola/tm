@@ -9,7 +9,6 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.DrawCardsAction;
-import tm.action.ResourceDeltaAction;
 import tm.effect.RequirementEffect;
 
 public class Inventrix extends Corporation implements RequirementEffect {
@@ -19,22 +18,18 @@ public class Inventrix extends Corporation implements RequirementEffect {
     }
 
     @Override
-    public boolean start(final Game game) {
-        if (super.start(game)) {
-            game.getActionHandler().addPendingAction(new DrawCardsAction(3, false, false));
-            return true;
-        }
-        return false;
+    public Resources getResourceDelta(Game game) {
+        return new Resources(45);
     }
 
     @Override
     public Action getInitialAction(Game game) {
-        return new ResourceDeltaAction(new Resources(45));
+        return new DrawCardsAction(3, false, false);
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("45 money", "3 cards", "Has +/- 2 to card requirements");
+        return Arrays.asList("3 cards", "Has +/- 2 to card requirements");
     }
 
     @Override

@@ -44,11 +44,6 @@ public class MarsUniversity extends Card implements PlayCardEffect {
                         private Card selectedCard;
 
                         @Override
-                        public boolean check() {
-                            return true;
-                        }
-
-                        @Override
                         public void complete() {
                             selectedCard = selectedCards.isEmpty() ? null : selectedCards.iterator().next();
                             if (selectedCard != null) {

@@ -35,12 +35,6 @@ public class SearchForLife extends CardWithMarkers {
                 @Override
                 public Completable begin(Game game) {
                     return new SelectCardsCompletable(game, Collections.singletonList(card), 0, 0, "Search For Life") {
-
-                        @Override
-                        public boolean check() {
-                            return true;
-                        }
-
                         @Override
                         public void complete() {
                             game.getDiscardDeck().add(card);
