@@ -23,7 +23,7 @@ public class ArtificialPhotosynthesis extends Card {
         return new Action() {
             @Override
             public Completable begin(Game game) {
-                return new SelectActionAction.SelectActionCompletable(game, Arrays.asList(
+                return new SelectActionAction.SelectActionCompletable<Action>(game, Arrays.asList(
                     new IncomeDeltaAction(Resources.PLANT) {
                         @Override
                         public String getDescription() {

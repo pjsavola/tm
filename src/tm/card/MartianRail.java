@@ -10,12 +10,13 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 import tm.action.ResourceDeltaAction;
 
 public class MartianRail extends Card {
 
-    private final Action action = new CardActionWithCost(true, ActionType.MARTIAN_RAIL, Resources.ENERGY.negate()) {
+    private final CardAction action = new CardActionWithCost(true, ActionType.MARTIAN_RAIL, Resources.ENERGY.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new ResourceDeltaAction(new Resources(game.getCityCount(true)));
@@ -27,7 +28,7 @@ public class MartianRail extends Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

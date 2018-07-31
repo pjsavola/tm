@@ -19,7 +19,7 @@ import tm.requirement.TemperatureRequirement;
 
 public class ExtremeColdFungus extends Card {
 
-    private final Action action = new CardAction(true, ActionType.EXTREME_COLD_FUNGUS) {
+    private final CardAction action = new CardAction(true, ActionType.EXTREME_COLD_FUNGUS) {
         @Override
         protected Action getAction(Game game) {
             return new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {
@@ -46,7 +46,7 @@ public class ExtremeColdFungus extends Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

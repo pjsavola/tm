@@ -10,12 +10,13 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 import tm.action.MarkerDeltaAction;
 
 public class PhysicsComplex extends CardWithMarkers {
 
-    private final Action action = new CardActionWithCost(true, ActionType.PHYSICS_COMPLEX, new Resources(0, 0, 0, 0, -6, 0)) {
+    private final CardAction action = new CardActionWithCost(true, ActionType.PHYSICS_COMPLEX, new Resources(0, 0, 0, 0, -6, 0)) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, PhysicsComplex.this);
@@ -32,7 +33,7 @@ public class PhysicsComplex extends CardWithMarkers {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

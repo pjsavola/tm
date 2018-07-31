@@ -41,7 +41,7 @@ public class NitriteReducingBacteria extends CardWithMarkers {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Arrays.asList(action1, action2);
     }
 

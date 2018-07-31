@@ -14,7 +14,7 @@ import tm.action.DrawCardsAction;
 
 public class InventorsGuild extends Card {
 
-    private final Action action = new CardAction(false, ActionType.INVENTORS_GUILD) {
+    private final CardAction action = new CardAction(false, ActionType.INVENTORS_GUILD) {
         @Override
         protected Action getAction(Game game) {
             return new DrawCardsAction(1, true, false);
@@ -26,7 +26,7 @@ public class InventorsGuild extends Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

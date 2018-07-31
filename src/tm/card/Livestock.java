@@ -16,7 +16,7 @@ import tm.requirement.OxygenRequirement;
 
 public class Livestock extends CardWithMarkers {
 
-    private final Action action = new CardAction(true, ActionType.LIVESTOCK) {
+    private final CardAction action = new CardAction(true, ActionType.LIVESTOCK) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, Livestock.this);
@@ -38,7 +38,7 @@ public class Livestock extends CardWithMarkers {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

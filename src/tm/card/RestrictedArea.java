@@ -11,13 +11,14 @@ import tm.Resources;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 import tm.action.DrawCardsAction;
 import tm.action.PlaceTileAction;
 
 public class RestrictedArea extends Card {
 
-    private final Action action = new CardActionWithCost(false, ActionType.RESTRICTED_AREA, new Resources(-2)) {
+    private final CardAction action = new CardActionWithCost(false, ActionType.RESTRICTED_AREA, new Resources(-2)) {
         @Override
         protected Action getAction(Game game) {
             return new DrawCardsAction(1, false, false);
@@ -34,7 +35,7 @@ public class RestrictedArea extends Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

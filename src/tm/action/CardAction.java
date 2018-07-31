@@ -42,7 +42,7 @@ public abstract class CardAction implements Action {
             return false;
         }
         final Action cardAction = getAction(game);
-        return cardAction.check(game);
+        return cardAction == null || cardAction.check(game);
     }
 
     @Override
@@ -50,6 +50,7 @@ public abstract class CardAction implements Action {
         return new CardActionCompletable(game, this);
     }
 
+    @Nullable
     protected abstract Action getAction(Game game);
 
     protected static class CardActionCompletable implements Completable {
@@ -66,7 +67,9 @@ public abstract class CardAction implements Action {
         public void complete() {
             final Action cardAction = action.getAction(game);
             action.usedOnRound = game.getPlanet().getRound();
-            game.getActionHandler().addPendingAction(cardAction);
+            if (cardAction != null) {
+                game.getActionHandler().addPendingAction(cardAction);
+            }
         }
 
         @Override

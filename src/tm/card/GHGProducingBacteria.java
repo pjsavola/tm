@@ -38,7 +38,7 @@ public class GHGProducingBacteria extends CardWithMarkers {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Arrays.asList(action1, action2);
     }
 

@@ -15,7 +15,7 @@ import tm.action.DrawCardsAction;
 
 public class BusinessNetwork extends Card {
 
-    private final Action action = new CardAction(false, ActionType.BUSINESS_NETWORK) {
+    private final CardAction action = new CardAction(false, ActionType.BUSINESS_NETWORK) {
         @Override
         protected Action getAction(Game game) {
             return new DrawCardsAction(1, true, false);
@@ -32,7 +32,7 @@ public class BusinessNetwork extends Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

@@ -35,7 +35,7 @@ public class Insulation extends Card {
                         }
                     });
                 }
-                return new SelectActionAction.SelectActionCompletable(game, actions);
+                return new SelectActionAction.SelectActionCompletable<>(game, actions);
             }
         };
     }

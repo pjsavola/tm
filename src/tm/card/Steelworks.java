@@ -10,17 +10,16 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddOxygenAction;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
-import tm.action.ResourceDeltaAction;
 
 public class Steelworks extends CardWithMarkers {
 
-    private final Action action = new CardActionWithCost(true, ActionType.STEELWORKS, new Resources(0, 0, 0, 0, -4, 0)) {
+    private final CardAction action = new CardActionWithCost(true, ActionType.STEELWORKS, new Resources(0, 2, 0, 0, -4, 0)) {
         @Override
         protected Action getAction(Game game) {
-            return new ActionChain(new AddOxygenAction(), new ResourceDeltaAction(Resources.STEEL_2));
+            return new AddOxygenAction();
         }
     };
 
@@ -29,7 +28,7 @@ public class Steelworks extends CardWithMarkers {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

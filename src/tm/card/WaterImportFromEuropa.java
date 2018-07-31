@@ -12,12 +12,13 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddWaterAction;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 import tm.effect.ScoringEffect;
 
 public class WaterImportFromEuropa extends Card implements ScoringEffect {
 
-    private final Action action = new CardActionWithCost(true, ActionType.WATER_IMPORT_FROM_EUROPA, new Resources(-12), Resources.EMPTY, false, true) {
+    private final CardAction action = new CardActionWithCost(true,ActionType.WATER_IMPORT_FROM_EUROPA, new Resources(-12), Resources.EMPTY, false, true) {
         @Override
         public boolean check(Game game) {
             return game.getPlanet().getWaterRemaining() > 0 && super.check(game);
@@ -34,7 +35,7 @@ public class WaterImportFromEuropa extends Card implements ScoringEffect {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

@@ -48,7 +48,7 @@ public class ElectroCatapult extends Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Arrays.asList(action1, action2);
     }
 

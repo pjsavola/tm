@@ -11,11 +11,12 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddTerraformingRatingAction;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 
 public class UnitedNationsMarsInitiative extends Corporation {
 
-    private final Action action = new CardActionWithCost(true, ActionType.TR, new Resources(-3)) {
+    private final CardAction action = new CardActionWithCost(true, ActionType.TR, new Resources(-3)) {
         @Override
         public boolean check(Game game) {
             return game.getCurrentPlayer().hasIncreasedRating();
@@ -37,7 +38,7 @@ public class UnitedNationsMarsInitiative extends Corporation {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

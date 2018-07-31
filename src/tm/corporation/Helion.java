@@ -8,11 +8,12 @@ import tm.Corporation;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.ActionChain;
-import tm.action.ResourceDeltaAction;
+import tm.action.CardAction;
+import tm.action.CardActionWithCost;
 
 public class Helion extends Corporation {
+
+    private final CardAction action = new CardActionWithCost(true, ActionType.HEAT_TO_MONEY, new Resources(1, 0, 0, 0, 0, -1));
 
     public Helion() {
         super("Helion", Tags.SPACE);
@@ -29,10 +30,8 @@ public class Helion extends Corporation {
     }
 
     @Override
-    public List<Action> getActions() {
-        return Collections.singletonList(new ActionChain(ActionType.HEAT_TO_MONEY, "Heat to money",
-            new ResourceDeltaAction(new Resources(1, 0, 0, 0, 0, -1))
-        ));
+    public List<CardAction> getActions() {
+        return Collections.singletonList(action);
     }
 
     @Override

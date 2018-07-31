@@ -9,16 +9,17 @@ import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.action.Action;
+import tm.action.CardAction;
 import tm.effect.ScoringEffect;
 import tm.requirement.Requirement;
 
-public abstract class Card implements Comparable<Card>, Renderable {
+public abstract class Card implements Comparable<Card>, Selectable {
 
     public static final int WIDTH = 200;
     public static final int TITLE_HEIGHT = 19;
     public static final int CARD_HEIGHT = 200;
-    private static final Color TEXT_COLOR = new Color(0xFFFFFF);
-    private static final Color BG_COLOR = new Color(0x333333);
+    public static final Color TEXT_COLOR = new Color(0xFFFFFF);
+    public static final Color BG_COLOR = new Color(0x333333);
     public static final Font FONT = new Font("Arial", Font.BOLD, 12);
     public static final Font VP_FONT = new Font("Arial", Font.BOLD, 18);
     private final String name;
@@ -88,16 +89,8 @@ public abstract class Card implements Comparable<Card>, Renderable {
         return 0;
     }
 
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.emptyList();
-    }
-
-    public Resources getResourceDelta(Game game) {
-        return Resources.EMPTY;
-    }
-
-    public Resources getIncomeDelta(Game game) {
-        return Resources.EMPTY;
     }
 
     @Nullable
@@ -105,6 +98,7 @@ public abstract class Card implements Comparable<Card>, Renderable {
         return null;
     }
 
+    @Override
     public void renderTitle(Graphics g, int x, int y) {
         g.setFont(FONT);
         final FontMetrics metrics = g.getFontMetrics();
@@ -139,6 +133,7 @@ public abstract class Card implements Comparable<Card>, Renderable {
 
     // x: top-left corner
     // y: top-right corner
+    @Override
     public void renderContent(Graphics g, int x, int y, Game game) {
         // Draw background
         g.setColor(BG_COLOR);

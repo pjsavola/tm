@@ -11,6 +11,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 import tm.completable.Completable;
 import tm.completable.SelectItemsCompletable;
@@ -18,7 +19,7 @@ import tm.requirement.OxygenRequirement;
 
 public class SearchForLife extends CardWithMarkers {
 
-    private final Action action = new CardActionWithCost(false, ActionType.SEARCH_FOR_LIFE, Resources.MONEY.negate()) {
+    private final CardAction action = new CardActionWithCost(false, ActionType.SEARCH_FOR_LIFE, Resources.MONEY.negate()) {
 
         @Override
         public boolean check(Game game) {
@@ -69,7 +70,7 @@ public class SearchForLife extends CardWithMarkers {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

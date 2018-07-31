@@ -11,11 +11,12 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddWaterAction;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 
 public class AquiferPumping extends Card {
 
-    private final Action action = new CardActionWithCost(true, ActionType.AQUIFER_PUMPING, new Resources(-8), Resources.EMPTY, true, false) {
+    private final CardAction action = new CardActionWithCost(true, ActionType.AQUIFER_PUMPING, new Resources(-8), Resources.EMPTY, true, false) {
         @Override
         public boolean check(Game game) {
             return game.getPlanet().getWaterRemaining() > 0 && super.check(game);
@@ -32,7 +33,7 @@ public class AquiferPumping extends Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

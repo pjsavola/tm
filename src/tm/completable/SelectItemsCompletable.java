@@ -24,9 +24,9 @@ import javax.swing.event.ListSelectionListener;
 
 import com.sun.istack.internal.Nullable;
 import tm.Game;
-import tm.Renderable;
+import tm.Selectable;
 
-public abstract class SelectItemsCompletable<T extends Renderable> extends JPanel implements Completable {
+public abstract class SelectItemsCompletable<T extends Selectable> extends JPanel implements Completable {
 
     protected final Set<T> selectedItems = new HashSet<>();
     protected final List<T> selection;

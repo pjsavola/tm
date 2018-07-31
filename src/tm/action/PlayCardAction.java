@@ -41,7 +41,7 @@ public class PlayCardAction implements Action {
         return new PlayCardCompletable(game, hand, title, discount, tolerance);
     }
 
-    private static class PlayCardCompletable extends SelectItemsCompletable {
+    private static class PlayCardCompletable extends SelectItemsCompletable<Card> {
 
         private final Game game;
         private Collection<Card> hand;
@@ -81,8 +81,10 @@ public class PlayCardAction implements Action {
 
         @Override
         public void complete() {
-            game.getActionHandler().addPendingAction(new ResourceDeltaAction(payment.getResourceDelta()));
-            game.getActionHandler().addPendingAction(new IncomeDeltaAction(payment.getIncomeDelta()));
+            if (payment != null) {
+                game.getCurrentPlayer().adjustResources(payment.getResourceDelta());
+                game.getCurrentPlayer().adjustIncome(payment.getIncomeDelta());
+            }
             final Action action = selectedCard.getInitialAction(game);
             if (action != null && action.check(game)) {
                 game.getActionHandler().addPendingAction(action);
@@ -93,11 +95,14 @@ public class PlayCardAction implements Action {
             player.cardPlayEffects(game, selectedCard);
             player.setResourcesDelta(Resources.EMPTY);
             player.setIncomeDelta(Resources.EMPTY);
-            payment = null;
         }
 
         @Override
         public void undo() {
+            if (payment != null) {
+                game.getCurrentPlayer().adjustResources(payment.getResourceDelta().negate());
+                game.getCurrentPlayer().adjustIncome(payment.getIncomeDelta().negate());
+            }
             player.removeTags(selectedCard.getTags());
             hand.add(selectedCard);
             player.unplayCard(selectedCard);
@@ -105,6 +110,10 @@ public class PlayCardAction implements Action {
 
         @Override
         public void redo() {
+            if (payment != null) {
+                game.getCurrentPlayer().adjustResources(payment.getResourceDelta());
+                game.getCurrentPlayer().adjustIncome(payment.getIncomeDelta());
+            }
             player.addTags(selectedCard.getTags());
             hand.remove(selectedCard);
             player.playCard(selectedCard);
@@ -114,8 +123,8 @@ public class PlayCardAction implements Action {
         public void cancel() {
             player.setResourcesDelta(Resources.EMPTY);
             player.setIncomeDelta(Resources.EMPTY);
-            payment = null;
             super.cancel();
+            game.repaint();
         }
 
         @Override

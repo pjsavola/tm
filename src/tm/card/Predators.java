@@ -16,7 +16,7 @@ import tm.requirement.OxygenRequirement;
 // Removing 1 animal is done from dummy player
 public class Predators extends CardWithMarkers {
 
-    private final Action action = new CardAction(true, ActionType.PREDATORS) {
+    private final CardAction action = new CardAction(true, ActionType.PREDATORS) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, Predators.this);
@@ -33,7 +33,7 @@ public class Predators extends CardWithMarkers {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

@@ -16,7 +16,7 @@ import tm.requirement.OxygenRequirement;
 // Removing 1 plant income is done from dummy player
 public class SmallAnimals extends CardWithMarkers {
 
-    private final Action action = new CardAction(true, ActionType.SMALL_ANIMALS) {
+    private final CardAction action = new CardAction(true, ActionType.SMALL_ANIMALS) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, SmallAnimals.this);
@@ -33,7 +33,7 @@ public class SmallAnimals extends CardWithMarkers {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

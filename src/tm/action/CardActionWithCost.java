@@ -7,7 +7,7 @@ import tm.Player;
 import tm.Resources;
 import tm.completable.Completable;
 
-public abstract class CardActionWithCost extends CardAction {
+public class CardActionWithCost extends CardAction {
 
     private final Resources resourceDelta;
     private final Resources incomeDelta;
@@ -30,6 +30,22 @@ public abstract class CardActionWithCost extends CardAction {
         this.incomeDelta = incomeDelta;
         this.steel = steel;
         this.titanium = titainum;
+    }
+
+    @Override
+    public Resources getResourceDelta(Game game) {
+        return resourceDelta;
+    }
+
+    @Override
+    public Resources getIncomeDelta(Game game) {
+        return incomeDelta;
+    }
+
+    @Nullable
+    @Override
+    protected Action getAction(Game game) {
+        return null;
     }
 
     @Override
@@ -96,7 +112,6 @@ public abstract class CardActionWithCost extends CardAction {
                     super.redo();
                 }
             }
-
         };
     }
 }

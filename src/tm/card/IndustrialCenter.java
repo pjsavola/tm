@@ -11,19 +11,13 @@ import tm.Resources;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
-import tm.action.IncomeDeltaAction;
 import tm.action.PlaceTileAction;
 
 public class IndustrialCenter extends Card {
 
-    private final Action action = new CardActionWithCost(true, ActionType.INDUSTRIAL_CENTER, new Resources(-7)) {
-        @Override
-        protected Action getAction(Game game) {
-            return new IncomeDeltaAction(Resources.STEEL);
-        }
-    };
-
+    private final CardAction action = new CardActionWithCost(true, ActionType.INDUSTRIAL_CENTER, new Resources(-7), Resources.STEEL);
     public IndustrialCenter() {
         super("Industrial Center", 4, Tags.BUILDING);
     }
@@ -34,7 +28,7 @@ public class IndustrialCenter extends Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

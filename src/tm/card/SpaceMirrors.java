@@ -6,28 +6,21 @@ import java.util.List;
 
 import tm.ActionType;
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
-import tm.action.IncomeDeltaAction;
 
 public class SpaceMirrors extends Card {
 
-    private final Action action = new CardActionWithCost(true, ActionType.SPACE_MIRRORS, new Resources(-7)) {
-        @Override
-        protected Action getAction(Game game) {
-            return new IncomeDeltaAction(Resources.ENERGY);
-        }
-    };
+    private final CardAction action = new CardActionWithCost(true, ActionType.SPACE_MIRRORS, new Resources(-7), Resources.ENERGY);
 
     public SpaceMirrors() {
         super("Space Mirrors", 3, Tags.SPACE.combine(Tags.POWER));
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

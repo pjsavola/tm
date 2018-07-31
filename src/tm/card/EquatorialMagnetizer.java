@@ -11,11 +11,12 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddTerraformingRatingAction;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 
 public class EquatorialMagnetizer extends Card {
 
-    private final Action action = new CardActionWithCost(true, ActionType.EQUATORIAL_MAGNETIZER, Resources.EMPTY, Resources.ENERGY.negate()) {
+    private final CardAction action = new CardActionWithCost(true, ActionType.EQUATORIAL_MAGNETIZER, Resources.EMPTY, Resources.ENERGY.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new AddTerraformingRatingAction();
@@ -27,7 +28,7 @@ public class EquatorialMagnetizer extends Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

@@ -10,12 +10,13 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 import tm.action.DrawCardsAction;
 
 public class DevelopmentCenter extends Card {
 
-    private final Action action = new CardActionWithCost(false, ActionType.DEVELOPMENT_CENTER, Resources.ENERGY.negate()) {
+    private final CardAction action = new CardActionWithCost(false, ActionType.DEVELOPMENT_CENTER, Resources.ENERGY.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new DrawCardsAction(1, false, false);
@@ -27,7 +28,7 @@ public class DevelopmentCenter extends Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

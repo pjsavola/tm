@@ -11,12 +11,13 @@ import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.AddOxygenAction;
+import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 import tm.requirement.OceanRequirement;
 
 public class WaterSplittingPlant extends CardWithMarkers {
 
-    private final Action action = new CardActionWithCost(true, ActionType.WATER_SPLITTING_PLANT, new Resources(0, 0, 0, 0, -3, 0)) {
+    private final CardAction action = new CardActionWithCost(true, ActionType.WATER_SPLITTING_PLANT, new Resources(0, 0, 0, 0, -3, 0)) {
         @Override
         protected Action getAction(Game game) {
             return new AddOxygenAction();
@@ -28,7 +29,7 @@ public class WaterSplittingPlant extends CardWithMarkers {
     }
 
     @Override
-    public List<Action> getActions() {
+    public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
 

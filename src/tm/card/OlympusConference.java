@@ -61,7 +61,7 @@ public class OlympusConference extends CardWithMarkers implements PlayCardEffect
                             }
                         });
                     }
-                    return new SelectActionAction.SelectActionCompletable(game, actions);
+                    return new SelectActionAction.SelectActionCompletable<>(game, actions);
                 }
             };
         }
