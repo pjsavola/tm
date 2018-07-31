@@ -216,6 +216,8 @@ import tm.card.Zeppelins;
 // Game deck is built from this class with reflection. There's a single instance of each card
 // through this class.
 public abstract class Cards {
+    public static final Card WATER_IMPORT_FROM_EUROPA = new WaterImportFromEuropa();
+
     public static final Card COLONIZER_TRAINING_CAMP = new ColonizerTrainingCamp();
     public static final Card ASTEROID_MINING_CONSORTIUM = new AsteroidMiningConsortium();
     public static final Card DEEP_WELL_HEATING = new DeepWellHeating();
@@ -227,7 +229,7 @@ public abstract class Cards {
     public static final Card ASTEROID = new Asteroid();
     public static final Card COMET = new Comet();
     public static final Card BIG_ASTEROID = new BigAsteroid();
-    public static final Card WATER_IMPORT_FROM_EUROPA = new WaterImportFromEuropa();
+    //public static final Card WATER_IMPORT_FROM_EUROPA = new WaterImportFromEuropa();
     public static final Card SPACE_ELEVATOR = new SpaceElevator();
     public static final Card DEVELOPMENT_CENTER = new DevelopmentCenter();
     public static final Card EQUATORIAL_MAGNETIZER = new EquatorialMagnetizer();

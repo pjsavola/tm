@@ -9,27 +9,15 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
 import tm.action.CardAction;
 import tm.action.CardActionWithCost;
-import tm.action.ResourceDeltaAction;
 import tm.requirement.OxygenRequirement;
 
 public class ElectroCatapult extends Card {
 
-    private final CardAction action1 = new CardActionWithCost(true, ActionType.ELECTRO_CATAPULT_1, Resources.STEEL.negate()) {
-        @Override
-        protected Action getAction(Game game) {
-            return new ResourceDeltaAction(new Resources(7));
-        }
-    };
+    private final CardAction action1 = new CardActionWithCost(true, ActionType.ELECTRO_CATAPULT_1, new Resources(7, -1, 0, 0, 0, 0));
 
-    private final CardAction action2 = new CardActionWithCost(true, ActionType.ELECTRO_CATAPULT_2, Resources.PLANT.negate()) {
-        @Override
-        protected Action getAction(Game game) {
-            return new ResourceDeltaAction(new Resources(7));
-        }
-    };
+    private final CardAction action2 = new CardActionWithCost(true, ActionType.ELECTRO_CATAPULT_2, new Resources(7, 0, 0, -1, 0, 0));
 
     public ElectroCatapult() {
         super("Electro Catapult", 17, Tags.BUILDING, new OxygenRequirement(8, false));

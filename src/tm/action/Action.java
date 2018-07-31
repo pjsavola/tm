@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import tm.ActionType;
 import tm.Card;
 import tm.Game;
+import tm.Resources;
 import tm.Selectable;
 import tm.completable.Completable;
 
@@ -32,6 +33,14 @@ public interface Action extends Selectable {
 
     default boolean isUndoable() {
         return true;
+    }
+
+    default Resources getResourceDelta(Game game) {
+        return Resources.EMPTY;
+    }
+
+    default Resources getIncomeDelta(Game game) {
+        return Resources.EMPTY;
     }
 
     @Override

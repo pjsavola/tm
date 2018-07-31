@@ -80,7 +80,7 @@ public class CardActionWithCost extends CardAction {
 
     public boolean adjustPayment(boolean steel, boolean increment) {
         if (payment != null) {
-            payment.adjust(steel, increment);
+            return payment.adjust(steel, increment);
         }
         return false;
     }

@@ -70,16 +70,15 @@ public class SelectActionAction implements Action {
             if (selectedAction instanceof CardActionWithCost) {
                 return ((CardActionWithCost) selectedAction).adjustPayment(steel, increment);
             }
-            game.repaint();
             return false;
         }
 
         @Override
         protected void selectionChanged() {
+            if (selectedAction instanceof CardActionWithCost) {
+                ((CardActionWithCost) selectedAction).resetPayment(game.getCurrentPlayer());
+            }
             if (selectedItems.isEmpty()) {
-                if (selectedAction instanceof CardActionWithCost) {
-                    ((CardActionWithCost) selectedAction).resetPayment(game.getCurrentPlayer());
-                }
                 selectedAction = null;
             } else {
                 selectedAction = selectedItems.iterator().next();
