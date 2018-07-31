@@ -22,7 +22,7 @@ public class IndenturedWorkers extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new PlayCardAction(8, 0);
+        return new PlayCardAction(game.getCurrentPlayer().getCards(), "Play card with Indentured Workers", 8, 0);
     }
 
     @Override

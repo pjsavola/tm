@@ -1,6 +1,6 @@
 package tm.corporation;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.sun.istack.internal.Nullable;
@@ -26,13 +26,13 @@ public class MiningGuild extends Corporation implements PlaceTileEffect {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.STEEL);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.STEEL;
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 steel income", "Get 1 steel income for covering steel or titanium");
+        return Collections.singletonList("Get 1 steel income for covering steel or titanium");
     }
 
     @Nullable

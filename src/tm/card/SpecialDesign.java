@@ -17,7 +17,7 @@ public class SpecialDesign extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new PlayCardAction(8, 2);
+        return new PlayCardAction(game.getCurrentPlayer().getCards(), "Play card with Special Design", 0, 2);
     }
 
     @Override

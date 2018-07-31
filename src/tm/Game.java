@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -43,7 +45,7 @@ public class Game extends JPanel {
     private Planet planet = new Planet();
     private Deque<Card> deck = new ArrayDeque<>();
     private List<Card> discard = new ArrayList<>();
-    private Deque<Card> corporationDeck = new ArrayDeque<>();
+    private Set<Card> corporationDeck = new TreeSet<>();
     private static final Random r = new Random();
 
     public Game() {
@@ -164,7 +166,7 @@ public class Game extends JPanel {
         return !deck.isEmpty() || !discard.isEmpty();
     }
 
-    public Deque<Card> getCorporationDeck() {
+    public Set<Card> getCorporationDeck() {
         return corporationDeck;
     }
 

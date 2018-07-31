@@ -1,7 +1,5 @@
-package tm.standard;
+package tm;
 
-import tm.ActionType;
-import tm.Game;
 import tm.action.Action;
 
 public abstract class StandardAction {

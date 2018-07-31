@@ -1,6 +1,6 @@
 package tm.corporation;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -8,8 +8,6 @@ import tm.Corporation;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.IncomeDeltaAction;
 import tm.effect.DiscountEffect;
 
 public class Thorgate extends Corporation implements DiscountEffect {
@@ -24,13 +22,13 @@ public class Thorgate extends Corporation implements DiscountEffect {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(Resources.ENERGY);
+    public Resources getIncomeDelta(Game game) {
+        return Resources.ENERGY;
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 energy income", "Everything with power tag costs 3 less");
+        return Collections.singletonList("Everything with power tag costs 3 less");
     }
 
     @Override

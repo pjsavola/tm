@@ -1,6 +1,6 @@
 package tm.corporation;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.sun.istack.internal.Nullable;
@@ -25,13 +25,13 @@ public class SaturnSystems extends Corporation implements PlayCardEffect {
     }
 
     @Override
-    public Action getInitialAction(Game game) {
-        return new IncomeDeltaAction(new Resources(1, 0, 1, 0, 0, 0));
+    public Resources getIncomeDelta(Game game) {
+        return Resources.TITANIUM;
     }
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("1 titanium income", "1 money income for each Jovian tag");
+        return Collections.singletonList("1 money income for each Jovian tag");
     }
 
     @Nullable

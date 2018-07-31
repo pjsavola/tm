@@ -1,6 +1,8 @@
 package tm.action;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
@@ -13,31 +15,36 @@ import tm.completable.SelectCardsCompletable;
 
 public class PlayCardAction implements Action {
 
+    private final Set<Card> hand;
+    private final String title;
     private final int discount;
     private final int tolerance;
 
-    public PlayCardAction() {
-        this(0, 0);
+    public PlayCardAction(Set<Card> hand, String title) {
+        this(hand, title, 0, 0);
     }
 
-    public PlayCardAction(int discount, int tolerance) {
+    public PlayCardAction(Set<Card> hand, String title, int discount, int tolerance) {
+        this.hand = hand;
+        this.title = title;
         this.discount = discount;
         this.tolerance = tolerance;
     }
 
     @Override
     public boolean check(Game game) {
-        return !game.getCurrentPlayer().getCards().isEmpty();
+        return !hand.isEmpty();
     }
 
     @Override
     public Completable begin(Game game) {
-        return new PlayCardCompletable(game, discount, tolerance);
+        return new PlayCardCompletable(game, hand, title, discount, tolerance);
     }
 
     private static class PlayCardCompletable extends SelectCardsCompletable {
 
         private final Game game;
+        private Collection<Card> hand;
         private final Player player;
         @Nullable
         private Card selectedCard;
@@ -46,10 +53,11 @@ public class PlayCardAction implements Action {
         private final int discount;
         private final int tolerance;
 
-        public PlayCardCompletable(Game game, int discount, int tolerance) {
-            super(game, new ArrayList<>(game.getCurrentPlayer().getCards()), 1, 1, "Select card to play");
+        public PlayCardCompletable(Game game, Set<Card> hand, String title, int discount, int tolerance) {
+            super(game, new ArrayList<>(hand), 1, 1, title);
             player = game.getCurrentPlayer();
             this.game = game;
+            this.hand = hand;
             this.discount = discount;
             this.tolerance = tolerance;
         }
@@ -80,7 +88,7 @@ public class PlayCardAction implements Action {
                 game.getActionHandler().addPendingAction(action);
             }
             player.addTags(selectedCard.getTags());
-            player.getCards().remove(selectedCard);
+            hand.remove(selectedCard);
             player.playCard(selectedCard);
             player.cardPlayEffects(game, selectedCard);
             player.setResourcesDelta(Resources.EMPTY);
@@ -91,14 +99,14 @@ public class PlayCardAction implements Action {
         @Override
         public void undo() {
             player.removeTags(selectedCard.getTags());
-            player.getCards().add(selectedCard);
+            hand.add(selectedCard);
             player.unplayCard(selectedCard);
         }
 
         @Override
         public void redo() {
             player.addTags(selectedCard.getTags());
-            player.getCards().remove(selectedCard);
+            hand.remove(selectedCard);
             player.playCard(selectedCard);
         }
 
@@ -156,7 +164,7 @@ public class PlayCardAction implements Action {
             this.titanium = titanium;
             this.incomeDelta = incomeDelta;
             resourceDeltaAfterDiscounts = resourceDelta.combine(new Resources(discount));
-            cost = -resourceDeltaAfterDiscounts.getMoney();
+            cost = Math.max(0, -resourceDeltaAfterDiscounts.getMoney());
             if (steel) {
                 materialValue = player.getSteelValue();
                 materialsUsed = Math.min(player.getSteel(), cost / materialValue);

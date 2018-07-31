@@ -32,7 +32,6 @@ public class Player {
     final Set<Tile> ownedTiles = new HashSet<>();
     final Set<Card> cards = new TreeSet<>();
     private final List<Card> playedCards = new ArrayList<>();
-    public Corporation corporation;
 
     public Color getColor() {
         return color;
@@ -248,11 +247,12 @@ public class Player {
 
         tags.renderVertical(g, 0, 700);
 
-        if (corporation != null) {
-            final String name = corporation.getName();
+        // First card is the corporation
+        if (!playedCards.isEmpty()) {
+            final String name = playedCards.get(0).getName();
             final int w = g.getFontMetrics().stringWidth(name);
             g.setColor(new Color(0xFFFFFF));
-            g.drawString(corporation.getName(), 350 - w / 2, 12);
+            g.drawString(playedCards.get(0).getName(), 350 - w / 2, 12);
         }
         g.setColor(oldColor);
     }

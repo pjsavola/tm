@@ -82,7 +82,7 @@ public class DrawCardsAction implements Action {
                     game.getCurrentPlayer().getCards().addAll(selectedCards);
                     game.getDiscardDeck().addAll(discardedCards);
                     if (initial) {
-                        game.getActionHandler().addPendingAction(new PlayCorporationAction());
+                        game.getActionHandler().addPendingAction(new PlayCardAction(game.getCorporationDeck(), "Select your corporation"));
                     }
                 }
 

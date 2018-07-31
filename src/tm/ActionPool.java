@@ -25,7 +25,6 @@ import tm.completable.Completable;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
 import tm.corporation.Thorgate;
-import tm.standard.StandardAction;
 
 public class ActionPool {
     private static final Font font = new Font("Arial", Font.BOLD, 12);
@@ -156,7 +155,7 @@ public class ActionPool {
         standardActions.add(new StandardAction("Play card", ActionType.PLAY) {
             @Override
             public Action getInitialAction(Game game) {
-                return new PlayCardAction();
+                return new PlayCardAction(game.getCurrentPlayer().getCards(), "Select card to play");
             }
         });
         standardActions.add(new StandardAction("Select action", ActionType.CUSTOM) {
