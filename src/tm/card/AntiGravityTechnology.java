@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,8 +21,8 @@ public class AntiGravityTechnology extends Card implements DiscountEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "2 money discount for all cards");
+    protected void renderEffect(Graphics g, int x, int y) {
+        DiscountEffect.render(g, x, y, "images/icon_card.png", "-2");
     }
 
     @Override

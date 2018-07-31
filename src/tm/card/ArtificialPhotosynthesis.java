@@ -8,6 +8,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
+import tm.action.CardAction;
 import tm.action.IncomeDeltaAction;
 import tm.action.SelectActionAction;
 import tm.completable.Completable;
@@ -23,17 +24,25 @@ public class ArtificialPhotosynthesis extends Card {
         return new Action() {
             @Override
             public Completable begin(Game game) {
-                return new SelectActionAction.SelectActionCompletable<Action>(game, Arrays.asList(
-                    new IncomeDeltaAction(Resources.PLANT) {
+                return new SelectActionAction.SelectActionCompletable<>(game, Arrays.asList(
+                    new CardAction(true, null) {
                         @Override
                         public String getDescription() {
                             return "Gain 1 plant";
                         }
+                        @Override
+                        public Action getAction(Game game) {
+                            return new IncomeDeltaAction(Resources.PLANT);
+                        }
                     },
-                    new IncomeDeltaAction(new Resources(0, 0, 0, 0, 2, 0)) {
+                    new CardAction(true, null) {
                         @Override
                         public String getDescription() {
                             return "Gain 2 energy";
+                        }
+                        @Override
+                        public Action getAction(Game game) {
+                            return new IncomeDeltaAction(new Resources(0, 0, 0, 0, 2, 0));
                         }
                     }
                 ));

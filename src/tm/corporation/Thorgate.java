@@ -1,7 +1,6 @@
 package tm.corporation;
 
-import java.util.Collections;
-import java.util.List;
+import java.awt.Graphics;
 
 import tm.Card;
 import tm.Corporation;
@@ -13,7 +12,7 @@ import tm.effect.DiscountEffect;
 public class Thorgate extends Corporation implements DiscountEffect {
 
     public Thorgate() {
-        super("Thorgate", Tags.POWER);
+        super("Thorgate", Tags.POWER, true);
     }
 
     @Override
@@ -27,8 +26,8 @@ public class Thorgate extends Corporation implements DiscountEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("Everything with power tag costs 3 less");
+    protected void renderEffect(Graphics g, int x, int y) {
+        DiscountEffect.render(g, x, y, "images/tag_power.png", "-3");
     }
 
     @Override

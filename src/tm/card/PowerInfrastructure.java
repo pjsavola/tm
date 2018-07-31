@@ -24,14 +24,18 @@ public class PowerInfrastructure extends Card {
             return new Action() {
                 @Override
                 public Completable begin(Game game) {
-                    final List<Action> actions = new ArrayList<>();
+                    final List<CardAction> actions = new ArrayList<>();
                     final int max = game.getCurrentPlayer().getEnergy();
                     for (int i = 1; i <= max; i++) {
                         final int x = i;
-                        actions.add(new ResourceDeltaAction(new Resources(i, 0, 0, 0, -i, 0)) {
+                        actions.add(new CardAction(true, null) {
                             @Override
                             public String getDescription() {
                                 return "" + x + "money, -" + x + " energy";
+                            }
+                            @Override
+                            public Action getAction(Game game) {
+                                return new ResourceDeltaAction(new Resources(x, 0, 0, 0, -x, 0));
                             }
                         });
                     }

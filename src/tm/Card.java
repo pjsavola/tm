@@ -170,10 +170,27 @@ public abstract class Card implements Comparable<Card>, Selectable {
         i++;
 
         // Draw content
+        /*
         g.setColor(TEXT_COLOR);
         for (String content : getContents()) {
             g.drawString(content, x + 4, y + 16 + i * 16);
             i++;
+        }*/
+
+        // Draw effect
+        if (effect) {
+            renderEffect(g, x + WIDTH / 2, y + TITLE_HEIGHT + 35);
+        }
+
+        // Draw action
+        for (Action action : getActions()) {
+
+        }
+
+        // Draw initial action
+        final Action action = getInitialAction(game);
+        if (action != null) {
+            action.render(g, x + 10, y + CARD_HEIGHT - 35);
         }
 
         // Draw VPS
@@ -191,6 +208,9 @@ public abstract class Card implements Comparable<Card>, Selectable {
                 ((ScoringEffect) this).render(g, x + WIDTH - 24, y + CARD_HEIGHT - 24);
             }
         }
+    }
+
+    protected void renderEffect(Graphics g, int x, int y) {
     }
 
     protected List<String> getRequirements() {

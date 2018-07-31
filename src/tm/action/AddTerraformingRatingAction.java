@@ -1,6 +1,9 @@
 package tm.action;
 
+import java.awt.Graphics;
+
 import tm.Game;
+import tm.ImageCache;
 import tm.completable.Completable;
 import tm.completable.InstantCompletable;
 
@@ -33,5 +36,10 @@ public class AddTerraformingRatingAction implements Action {
                 game.getCurrentPlayer().adjustRating(delta);
             }
         };
+    }
+
+    @Override
+    public void render(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/icon_tr.png"), x, y, null);
     }
 }

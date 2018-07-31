@@ -9,6 +9,7 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
+import tm.action.CardAction;
 import tm.action.IncomeDeltaAction;
 import tm.action.SelectActionAction;
 import tm.completable.Completable;
@@ -24,14 +25,18 @@ public class Insulation extends Card {
         return new Action() {
             @Override
             public Completable begin(Game game) {
-                final List<Action> actions = new ArrayList<>();
+                final List<CardAction> actions = new ArrayList<>();
                 final int max = game.getCurrentPlayer().getIncome().getHeat();
                 for (int i = 1; i <= max; i++) {
                     final int x = i;
-                    actions.add(new IncomeDeltaAction(new Resources(i, 0, 0, 0, 0, -i)) {
+                    actions.add(new CardAction(true, null) {
                         @Override
                         public String getDescription() {
                             return "" + x + "money income, -" + x + " heat income";
+                        }
+                        @Override
+                        public Action getAction(Game game) {
+                            return new IncomeDeltaAction(new Resources(x, 0, 0, 0, 0, -x));
                         }
                     });
                 }

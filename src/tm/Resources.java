@@ -83,34 +83,34 @@ public class Resources {
     private static final Color STEEL_COLOR = new Color(0x8B4513);
     private static final Color TITANIUM_COLOR = new Color(0x888888);
     private static final Color PLANT_COLOR = new Color(0x00FF00);
-    private static final Color ENERGY_COLOR = new Color(0x6600FF);
+    private static final Color ENERGY_COLOR = new Color(0xBB66FF);
     private static final Color HEAT_COLOR = new Color(0xFF9900);
 
     public int render(Graphics g, int x, int y, boolean income) {
         int offset = 2;
         if (money != 0) {
-            renderMoney(g, x + 2, y + offset, income);
-            offset += 18;
+            renderMoney(g, x + 5, y + offset, income);
+            offset += 20;
         }
         if (steel != 0) {
-            renderSteel(g, x + 2, y + offset, income);
-            offset += 18;
+            renderSteel(g, x + 5, y + offset, income);
+            offset += 20;
         }
         if (titanium != 0) {
-            renderTitanium(g, x + 2, y + offset, income);
-            offset += 18;
+            renderTitanium(g, x + 5, y + offset, income);
+            offset += 20;
         }
         if (plants != 0) {
-            renderPlants(g, x + 2, y + offset, income);
-            offset += 18;
+            renderPlants(g, x + 5, y + offset, income);
+            offset += 20;
         }
         if (energy != 0) {
-            renderEnergy(g, x + 2, y + offset, income);
-            offset += 18;
+            renderEnergy(g, x + 5, y + offset, income);
+            offset += 20;
         }
         if (heat != 0) {
-            renderHeat(g, x + 2, y + offset, income);
-            offset += 18;
+            renderHeat(g, x + 5, y + offset, income);
+            offset += 20;
         }
         return offset;
     }

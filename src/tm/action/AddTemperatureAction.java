@@ -1,6 +1,9 @@
 package tm.action;
 
+import java.awt.Graphics;
+
 import tm.Game;
+import tm.ImageCache;
 import tm.Resources;
 import tm.completable.Completable;
 import tm.completable.InstantCompletable;
@@ -49,5 +52,10 @@ public class AddTemperatureAction implements Action {
     @Override
     public boolean isOptional() {
         return true;
+    }
+
+    @Override
+    public void render(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/icon_temperature.png"), x, y, null);
     }
 }

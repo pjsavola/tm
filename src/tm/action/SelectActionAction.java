@@ -22,7 +22,7 @@ public class SelectActionAction implements Action {
         return new SelectActionCompletable<>(game, selectableActions);
     }
 
-    public static class SelectActionCompletable<T extends Action> extends SelectItemsCompletable<T> {
+    public static class SelectActionCompletable<T extends CardAction> extends SelectItemsCompletable<T> {
         private final Game game;
         private T selectedAction;
 

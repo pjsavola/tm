@@ -1,7 +1,6 @@
 package tm.corporation;
 
-import java.util.Collections;
-import java.util.List;
+import java.awt.Graphics;
 
 import tm.Corporation;
 import tm.Game;
@@ -12,7 +11,7 @@ import tm.effect.ValueEffect;
 public class Phoblog extends Corporation implements ValueEffect {
 
     public Phoblog() {
-        super("Phoblog", Tags.SPACE);
+        super("Phoblog", Tags.SPACE, true);
     }
 
     @Override
@@ -21,8 +20,8 @@ public class Phoblog extends Corporation implements ValueEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("Titanium value +1");
+    protected void renderEffect(Graphics g, int x, int y) {
+        ValueEffect.render(g, x, y, getSteelDelta(), getTitaniumDelta());
     }
 
     @Override

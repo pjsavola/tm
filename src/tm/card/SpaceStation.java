@@ -1,7 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import tm.Card;
 import tm.Tags;
@@ -19,8 +18,8 @@ public class SpaceStation extends Card implements DiscountEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "Space cards cost 2 less");
+    protected void renderEffect(Graphics g, int x, int y) {
+        DiscountEffect.render(g, x, y, "images/tag_space.png", "-2");
     }
 
     @Override

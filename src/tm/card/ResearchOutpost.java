@@ -1,6 +1,7 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.awt.Graphics;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -23,8 +24,13 @@ public class ResearchOutpost extends Card implements DiscountEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("1 money discount for all cards", "Place next to no other tile!");
+    protected List<String> getRequirements() {
+        return Collections.singletonList("Place next to no other tile");
+    }
+
+    @Override
+    protected void renderEffect(Graphics g, int x, int y) {
+        DiscountEffect.render(g, x, y, "images/icon_card.png", "-1");
     }
 
     @Override

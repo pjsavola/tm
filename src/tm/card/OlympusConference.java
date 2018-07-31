@@ -11,6 +11,7 @@ import tm.Game;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
+import tm.action.CardAction;
 import tm.action.DrawCardsAction;
 import tm.action.MarkerDeltaAction;
 import tm.action.SelectActionAction;
@@ -42,22 +43,30 @@ public class OlympusConference extends CardWithMarkers implements PlayCardEffect
             return new Action() {
                 @Override
                 public Completable begin(Game game) {
-                    final List<Action> actions = new ArrayList<>();
-                    actions.add(new MarkerDeltaAction(tagCount, OlympusConference.this) {
+                    final List<CardAction> actions = new ArrayList<>();
+                    actions.add(new CardAction(true, null) {
                         @Override
                         public String getDescription() {
                             return "Olympus Conference: Gain " + tagCount + " markers";
                         }
+                        @Override
+                        public Action getAction(Game game) {
+                            return new MarkerDeltaAction(tagCount, OlympusConference.this);
+                        }
                     });
                     for (int i = 1; i <= usedMarkersMax && i <= tagCount; i++) {
                         final int drawnCards = i;
-                        actions.add(new ActionChain(
-                            new MarkerDeltaAction(tagCount - 2 * drawnCards, OlympusConference.this),
-                            new DrawCardsAction(drawnCards, false, false)
-                        ) {
+                        actions.add(new CardAction(false, null) {
                             @Override
                             public String getDescription() {
                                 return "Olympus Conference: Gain " + (tagCount - 2 * drawnCards) + " markers, draw " + drawnCards + " cards";
+                            }
+                            @Override
+                            public Action getAction(Game game) {
+                                return new ActionChain(
+                                    new MarkerDeltaAction(tagCount - 2 * drawnCards, OlympusConference.this),
+                                    new DrawCardsAction(drawnCards, false, false)
+                                );
                             }
                         });
                     }

@@ -1,7 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import tm.Card;
 import tm.Tags;
@@ -14,8 +13,8 @@ public class AdvancedAlloys extends Card implements ValueEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Steel value +1", "Titanium value +1");
+    protected void renderEffect(Graphics g, int x, int y) {
+        ValueEffect.render(g, x, y, getSteelDelta(), getTitaniumDelta());
     }
 
     @Override

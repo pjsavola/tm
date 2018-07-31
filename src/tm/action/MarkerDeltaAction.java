@@ -1,5 +1,7 @@
 package tm.action;
 
+import java.awt.Graphics;
+
 import tm.CardWithMarkers;
 import tm.Game;
 import tm.completable.Completable;
@@ -38,5 +40,9 @@ public class MarkerDeltaAction implements Action {
                 card.adjustMarkers(delta);
             }
         };
+    }
+
+    @Override
+    public void render(Graphics g, int x, int y) {
     }
 }

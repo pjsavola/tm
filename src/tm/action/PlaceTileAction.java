@@ -13,6 +13,7 @@ import java.util.Set;
 
 import com.sun.istack.internal.Nullable;
 import tm.Game;
+import tm.ImageCache;
 import tm.Player;
 import tm.Resources;
 import tm.Tile;
@@ -267,7 +268,9 @@ public class PlaceTileAction implements Action {
         });
     }
 
-    public static void tilePlaced(Game game) {
-
+    @Override
+    public void render(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/icon_city.png"), x, y, null);
+        // TODO:
     }
 }

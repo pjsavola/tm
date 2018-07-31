@@ -1,10 +1,12 @@
 package tm.action;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
 import tm.Card;
 import tm.Game;
+import tm.ImageCache;
 import tm.Resources;
 import tm.completable.Completable;
 import tm.completable.SelectItemsCompletable;
@@ -125,5 +127,11 @@ public class DrawCardsAction implements Action {
                 }
             };
         }
+    }
+
+    @Override
+    public void render(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/icon_card.png"), x, y, null);
+        // TODO: min/max/amount
     }
 }

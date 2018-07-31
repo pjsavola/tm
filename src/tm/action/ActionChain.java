@@ -1,6 +1,8 @@
 package tm.action;
 
 
+import java.awt.Graphics;
+
 import com.sun.istack.internal.Nullable;
 import tm.ActionType;
 import tm.Game;
@@ -78,5 +80,14 @@ public class ActionChain implements Action {
             }
         }
         return true;
+    }
+
+    @Override
+    public void render(Graphics g, int x, int y) {
+        int currentX = x;
+        for (Action action : actions) {
+            action.render(g, currentX, y);
+            currentX += 30;
+        }
     }
 }

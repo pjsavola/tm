@@ -1,5 +1,6 @@
 package tm.action;
 
+import java.awt.Graphics;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,7 +13,7 @@ import tm.completable.Completable;
 import tm.completable.InstantCompletable;
 import tm.completable.SelectItemsCompletable;
 
-public class AddMarkerAction implements Action {
+public abstract class AddMarkerAction implements Action {
 
     private final List<CardWithMarkers> cards;
 
@@ -39,6 +40,11 @@ public class AddMarkerAction implements Action {
 
     protected int getMarkerCount(CardWithMarkers card) {
         return 1;
+    }
+
+    @Override
+    public void render(Graphics g, int x, int y) {
+        // TODO
     }
 
     @Override

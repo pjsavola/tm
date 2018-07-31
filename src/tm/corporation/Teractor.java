@@ -1,7 +1,6 @@
 package tm.corporation;
 
-import java.util.Collections;
-import java.util.List;
+import java.awt.Graphics;
 
 import tm.Card;
 import tm.Corporation;
@@ -13,7 +12,7 @@ import tm.effect.DiscountEffect;
 public class Teractor extends Corporation implements DiscountEffect {
 
     public Teractor() {
-        super("Teractor", Tags.EARTH);
+        super("Teractor", Tags.EARTH, true);
     }
 
     @Override
@@ -22,8 +21,8 @@ public class Teractor extends Corporation implements DiscountEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("Cards with earth tag cost 3 less");
+    protected void renderEffect(Graphics g, int x, int y) {
+        DiscountEffect.render(g, x, y, "images/tag_earth.png", "-3");
     }
 
     @Override

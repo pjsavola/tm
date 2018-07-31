@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,8 +28,8 @@ public class QuantumExtractor extends Card implements DiscountEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "Space cards cost 2 less");
+    protected void renderEffect(Graphics g, int x, int y) {
+        DiscountEffect.render(g, x, y, "images/tag_space.png", "-2");
     }
 
     @Override
