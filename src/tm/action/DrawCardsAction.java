@@ -7,7 +7,7 @@ import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.completable.Completable;
-import tm.completable.SelectCardsCompletable;
+import tm.completable.SelectItemsCompletable;
 
 public class DrawCardsAction implements Action {
 
@@ -61,12 +61,12 @@ public class DrawCardsAction implements Action {
                 title += "-" + max;
             }
             title += " cards";
-            return new SelectCardsCompletable(game, drawnCards, min, max, title) {
+            return new SelectItemsCompletable<Card>(game, drawnCards, min, max, title) {
                 private List<Card> discardedCards;
 
                 @Override
                 public boolean check() {
-                    if (pay && !initial && !game.getCurrentPlayer().canAdjustResources(new Resources(-3 * selectedCards.size()))) {
+                    if (pay && !initial && !game.getCurrentPlayer().canAdjustResources(new Resources(-3 * selectedItems.size()))) {
                         return false;
                     }
                     return true;
@@ -75,11 +75,11 @@ public class DrawCardsAction implements Action {
                 @Override
                 public void complete() {
                     if (pay) {
-                        game.getCurrentPlayer().adjustResources(new Resources(-3 * selectedCards.size()));
+                        game.getCurrentPlayer().adjustResources(new Resources(-3 * selectedItems.size()));
                     }
                     discardedCards = new ArrayList<>(selection);
-                    discardedCards.removeAll(selectedCards);
-                    game.getCurrentPlayer().getCards().addAll(selectedCards);
+                    discardedCards.removeAll(selectedItems);
+                    game.getCurrentPlayer().getCards().addAll(selectedItems);
                     game.getDiscardDeck().addAll(discardedCards);
                     if (initial) {
                         game.getActionHandler().addPendingAction(new PlayCardAction(game.getCorporationDeck(), "Select your corporation"));
@@ -89,9 +89,9 @@ public class DrawCardsAction implements Action {
                 @Override
                 public void undo() {
                     if (pay) {
-                        game.getCurrentPlayer().adjustResources(new Resources(3 * selectedCards.size()));
+                        game.getCurrentPlayer().adjustResources(new Resources(3 * selectedItems.size()));
                     }
-                    game.getCurrentPlayer().getCards().removeAll(selectedCards);
+                    game.getCurrentPlayer().getCards().removeAll(selectedItems);
                     game.getDiscardDeck().removeAll(discardedCards);
                     openWindow();
                     game.getActionHandler().reprocess(this);
@@ -104,7 +104,7 @@ public class DrawCardsAction implements Action {
                 }
             };
         } else {
-            return new SelectCardsCompletable(game, drawnCards, 0, 0, "You got these cards") {
+            return new SelectItemsCompletable<Card>(game, drawnCards, 0, 0, "You got these cards") {
                 @Override
                 public void complete() {
                     game.getCurrentPlayer().getCards().addAll(selection);

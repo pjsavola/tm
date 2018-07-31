@@ -13,7 +13,7 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.CardActionWithCost;
 import tm.completable.Completable;
-import tm.completable.SelectCardsCompletable;
+import tm.completable.SelectItemsCompletable;
 import tm.requirement.OxygenRequirement;
 
 public class SearchForLife extends CardWithMarkers {
@@ -34,7 +34,7 @@ public class SearchForLife extends CardWithMarkers {
             return new Action() {
                 @Override
                 public Completable begin(Game game) {
-                    return new SelectCardsCompletable(game, Collections.singletonList(card), 0, 0, "Search For Life") {
+                    return new SelectItemsCompletable<Card>(game, Collections.singletonList(card), 0, 0, "Search For Life") {
                         @Override
                         public void complete() {
                             game.getDiscardDeck().add(card);

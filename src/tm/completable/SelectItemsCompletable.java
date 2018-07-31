@@ -23,14 +23,15 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.sun.istack.internal.Nullable;
-import tm.Card;
 import tm.Game;
+import tm.Renderable;
 
-public abstract class SelectCardsCompletable extends JPanel implements Completable {
+public abstract class SelectItemsCompletable<T extends Renderable> extends JPanel implements Completable {
 
-    protected final Set<Card> selectedCards = new HashSet<>();
+    protected final Set<T> selectedItems = new HashSet<>();
+    protected final List<T> selection;
+
     private final Game game;
-    protected final List<? extends Card> selection;
     private final int min;
     private final int max;
     private final String title;
@@ -38,16 +39,16 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
     private SelectionWindow window;
 
     private class SelectionWindow extends JFrame {
-        private Card cardToRender;
+        private T itemToRender;
 
-        public SelectionWindow(Game game, List<? extends Card> selection, int min, int max, String title) {
+        public SelectionWindow(Game game, List<T> selection, int min, int max, String title) {
             // Create confirm button
             final JButton confirmButton = new JButton("Confirm");
             confirmButton.setEnabled(min == 0 && check());
             confirmButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    game.getActionHandler().completed(SelectCardsCompletable.this);
+                    game.getActionHandler().completed(SelectItemsCompletable.this);
                     game.repaint();
                     cancel();
                 }
@@ -77,9 +78,9 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
             final JPanel cardPanel = new JPanel() {
                 @Override
                 public void paintComponent(Graphics g) {
-                    if (cardToRender != null) {
-                        cardToRender.renderTitle(g, 0, 0);
-                        cardToRender.renderContent(g, 0, 22, game);
+                    if (itemToRender != null) {
+                        itemToRender.renderTitle(g, 0, 0);
+                        itemToRender.renderContent(g, 0, 22, game);
                     }
                 }
             };
@@ -87,11 +88,11 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
             cardPanel.setBackground(Color.BLACK);
 
             // Create list which contains the selection
-            final DefaultListModel<Card> listModel = new DefaultListModel<>();
-            for (Card card : selection) {
+            final DefaultListModel<T> listModel = new DefaultListModel<>();
+            for (T card : selection) {
                 listModel.addElement(card);
             }
-            final JList<Card> cardList = new JList<>(listModel);
+            final JList<T> cardList = new JList<>(listModel);
             cardList.setFixedCellHeight(23);
             cardList.setFixedCellWidth(204);
             final int selectionMode = (max == 1 && min == 1) ? ListSelectionModel.SINGLE_SELECTION : ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
@@ -105,7 +106,7 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
                         g.drawRect(0, 0, 202, 21);
                     }
                     if (cellHasFocus) {
-                        cardToRender = card;
+                        itemToRender = card;
                         cardPanel.repaint();
                     }
                     card.renderTitle(g, 1, 1);
@@ -115,9 +116,9 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
                 @Override
                 public void valueChanged(ListSelectionEvent e) {
                     final int[] indices = ((JList<?>) e.getSource()).getSelectedIndices();
-                    selectedCards.clear();
+                    selectedItems.clear();
                     for (int i : indices) {
-                        selectedCards.add(selection.get(i));
+                        selectedItems.add(selection.get(i));
                     }
                     selectionChanged();
                     game.repaint();
@@ -151,7 +152,7 @@ public abstract class SelectCardsCompletable extends JPanel implements Completab
         }
     }
 
-    protected SelectCardsCompletable(Game game, List<? extends Card> selection, int min, int max, String title) {
+    protected SelectItemsCompletable(Game game, List<T> selection, int min, int max, String title) {
         this.game = game;
         this.selection = selection;
         this.min = min;

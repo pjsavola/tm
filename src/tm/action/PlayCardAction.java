@@ -11,7 +11,7 @@ import tm.Player;
 import tm.Resources;
 import tm.Tags;
 import tm.completable.Completable;
-import tm.completable.SelectCardsCompletable;
+import tm.completable.SelectItemsCompletable;
 
 public class PlayCardAction implements Action {
 
@@ -41,7 +41,7 @@ public class PlayCardAction implements Action {
         return new PlayCardCompletable(game, hand, title, discount, tolerance);
     }
 
-    private static class PlayCardCompletable extends SelectCardsCompletable {
+    private static class PlayCardCompletable extends SelectItemsCompletable {
 
         private final Game game;
         private Collection<Card> hand;
@@ -128,8 +128,8 @@ public class PlayCardAction implements Action {
 
         @Override
         protected void selectionChanged() {
-            if (!selectedCards.isEmpty()) {
-                selectedCard = selectedCards.iterator().next();
+            if (!selectedItems.isEmpty()) {
+                selectedCard = selectedItems.iterator().next();
                 payment = new Payment(
                     player,
                     selectedCard.getTags().has(Tags.Type.BUILDING),

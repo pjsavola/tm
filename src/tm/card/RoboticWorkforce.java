@@ -15,7 +15,7 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.IncomeDeltaAction;
 import tm.completable.Completable;
-import tm.completable.SelectCardsCompletable;
+import tm.completable.SelectItemsCompletable;
 
 public class RoboticWorkforce extends CardWithMarkers {
 
@@ -43,7 +43,7 @@ public class RoboticWorkforce extends CardWithMarkers {
             return new Action() {
                 @Override
                 public Completable begin(Game game) {
-                    return new SelectCardsCompletable(game, new ArrayList<>(incomeMap.keySet()), 1, 1, "Select income to duplicate") {
+                    return new SelectItemsCompletable<Card>(game, new ArrayList<>(incomeMap.keySet()), 1, 1, "Select income to duplicate") {
                         @Nullable
                         private Card selectedCard;
 

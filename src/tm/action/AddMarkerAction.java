@@ -10,7 +10,7 @@ import tm.CardWithMarkers;
 import tm.Game;
 import tm.completable.Completable;
 import tm.completable.InstantCompletable;
-import tm.completable.SelectCardsCompletable;
+import tm.completable.SelectItemsCompletable;
 
 public class AddMarkerAction implements Action {
 
@@ -62,14 +62,14 @@ public class AddMarkerAction implements Action {
                 }
             };
         }
-        return new SelectCardsCompletable(game, cards, 0, 1, AddMarkerAction.this.getTitle()) {
+        return new SelectItemsCompletable<CardWithMarkers>(game, cards, 0, 1, AddMarkerAction.this.getTitle()) {
             @Nullable
             private CardWithMarkers selectedCard;
 
             @Override
             public void complete() {
-                if (!selectedCards.isEmpty()) {
-                    selectedCard = (CardWithMarkers) selectedCards.iterator().next();
+                if (!selectedItems.isEmpty()) {
+                    selectedCard = selectedItems.iterator().next();
                 }
                 if (selectedCard == null) {
                     final Action action = onEmptySelection();

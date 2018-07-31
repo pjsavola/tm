@@ -10,11 +10,22 @@ import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
-import tm.action.ActionChain;
 import tm.action.AddTerraformingRatingAction;
-import tm.action.ResourceDeltaAction;
+import tm.action.CardActionWithCost;
 
 public class UnitedNationsMarsInitiative extends Corporation {
+
+    private final Action action = new CardActionWithCost(true, ActionType.TR, new Resources(-3)) {
+        @Override
+        public boolean check(Game game) {
+            return game.getCurrentPlayer().hasIncreasedRating();
+        }
+
+        @Override
+        protected Action getAction(Game game) {
+            return new AddTerraformingRatingAction();
+        }
+    };
 
     public UnitedNationsMarsInitiative() {
         super("United Nations Mars Initiative", Tags.PLANT);
@@ -27,15 +38,7 @@ public class UnitedNationsMarsInitiative extends Corporation {
 
     @Override
     public List<Action> getActions() {
-        return Collections.singletonList(new ActionChain(ActionType.TR, "Increase TR",
-            new ResourceDeltaAction(new Resources(-3)),
-            new AddTerraformingRatingAction() {
-                @Override
-                public boolean check(Game game) {
-                    return game.getCurrentPlayer().hasIncreasedRating();
-                }
-            }
-        ));
+        return Collections.singletonList(action);
     }
 
     @Override

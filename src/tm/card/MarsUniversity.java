@@ -12,7 +12,7 @@ import tm.Tags;
 import tm.action.Action;
 import tm.action.DrawCardsAction;
 import tm.completable.Completable;
-import tm.completable.SelectCardsCompletable;
+import tm.completable.SelectItemsCompletable;
 import tm.effect.PlayCardEffect;
 
 public class MarsUniversity extends Card implements PlayCardEffect {
@@ -39,13 +39,13 @@ public class MarsUniversity extends Card implements PlayCardEffect {
                 @Override
                 public Completable begin(Game game) {
                     final Player player = game.getCurrentPlayer();
-                    return new SelectCardsCompletable(game, new ArrayList<>(player.getCards()), 0, 1, "You may discard 1 card to draw 1 card") {
+                    return new SelectItemsCompletable<Card>(game, new ArrayList<>(player.getCards()), 0, 1, "You may discard 1 card to draw 1 card") {
                         @Nullable
                         private Card selectedCard;
 
                         @Override
                         public void complete() {
-                            selectedCard = selectedCards.isEmpty() ? null : selectedCards.iterator().next();
+                            selectedCard = selectedItems.isEmpty() ? null : selectedItems.iterator().next();
                             if (selectedCard != null) {
                                 game.getCurrentPlayer().getCards().remove(selectedCard);
                                 game.getActionHandler().addPendingAction(new DrawCardsAction(1, false, false));

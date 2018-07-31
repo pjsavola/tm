@@ -12,7 +12,7 @@ import tm.action.Action;
 import tm.effect.ScoringEffect;
 import tm.requirement.Requirement;
 
-public abstract class Card implements Comparable<Card> {
+public abstract class Card implements Comparable<Card>, Renderable {
 
     public static final int WIDTH = 200;
     public static final int TITLE_HEIGHT = 19;
