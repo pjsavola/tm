@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.ActionType;
-import tm.CardWithMarkers;
+import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
@@ -15,7 +15,7 @@ import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 import tm.requirement.OceanRequirement;
 
-public class WaterSplittingPlant extends CardWithMarkers {
+public class WaterSplittingPlant extends Card {
 
     private final CardAction action = new CardActionWithCost(true, ActionType.WATER_SPLITTING_PLANT, new Resources(0, 0, 0, 0, -3, 0)) {
         @Override

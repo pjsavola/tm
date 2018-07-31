@@ -22,12 +22,7 @@ public class Tardigrades extends CardWithMarkers {
     };
 
     public Tardigrades() {
-        super("Tardigrades", 4, Tags.MICROBE);
-    }
-
-    @Override
-    public int getVPs() {
-        return getMarkerCount() / 4;
+        super("Tardigrades", 4, Tags.MICROBE, 1, 4);
     }
 
     @Override
@@ -37,6 +32,6 @@ public class Tardigrades extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Add 1 marker", "Each 4 markers is worth 1 VP", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action:", "Add 1 marker");
     }
 }

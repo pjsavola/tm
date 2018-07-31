@@ -1,7 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import tm.Card;
 import tm.Tags;
@@ -19,8 +18,8 @@ public class AdaptationTechnology extends Card implements RequirementEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "+/- 2 to card requirements");
+    protected void renderEffect(Graphics g, int x, int y) {
+        RequirementEffect.render(g, x, y, getTolerance());
     }
 
     @Override

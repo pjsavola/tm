@@ -1,7 +1,6 @@
 package tm.corporation;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import tm.Corporation;
 import tm.Game;
@@ -14,7 +13,7 @@ import tm.effect.RequirementEffect;
 public class Inventrix extends Corporation implements RequirementEffect {
 
     public Inventrix() {
-        super("Inventrix", Tags.SCIENCE);
+        super("Inventrix", Tags.SCIENCE, true);
     }
 
     @Override
@@ -28,8 +27,8 @@ public class Inventrix extends Corporation implements RequirementEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("3 cards", "Has +/- 2 to card requirements");
+    protected void renderEffect(Graphics g, int x, int y) {
+        RequirementEffect.render(g, x, y, getTolerance());
     }
 
     @Override

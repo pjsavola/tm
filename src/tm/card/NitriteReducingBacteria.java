@@ -30,7 +30,7 @@ public class NitriteReducingBacteria extends CardWithMarkers {
     };
 
     public NitriteReducingBacteria() {
-        super("Nitrite Reducing Bacteria", 11, Tags.MICROBE);
+        super("Nitrite Reducing Bacteria", 11, Tags.MICROBE, 0, 1);
         action1.setAlternativeAction(action2);
         action2.setAlternativeAction(action1);
     }
@@ -47,6 +47,6 @@ public class NitriteReducingBacteria extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action 1:", "Add 1 marker", "", "Action 2:", "Remove 3 markers to get TR", "", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action 1:", "Add 1 marker", "", "Action 2:", "Remove 3 markers to get TR");
     }
 }

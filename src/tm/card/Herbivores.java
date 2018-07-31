@@ -18,12 +18,7 @@ import tm.requirement.OxygenRequirement;
 public class Herbivores extends CardWithMarkers implements PlaceTileEffect {
 
     public Herbivores() {
-        super("Herbivores", 12, Tags.ANIMAL, new OxygenRequirement(8, true), true);
-    }
-
-    @Override
-    public int getVPs() {
-        return getMarkerCount() / 2;
+        super("Herbivores", 12, Tags.ANIMAL, new OxygenRequirement(8, true), true, 1, 2);
     }
 
     @Override
@@ -38,7 +33,7 @@ public class Herbivores extends CardWithMarkers implements PlaceTileEffect {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Effect:", "Add 1 marker when placing greenery tile", "Each 2 markers is worth 1 VP", "Currently " + getMarkerCount() + " markers", "", "1 marker");
+        return Arrays.asList("Effect:", "Add 1 marker when placing greenery tile", "", "1 marker");
     }
 
     @Nullable

@@ -61,12 +61,7 @@ public class SearchForLife extends CardWithMarkers {
     };
 
     public SearchForLife() {
-        super("Search For Life", 3, Tags.SCIENCE, new OxygenRequirement(6, false));
-    }
-
-    @Override
-    public int getVPs() {
-        return getMarkerCount() > 0 ? 3 : 0;
+        super("Search For Life", 3, Tags.SCIENCE, new OxygenRequirement(6, false), 3, 0);
     }
 
     @Override
@@ -81,6 +76,6 @@ public class SearchForLife extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Draw card", "Gain marker if microbe", "3 VPs if you have any markers", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action:", "Draw card", "Gain marker if microbe");
     }
 }

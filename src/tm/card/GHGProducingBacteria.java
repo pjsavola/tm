@@ -32,7 +32,7 @@ public class GHGProducingBacteria extends CardWithMarkers {
     };
 
     public GHGProducingBacteria() {
-        super("GHG Producing Bacteria", 8, Tags.SCIENCE.combine(Tags.MICROBE), new OxygenRequirement(4, true));
+        super("GHG Producing Bacteria", 8, Tags.SCIENCE.combine(Tags.MICROBE), new OxygenRequirement(4, true), 0, 1);
         action1.setAlternativeAction(action2);
         action2.setAlternativeAction(action1);
     }
@@ -49,6 +49,6 @@ public class GHGProducingBacteria extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action 1:", "Add 1 marker", "", "Action 2:", "Remove 2 markers to raise temperature", "", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action 1:", "Add 1 marker", "", "Action 2:", "Remove 2 markers to raise temperature");
     }
 }

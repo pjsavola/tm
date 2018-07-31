@@ -24,12 +24,7 @@ public class Fish extends CardWithMarkers {
     };
 
     public Fish() {
-        super("Fish", 9, Tags.ANIMAL, new TemperatureRequirement(2, true));
-    }
-
-    @Override
-    public int getVPs() {
-        return getMarkerCount();
+        super("Fish", 9, Tags.ANIMAL, new TemperatureRequirement(2, true), 1, 1);
     }
 
     @Override
@@ -44,6 +39,6 @@ public class Fish extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Add 1 marker", "Each marker is worth 1 VP", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action:", "Add 1 marker");
     }
 }

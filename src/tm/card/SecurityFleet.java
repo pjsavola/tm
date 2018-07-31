@@ -25,12 +25,7 @@ public class SecurityFleet extends CardWithMarkers {
     };
 
     public SecurityFleet() {
-        super("Security Fleet", 12, Tags.SPACE);
-    }
-
-    @Override
-    public int getVPs() {
-        return getMarkerCount();
+        super("Security Fleet", 12, Tags.SPACE, 1, 1);
     }
 
     @Override
@@ -40,6 +35,6 @@ public class SecurityFleet extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Spend 1 titanium to add 1 marker", "Each marker is worth 1 VP", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action:", "Spend 1 titanium to add 1 marker");
     }
 }

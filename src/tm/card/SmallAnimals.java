@@ -24,12 +24,7 @@ public class SmallAnimals extends CardWithMarkers {
     };
 
     public SmallAnimals() {
-        super("Small Animals", 6, Tags.ANIMAL, new OxygenRequirement(6, true));
-    }
-
-    @Override
-    public int getVPs() {
-        return getMarkerCount() / 2;
+        super("Small Animals", 6, Tags.ANIMAL, new OxygenRequirement(6, true), 1, 2);
     }
 
     @Override
@@ -44,6 +39,6 @@ public class SmallAnimals extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Add 1 marker", "Each 2 markers is worth 1 VP", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action:", "Add 1 marker");
     }
 }

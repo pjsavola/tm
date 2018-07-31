@@ -24,12 +24,7 @@ public class Birds extends CardWithMarkers {
     };
 
     public Birds() {
-        super("Birds", 10, Tags.ANIMAL, new OxygenRequirement(13, true));
-    }
-
-    @Override
-    public int getVPs() {
-        return getMarkerCount();
+        super("Birds", 10, Tags.ANIMAL, new OxygenRequirement(13, true), 1, 1);
     }
 
     @Override
@@ -44,6 +39,6 @@ public class Birds extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Add 1 marker", "Each marker is worth 1 VP", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action:", "Add 1 marker");
     }
 }

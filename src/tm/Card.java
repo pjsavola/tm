@@ -193,6 +193,15 @@ public abstract class Card implements Comparable<Card>, Selectable {
             action.render(g, x + 10, y + CARD_HEIGHT - 35);
         }
 
+        // Draw markers
+        if (this instanceof CardWithMarkers) {
+            g.setColor(Color.LIGHT_GRAY);
+            g.drawRect(x + WIDTH / 2 - 10, y + CARD_HEIGHT - 28, 20, 20);
+            final String markerString = Integer.toString(((CardWithMarkers) this).getMarkerCount());
+            final int markerWidth = g.getFontMetrics().stringWidth(markerString);
+            g.drawString(markerString, x + WIDTH / 2 - 10 + (20 - markerWidth) / 2, y + CARD_HEIGHT - 13);
+        }
+
         // Draw VPS
         final int vp = getVPs();
         if (vp > 0 || this instanceof ScoringEffect) {

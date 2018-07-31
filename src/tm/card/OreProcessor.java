@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.ActionType;
-import tm.CardWithMarkers;
+import tm.Card;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
@@ -14,7 +14,7 @@ import tm.action.AddOxygenAction;
 import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 
-public class OreProcessor extends CardWithMarkers {
+public class OreProcessor extends Card {
 
     private final CardAction action = new CardActionWithCost(true, ActionType.ORE_PROCESSOR, new Resources(0, 0, 1, 0, -4, 0)) {
         @Override

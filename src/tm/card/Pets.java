@@ -17,12 +17,7 @@ import tm.effect.PlayCardEffect;
 public class Pets extends CardWithMarkers implements PlaceTileEffect, PlayCardEffect {
 
     public Pets() {
-        super("Pets", 10, Tags.ANIMAL.combine(Tags.EARTH), null, true);
-    }
-
-    @Override
-    public int getVPs() {
-        return getMarkerCount() / 2;
+        super("Pets", 10, Tags.ANIMAL.combine(Tags.EARTH), null, true, 1, 2);
     }
 
     @Override
@@ -32,7 +27,7 @@ public class Pets extends CardWithMarkers implements PlaceTileEffect, PlayCardEf
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Effect:", "Add 1 marker when city is placed", "Each 2 markers is worth 1 VP", "Currently " + getMarkerCount() + " markers", "", "1 marker");
+        return Arrays.asList("Effect:", "Add 1 marker when city is placed");
     }
 
     @Nullable

@@ -30,7 +30,7 @@ public class RegolithEaters extends CardWithMarkers {
     };
 
     public RegolithEaters() {
-        super("Regolith Eaters", 13, Tags.SCIENCE.combine(Tags.MICROBE));
+        super("Regolith Eaters", 13, Tags.SCIENCE.combine(Tags.MICROBE), 0, 1);
         action1.setAlternativeAction(action2);
         action2.setAlternativeAction(action1);
     }
@@ -42,6 +42,6 @@ public class RegolithEaters extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action 1:", "Add 1 marker", "", "Action 2:", "Remove 2 markers to raise oxygen", "", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action 1:", "Add 1 marker", "", "Action 2:", "Remove 2 markers to raise oxygen");
     }
 }

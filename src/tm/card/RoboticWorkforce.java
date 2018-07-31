@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
-import tm.CardWithMarkers;
 import tm.Game;
 import tm.Resources;
 import tm.Tags;
@@ -17,7 +16,7 @@ import tm.action.IncomeDeltaAction;
 import tm.completable.Completable;
 import tm.completable.SelectItemsCompletable;
 
-public class RoboticWorkforce extends CardWithMarkers {
+public class RoboticWorkforce extends Card {
 
     public RoboticWorkforce() {
         super("Robotic Workforce", 9, Tags.SCIENCE);

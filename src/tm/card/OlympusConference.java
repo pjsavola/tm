@@ -21,7 +21,7 @@ import tm.effect.PlayCardEffect;
 public class OlympusConference extends CardWithMarkers implements PlayCardEffect {
 
     public OlympusConference() {
-        super("Olympus Conference", 10, Tags.SCIENCE_BUILDING.combine(Tags.EARTH), null, true);
+        super("Olympus Conference", 10, Tags.SCIENCE_BUILDING.combine(Tags.EARTH), null, true, 0, 1);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class OlympusConference extends CardWithMarkers implements PlayCardEffect
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Effect:", "When you play science tag", "Add marker to this card", "or remove marker to draw a card", "(including this)", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Effect:", "When you play science tag", "Add marker to this card", "or remove marker to draw a card", "(including this)");
     }
 
     @Nullable

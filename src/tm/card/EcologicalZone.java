@@ -19,12 +19,7 @@ import tm.requirement.GreeneryRequirement;
 public class EcologicalZone extends CardWithMarkers implements PlayCardEffect {
 
     public EcologicalZone() {
-        super("Ecological Zone", 12, Tags.PLANT.combine(Tags.ANIMAL), new GreeneryRequirement());
-    }
-
-    @Override
-    public int getVPs() {
-        return getMarkerCount() / 2;
+        super("Ecological Zone", 12, Tags.PLANT.combine(Tags.ANIMAL), new GreeneryRequirement(), 1, 2);
     }
 
     @Override
@@ -39,7 +34,7 @@ public class EcologicalZone extends CardWithMarkers implements PlayCardEffect {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Effect:", "When you play card with", "plant or animal tag", "(including these 2)", "Place marker on this card", "1 vp for each 2 markers", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Effect:", "When you play card with", "plant or animal tag", "(including these 2)", "Place marker on this card");
     }
 
     @Nullable

@@ -24,12 +24,7 @@ public class PhysicsComplex extends CardWithMarkers {
     };
 
     public PhysicsComplex() {
-        super("Physics Complex", 12, Tags.SCIENCE_BUILDING);
-    }
-
-    @Override
-    public int getVPs() {
-        return getMarkerCount() * 2;
+        super("Physics Complex", 12, Tags.SCIENCE_BUILDING, 2, 1);
     }
 
     @Override
@@ -39,6 +34,6 @@ public class PhysicsComplex extends CardWithMarkers {
 
     @Override
     protected List<String> getContents() {
-        return Arrays.asList("Action:", "Spend 6 energy to add a marker", "2 VPs per marker", "Currently " + getMarkerCount() + " markers");
+        return Arrays.asList("Action:", "Spend 6 energy to add a marker");
     }
 }
