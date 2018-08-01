@@ -1,6 +1,5 @@
 package tm.corporation;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,10 +39,5 @@ public class UnitedNationsMarsInitiative extends Corporation {
     @Override
     public List<CardAction> getActions() {
         return Collections.singletonList(action);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("May increase TR for 3 money", "if TR has been increased this turn");
     }
 }

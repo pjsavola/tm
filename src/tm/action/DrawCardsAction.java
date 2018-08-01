@@ -1,5 +1,6 @@
 package tm.action;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,8 +131,17 @@ public class DrawCardsAction implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y) {
-        g.drawImage(ImageCache.getImage("images/icon_card.png"), x, y, null);
-        // TODO: min/max/amount
+    public void render(Graphics g, int x, int y, Game game) {
+        final String str = pay ? "Buy" : "Draw";
+        g.setColor(Color.WHITE);
+        g.drawString(str, x, y + 8);
+        for (int i = 0; i < amount; i++) {
+            g.drawImage(ImageCache.getImage("images/icon_card.png"), x + i * 16, y + 12, null);
+            if (i + 1 > max) {
+                g.setColor(Color.RED);
+                g.drawLine(x + i * 16 + 4, y + 12, x + i * 16 + 12, y + 28);
+                g.drawLine(x + i * 16 + 4, y + 28, x + i * 16 + 12, y + 12);
+            }
+        }
     }
 }

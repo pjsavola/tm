@@ -158,8 +158,9 @@ public abstract class Card implements Comparable<Card>, Selectable {
         }
 
         // Draw resources and income
-        int offset = getResourceDelta(game).render(g, x, y + TITLE_HEIGHT + 20, false);
-        getIncomeDelta(game).render(g, x, y + TITLE_HEIGHT + 20 + offset, true);
+        int offset = 0;
+        offset += getResourceDelta(game).render(g, x, y + TITLE_HEIGHT + 20, false);
+        offset += getIncomeDelta(game).render(g, x, y + TITLE_HEIGHT + 20 + offset, true);
 
         // Draw requirements
         g.setColor(Color.RED);
@@ -188,14 +189,20 @@ public abstract class Card implements Comparable<Card>, Selectable {
         }
 
         // Draw action
+        int actionOffset = 0;
         for (Action action : getActions()) {
-
+            final int px = x + WIDTH / 2;
+            final int py = y + TITLE_HEIGHT + 35 + offset;
+            g.setColor(Color.WHITE);
+            g.drawString("Action:", px, py);
+            action.render(g, px, py + 5, game);
+            offset += 75;
         }
 
         // Draw initial action
         final Action action = getInitialAction(game);
         if (action != null) {
-            action.render(g, x + 10, y + CARD_HEIGHT - 35);
+            action.render(g, x + 10, y + CARD_HEIGHT - 35, game);
         }
 
         // Draw markers

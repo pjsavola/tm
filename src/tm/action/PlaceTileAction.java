@@ -2,6 +2,7 @@ package tm.action;
 
 import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -13,7 +14,6 @@ import java.util.Set;
 
 import com.sun.istack.internal.Nullable;
 import tm.Game;
-import tm.ImageCache;
 import tm.Player;
 import tm.Resources;
 import tm.Tile;
@@ -269,8 +269,7 @@ public class PlaceTileAction implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y) {
-        g.drawImage(ImageCache.getImage("images/icon_city.png"), x, y, null);
-        // TODO:
+    public void render(Graphics g, int x, int y, Game game) {
+        g.drawImage(type.getImage().getScaledInstance(24, 24, Image.SCALE_DEFAULT), x, y, null);
     }
 }

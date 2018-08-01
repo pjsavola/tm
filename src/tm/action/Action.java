@@ -30,6 +30,6 @@ public interface Action {
         return true;
     }
 
-    default void render(Graphics g, int x, int y) {
+    default void render(Graphics g, int x, int y, Game game) {
     }
 }

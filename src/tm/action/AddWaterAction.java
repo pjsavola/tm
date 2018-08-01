@@ -55,7 +55,7 @@ public class AddWaterAction implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y) {
+    public void render(Graphics g, int x, int y, Game game) {
         g.drawImage(ImageCache.getImage("images/icon_water.png"), x, y, null);
     }
 }

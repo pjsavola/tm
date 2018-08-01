@@ -44,7 +44,7 @@ public class MarkerDeltaAction implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y) {
+    public void render(Graphics g, int x, int y, Game game) {
         render(g, x, y, delta);
     }
 

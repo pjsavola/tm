@@ -105,8 +105,17 @@ public abstract class CardAction implements Action, Selectable {
     }
 
     @Override
-    public void render(Graphics g, int x, int y) {
-        // TODO
+    public void render(Graphics g, int x, int y, Game game) {
+        // Draw resources and income
+        int offset = 0;
+        offset += getResourceDelta(game).render(g, x, y, false);
+        offset += getIncomeDelta(game).render(g, x, y + offset, true);
+
+        // Draw actual action
+        final Action action = getAction(game);
+        if (action != null) {
+            action.render(g, x, y + offset, game);
+        }
     }
 
     protected static class CardActionCompletable implements Completable {

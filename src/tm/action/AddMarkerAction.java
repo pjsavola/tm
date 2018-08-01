@@ -43,7 +43,7 @@ public abstract class AddMarkerAction implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y) {
+    public void render(Graphics g, int x, int y, Game game) {
         // TODO
     }
 
