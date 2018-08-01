@@ -163,11 +163,19 @@ public class Player {
     }
 
     public void addTags(Tags tags) {
-        this.tags = this.tags.combine(tags);
+        if (tags.has(Tags.Type.EVENT)) {
+            this.tags = this.tags.combine(Tags.EVENT);
+        } else {
+            this.tags = this.tags.combine(tags);
+        }
     }
 
     public void removeTags(Tags tags) {
-        this.tags = this.tags.subtract(tags);
+        if (tags.has(Tags.Type.EVENT)) {
+            this.tags = this.tags.subtract(Tags.EVENT);
+        } else {
+            this.tags = this.tags.subtract(tags);
+        }
     }
 
     public Tags getTags() {

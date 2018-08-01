@@ -1,12 +1,12 @@
 package tm.card;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Game;
+import tm.ImageCache;
 import tm.Player;
 import tm.Tags;
 import tm.action.Action;
@@ -27,8 +27,10 @@ public class MarsUniversity extends Card implements PlayCardEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "When playing card with science tag", "(including this)", "you may discard a card to draw a card");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/tag_science.png"), x, y + 8, null);
+        g.drawString("discard 1", x + 24, y + 12);
+        g.drawString("to draw 1", x + 24, y + 28);
     }
 
     @Nullable

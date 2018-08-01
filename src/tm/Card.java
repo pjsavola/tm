@@ -10,6 +10,7 @@ import java.util.List;
 import com.sun.istack.internal.Nullable;
 import tm.action.Action;
 import tm.action.CardAction;
+import tm.action.MarkerDeltaAction;
 import tm.effect.ScoringEffect;
 import tm.requirement.Requirement;
 
@@ -179,7 +180,11 @@ public abstract class Card implements Comparable<Card>, Selectable {
 
         // Draw effect
         if (effect) {
-            renderEffect(g, x + WIDTH / 2, y + TITLE_HEIGHT + 35);
+            final int px = x + WIDTH / 2;
+            final int py = y + TITLE_HEIGHT + 35;
+            g.setColor(Color.WHITE);
+            g.drawString("Effect:", px, py);
+            renderEffect(g, px, py + 5);
         }
 
         // Draw action
@@ -195,16 +200,15 @@ public abstract class Card implements Comparable<Card>, Selectable {
 
         // Draw markers
         if (this instanceof CardWithMarkers) {
-            g.setColor(Color.LIGHT_GRAY);
-            g.drawRect(x + WIDTH / 2 - 10, y + CARD_HEIGHT - 28, 20, 20);
-            final String markerString = Integer.toString(((CardWithMarkers) this).getMarkerCount());
-            final int markerWidth = g.getFontMetrics().stringWidth(markerString);
-            g.drawString(markerString, x + WIDTH / 2 - 10 + (20 - markerWidth) / 2, y + CARD_HEIGHT - 13);
+            MarkerDeltaAction.render(g, x + WIDTH / 2 - 10, y + CARD_HEIGHT - 28, ((CardWithMarkers) this).getMarkerCount());
         }
 
         // Draw VPS
         final int vp = getVPs();
         if (vp > 0 || this instanceof ScoringEffect) {
+            if (this instanceof CardWithMarkers && ((CardWithMarkers) this).vp == 0) {
+                return;
+            }
             g.setColor(new Color(0x8B4513));
             g.fillOval(x + WIDTH - 28, y + CARD_HEIGHT - 28, 24, 24);
             if (vp > 0) {

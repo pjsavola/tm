@@ -1,12 +1,13 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.CardWithMarkers;
 import tm.Game;
+import tm.ImageCache;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
@@ -32,8 +33,9 @@ public class Herbivores extends CardWithMarkers implements PlaceTileEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "Add 1 marker when placing greenery tile", "", "1 marker");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/icon_greenery.png"), x, y, null);
+        g.drawString("1 marker", x + 30, y + 16);
     }
 
     @Nullable

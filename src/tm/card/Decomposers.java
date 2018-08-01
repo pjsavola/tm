@@ -1,12 +1,13 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.CardWithMarkers;
+import tm.ImageCache;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.MarkerDeltaAction;
@@ -25,8 +26,11 @@ public class Decomposers extends CardWithMarkers implements PlayCardEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "When you play card with", "plant, animal or microbe tag", "(including this)", "Place marker on this card");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/tag_plant.png"), x, y, null);
+        g.drawImage(ImageCache.getImage("images/tag_animal.png"), x, y + 20, null);
+        g.drawImage(ImageCache.getImage("images/tag_microbe.png"), x, y + 40, null);
+        g.drawString("1 marker", x + 24, y + 32);
     }
 
     @Nullable

@@ -1,10 +1,10 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
+import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -25,8 +25,9 @@ public class RoverConstruction extends Card implements PlaceTileEffect, PlayCard
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "2 money for each city");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/icon_city.png"), x, y, null);
+        new Resources(2).render(g, x + 30, y + 4, false);
     }
 
     @Nullable

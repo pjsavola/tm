@@ -1,12 +1,12 @@
 package tm.corporation;
 
-import java.util.Collections;
-import java.util.List;
+import java.awt.Graphics;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Corporation;
 import tm.Game;
+import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -16,7 +16,7 @@ import tm.effect.PlayCardEffect;
 public class SaturnSystems extends Corporation implements PlayCardEffect {
 
     public SaturnSystems() {
-        super("Saturn Systems", Tags.JOVIAN);
+        super("Saturn Systems", Tags.JOVIAN, true);
     }
 
     @Override
@@ -30,10 +30,10 @@ public class SaturnSystems extends Corporation implements PlayCardEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 money income for each Jovian tag");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/tag_jovian.png"), x, y, null);
+        Resources.MONEY.render(g, x + 24, y - 2, true);
     }
-
     @Nullable
     @Override
     public Action cardPlayed(Card card) {

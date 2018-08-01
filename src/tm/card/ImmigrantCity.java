@@ -1,11 +1,11 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Game;
+import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -32,8 +32,9 @@ public class ImmigrantCity extends Card implements PlaceTileEffect, PlayCardEffe
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "1 money income for each city", "(including this)");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/icon_city.png"), x, y, null);
+        Resources.MONEY.render(g, x + 30, y + 4, true);
     }
 
     @Nullable

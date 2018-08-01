@@ -1,9 +1,10 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
+import java.awt.Color;
+import java.awt.Graphics;
 
 import tm.Card;
+import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -17,8 +18,12 @@ public class MediaGroup extends Card implements PlayCardEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("3 money for each event you play");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/tag_event.png"), x, y, null);
+        g.setColor(new Color(0xFFFF00));
+        final String str = "3";
+        g.drawString(str, x + 24, y + 12);
+        Resources.MONEY.render(g, x + g.getFontMetrics().stringWidth(str) + 29, y, false);
     }
 
     @Override

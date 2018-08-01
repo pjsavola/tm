@@ -1,13 +1,14 @@
 package tm.card;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
+import tm.ImageCache;
 import tm.Tags;
 import tm.action.Action;
 import tm.action.ActionChain;
@@ -30,8 +31,11 @@ public class OlympusConference extends CardWithMarkers implements PlayCardEffect
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "When you play science tag", "Add marker to this card", "or remove marker to draw a card", "(including this)");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/tag_science.png"), x, y + 16, null);
+        g.drawString("1 marker OR", x + 24, y + 12);
+        g.drawString("-1 marker", x + 24, y + 28);
+        g.drawString("to draw 1", x + 24, y + 44);
     }
 
     @Nullable

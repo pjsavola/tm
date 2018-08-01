@@ -1,12 +1,13 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Game;
+import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -32,8 +33,9 @@ public class ArcticAlgae extends Card implements PlaceTileEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect: ", "2 plants for each ocean");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/icon_water.png"), x, y, null);
+        Resources.PLANT_2.render(g, x + 30, y + 4, false);
     }
 
     @Nullable

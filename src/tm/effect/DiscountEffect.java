@@ -11,10 +11,8 @@ public interface DiscountEffect {
 
     static void render(Graphics g, int x, int y, String imagePath, String amount) {
         g.setFont(Card.FONT);
-        g.setColor(Color.WHITE);
-        g.drawString("Effect:", x, y);
-        g.drawImage(ImageCache.getImage(imagePath), x, y + 5, null);
+        g.drawImage(ImageCache.getImage(imagePath), x, y, null);
         g.setColor(new Color(0xFFFF00));
-        g.drawString(amount, x + 24, y + 17);
+        g.drawString(amount, x + 24, y + 12);
     }
 }

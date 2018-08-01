@@ -1,12 +1,12 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
+import tm.ImageCache;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
@@ -26,8 +26,9 @@ public class Pets extends CardWithMarkers implements PlaceTileEffect, PlayCardEf
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "Add 1 marker when city is placed");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/icon_city.png"), x, y, null);
+        g.drawString("1 marker", x + 30, y + 16);
     }
 
     @Nullable

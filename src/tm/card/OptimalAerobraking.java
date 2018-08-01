@@ -1,10 +1,10 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
+import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -18,8 +18,11 @@ public class OptimalAerobraking extends Card implements PlayCardEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "Gain 3 money and 3 heat for each space event");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/tag_event.png"), x, y + 8, null);
+        g.drawImage(ImageCache.getImage("images/tag_space.png"), x + 18, y + 8, null);
+        //new Resources(3).render(g, x + 42, y - 2, false);
+        new Resources(3, 0, 0, 0, 0,3).render(g, x + 42, y - 2, false);
     }
 
     @Nullable

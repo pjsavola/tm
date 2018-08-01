@@ -10,7 +10,7 @@ import tm.requirement.Requirement;
 public abstract class CardWithMarkers extends Card implements ScoringEffect {
 
     private int markers;
-    private final int vp;
+    public final int vp;
     private final int mc;
 
     public CardWithMarkers(String name, int cost, Tags tags, int vp, int mc) {

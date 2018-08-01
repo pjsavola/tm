@@ -1,11 +1,11 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.awt.Graphics;
 import java.util.Collections;
-import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
+import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -25,8 +25,13 @@ public class ViralEnhancers extends Card implements PlayCardEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "When playing card with animal/plant/microbe tag", "(including this)", "add marker to that card or gain 1 plant");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/tag_plant.png"), x, y, null);
+        g.drawImage(ImageCache.getImage("images/tag_animal.png"), x, y + 20, null);
+        g.drawImage(ImageCache.getImage("images/tag_microbe.png"), x, y + 40, null);
+        g.drawString("1 marker to", x + 24, y + 12);
+        g.drawString("that card OR", x + 24, y + 32);
+        Resources.PLANT.render(g,x + 24, y + 38, false);
     }
 
     @Nullable

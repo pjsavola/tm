@@ -1,5 +1,6 @@
 package tm.action;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import tm.CardWithMarkers;
@@ -44,5 +45,14 @@ public class MarkerDeltaAction implements Action {
 
     @Override
     public void render(Graphics g, int x, int y) {
+        render(g, x, y, delta);
+    }
+
+    public static void render(Graphics g, int x, int y, int amount) {
+        g.setColor(Color.LIGHT_GRAY);
+        g.drawRect(x, y, 20, 20);
+        final String markerString = Integer.toString(amount);
+        final int markerWidth = g.getFontMetrics().stringWidth(markerString);
+        g.drawString(markerString, x + (20 - markerWidth) / 2, y + 13);
     }
 }

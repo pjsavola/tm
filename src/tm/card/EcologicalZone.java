@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,6 +8,7 @@ import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
+import tm.ImageCache;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
@@ -19,7 +20,7 @@ import tm.requirement.GreeneryRequirement;
 public class EcologicalZone extends CardWithMarkers implements PlayCardEffect {
 
     public EcologicalZone() {
-        super("Ecological Zone", 12, Tags.PLANT.combine(Tags.ANIMAL), new GreeneryRequirement(), 1, 2);
+        super("Ecological Zone", 12, Tags.PLANT.combine(Tags.ANIMAL), new GreeneryRequirement(), true, 1, 2);
     }
 
     @Override
@@ -33,8 +34,10 @@ public class EcologicalZone extends CardWithMarkers implements PlayCardEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Effect:", "When you play card with", "plant or animal tag", "(including these 2)", "Place marker on this card");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/tag_plant.png"), x, y, null);
+        g.drawImage(ImageCache.getImage("images/tag_animal.png"), x, y + 20, null);
+        g.drawString("1 marker", x + 24, y + 22);
     }
 
     @Nullable

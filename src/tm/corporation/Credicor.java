@@ -1,7 +1,7 @@
 package tm.corporation;
 
-import java.util.Collections;
-import java.util.List;
+import java.awt.Color;
+import java.awt.Graphics;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
@@ -16,7 +16,7 @@ import tm.effect.PlayCardEffect;
 public class Credicor extends Corporation implements PlayCardEffect {
 
     public Credicor() {
-        super("Credicor", Tags.EMPTY);
+        super("Credicor", Tags.EMPTY, true);
     }
 
     @Override
@@ -25,8 +25,11 @@ public class Credicor extends Corporation implements PlayCardEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("Get 4 money for value of 20 or more");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.setColor(new Color(0xFFFF00));
+        final String str = ">= 20";
+        g.drawString(str, x, y + 12);
+        new Resources(4).render(g, x + g.getFontMetrics().stringWidth(str) + 5, y - 2, false);
     }
 
     @Nullable

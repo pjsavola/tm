@@ -1,12 +1,12 @@
 package tm.corporation;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Corporation;
 import tm.Game;
+import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -23,7 +23,7 @@ import tm.effect.PlayCardEffect;
 public class TharsisRepublic extends Corporation implements PlaceTileEffect, PlayCardEffect {
 
     public TharsisRepublic() {
-        super("Tharsis Republic", Tags.BUILDING);
+        super("Tharsis Republic", Tags.BUILDING, true);
     }
 
     @Override
@@ -42,8 +42,10 @@ public class TharsisRepublic extends Corporation implements PlaceTileEffect, Pla
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("3 money for each city you play", "1 money income for each city");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawImage(ImageCache.getImage("images/icon_city.png"), x, y + 10, null);
+        new Resources(3).render(g, x + 30, y + 4, false);
+        Resources.MONEY.render(g, x + 30, y + 24, true);
     }
 
     @Nullable
