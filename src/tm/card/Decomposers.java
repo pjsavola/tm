@@ -17,7 +17,17 @@ import tm.requirement.OxygenRequirement;
 public class Decomposers extends CardWithMarkers implements PlayCardEffect {
 
     public Decomposers() {
-        super("Decomposers", 5, Tags.MICROBE, new OxygenRequirement(3, true), true, 1, 3);
+        super("Decomposers", 5, Tags.MICROBE, new OxygenRequirement(3, true), true);
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount() / 3;
+    }
+
+    @Override
+    public String getRatio() {
+        return "1:3";
     }
 
     @Override

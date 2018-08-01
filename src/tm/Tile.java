@@ -2,6 +2,7 @@ package tm;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -13,32 +14,38 @@ import com.sun.istack.internal.Nullable;
 public class Tile {
 
     public enum Type {
-        WATER("images/water.png"),
-        GREENERY("images/forest.png"),
-        CITY("images/city.png"),
-        CAPITAL("images/city.png"),
-        MANGROVE("images/forest.png"),
-        MINING_AREA("images/city.png"),
-        MINING_RIGHTS("images/city.png"),
-        COMMERCIAL_DISTRICT("images/city.png"),
-        NUCLEAR_ZONE("images/city.png"),
-        ARTIFICIAL_LAKE("images/water.png"),
-        URBANIZED_AREA("images/city.png"),
-        INDUSTRIAL_CENTER("images/city.png"),
-        ECOLOGICAL_ZONE("images/forest.png"),
-        LAVA_FLOWS("images/forest.png"),
-        MOHOLE_AREA("images/forest.png"),
-        RESTRICTED_AREA("images/forest.png"),
-        NATURAL_PRESERVE("images/forest.png");
+        WATER("hex_water", "water"),
+        GREENERY("hex_greenery", "forest"),
+        CITY("hex_city", "city"),
+        CAPITAL("hex_city", "city"),
+        MANGROVE("hex_greenery", "forest"),
+        MINING_AREA("hex_misc", "hex_misc"),
+        MINING_RIGHTS("hex_misc", "hex_misc"),
+        COMMERCIAL_DISTRICT("hex_misc", "hex_misc"),
+        NUCLEAR_ZONE("hex_misc", "hex_misc"),
+        ARTIFICIAL_LAKE("hex_water", "water"),
+        URBANIZED_AREA("hex_city", "city"),
+        INDUSTRIAL_CENTER("hex_misc", "hex_misc"),
+        ECOLOGICAL_ZONE("hex_misc", "hex_misc"),
+        LAVA_FLOWS("hex_misc", "hex_misc"),
+        MOHOLE_AREA("hex_misc", "hex_misc"),
+        RESTRICTED_AREA("hex_misc", "hex_misc"),
+        NATURAL_PRESERVE("hex_misc", "hex_misc");
 
         private final BufferedImage image;
+        private final Image icon;
 
-        private Type(String imagePath) {
-            image = ImageCache.getImage(imagePath);
+        private Type(String iconName, String imageName) {
+            icon = ImageCache.getImage("images/" + iconName + ".png").getScaledInstance(24, 26, Image.SCALE_DEFAULT);
+            image = ImageCache.getImage("images/" + imageName + ".png");
         }
 
         public BufferedImage getImage() {
             return image;
+        }
+
+        public Image getIcon() {
+            return icon;
         }
     }
 

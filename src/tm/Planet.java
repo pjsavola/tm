@@ -60,7 +60,7 @@ public class Planet {
         g.drawString(generation, 350 - w / 2, 688);
         g.drawImage(ImageCache.getImage("images/icon_temperature.png"), 658, 2, null);
         g.drawImage(ImageCache.getImage("images/icon_oxygen.png"), 650, 34, null);
-        g.drawImage(ImageCache.getImage("images/icon_water.png"), 650, 60, null);
+        g.drawImage(Tile.Type.WATER.getIcon(), 650, 60, null);
         g.setColor(getColor(-30, temperature, 8, new Color(0x6666FF), new Color(0xFF3300)));
         g.drawString(Integer.toString(temperature), 670, 20);
         g.setColor(getColor(0, oxygen, 14, new Color(0x8B4513), new Color(0xBBBBFF)));

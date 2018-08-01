@@ -24,7 +24,17 @@ public class Livestock extends CardWithMarkers {
     };
 
     public Livestock() {
-        super("Livestock", 13, Tags.ANIMAL, new OxygenRequirement(9, true), 1, 1);
+        super("Livestock", 13, Tags.ANIMAL, new OxygenRequirement(9, true));
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount();
+    }
+
+    @Override
+    public String getRatio() {
+        return "1:1";
     }
 
     @Override

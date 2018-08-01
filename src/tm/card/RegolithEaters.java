@@ -30,7 +30,7 @@ public class RegolithEaters extends CardWithMarkers {
     };
 
     public RegolithEaters() {
-        super("Regolith Eaters", 13, Tags.SCIENCE.combine(Tags.MICROBE), 0, 1);
+        super("Regolith Eaters", 13, Tags.SCIENCE.combine(Tags.MICROBE));
         action1.setAlternativeAction(action2);
         action2.setAlternativeAction(action1);
     }

@@ -24,7 +24,17 @@ public class Predators extends CardWithMarkers {
     };
 
     public Predators() {
-        super("Predators", 14, Tags.ANIMAL, new OxygenRequirement(11, true), 1, 1);
+        super("Predators", 14, Tags.ANIMAL, new OxygenRequirement(11, true));
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount();
+    }
+
+    @Override
+    public String getRatio() {
+        return "1:1";
     }
 
     @Override

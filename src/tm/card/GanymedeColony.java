@@ -1,7 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import tm.Card;
 import tm.Player;
@@ -15,12 +14,13 @@ public class GanymedeColony extends Card implements ScoringEffect {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("1 vp per jovian tag", "City to Ganymede");
+    public int getVPs(Player player) {
+        return player.getTags().getCount(Tags.Type.JOVIAN);
     }
 
     @Override
-    public int getVPs(Player player) {
-        return player.getTags().getCount(Tags.Type.JOVIAN);
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawString("1 vp for each", x, y + 12);
+        g.drawString("jovian tag", x, y + 28);
     }
 }

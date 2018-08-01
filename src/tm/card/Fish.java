@@ -24,7 +24,17 @@ public class Fish extends CardWithMarkers {
     };
 
     public Fish() {
-        super("Fish", 9, Tags.ANIMAL, new TemperatureRequirement(2, true), 1, 1);
+        super("Fish", 9, Tags.ANIMAL, new TemperatureRequirement(2, true));
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount();
+    }
+
+    @Override
+    public String getRatio() {
+        return "1:1";
     }
 
     @Override

@@ -24,7 +24,17 @@ public class PhysicsComplex extends CardWithMarkers {
     };
 
     public PhysicsComplex() {
-        super("Physics Complex", 12, Tags.SCIENCE_BUILDING, 2, 1);
+        super("Physics Complex", 12, Tags.SCIENCE_BUILDING);
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount() * 2;
+    }
+
+    @Override
+    public String getRatio() {
+        return "2:1";
     }
 
     @Override

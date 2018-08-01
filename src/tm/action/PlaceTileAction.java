@@ -2,7 +2,6 @@ package tm.action;
 
 import java.awt.Cursor;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -270,6 +269,6 @@ public class PlaceTileAction implements Action {
 
     @Override
     public void render(Graphics g, int x, int y, Game game) {
-        g.drawImage(type.getImage().getScaledInstance(24, 24, Image.SCALE_DEFAULT), x, y, null);
+        g.drawImage(type.getIcon(), x, y, null);
     }
 }

@@ -30,7 +30,7 @@ public class NitriteReducingBacteria extends CardWithMarkers {
     };
 
     public NitriteReducingBacteria() {
-        super("Nitrite Reducing Bacteria", 11, Tags.MICROBE, 0, 1);
+        super("Nitrite Reducing Bacteria", 11, Tags.MICROBE);
         action1.setAlternativeAction(action2);
         action2.setAlternativeAction(action1);
     }

@@ -139,8 +139,8 @@ public class DrawCardsAction implements Action {
             g.drawImage(ImageCache.getImage("images/icon_card.png"), x + i * 16, y + 12, null);
             if (i + 1 > max) {
                 g.setColor(Color.RED);
-                g.drawLine(x + i * 16 + 4, y + 12, x + i * 16 + 12, y + 28);
-                g.drawLine(x + i * 16 + 4, y + 28, x + i * 16 + 12, y + 12);
+                g.drawLine(x + i * 16 + 2, y + 12, x + i * 16 + 10, y + 28);
+                g.drawLine(x + i * 16 + 2, y + 28, x + i * 16 + 10, y + 12);
             }
         }
     }

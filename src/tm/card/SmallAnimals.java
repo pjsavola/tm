@@ -24,7 +24,17 @@ public class SmallAnimals extends CardWithMarkers {
     };
 
     public SmallAnimals() {
-        super("Small Animals", 6, Tags.ANIMAL, new OxygenRequirement(6, true), 1, 2);
+        super("Small Animals", 6, Tags.ANIMAL, new OxygenRequirement(6, true));
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount() / 2;
+    }
+
+    @Override
+    public String getRatio() {
+        return "1:2";
     }
 
     @Override

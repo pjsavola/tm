@@ -24,7 +24,17 @@ public class Birds extends CardWithMarkers {
     };
 
     public Birds() {
-        super("Birds", 10, Tags.ANIMAL, new OxygenRequirement(13, true), 1, 1);
+        super("Birds", 10, Tags.ANIMAL, new OxygenRequirement(13, true));
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount();
+    }
+
+    @Override
+    public String getRatio() {
+        return "1:1";
     }
 
     @Override

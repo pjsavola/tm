@@ -28,13 +28,13 @@ public class SearchForLife extends CardWithMarkers {
 
         @Override
         protected Action getAction(Game game) {
-            final Card card = game.drawCard();
-            if (card.getTags().has(Tags.Type.MICROBE)) {
-                adjustMarkers(1);
-            }
             return new Action() {
                 @Override
                 public Completable begin(Game game) {
+                    final Card card = game.drawCard();
+                    if (card.getTags().has(Tags.Type.MICROBE)) {
+                        adjustMarkers(1);
+                    }
                     return new SelectItemsCompletable<Card>(game, Collections.singletonList(card), 0, 0, "Search For Life") {
                         @Override
                         public void complete() {
@@ -61,7 +61,17 @@ public class SearchForLife extends CardWithMarkers {
     };
 
     public SearchForLife() {
-        super("Search For Life", 3, Tags.SCIENCE, new OxygenRequirement(6, false), 3, 0);
+        super("Search For Life", 3, Tags.SCIENCE, new OxygenRequirement(6, false));
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount() > 0 ? 3 : 0;
+    }
+
+    @Override
+    public String getRatio() {
+        return "3?";
     }
 
     @Override

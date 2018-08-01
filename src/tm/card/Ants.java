@@ -24,7 +24,17 @@ public class Ants extends CardWithMarkers {
     };
 
     public Ants() {
-        super("Ants", 9, Tags.MICROBE, new OxygenRequirement(4, true), 1, 2);
+        super("Ants", 9, Tags.MICROBE, new OxygenRequirement(4, true));
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount() / 2;
+    }
+
+    @Override
+    public String getRatio() {
+        return "1:2";
     }
 
     @Override

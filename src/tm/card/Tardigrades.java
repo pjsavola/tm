@@ -22,7 +22,17 @@ public class Tardigrades extends CardWithMarkers {
     };
 
     public Tardigrades() {
-        super("Tardigrades", 4, Tags.MICROBE, 1, 4);
+        super("Tardigrades", 4, Tags.MICROBE);
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount() / 4;
+    }
+
+    @Override
+    public String getRatio() {
+        return "1:4";
     }
 
     @Override

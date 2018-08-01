@@ -25,7 +25,17 @@ public class SecurityFleet extends CardWithMarkers {
     };
 
     public SecurityFleet() {
-        super("Security Fleet", 12, Tags.SPACE, 1, 1);
+        super("Security Fleet", 12, Tags.SPACE);
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount();
+    }
+
+    @Override
+    public String getRatio() {
+        return "1:1";
     }
 
     @Override

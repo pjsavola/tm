@@ -7,7 +7,6 @@ import java.util.List;
 import tm.Card;
 import tm.Cards;
 import tm.Game;
-import tm.ImageCache;
 import tm.Player;
 import tm.Resources;
 import tm.Tags;
@@ -42,7 +41,8 @@ public class ImmigrationShuttles extends Card implements ScoringEffect {
     }
 
     @Override
-    public void render(Graphics g, int x, int y) {
-        g.drawImage(ImageCache.getImage("images/tag_city.png"), x, y, null);
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawString("1 vp for each", x, y + 12);
+        g.drawString("3 cities", x, y + 28);
     }
 }

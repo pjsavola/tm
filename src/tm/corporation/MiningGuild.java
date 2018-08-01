@@ -1,7 +1,6 @@
 package tm.corporation;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,10 +49,10 @@ public class MiningGuild extends Corporation implements PlaceTileEffect {
 
     @Override
     protected void renderEffect(Graphics g, int x, int y) {
-        g.drawImage(Tile.Type.MINING_AREA.getImage().getScaledInstance(24, 24, Image.SCALE_DEFAULT), x, y, null);
+        g.drawImage(Tile.Type.MINING_AREA.getIcon(), x, y, null);
         g.drawImage(ImageCache.getImage("images/icon_steel.png"), x + 4, y + 4, null);
         Resources.STEEL.render(g, x + 30, y + 4, true);
-        g.drawImage(Tile.Type.MINING_AREA.getImage().getScaledInstance(24, 24, Image.SCALE_DEFAULT), x, y + 30, null);
+        g.drawImage(Tile.Type.MINING_AREA.getIcon(), x, y + 30, null);
         g.drawImage(ImageCache.getImage("images/icon_titanium.png"), x + 4, y + 34, null);
         Resources.STEEL.render(g, x + 30, y + 34, true);
     }

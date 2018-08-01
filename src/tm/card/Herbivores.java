@@ -19,7 +19,17 @@ import tm.requirement.OxygenRequirement;
 public class Herbivores extends CardWithMarkers implements PlaceTileEffect {
 
     public Herbivores() {
-        super("Herbivores", 12, Tags.ANIMAL, new OxygenRequirement(8, true), true, 1, 2);
+        super("Herbivores", 12, Tags.ANIMAL, new OxygenRequirement(8, true), true);
+    }
+
+    @Override
+    public int getVPs() {
+        return getMarkerCount() / 2;
+    }
+
+    @Override
+    public String getRatio() {
+        return "1:2";
     }
 
     @Override

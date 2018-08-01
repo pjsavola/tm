@@ -1,7 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.awt.Image;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
@@ -27,10 +26,10 @@ public class MiningRights extends Card implements PlaceTileEffect {
         return new PlaceTileAction(Tile.Type.MINING_RIGHTS) {
             @Override
             public void render(Graphics g, int x, int y, Game game) {
-                g.drawImage(Tile.Type.MINING_AREA.getImage().getScaledInstance(24, 24, Image.SCALE_DEFAULT), x, y - 30, null);
+                g.drawImage(Tile.Type.MINING_RIGHTS.getIcon(), x, y - 30, null);
                 g.drawImage(ImageCache.getImage("images/icon_steel.png"), x + 4, y - 26, null);
                 Resources.STEEL.render(g, x + 30, y - 26, true);
-                g.drawImage(Tile.Type.MINING_AREA.getImage().getScaledInstance(24, 24, Image.SCALE_DEFAULT), x, y, null);
+                g.drawImage(Tile.Type.MINING_RIGHTS.getIcon(), x, y, null);
                 g.drawImage(ImageCache.getImage("images/icon_titanium.png"), x + 4, y + 4, null);
                 Resources.TITANIUM.render(g, x + 30, y + 4, true);
             }

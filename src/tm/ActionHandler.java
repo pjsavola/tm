@@ -34,7 +34,7 @@ public class ActionHandler {
     }
 
     public void start() {
-        final Action initialDraw = new DrawCardsAction(10, true, true);
+        final Action initialDraw = new DrawCardsAction(208, true, true);
         reprocess(initialDraw.begin(game));
     }
 

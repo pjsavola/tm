@@ -116,7 +116,7 @@ public class Game extends JPanel {
         currentPlayer.render(g);
         planet.render(g);
 
-        g.drawImage(ImageCache.getImage("images/icon_city.png"), 650, 90, null);
+        g.drawImage(Tile.Type.CITY.getIcon(), 650, 90, null);
         g.setColor(Color.LIGHT_GRAY);
         g.drawString(Long.toString(getCityCount(false)), 680, 110);
     }

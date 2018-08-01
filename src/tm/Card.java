@@ -180,23 +180,24 @@ public abstract class Card implements Comparable<Card>, Selectable {
         }*/
 
         // Draw effect
-        if (effect) {
+        int actionOffset = 0;
+        if (effect || this instanceof ScoringEffect) {
             final int px = x + WIDTH / 2;
             final int py = y + TITLE_HEIGHT + 35;
             g.setColor(Color.WHITE);
             g.drawString("Effect:", px, py);
             renderEffect(g, px, py + 5);
+            actionOffset += 60;
         }
 
         // Draw action
-        int actionOffset = 0;
         for (Action action : getActions()) {
             final int px = x + WIDTH / 2;
-            final int py = y + TITLE_HEIGHT + 35 + offset;
+            final int py = y + TITLE_HEIGHT + 35 + actionOffset;
             g.setColor(Color.WHITE);
             g.drawString("Action:", px, py);
             action.render(g, px, py + 5, game);
-            offset += 75;
+            actionOffset += 60;
         }
 
         // Draw initial action
@@ -207,26 +208,25 @@ public abstract class Card implements Comparable<Card>, Selectable {
 
         // Draw markers
         if (this instanceof CardWithMarkers) {
-            MarkerDeltaAction.render(g, x + WIDTH / 2 - 10, y + CARD_HEIGHT - 28, ((CardWithMarkers) this).getMarkerCount());
+            final CardWithMarkers cardWithMarkers = (CardWithMarkers) this;
+            MarkerDeltaAction.render(g, x + WIDTH / 2 - 10, y + CARD_HEIGHT - 28, cardWithMarkers.getMarkerCount());
+            final String ratio = cardWithMarkers.getRatio();
+            if (ratio != null) {
+                g.setColor(Color.LIGHT_GRAY);
+                g.drawString(ratio, x + WIDTH / 2 + 15, y + CARD_HEIGHT - 16);
+            }
         }
 
         // Draw VPS
         final int vp = getVPs();
-        if (vp > 0 || this instanceof ScoringEffect) {
-            if (this instanceof CardWithMarkers && ((CardWithMarkers) this).vp == 0) {
-                return;
-            }
+        if (vp > 0) {
             g.setColor(new Color(0x8B4513));
             g.fillOval(x + WIDTH - 28, y + CARD_HEIGHT - 28, 24, 24);
-            if (vp > 0) {
-                g.setFont(VP_FONT);
-                g.setColor(Color.BLACK);
-                final String vpString = Integer.toString(getVPs());
-                final int vpWidth = g.getFontMetrics().stringWidth(vpString);
-                g.drawString(vpString, x + WIDTH - 28 + (24 - vpWidth) / 2, y + CARD_HEIGHT - 9);
-            } else {
-                ((ScoringEffect) this).render(g, x + WIDTH - 24, y + CARD_HEIGHT - 24);
-            }
+            g.setFont(VP_FONT);
+            g.setColor(Color.BLACK);
+            final String vpString = Integer.toString(getVPs());
+            final int vpWidth = g.getFontMetrics().stringWidth(vpString);
+            g.drawString(vpString, x + WIDTH - 28 + (24 - vpWidth) / 2, y + CARD_HEIGHT - 9);
         }
     }
 

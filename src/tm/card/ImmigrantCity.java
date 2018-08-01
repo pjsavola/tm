@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Game;
-import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -33,7 +32,7 @@ public class ImmigrantCity extends Card implements PlaceTileEffect, PlayCardEffe
 
     @Override
     protected void renderEffect(Graphics g, int x, int y) {
-        g.drawImage(ImageCache.getImage("images/icon_city.png"), x, y, null);
+        g.drawImage(Tile.Type.CITY.getIcon(), x, y, null);
         Resources.MONEY.render(g, x + 30, y + 4, true);
     }
 

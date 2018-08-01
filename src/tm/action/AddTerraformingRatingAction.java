@@ -40,6 +40,8 @@ public class AddTerraformingRatingAction implements Action {
 
     @Override
     public void render(Graphics g, int x, int y, Game game) {
-        g.drawImage(ImageCache.getImage("images/icon_tr.png"), x, y, null);
+        for (int i = 0; i < delta; i++) {
+            g.drawImage(ImageCache.getImage("images/big_icon_tr.png"), x + i * 36, y, null);
+        }
     }
 }
