@@ -1,11 +1,11 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
+import java.awt.Graphics;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Game;
+import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -23,12 +23,17 @@ public class MiningRights extends Card implements PlaceTileEffect {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new PlaceTileAction(Tile.Type.MINING_RIGHTS);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Place tile on steel or titanium", "1 income of that type");
+        return new PlaceTileAction(Tile.Type.MINING_RIGHTS) {
+            @Override
+            public void render(Graphics g, int x, int y) {
+                g.drawImage(ImageCache.getImage("images/icon_city.png"), x, y - 30, null);
+                g.drawImage(ImageCache.getImage("images/icon_steel.png"), x + 4, y - 26, null);
+                Resources.STEEL.render(g, x + 30, y - 26, true);
+                g.drawImage(ImageCache.getImage("images/icon_city.png"), x, y, null);
+                g.drawImage(ImageCache.getImage("images/icon_titanium.png"), x + 4, y + 4, null);
+                Resources.TITANIUM.render(g, x + 30, y + 4, true);
+            }
+        };
     }
 
     @Nullable

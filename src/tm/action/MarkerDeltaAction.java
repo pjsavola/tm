@@ -50,9 +50,12 @@ public class MarkerDeltaAction implements Action {
 
     public static void render(Graphics g, int x, int y, int amount) {
         g.setColor(Color.LIGHT_GRAY);
-        g.drawRect(x, y, 20, 20);
+        g.fillRect(x, y, 16, 16);
+        g.setColor(Color.GRAY);
+        g.drawRect(x, y, 16, 16);
+        g.setColor(Color.BLACK);
         final String markerString = Integer.toString(amount);
         final int markerWidth = g.getFontMetrics().stringWidth(markerString);
-        g.drawString(markerString, x + (20 - markerWidth) / 2, y + 13);
+        g.drawString(markerString, x + (16 - markerWidth) / 2, y + 12);
     }
 }

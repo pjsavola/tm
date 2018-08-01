@@ -24,6 +24,7 @@ import tm.card.StandardTechnology;
 import tm.completable.Completable;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
+import tm.corporation.Helion;
 import tm.corporation.Thorgate;
 
 public class ActionPool {
@@ -164,15 +165,28 @@ public class ActionPool {
                 return new SelectActionAction();
             }
         });
+        standardActions.add(new StandardAction("Heat", ActionType.HEAT_TO_MONEY) {
+            @Override
+            public boolean check(Game game) {
+                return game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof Helion);
+            }
+
+            @Override
+            public Action getInitialAction(Game game) {
+                return new ResourceDeltaAction(new Resources(1, 0, 0, 0, 0, -1));
+            }
+        });
     }
 
     @Nullable
     public Completable getCompletable(@Nullable ActionType type) {
         for (StandardAction standardAction : standardActions) {
             if (standardAction.getType() == type) {
-                final Action action = standardAction.getInitialAction(game);
-                if (action.check(game)) {
-                    return action.begin(game);
+                if (standardAction.check(game)) {
+                    final Action action = standardAction.getInitialAction(game);
+                    if (action.check(game)) {
+                        return action.begin(game);
+                    }
                 }
             }
         }

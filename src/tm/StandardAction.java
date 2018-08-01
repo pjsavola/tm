@@ -19,5 +19,9 @@ public abstract class StandardAction {
         return type;
     }
 
+    public boolean check(Game game) {
+        return true;
+    }
+
     public abstract Action getInitialAction(Game game);
 }

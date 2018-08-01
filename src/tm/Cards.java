@@ -210,6 +210,7 @@ import tm.card.Zeppelins;
 public abstract class Cards {
     public static final Card ARCTIC_ALGAE = new ArcticAlgae();
     public static final Card HERBIVORES = new Herbivores();
+    public static final Card MINING_AREA = new MiningArea();
 
     public static final Card COLONIZER_TRAINING_CAMP = new ColonizerTrainingCamp();
     public static final Card ASTEROID_MINING_CONSORTIUM = new AsteroidMiningConsortium();
@@ -274,7 +275,7 @@ public abstract class Cards {
     public static final Card GREAT_ESCARPMENT_CONSORTIUM = new GreatEscarpmentConsortium();
     public static final Card MINERAL_DEPOSIT = new MineralDeposit();
     public static final Card MINING_EXPEDITION = new MiningExpedition();
-    public static final Card MINING_AREA = new MiningArea();
+    //public static final Card MINING_AREA = new MiningArea();
     public static final Card BUILDING_INDUSTRIES = new BuildingIndustries();
     public static final Card LAND_CLAIM = new LandClaim();
     public static final Card MINING_RIGHTS = new MiningRights();

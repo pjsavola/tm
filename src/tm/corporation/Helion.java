@@ -1,5 +1,6 @@
 package tm.corporation;
 
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Helion extends Corporation {
     private final CardAction action = new CardActionWithCost(true, ActionType.HEAT_TO_MONEY, new Resources(1, 0, 0, 0, 0, -1));
 
     public Helion() {
-        super("Helion", Tags.SPACE);
+        super("Helion", Tags.SPACE, true);
     }
 
     @Override
@@ -35,7 +36,8 @@ public class Helion extends Corporation {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("May convert heat to money");
+    protected void renderEffect(Graphics g, int x, int y) {
+        g.drawString("May convert", x, y + 12);
+        g.drawString("heat to money", x, y + 28);
     }
 }
