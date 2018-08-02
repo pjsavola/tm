@@ -1,7 +1,12 @@
 package tm.action;
 
-import tm.completable.Completable;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+
 import tm.Game;
+import tm.ImageCache;
+import tm.completable.Completable;
 import tm.completable.InstantCompletable;
 
 public class AddOxygenAction implements Action {
@@ -43,5 +48,12 @@ public class AddOxygenAction implements Action {
     @Override
     public boolean isOptional() {
         return true;
+    }
+
+    @Override
+    public Point render(Graphics g, int x, int y, Game game) {
+        final Image image = ImageCache.getImage("images/icon_oxygen.png");
+        g.drawImage(image, x, y, null);
+        return new Point(x + image.getWidth(null), y + image.getHeight(null));
     }
 }

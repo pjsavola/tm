@@ -33,7 +33,7 @@ public class Worms extends Card {
                 g.setColor(Color.LIGHT_GRAY);
                 Point p;
                 p = Resources.EMPTY.renderPlants(g, x, y, true, false);
-                p = Renderer.renderText(g, "/ 2", p.x + 2, y, false);
+                p = Renderer.renderText(g, "/ 2", p.x + 2, y + 4, false);
                 p = Tags.MICROBE.render(g, p.x + 2, y, true);
                 return new Point(p.x, y + 18);
             }

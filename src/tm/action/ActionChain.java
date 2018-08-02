@@ -92,7 +92,7 @@ public class ActionChain implements Action {
                 currentX += 4; // spacing
             }
             final Point p = actions[i].render(g, currentX, y, game);
-            currentX += p.x;
+            currentX = p.x;
             if (p.y > maxY) {
                 maxY = p.y;
             }

@@ -1,6 +1,5 @@
 package tm.action;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -55,16 +54,5 @@ public class MarkerDeltaAction implements Action {
             }
         }
         return new Point(x + Math.abs(delta) * 14 - 2, y + 12);
-    }
-
-    public static void render(Graphics g, int x, int y, int amount) {
-        g.setColor(Color.LIGHT_GRAY);
-        g.fillRect(x, y, 16, 16);
-        g.setColor(Color.GRAY);
-        g.drawRect(x, y, 16, 16);
-        g.setColor(Color.BLACK);
-        final String markerString = Integer.toString(amount);
-        final int markerWidth = g.getFontMetrics().stringWidth(markerString);
-        g.drawString(markerString, x + (16 - markerWidth) / 2, y + 12);
     }
 }

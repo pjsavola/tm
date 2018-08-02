@@ -35,7 +35,7 @@ public class MedicalLab extends Card {
                 g.setColor(Color.LIGHT_GRAY);
                 Point p;
                 p = Resources.EMPTY.renderMoney(g, x, y, true, false);
-                p = Renderer.renderText(g, "/ 2", p.x + 2, y, false);
+                p = Renderer.renderText(g, "/ 2", p.x + 2, y + 4, false);
                 p = Tags.BUILDING.render(g, p.x + 2, y, true);
                 return new Point(p.x, y + 18);
             }

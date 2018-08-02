@@ -39,7 +39,7 @@ public class Zeppelins extends Card {
                 g.setColor(Color.LIGHT_GRAY);
                 Point p;
                 p = Resources.EMPTY.renderMoney(g, x, y, true, false);
-                p = Renderer.renderText(g, "/", p.x + 2, y, false);
+                p = Renderer.renderText(g, "/", p.x + 2, y + 4, false);
                 Renderer.renderVPCircle(g, p.x + 2, y);
                 p = Renderer.renderIcon(g, Tile.Type.CITY, p.x + 2, y);
                 return p;            }

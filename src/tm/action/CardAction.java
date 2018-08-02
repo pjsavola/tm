@@ -109,17 +109,16 @@ public abstract class CardAction implements Action, Selectable {
     @Override
     public Point render(Graphics g, int x, int y, Game game) {
         // Draw resources and income
-        Point p1;
-        p1 = getResourceDelta(game).render(g, x, y, false);
-        p1 = getIncomeDelta(game).render(g, x, p1.y + 4, true);
+        Point p1 = getResourceDelta(game).render(g, x, y, false);
+        Point p2 = getIncomeDelta(game).render(g, x, p1.y == y ? y : (p1.y + 4), true);
 
         // Draw actual action
         final Action action = getAction(game);
         if (action != null) {
-            final Point p2 = action.render(g, p1.x + 4, y, game);
+            final Point p3 = action.render(g, Math.max(p1.x, p2.x) + 4, y, game);
             return new Point(p2.x, Math.max(p1.y, p2.y));
         }
-        return p1;
+        return new Point(Math.max(p1.x, p2.x), p2.y);
     }
 
     protected static class CardActionCompletable implements Completable {

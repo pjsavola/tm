@@ -202,7 +202,7 @@ public abstract class Card implements Comparable<Card>, Selectable {
         // Draw initial action
         final Action action = getInitialAction(game);
         if (action != null) {
-            action.render(g, x + 10, y + CARD_HEIGHT - 35, game);
+            action.render(g, x + 10, y + CARD_HEIGHT - 55, game);
         }
 
         // Draw markers

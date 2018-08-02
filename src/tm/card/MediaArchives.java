@@ -30,7 +30,7 @@ public class MediaArchives extends Card {
                 g.setColor(Color.LIGHT_GRAY);
                 Point p;
                 p = Resources.EMPTY.renderMoney(g, x, y, false, false);
-                p = Renderer.renderText(g, "/", p.x + 2, y, false);
+                p = Renderer.renderText(g, "/", p.x + 2, y + 4, false);
                 p = Tags.EVENT.render(g, p.x + 2, y, true);
                 return p;
             }

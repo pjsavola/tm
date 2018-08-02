@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,6 +33,6 @@ public class IndustrialCenter extends Card {
 
     @Override
     protected List<String> getRequirements() {
-        return Arrays.asList("Action:", "-7 money, 1 steel income", "", "Place next to a city tile");
+        return Collections.singletonList("Place next to a city tile");
     }
 }

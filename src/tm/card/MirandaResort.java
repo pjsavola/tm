@@ -35,7 +35,7 @@ public class MirandaResort extends Card {
                 g.setColor(Color.LIGHT_GRAY);
                 Point p;
                 p = Resources.EMPTY.renderMoney(g, x, y, true, false);
-                p = Renderer.renderText(g, "/", p.x + 2, y, false);
+                p = Renderer.renderText(g, "/", p.x + 2, y + 4, false);
                 p = Tags.EARTH.render(g, p.x + 2, y, true);
                 return p;
             }
