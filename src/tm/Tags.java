@@ -2,6 +2,7 @@ package tm;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 public class Tags {
@@ -105,21 +106,25 @@ public class Tags {
         return true;
     }
 
-    // (x,y) is top right corner of the tags
-    public void render(Graphics g, int x, int y) {
-        int offset = x - 17;
+    public Point render(Graphics g, int x, int y, boolean leftToRight) {
+        int currentX = x;
         for (Type type : Type.values()) {
-            offset = drawTags(g, type.getImage(), getCount(type), offset, y + 2);
+            currentX = drawTags(g, type.getImage(), getCount(type), currentX, y, leftToRight);
         }
+        return new Point(currentX, y + 16);
     }
 
-    private static int drawTags(Graphics g, BufferedImage image, int count, int x, int y) {
-        int actualX = x;
+    private static int drawTags(Graphics g, BufferedImage image, int count, int x, int y, boolean leftToRight) {
+        int currentX = x;
         for (int i = 0; i < count; i++) {
-            g.drawImage(image, actualX, y, null);
-            actualX -= 17;
+            if (!leftToRight) {
+                currentX -= 17;
+            } else if (i != 0) {
+                currentX += 17;
+            }
+            g.drawImage(image, currentX, y, null);
         }
-        return actualX;
+        return currentX;
     }
 
     // (x,y) is bottom left corner of the tags

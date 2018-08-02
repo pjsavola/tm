@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Corporation;
-import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -30,8 +29,8 @@ public class SaturnSystems extends Corporation implements PlayCardEffect {
 
     @Override
     protected void renderEffect(Graphics g, int x, int y) {
-        g.drawImage(ImageCache.getImage("images/tag_jovian.png"), x, y, null);
-        Resources.MONEY.render(g, x + 24, y - 2, true);
+        final int currentX = Tags.JOVIAN.render(g, x, y, true).x;
+        Resources.MONEY.render(g, currentX + 4, y, true);
     }
     @Nullable
     @Override

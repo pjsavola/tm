@@ -2,11 +2,13 @@ package tm.card;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
 import tm.Game;
+import tm.Renderer;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -27,11 +29,13 @@ public class Insects extends Card {
                 return new Resources(0, 0, 0, game.getCurrentPlayer().getTags().getCount(Tags.Type.PLANT), 0, 0);
             }
             @Override
-            public void render(Graphics g, int x, int y, Game game) {
+            public Point render(Graphics g, int x, int y, Game game) {
                 g.setColor(Color.LIGHT_GRAY);
-                Resources.PLANT.render(g, x, y, true);
-                g.drawString("/", x + 24, y + 12);
-                Tags.PLANT.render(g, x + 45, y);
+                Point p;
+                p = Resources.EMPTY.renderPlants(g, x, y, true, false);
+                p = Renderer.renderText(g, "/", p.x + 2, y, false);
+                p = Tags.PLANT.render(g, p.x + 2, y, true);
+                return new Point(p.x, y + 18);
             }
         };
     }

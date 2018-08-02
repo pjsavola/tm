@@ -2,6 +2,7 @@ package tm.action;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 import tm.CardWithMarkers;
 import tm.Game;
@@ -45,11 +46,15 @@ public class MarkerDeltaAction implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y, Game game) {
-        int offset = 0;
-        for (int i = 0; i < delta; i++) {
-            offset += Renderer.renderMarker(g, x + offset, y) + 2;
+    public Point render(Graphics g, int x, int y, Game game) {
+        final boolean negative = delta < 0;
+        for (int i = 0; i < Math.abs(delta); i++) {
+            Renderer.renderMarker(g, x + i * 14, y);
+            if (negative) {
+                Renderer.renderX(g, x + i * 14, y, 12, 12);
+            }
         }
+        return new Point(x + Math.abs(delta) * 14 - 2, y + 12);
     }
 
     public static void render(Graphics g, int x, int y, int amount) {

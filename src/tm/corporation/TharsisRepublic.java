@@ -1,6 +1,7 @@
 package tm.corporation;
 
 import java.awt.Graphics;
+import java.awt.Image;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
@@ -42,9 +43,11 @@ public class TharsisRepublic extends Corporation implements PlaceTileEffect, Pla
 
     @Override
     protected void renderEffect(Graphics g, int x, int y) {
-        g.drawImage(Tile.Type.CITY.getIcon(), x, y + 10, null);
-        new Resources(3).render(g, x + 30, y + 4, false);
-        Resources.MONEY.render(g, x + 30, y + 24, true);
+        final Image image = Tile.Type.CITY.getIcon();
+        g.drawImage(image, x, y + 6, null);
+        final int currentX = image.getWidth(null);
+        Resources.MONEY_3.render(g, currentX + 4, y, false);
+        Resources.MONEY.render(g, currentX + 4, y + 20, true);
     }
 
     @Nullable
@@ -52,7 +55,7 @@ public class TharsisRepublic extends Corporation implements PlaceTileEffect, Pla
     public Action tilePlaced(Tile tile) {
         if (Tile.isCity(tile.getType())) {
             return new ActionChain(
-                new ResourceDeltaAction(new Resources(3)),
+                new ResourceDeltaAction(Resources.MONEY_3),
                 new IncomeDeltaAction(Resources.MONEY)
             );
         }

@@ -1,6 +1,5 @@
 package tm.action;
 
-import java.awt.Graphics;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -40,11 +39,6 @@ public abstract class AddMarkerAction implements Action {
 
     protected int getMarkerCount(CardWithMarkers card) {
         return 1;
-    }
-
-    @Override
-    public void render(Graphics g, int x, int y, Game game) {
-        // TODO
     }
 
     @Override

@@ -2,12 +2,14 @@ package tm.action;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
 import tm.Card;
 import tm.Game;
 import tm.ImageCache;
+import tm.Renderer;
 import tm.Resources;
 import tm.completable.Completable;
 import tm.completable.SelectItemsCompletable;
@@ -131,17 +133,16 @@ public class DrawCardsAction implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y, Game game) {
-        final String str = pay ? "Buy" : "Draw";
+    public Point render(Graphics g, int x, int y, Game game) {
         g.setColor(Color.WHITE);
-        g.drawString(str, x, y + 8);
+        final Point p = Renderer.renderText(g, pay ? "Buy" : "Draw", x, y, false);
+        final int currentY = p.y + 4;
         for (int i = 0; i < amount; i++) {
-            g.drawImage(ImageCache.getImage("images/icon_card.png"), x + i * 16, y + 12, null);
+            g.drawImage(ImageCache.getImage("images/icon_card.png"), x + i * 16, currentY, null);
             if (i + 1 > max) {
-                g.setColor(Color.RED);
-                g.drawLine(x + i * 16 + 2, y + 12, x + i * 16 + 10, y + 28);
-                g.drawLine(x + i * 16 + 2, y + 28, x + i * 16 + 10, y + 12);
+                Renderer.renderX(g, x + i * 16 + 2, currentY, 8, 16);
             }
         }
+        return new Point(Math.max(p.x, x + 16 * amount - 4), currentY + 16);
     }
 }

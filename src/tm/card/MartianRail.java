@@ -2,6 +2,7 @@ package tm.card;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -9,8 +10,10 @@ import java.util.List;
 import tm.ActionType;
 import tm.Card;
 import tm.Game;
+import tm.Renderer;
 import tm.Resources;
 import tm.Tags;
+import tm.Tile;
 import tm.action.Action;
 import tm.action.CardAction;
 import tm.action.CardActionWithCost;
@@ -27,10 +30,14 @@ public class MartianRail extends Card {
                     return new Resources(game.getCityCount(true));
                 }
                 @Override
-                public void render(Graphics g, int x, int y, Game game) {
+                public Point render(Graphics g, int x, int y, Game game) {
                     g.setColor(Color.LIGHT_GRAY);
-                    Resources.MONEY.render(g, x, y, false);
-                    g.drawString("/ city on Mars", x + 24, y + 12);
+                    Point p;
+                    p = Resources.EMPTY.renderMoney(g, x, y, false, false);
+                    p = Renderer.renderText(g, "/", p.x + 2, y, false);
+                    Renderer.renderVPCircle(g, p.x + 2, y);
+                    p = Renderer.renderIcon(g, Tile.Type.CITY, p.x + 2, y);
+                    return p;
                 }
             };
         }

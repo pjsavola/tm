@@ -2,9 +2,11 @@ package tm.card;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 import tm.Card;
 import tm.Game;
+import tm.Renderer;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -24,11 +26,13 @@ public class Cartel extends Card {
                 return new Resources(game.getCurrentPlayer().getTags().getCount(Tags.Type.EARTH) + 1);
             }
             @Override
-            public void render(Graphics g, int x, int y, Game game) {
+            public Point render(Graphics g, int x, int y, Game game) {
                 g.setColor(Color.LIGHT_GRAY);
-                Resources.MONEY.render(g, x, y, true);
-                g.drawString("/", x + 24, y + 12);
-                Tags.EARTH.render(g, x + 45, y);
+                Point p;
+                p = Resources.EMPTY.renderMoney(g, x, y, true, false);
+                p = Renderer.renderText(g, "/", p.x + 2, y, false);
+                p = Tags.EARTH.render(g, p.x + 2, y, true);
+                return new Point(p.x, y + 18);
             }
         };
     }

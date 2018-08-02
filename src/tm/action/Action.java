@@ -1,6 +1,7 @@
 package tm.action;
 
 import java.awt.Graphics;
+import java.awt.Point;
 
 import tm.ActionType;
 import tm.Game;
@@ -30,6 +31,10 @@ public interface Action {
         return true;
     }
 
-    default void render(Graphics g, int x, int y, Game game) {
+    /**
+     * Returns bottom-right corner of the bounding box needed for this rendering.
+     */
+    default Point render(Graphics g, int x, int y, Game game) {
+        return new Point(0, 0);
     }
 }

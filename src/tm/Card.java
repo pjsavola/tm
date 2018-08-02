@@ -136,7 +136,7 @@ public abstract class Card implements Comparable<Card>, Selectable {
         }
 
         // Draw tags
-        tags.render(g, x + WIDTH, y);
+        tags.render(g, x + WIDTH, y + 1, false);
     }
 
     // x: top-left corner
@@ -157,9 +157,9 @@ public abstract class Card implements Comparable<Card>, Selectable {
         }
 
         // Draw resources and income
-        int offset = 0;
-        offset += getResourceDelta().render(g, x, y + TITLE_HEIGHT + 20, false);
-        offset += getIncomeDelta().render(g, x, y + TITLE_HEIGHT + 20 + offset, true);
+        int currentY = y + TITLE_HEIGHT + 20;
+        currentY = getResourceDelta().render(g, x + 5, currentY, false).y + 4;
+        getIncomeDelta().render(g, x + 5, currentY, true);
 
         // Draw requirements
         g.setColor(Color.RED);

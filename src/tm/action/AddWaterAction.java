@@ -1,9 +1,10 @@
 package tm.action;
 
 import java.awt.Graphics;
+import java.awt.Point;
 
 import tm.Game;
-import tm.ImageCache;
+import tm.Renderer;
 import tm.Tile;
 import tm.completable.Completable;
 import tm.completable.InstantCompletable;
@@ -55,7 +56,7 @@ public class AddWaterAction implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y, Game game) {
-        g.drawImage(Tile.Type.WATER.getIcon(), x, y, null);
+    public Point render(Graphics g, int x, int y, Game game) {
+        return Renderer.renderIcon(g, Tile.Type.WATER, x, y);
     }
 }

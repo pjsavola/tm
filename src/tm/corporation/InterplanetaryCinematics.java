@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Corporation;
-import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -25,15 +24,15 @@ public class InterplanetaryCinematics extends Corporation implements PlayCardEff
 
     @Override
     protected void renderEffect(Graphics g, int x, int y) {
-        g.drawImage(ImageCache.getImage("images/tag_event.png"), x, y, null);
-        new Resources(2).render(g, x + 24, y - 2, false);
+        int currentX = Tags.EVENT.render(g, x, y, true).x;
+        Resources.MONEY_2.render(g, currentX + 4, y, false);
     }
 
     @Nullable
     @Override
     public Action cardPlayed(Card card) {
         if (card.getTags().has(Tags.Type.EVENT)) {
-            return new ResourceDeltaAction(new Resources(2));
+            return new ResourceDeltaAction(Resources.MONEY_2);
         }
         return null;
     }

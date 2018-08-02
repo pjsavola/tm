@@ -1,6 +1,8 @@
 package tm.action;
 
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import tm.Game;
 import tm.ImageCache;
@@ -39,9 +41,16 @@ public class AddTerraformingRatingAction implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y, Game game) {
+    public Point render(Graphics g, int x, int y, Game game) {
+        final BufferedImage image = ImageCache.getImage("images/big_icon_tr.png");
+        int currentX = x;
         for (int i = 0; i < delta; i++) {
-            g.drawImage(ImageCache.getImage("images/big_icon_tr.png"), x + i * 36, y, null);
+            if (i != 0) {
+                currentX += 4; // spacing
+            }
+            g.drawImage(image, currentX, y, null);
+            currentX += image.getWidth();
         }
+        return new Point(currentX, y + image.getHeight());
     }
 }

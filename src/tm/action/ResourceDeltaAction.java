@@ -1,6 +1,7 @@
 package tm.action;
 
 import java.awt.Graphics;
+import java.awt.Point;
 
 import com.sun.istack.internal.Nullable;
 import tm.Game;
@@ -51,7 +52,7 @@ public class ResourceDeltaAction implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y, Game game) {
-        delta.render(g, x, y, false);
+    public Point render(Graphics g, int x, int y, Game game) {
+        return delta.render(g, x, y, false);
     }
 }

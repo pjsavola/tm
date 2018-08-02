@@ -2,9 +2,11 @@ package tm.card;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 import tm.Card;
 import tm.Game;
+import tm.Renderer;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -25,11 +27,13 @@ public class EnergySaving extends Card {
                 return new Resources(0, 0, 0, 0, game.getCityCount(false), 0);
             }
             @Override
-            public void render(Graphics g, int x, int y, Game game) {
+            public Point render(Graphics g, int x, int y, Game game) {
                 g.setColor(Color.LIGHT_GRAY);
-                Resources.ENERGY.render(g, x, y, true);
-                g.drawString("/", x + 24, y + 12);
-                g.drawImage(Tile.Type.CITY.getIcon(), x + 28, y, null);
+                Point p;
+                p = Resources.EMPTY.renderEnergy(g, x, y, true, false);
+                p = Renderer.renderText(g, "/", p.x + 2, y, false);
+                p = Renderer.renderIcon(g, Tile.Type.CITY, p.x + 2, y);
+                return p;
             }
         };
     }

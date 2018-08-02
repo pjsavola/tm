@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Corporation;
+import tm.Renderer;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -26,16 +27,15 @@ public class Credicor extends Corporation implements PlayCardEffect {
     @Override
     protected void renderEffect(Graphics g, int x, int y) {
         g.setColor(new Color(0xFFFF00));
-        final String str = ">= 20";
-        g.drawString(str, x, y + 12);
-        new Resources(4).render(g, x + g.getFontMetrics().stringWidth(str) + 5, y - 2, false);
+        final int newX = Renderer.renderText(g, ">= 20", x, y, false).x;
+        Resources.MONEY_4.render(g, newX + 4, y, false);
     }
 
     @Nullable
     @Override
     public Action cardPlayed(Card card) {
         if (card.getCost() >= 20) {
-            return new ResourceDeltaAction(new Resources(4));
+            return new ResourceDeltaAction(Resources.MONEY_4);
         }
         return null;
     }

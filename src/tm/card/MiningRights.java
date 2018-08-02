@@ -1,11 +1,12 @@
 package tm.card;
 
 import java.awt.Graphics;
+import java.awt.Point;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Game;
-import tm.ImageCache;
+import tm.Renderer;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -25,13 +26,14 @@ public class MiningRights extends Card implements PlaceTileEffect {
     public Action getInitialAction(Game game) {
         return new PlaceTileAction(Tile.Type.MINING_RIGHTS) {
             @Override
-            public void render(Graphics g, int x, int y, Game game) {
-                g.drawImage(Tile.Type.MINING_RIGHTS.getIcon(), x, y - 30, null);
-                g.drawImage(ImageCache.getImage("images/icon_steel.png"), x + 4, y - 26, null);
-                Resources.STEEL.render(g, x + 30, y - 26, true);
-                g.drawImage(Tile.Type.MINING_RIGHTS.getIcon(), x, y, null);
-                g.drawImage(ImageCache.getImage("images/icon_titanium.png"), x + 4, y + 4, null);
-                Resources.TITANIUM.render(g, x + 30, y + 4, true);
+            public Point render(Graphics g, int x, int y, Game game) {
+                Point p1 = Renderer.renderIcon(g, Tile.Type.MINING_RIGHTS, x, y);
+                Resources.EMPTY.renderSteel(g, x + 3, y + 3, false, false);
+                Resources.EMPTY.renderSteel(g, p1.x + 4, y + 3, true, false);
+                Point p2 = Renderer.renderIcon(g, Tile.Type.MINING_RIGHTS, x, p1.y);
+                Resources.EMPTY.renderTitanium(g, x + 3, p1.y + 3, false, false);
+                Point p3 = Resources.EMPTY.renderTitanium(g, p2.x + 4, p1.y + 3, true, false);
+                return new Point(p3.x, p2.y);
             }
         };
     }

@@ -2,6 +2,7 @@ package tm.action;
 
 
 import java.awt.Graphics;
+import java.awt.Point;
 
 import com.sun.istack.internal.Nullable;
 import tm.ActionType;
@@ -83,11 +84,19 @@ public class ActionChain implements Action {
     }
 
     @Override
-    public void render(Graphics g, int x, int y, Game game) {
+    public Point render(Graphics g, int x, int y, Game game) {
         int currentX = x;
-        for (Action action : actions) {
-            action.render(g, currentX, y, game);
-            currentX += 30;
+        int maxY = y;
+        for (int i = 0; i < actions.length; i++) {
+            if (i != 0) {
+                currentX += 4; // spacing
+            }
+            final Point p = actions[i].render(g, currentX, y, game);
+            currentX += p.x;
+            if (p.y > maxY) {
+                maxY = p.y;
+            }
         }
+        return new Point(currentX, maxY);
     }
 }
