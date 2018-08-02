@@ -10,7 +10,6 @@ import java.util.List;
 import com.sun.istack.internal.Nullable;
 import tm.action.Action;
 import tm.action.CardAction;
-import tm.action.MarkerDeltaAction;
 import tm.effect.ScoringEffect;
 import tm.requirement.Requirement;
 
@@ -209,24 +208,24 @@ public abstract class Card implements Comparable<Card>, Selectable {
         // Draw markers
         if (this instanceof CardWithMarkers) {
             final CardWithMarkers cardWithMarkers = (CardWithMarkers) this;
-            MarkerDeltaAction.render(g, x + WIDTH / 2 - 10, y + CARD_HEIGHT - 28, cardWithMarkers.getMarkerCount());
+            final int middleX = x + WIDTH / 2;
+            final int middleY = y + CARD_HEIGHT - 26;
+            Renderer.renderMarker(g, middleX - 6, middleY - 6);
+            Renderer.renderText(g, Integer.toString(cardWithMarkers.getMarkerCount()), middleX, middleY, true);
             final String ratio = cardWithMarkers.getRatio();
             if (ratio != null) {
                 g.setColor(Color.LIGHT_GRAY);
-                g.drawString(ratio, x + WIDTH / 2 + 15, y + CARD_HEIGHT - 16);
+                Renderer.renderText(g, ratio, middleX, middleY + 14, true);
             }
         }
 
         // Draw VPS
         final int vp = getVPs();
         if (vp > 0) {
-            g.setColor(new Color(0x8B4513));
-            g.fillOval(x + WIDTH - 28, y + CARD_HEIGHT - 28, 24, 24);
+            Renderer.renderVPCircle(g, x + WIDTH - 28, y + CARD_HEIGHT - 28);
             g.setFont(VP_FONT);
             g.setColor(Color.BLACK);
-            final String vpString = Integer.toString(getVPs());
-            final int vpWidth = g.getFontMetrics().stringWidth(vpString);
-            g.drawString(vpString, x + WIDTH - 28 + (24 - vpWidth) / 2, y + CARD_HEIGHT - 9);
+            Renderer.renderText(g, Integer.toString(vp), x + WIDTH - 16, y + CARD_HEIGHT - 16, true);
         }
     }
 

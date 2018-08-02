@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import tm.CardWithMarkers;
 import tm.Game;
+import tm.Renderer;
 import tm.completable.Completable;
 import tm.completable.InstantCompletable;
 
@@ -45,7 +46,10 @@ public class MarkerDeltaAction implements Action {
 
     @Override
     public void render(Graphics g, int x, int y, Game game) {
-        render(g, x, y, delta);
+        int offset = 0;
+        for (int i = 0; i < delta; i++) {
+            offset += Renderer.renderMarker(g, x + offset, y) + 2;
+        }
     }
 
     public static void render(Graphics g, int x, int y, int amount) {
