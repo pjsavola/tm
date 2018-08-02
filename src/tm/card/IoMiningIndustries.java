@@ -3,7 +3,6 @@ package tm.card;
 import java.awt.Graphics;
 
 import tm.Card;
-import tm.Game;
 import tm.Player;
 import tm.Resources;
 import tm.Tags;
@@ -16,7 +15,7 @@ public class IoMiningIndustries extends Card implements ScoringEffect {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(2, 0, 2, 0, 0, 0);
     }
 

@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -18,7 +15,7 @@ public class UndergroundCity extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(0, 2, 0, 0, -2, 0);
     }
 

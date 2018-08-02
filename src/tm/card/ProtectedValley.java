@@ -20,7 +20,7 @@ public class ProtectedValley extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(2);
     }
 

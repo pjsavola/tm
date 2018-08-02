@@ -19,7 +19,7 @@ public class TowingComet extends Card {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return Resources.PLANT_2;
     }
 

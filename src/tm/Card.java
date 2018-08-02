@@ -94,11 +94,11 @@ public abstract class Card implements Comparable<Card>, Selectable {
         return Collections.emptyList();
     }
 
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return Resources.EMPTY;
     }
 
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.EMPTY;
     }
 
@@ -159,8 +159,8 @@ public abstract class Card implements Comparable<Card>, Selectable {
 
         // Draw resources and income
         int offset = 0;
-        offset += getResourceDelta(game).render(g, x, y + TITLE_HEIGHT + 20, false);
-        offset += getIncomeDelta(game).render(g, x, y + TITLE_HEIGHT + 20 + offset, true);
+        offset += getResourceDelta().render(g, x, y + TITLE_HEIGHT + 20, false);
+        offset += getIncomeDelta().render(g, x, y + TITLE_HEIGHT + 20 + offset, true);
 
         // Draw requirements
         g.setColor(Color.RED);

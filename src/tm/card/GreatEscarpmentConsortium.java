@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.requirement.ProductionRequirement;
@@ -17,7 +16,7 @@ public class GreatEscarpmentConsortium extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.STEEL;
     }
 

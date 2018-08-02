@@ -1,7 +1,6 @@
 package tm.card;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 
@@ -12,12 +11,12 @@ public class SolarWindPower extends Card {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return Resources.TITANIUM_2;
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.ENERGY;
     }
 }

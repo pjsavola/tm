@@ -17,7 +17,7 @@ public class DeepWellHeating extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.ENERGY;
     }
 

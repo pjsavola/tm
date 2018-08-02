@@ -18,7 +18,7 @@ public class Asteroid extends Card {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return Resources.TITANIUM_2;
     }
 

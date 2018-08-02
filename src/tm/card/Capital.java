@@ -22,7 +22,7 @@ public class Capital extends Card implements ScoringEffect {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(5, 0, 0, 0, -2, 0);
     }
 

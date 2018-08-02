@@ -1,7 +1,6 @@
 package tm.card;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 
@@ -17,7 +16,7 @@ public class FoodFactory extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(4, 0, 0, -1, 0, 0);
     }
 }

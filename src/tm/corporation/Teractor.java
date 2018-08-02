@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import tm.Card;
 import tm.Corporation;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.effect.DiscountEffect;
@@ -16,7 +15,7 @@ public class Teractor extends Corporation implements DiscountEffect {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(60);
     }
 

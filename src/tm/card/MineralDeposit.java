@@ -1,7 +1,6 @@
 package tm.card;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 
@@ -12,7 +11,7 @@ public class MineralDeposit extends Card {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(0, 5, 0, 0, 0, 0);
     }
 }

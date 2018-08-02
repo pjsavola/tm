@@ -21,7 +21,7 @@ public class CommercialDistrict extends Card implements ScoringEffect {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(4, 0, 0, 0, -1, 0);
     }
 

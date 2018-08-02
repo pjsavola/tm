@@ -1,7 +1,6 @@
 package tm.card;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 
@@ -18,7 +17,7 @@ public class HeatTrappers extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.ENERGY;
     }
 }

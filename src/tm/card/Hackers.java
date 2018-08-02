@@ -1,7 +1,6 @@
 package tm.card;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 
@@ -18,7 +17,7 @@ public class Hackers extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(2, 0, 0, 0, -1, 0);
     }
 }

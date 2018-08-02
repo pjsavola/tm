@@ -32,7 +32,7 @@ public class UnitedNationsMarsInitiative extends Corporation {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(40);
     }
 

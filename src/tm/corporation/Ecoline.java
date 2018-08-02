@@ -3,7 +3,6 @@ package tm.corporation;
 import java.awt.Graphics;
 
 import tm.Corporation;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 
@@ -14,12 +13,12 @@ public class Ecoline extends Corporation {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(36, 0, 0, 3, 0, 0);
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.PLANT_2;
     }
 

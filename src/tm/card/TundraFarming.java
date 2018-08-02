@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.requirement.TemperatureRequirement;
@@ -21,12 +20,12 @@ public class TundraFarming extends Card {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return Resources.PLANT;
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(2, 0, 0, 1, 0, 0);
     }
 

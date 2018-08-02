@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Corporation;
-import tm.Game;
 import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
@@ -20,12 +19,12 @@ public class SaturnSystems extends Corporation implements PlayCardEffect {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(42);
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.TITANIUM;
     }
 

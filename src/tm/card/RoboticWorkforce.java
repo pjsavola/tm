@@ -27,7 +27,7 @@ public class RoboticWorkforce extends Card {
     public Action getInitialAction(Game game) {
         final Map<Card, Resources> incomeMap = new HashMap<>();
         for (Card card : game.getCurrentPlayer().getPlayedCards()) {
-            final Resources income = card.getIncomeDelta(game);
+            final Resources income = card.getIncomeDelta();
             if (income != Resources.EMPTY) {
                 if (game.getCurrentPlayer().canAdjustIncome(income)) {
                     incomeMap.put(card, income);

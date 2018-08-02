@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.requirement.TemperatureRequirement;
@@ -16,12 +15,12 @@ public class Bushes extends Card {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return Resources.PLANT_2;
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.PLANT_2;
     }
 

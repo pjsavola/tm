@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.effect.DiscountEffect;
@@ -18,7 +17,7 @@ public class QuantumExtractor extends Card implements DiscountEffect {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(0, 0, 0, 0, 4, 0);
     }
 

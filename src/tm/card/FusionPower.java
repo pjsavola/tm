@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.requirement.TagRequirement;
@@ -16,7 +15,7 @@ public class FusionPower extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(0, 0, 0, 0, 3, 0);
     }
 

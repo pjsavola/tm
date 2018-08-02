@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.effect.DiscountEffect;
@@ -23,7 +22,7 @@ public class Shuttles extends Card implements DiscountEffect {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(2, 0, 0, 0, -1, 0);
     }
 

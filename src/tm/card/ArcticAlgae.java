@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -22,7 +21,7 @@ public class ArcticAlgae extends Card implements PlaceTileEffect {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return Resources.PLANT;
     }
 

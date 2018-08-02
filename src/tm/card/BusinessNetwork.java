@@ -27,7 +27,7 @@ public class BusinessNetwork extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.MONEY.negate();
     }
 

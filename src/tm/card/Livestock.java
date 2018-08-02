@@ -38,7 +38,7 @@ public class Livestock extends CardWithMarkers {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(2, 0, 0, -1, 0, 0);
     }
 

@@ -26,12 +26,12 @@ public class TharsisRepublic extends Corporation implements PlaceTileEffect, Pla
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(40);
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(2); // Initial cities in solo game
     }
 

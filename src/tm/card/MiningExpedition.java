@@ -18,7 +18,7 @@ public class MiningExpedition extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.STEEL_2;
     }
 

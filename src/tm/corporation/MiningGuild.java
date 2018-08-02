@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Corporation;
-import tm.Game;
 import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
@@ -23,12 +22,12 @@ public class MiningGuild extends Corporation implements PlaceTileEffect {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(30, 5, 0, 0, 0, 0);
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.STEEL;
     }
 

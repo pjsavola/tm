@@ -143,8 +143,8 @@ public class PlayCardAction implements Action {
                     player,
                     selectedCard.getTags().has(Tags.Type.BUILDING),
                     selectedCard.getTags().has(Tags.Type.SPACE),
-                    selectedCard.getResourceDelta(game).combine(new Resources(-selectedCard.getCost())),
-                    selectedCard.getIncomeDelta(game),
+                    selectedCard.getResourceDelta().combine(new Resources(-selectedCard.getCost())),
+                    selectedCard.getIncomeDelta(),
                     player.getDiscount(selectedCard, discount)
                 );
             } else {

@@ -18,7 +18,7 @@ public class StripMine extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(0, 2, 1, 0, -1, 0);
     }
 

@@ -6,7 +6,6 @@ import java.util.List;
 
 import tm.ActionType;
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.CardAction;
@@ -31,7 +30,7 @@ public class ElectroCatapult extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return Resources.ENERGY.negate();
     }
 

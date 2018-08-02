@@ -6,7 +6,6 @@ import java.util.List;
 
 import tm.Card;
 import tm.Cards;
-import tm.Game;
 import tm.Player;
 import tm.Resources;
 import tm.Tags;
@@ -19,7 +18,7 @@ public class ImmigrationShuttles extends Card implements ScoringEffect {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(5);
     }
 

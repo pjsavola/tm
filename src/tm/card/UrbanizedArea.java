@@ -18,7 +18,7 @@ public class UrbanizedArea extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(2, 0, 0, 0, -1, 0);
     }
 

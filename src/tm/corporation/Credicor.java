@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Corporation;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
 import tm.action.Action;
@@ -20,7 +19,7 @@ public class Credicor extends Corporation implements PlayCardEffect {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(57);
     }
 

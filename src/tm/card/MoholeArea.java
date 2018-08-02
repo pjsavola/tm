@@ -18,7 +18,7 @@ public class MoholeArea extends Card {
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(0, 0, 0, 0, 0, 4);
     }
 

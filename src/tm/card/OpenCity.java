@@ -24,12 +24,12 @@ public class OpenCity extends Card {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return Resources.PLANT_2;
     }
 
     @Override
-    public Resources getIncomeDelta(Game game) {
+    public Resources getIncomeDelta() {
         return new Resources(4, 0, 0, 0, -1, 0);
     }
 

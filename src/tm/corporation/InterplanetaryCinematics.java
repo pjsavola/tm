@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.Corporation;
-import tm.Game;
 import tm.ImageCache;
 import tm.Resources;
 import tm.Tags;
@@ -20,7 +19,7 @@ public class InterplanetaryCinematics extends Corporation implements PlayCardEff
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(30, 20, 0, 0, 0, 0);
     }
 

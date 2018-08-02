@@ -21,7 +21,7 @@ public class ImportedNitrogen extends Card {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(0, 0, 0, 4, 0, 0);
     }
 

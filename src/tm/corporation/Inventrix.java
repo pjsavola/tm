@@ -17,7 +17,7 @@ public class Inventrix extends Corporation implements RequirementEffect {
     }
 
     @Override
-    public Resources getResourceDelta(Game game) {
+    public Resources getResourceDelta() {
         return new Resources(45);
     }
 
