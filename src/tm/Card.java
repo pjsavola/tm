@@ -107,7 +107,7 @@ public abstract class Card implements Comparable<Card>, Selectable {
     }
 
     @Override
-    public void renderTitle(Graphics g, int x, int y) {
+    public void renderTitle(Graphics g, int x, int y, Game game) {
         g.setFont(FONT);
         final FontMetrics metrics = g.getFontMetrics();
         final int h = metrics.getHeight();

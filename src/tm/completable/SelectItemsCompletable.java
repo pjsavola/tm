@@ -23,6 +23,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.sun.istack.internal.Nullable;
+import tm.Card;
 import tm.Game;
 import tm.Selectable;
 
@@ -39,7 +40,7 @@ public abstract class SelectItemsCompletable<T extends Selectable> extends JPane
     private SelectionWindow window;
 
     private class SelectionWindow extends JFrame {
-        private T itemToRender;
+        private Card cardToRender;
 
         public SelectionWindow(Game game, List<T> selection, int min, int max, String title) {
             // Create confirm button
@@ -78,9 +79,9 @@ public abstract class SelectItemsCompletable<T extends Selectable> extends JPane
             final JPanel cardPanel = new JPanel() {
                 @Override
                 public void paintComponent(Graphics g) {
-                    if (itemToRender != null) {
-                        itemToRender.renderTitle(g, 0, 0);
-                        itemToRender.renderContent(g, 0, 22, game);
+                    if (cardToRender != null) {
+                        cardToRender.renderTitle(g, 0, 0, game);
+                        cardToRender.renderContent(g, 0, 22, game);
                     }
                 }
             };
@@ -98,7 +99,7 @@ public abstract class SelectItemsCompletable<T extends Selectable> extends JPane
             final int selectionMode = (max == 1 && min == 1) ? ListSelectionModel.SINGLE_SELECTION : ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
             cardList.setSelectionMode(selectionMode);
             cardList.setBackground(Color.BLACK);
-            cardList.setCellRenderer((_selection, card, index, isSelected, cellHasFocus) -> new JPanel() {
+            cardList.setCellRenderer((_selection, item, index, isSelected, cellHasFocus) -> new JPanel() {
                 @Override
                 public void paintComponent(Graphics g) {
                     if (isSelected && (max > 0)) {
@@ -106,10 +107,10 @@ public abstract class SelectItemsCompletable<T extends Selectable> extends JPane
                         g.drawRect(0, 0, 202, 21);
                     }
                     if (cellHasFocus) {
-                        itemToRender = card;
+                        cardToRender = getCard(item);
                         cardPanel.repaint();
                     }
-                    card.renderTitle(g, 1, 1);
+                    item.renderTitle(g, 1, 1, game);
                 }
             });
             cardList.addListSelectionListener(new ListSelectionListener() {
@@ -169,6 +170,11 @@ public abstract class SelectItemsCompletable<T extends Selectable> extends JPane
     }
 
     protected void selectionChanged() {
+    }
+
+    // Dangerous... one might forget to override this.
+    protected Card getCard(T item) {
+        return (Card) item;
     }
 
     public boolean check() {

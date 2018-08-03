@@ -203,18 +203,6 @@ public class Game extends JPanel {
         return properties == null || (!properties.isWater() && !properties.isNoctis());
     }
 
-    public static class Test extends JPanel {
-        public Card card;
-
-        @Override
-        public void paintComponent(Graphics g) {
-            if (card != null) {
-                card.renderTitle(g, 0, 0);
-                card.renderContent(g, 0, 22, null);
-            }
-        }
-    }
-
     public static void main(String[] args) {
         JFrame f = new JFrame();
         Game g = new Game();

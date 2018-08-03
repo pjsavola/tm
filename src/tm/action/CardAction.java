@@ -40,13 +40,20 @@ public abstract class CardAction implements Action, Selectable {
         alternativeAction = action;
     }
 
-    @Override
-    public boolean check(Game game) {
+    public boolean isUsed(Game game) {
         final int round = game.getPlanet().getRound();
         if (usedOnRound >= round) {
-            return false;
+            return true;
         }
         if (alternativeAction != null && alternativeAction.usedOnRound >= round) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean check(Game game) {
+        if (isUsed(game)) {
             return false;
         }
         final Action cardAction = getAction(game);
@@ -70,7 +77,7 @@ public abstract class CardAction implements Action, Selectable {
     }
 
     @Override
-    public void renderTitle(Graphics g, int x, int y) {
+    public void renderTitle(Graphics g, int x, int y, Game game) {
         g.setFont(Card.FONT);
         final FontMetrics metrics = g.getFontMetrics();
         final int w = metrics.stringWidth(getDescription());
@@ -85,6 +92,9 @@ public abstract class CardAction implements Action, Selectable {
 
         // Draw text
         g.setColor(Color.WHITE);
+        if (isUsed(game)) {
+            g.setColor(Color.RED);
+        }
         g.drawString(getDescription(), x + (Card.WIDTH - w) / 2 - 8, y + 14);
     }
 
