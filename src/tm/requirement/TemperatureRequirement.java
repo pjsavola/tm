@@ -1,8 +1,12 @@
 package tm.requirement;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 
 import tm.Game;
+import tm.ImageCache;
+import tm.Renderer;
 
 public class TemperatureRequirement implements Requirement {
 
@@ -23,6 +27,9 @@ public class TemperatureRequirement implements Requirement {
 
     @Override
     public void render(Graphics g, int x, int y) {
-
+        g.setColor(Color.RED);
+        final Image image = ImageCache.getImage("images/icon_temperature.png").getScaledInstance(8, 20, Image.SCALE_DEFAULT);
+        g.drawImage(image, x - 2, y, null);
+        Renderer.renderText(g, (min ? "≥" : "≤") + " " + limit + "°C", x + 11, y + 4, false);
     }
 }

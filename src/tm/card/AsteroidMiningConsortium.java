@@ -1,9 +1,11 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
 
 import tm.Card;
+import tm.Renderer;
 import tm.Resources;
 import tm.Tags;
 import tm.requirement.ProductionRequirement;
@@ -12,7 +14,14 @@ import tm.requirement.ProductionRequirement;
 public class AsteroidMiningConsortium extends Card {
 
     public AsteroidMiningConsortium() {
-        super("Asteroid Mining Cons.", 13, Tags.JOVIAN, new ProductionRequirement(Resources.TITANIUM));
+        super("Asteroid Mining Cons.", 13, Tags.JOVIAN, new ProductionRequirement(Resources.TITANIUM) {
+            @Override
+            public void render(Graphics g, int x, int y) {
+                final Point p = Resources.EMPTY.renderTitanium(g, x, y, true, false);
+                g.setColor(Color.RED);
+                Renderer.renderText(g, "≥ 1", p.x + 3, y + 4, false);
+            }
+        });
     }
 
     @Override
@@ -23,10 +32,5 @@ public class AsteroidMiningConsortium extends Card {
     @Override
     public Resources getIncomeDelta() {
         return Resources.TITANIUM;
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires titanium income");
     }
 }

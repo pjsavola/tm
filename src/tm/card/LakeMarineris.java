@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Tags;
@@ -26,10 +23,5 @@ public class LakeMarineris extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(new AddWaterAction(), new AddWaterAction());
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 0C or warmer");
     }
 }

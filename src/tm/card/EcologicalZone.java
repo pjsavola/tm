@@ -1,14 +1,14 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Collections;
-import java.util.List;
+import java.awt.Point;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
 import tm.ImageCache;
+import tm.Renderer;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
@@ -35,12 +35,13 @@ public class EcologicalZone extends CardWithMarkers implements PlayCardEffect {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new PlaceTileAction(Tile.Type.ECOLOGICAL_ZONE);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Must have greenery tile, place next to greenery tile");
+        return new PlaceTileAction(Tile.Type.ECOLOGICAL_ZONE) {
+            @Override
+            public Point render(Graphics g, int x, int y, Game game) {
+                final Point p = super.render(g, x, y, game);
+                return Renderer.renderText(g, "adjacent to Greenery", p.x + 4, y + 4, false);
+            }
+        };
     }
 
     @Override

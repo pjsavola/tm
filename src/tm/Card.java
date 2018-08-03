@@ -157,30 +157,13 @@ public abstract class Card implements Comparable<Card>, Selectable {
 
         // Draw requirements
         if (requirement != null) {
-            requirement.render(g, x, y + TITLE_HEIGHT);
+            requirement.render(g, x + 5, y + 10);
         }
 
         // Draw resources and income
         int currentY = y + TITLE_HEIGHT + 20;
         currentY = getResourceDelta().render(g, x + 5, currentY, false).y + 4;
         getIncomeDelta().render(g, x + 5, currentY, true);
-
-        // Draw requirements
-        g.setColor(Color.RED);
-        int i = 0;
-        for (String requirement : getRequirements()) {
-            g.drawString(requirement, x + 4, y + 16 + i * 16);
-            i++;
-        }
-        i++;
-
-        // Draw content
-        /*
-        g.setColor(TEXT_COLOR);
-        for (String content : getContents()) {
-            g.drawString(content, x + 4, y + 16 + i * 16);
-            i++;
-        }*/
 
         // Draw effect
         int actionOffset = 0;
@@ -234,10 +217,6 @@ public abstract class Card implements Comparable<Card>, Selectable {
     }
 
     protected void renderEffect(Graphics g, int x, int y) {
-    }
-
-    protected List<String> getRequirements() {
-        return Collections.emptyList();
     }
 
     protected List<String> getContents() {

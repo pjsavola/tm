@@ -1,11 +1,11 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Collections;
-import java.util.List;
+import java.awt.Point;
 
 import tm.Card;
 import tm.Game;
+import tm.Renderer;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
@@ -20,12 +20,13 @@ public class ResearchOutpost extends Card implements DiscountEffect {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new PlaceTileAction(Tile.Type.CITY, true);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Place next to no other tile");
+        return new PlaceTileAction(Tile.Type.CITY, true) {
+            @Override
+            public Point render(Graphics g, int x, int y, Game game) {
+                final Point p = super.render(g, x, y, game);
+                return Renderer.renderText(g, "isolated", p.x + 4, y + 4, false);
+            }
+        };
     }
 
     @Override

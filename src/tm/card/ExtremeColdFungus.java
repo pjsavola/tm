@@ -56,11 +56,6 @@ public class ExtremeColdFungus extends Card {
     }
 
     @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("It must be -10C or colder");
-    }
-
-    @Override
     protected List<String> getContents() {
         return Arrays.asList("Action:", "Add 2 microbes to another card /", "Gain 1 plant");
     }

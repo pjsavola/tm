@@ -1,7 +1,6 @@
 package tm.card;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import tm.ActionType;
@@ -37,10 +36,5 @@ public class ElectroCatapult extends Card {
     @Override
     public List<CardAction> getActions() {
         return Arrays.asList(action1, action2);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Oxygen must be 8% or less");
     }
 }

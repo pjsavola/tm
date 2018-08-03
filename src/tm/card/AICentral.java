@@ -40,9 +40,4 @@ public class AICentral extends Card {
     public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 3 science tags");
-    }
 }

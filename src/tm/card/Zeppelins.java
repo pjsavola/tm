@@ -3,8 +3,6 @@ package tm.card;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.Collections;
-import java.util.List;
 
 import tm.Card;
 import tm.Game;
@@ -45,10 +43,5 @@ public class Zeppelins extends Card {
                 p = Renderer.renderSmallIcon(g, Tile.Type.CITY, p.x + 2, y);
                 return new Point(p.x + 1, p.y + 1);            }
         };
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Oxygen must be at least 5%");
     }
 }

@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Resources;
 import tm.Tags;
@@ -22,10 +19,5 @@ public class Algae extends Card {
     @Override
     public Resources getIncomeDelta() {
         return Resources.PLANT_2;
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 5 ocean tiles");
     }
 }

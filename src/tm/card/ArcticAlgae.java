@@ -1,8 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Collections;
-import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
@@ -23,11 +21,6 @@ public class ArcticAlgae extends Card implements PlaceTileEffect {
     @Override
     public Resources getResourceDelta() {
         return Resources.PLANT;
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("It must be -12C or colder");
     }
 
     @Override

@@ -1,8 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Collections;
-import java.util.List;
 
 import tm.Card;
 import tm.Resources;
@@ -24,11 +22,6 @@ public class Shuttles extends Card implements DiscountEffect {
     @Override
     public Resources getIncomeDelta() {
         return new Resources(2, 0, 0, 0, -1, 0);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires at least 5% oxygen");
     }
 
     @Override

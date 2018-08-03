@@ -44,11 +44,6 @@ public class SymbioticFungus extends Card {
     }
 
     @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("It must be -14C or warmer");
-    }
-
-    @Override
     protected List<String> getContents() {
         return Arrays.asList("Action:", "Add 1 microbe to another card");
     }

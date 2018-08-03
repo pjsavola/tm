@@ -40,9 +40,4 @@ public class SmallAnimals extends CardWithMarkers {
     public List<CardAction> getActions() {
         return Collections.singletonList(action);
     }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 6% oxygen");
-    }
 }

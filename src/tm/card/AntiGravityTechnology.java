@@ -1,8 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Collections;
-import java.util.List;
 
 import tm.Card;
 import tm.Tags;
@@ -18,11 +16,6 @@ public class AntiGravityTechnology extends Card implements DiscountEffect {
     @Override
     public int getVPs() {
         return 3;
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 7 science tags");
     }
 
     @Override

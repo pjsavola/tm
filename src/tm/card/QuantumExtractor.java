@@ -1,8 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Collections;
-import java.util.List;
 
 import tm.Card;
 import tm.Resources;
@@ -19,11 +17,6 @@ public class QuantumExtractor extends Card implements DiscountEffect {
     @Override
     public Resources getIncomeDelta() {
         return new Resources(0, 0, 0, 0, 4, 0);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 4 science tags");
     }
 
     @Override

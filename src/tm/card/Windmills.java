@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Resources;
 import tm.Tags;
@@ -22,10 +19,5 @@ public class Windmills extends Card {
     @Override
     public Resources getIncomeDelta() {
         return Resources.ENERGY;
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires at least 7% oxygen");
     }
 }

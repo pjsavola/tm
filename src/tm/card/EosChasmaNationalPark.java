@@ -45,11 +45,6 @@ public class EosChasmaNationalPark extends Card {
     }
 
     @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("It must be -12C or warmer");
-    }
-
-    @Override
     protected List<String> getContents() {
         return Collections.singletonList("1 animal marker");
     }

@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Resources;
 import tm.Tags;
@@ -23,10 +20,4 @@ public class RadSuits extends Card {
     public Resources getIncomeDelta() {
         return Resources.MONEY;
     }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 2 or more cities");
-    }
-
 }

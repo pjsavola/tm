@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Resources;
 import tm.Tags;
@@ -17,10 +14,5 @@ public class FusionPower extends Card {
     @Override
     public Resources getIncomeDelta() {
         return new Resources(0, 0, 0, 0, 3, 0);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 2 power tags");
     }
 }

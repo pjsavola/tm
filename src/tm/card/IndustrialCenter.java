@@ -1,11 +1,14 @@
 package tm.card;
 
+import java.awt.Graphics;
+import java.awt.Point;
 import java.util.Collections;
 import java.util.List;
 
 import tm.ActionType;
 import tm.Card;
 import tm.Game;
+import tm.Renderer;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -23,16 +26,17 @@ public class IndustrialCenter extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new PlaceTileAction(Tile.Type.INDUSTRIAL_CENTER);
+        return new PlaceTileAction(Tile.Type.INDUSTRIAL_CENTER) {
+            @Override
+            public Point render(Graphics g, int x, int y, Game game) {
+                final Point p = super.render(g, x, y, game);
+                return Renderer.renderText(g, "adjacent to City", p.x + 4, y + 4, false);
+            }
+        };
     }
 
     @Override
     public List<CardAction> getActions() {
         return Collections.singletonList(action);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Place next to a city tile");
     }
 }

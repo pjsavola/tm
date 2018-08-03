@@ -1,8 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Collections;
-import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
@@ -28,11 +26,6 @@ public class Decomposers extends CardWithMarkers implements PlayCardEffect {
     @Override
     public String getRatio() {
         return "1:3";
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Oxygen must be at least 3%");
     }
 
     @Override

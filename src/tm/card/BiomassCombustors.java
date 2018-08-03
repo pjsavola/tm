@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Resources;
 import tm.Tags;
@@ -23,10 +20,5 @@ public class BiomassCombustors extends Card {
     @Override
     public Resources getIncomeDelta() {
         return new Resources(0, 0, 0, 0, 2, 0);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires at least 6% oxygen");
     }
 }

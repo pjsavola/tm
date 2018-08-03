@@ -3,8 +3,6 @@ package tm.card;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.Collections;
-import java.util.List;
 
 import tm.Card;
 import tm.Game;
@@ -38,10 +36,5 @@ public class Insects extends Card {
                 return new Point(p.x, y + 18);
             }
         };
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 6% oxygen");
     }
 }

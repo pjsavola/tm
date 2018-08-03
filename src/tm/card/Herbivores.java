@@ -1,8 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Collections;
-import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.CardWithMarkers;
@@ -35,11 +33,6 @@ public class Herbivores extends CardWithMarkers implements PlaceTileEffect {
     @Override
     public Action getInitialAction(Game game) {
         return new MarkerDeltaAction(1, this);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 8% oxygen");
     }
 
     @Override

@@ -1,8 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Collections;
-import java.util.List;
 
 import tm.Card;
 import tm.Game;
@@ -29,11 +27,6 @@ public class Capital extends Card implements ScoringEffect {
     @Override
     public Action getInitialAction(Game game) {
         return new PlaceTileAction(Tile.Type.CAPITAL);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 4 ocean tiles");
     }
 
     @Override

@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -36,10 +33,5 @@ public class DomedCrater extends Card {
     @Override
     public int getVPs() {
         return 1;
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Oxygen must be 7% or less");
     }
 }

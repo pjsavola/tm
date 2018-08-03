@@ -1,8 +1,12 @@
 package tm.requirement;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 import tm.Game;
+import tm.Renderer;
+import tm.Tile;
 
 public class OceanRequirement implements Requirement {
 
@@ -23,6 +27,8 @@ public class OceanRequirement implements Requirement {
 
     @Override
     public void render(Graphics g, int x, int y) {
-
+        g.setColor(Color.RED);
+        final Point p1 = Renderer.renderSmallIcon(g, Tile.Type.WATER, x, y);
+        Renderer.renderText(g, (min ? "≥" : "≤") + " " + limit, p1.x + 3, y + 4, false);
     }
 }

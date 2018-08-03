@@ -1,8 +1,12 @@
 package tm.requirement;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 
 import tm.Game;
+import tm.ImageCache;
+import tm.Renderer;
 
 public class OxygenRequirement implements Requirement {
 
@@ -23,6 +27,9 @@ public class OxygenRequirement implements Requirement {
 
     @Override
     public void render(Graphics g, int x, int y) {
-
+        g.setColor(Color.RED);
+        final Image image = ImageCache.getImage("images/icon_oxygen.png").getScaledInstance(16, 16, Image.SCALE_DEFAULT);
+        g.drawImage(image, x, y, null);
+        Renderer.renderText(g, (min ? "≥" : "≤") + " " + limit + "%", x + 19, y + 4, false);
     }
 }

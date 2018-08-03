@@ -272,6 +272,6 @@ public class PlaceTileAction implements Action {
     public Point render(Graphics g, int x, int y, Game game) {
         final Image image = type.getIcon();
         g.drawImage(image, x, y, null);
-        return new Point(image.getWidth(null), image.getHeight(null));
+        return new Point(x + image.getWidth(null), y + image.getHeight(null));
     }
 }

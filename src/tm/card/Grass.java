@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Resources;
 import tm.Tags;
@@ -22,10 +19,5 @@ public class Grass extends Card {
     @Override
     public Resources getIncomeDelta() {
         return Resources.PLANT;
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires -16C or warmer");
     }
 }

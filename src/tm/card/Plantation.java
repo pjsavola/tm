@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Tags;
@@ -22,15 +19,5 @@ public class Plantation extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(new PlaceTileAction(Tile.Type.GREENERY), new AddOxygenAction());
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 2 science tags");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("Greenery tile (+ oxygen)");
     }
 }

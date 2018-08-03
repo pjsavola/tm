@@ -80,11 +80,6 @@ public class SearchForLife extends CardWithMarkers {
     }
 
     @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Oxygen must be 6% or less");
-    }
-
-    @Override
     protected List<String> getContents() {
         return Arrays.asList("Action:", "Draw card", "Gain marker if microbe");
     }

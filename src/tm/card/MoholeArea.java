@@ -1,10 +1,11 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
+import java.awt.Graphics;
+import java.awt.Point;
 
 import tm.Card;
 import tm.Game;
+import tm.Renderer;
 import tm.Resources;
 import tm.Tags;
 import tm.Tile;
@@ -24,11 +25,12 @@ public class MoholeArea extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new PlaceTileAction(Tile.Type.MOHOLE_AREA);
-    }
-
-    @Override
-    protected List<String> getRequirements() {
-        return Collections.singletonList("Place tile on ocean");
+        return new PlaceTileAction(Tile.Type.MOHOLE_AREA) {
+            @Override
+            public Point render(Graphics g, int x, int y, Game game) {
+                final Point p = super.render(g, x, y, game);
+                return Renderer.renderText(g, "on Ocean", p.x + 4, y + 4, false);
+            }
+        };
     }
 }
