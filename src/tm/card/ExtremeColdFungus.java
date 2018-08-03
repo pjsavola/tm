@@ -34,6 +34,11 @@ public class ExtremeColdFungus extends Card {
                 }
 
                 @Override
+                protected int getMarkerCount(CardWithMarkers card) {
+                    return 2;
+                }
+
+                @Override
                 protected Action onEmptySelection() {
                     return new ResourceDeltaAction(Resources.PLANT);
                 }
