@@ -19,6 +19,11 @@ public class NaturalPreserve extends Card {
     }
 
     @Override
+    public int getVPs() {
+        return 1;
+    }
+
+    @Override
     public Resources getIncomeDelta() {
         return Resources.MONEY;
     }

@@ -15,7 +15,7 @@ public class PhobosSpaceHaven extends Card {
 
     @Override
     public int getVPs() {
-        return 2;
+        return 3;
     }
 
     @Override

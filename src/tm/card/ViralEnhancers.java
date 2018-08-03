@@ -20,11 +20,6 @@ public class ViralEnhancers extends Card implements PlayCardEffect {
     }
 
     @Override
-    public int getVPs() {
-        return 1;
-    }
-
-    @Override
     protected void renderEffect(Graphics g, int x, int y) {
         g.drawImage(ImageCache.getImage("images/tag_plant.png"), x, y, null);
         g.drawImage(ImageCache.getImage("images/tag_animal.png"), x, y + 20, null);

@@ -17,7 +17,7 @@ import tm.completable.InstantCompletable;
 public class NitrogenRichAsteroid extends Card {
 
     public NitrogenRichAsteroid() {
-        super("Nitrogen-Rich Asteroid", 31, Tags.SCIENCE.combine(Tags.EVENT));
+        super("Nitrogen-Rich Asteroid", 31, Tags.SPACE_EVENT);
     }
 
     @Override

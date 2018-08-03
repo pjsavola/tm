@@ -15,6 +15,11 @@ public class LightningHarvest extends Card {
     }
 
     @Override
+    public int getVPs() {
+        return 1;
+    }
+
+    @Override
     public Resources getIncomeDelta() {
         return new Resources(1, 0, 0, 0, 1, 0);
     }

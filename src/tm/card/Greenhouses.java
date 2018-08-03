@@ -32,7 +32,7 @@ public class Greenhouses extends Card {
                 g.setColor(Color.LIGHT_GRAY);
                 Point p;
                 p = Resources.EMPTY.renderPlants(g, x, y, false, false);
-                p = Renderer.renderText(g, "/", p.x + 2, y, false);
+                p = Renderer.renderText(g, "/", p.x + 2, y + 4, false);
                 p = Renderer.renderIcon(g, Tile.Type.CITY, p.x + 2, y);
                 return p;
             }

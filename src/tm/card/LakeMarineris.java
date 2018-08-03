@@ -19,6 +19,11 @@ public class LakeMarineris extends Card {
     }
 
     @Override
+    public int getVPs() {
+        return 2;
+    }
+
+    @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(new AddWaterAction(), new AddWaterAction());
     }

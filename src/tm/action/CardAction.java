@@ -99,11 +99,7 @@ public abstract class CardAction implements Action, Selectable {
         g.drawRect(x, y, Card.WIDTH, Card.CARD_HEIGHT);
 
         // Draw resources and income
-        int currentY = y + Card.TITLE_HEIGHT + 20;
-        Point p = getResourceDelta(game).render(g, x, currentY, false);
-        getIncomeDelta(game).render(g, x, p.y + 4, true);
-
-        // Draw content
+        render(g, x + 5, y + Card.TITLE_HEIGHT + 20, game);
     }
 
     @Override

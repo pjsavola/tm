@@ -16,6 +16,11 @@ public class AntiGravityTechnology extends Card implements DiscountEffect {
     }
 
     @Override
+    public int getVPs() {
+        return 3;
+    }
+
+    @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 7 science tags");
     }

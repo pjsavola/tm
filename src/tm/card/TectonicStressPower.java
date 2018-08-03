@@ -4,11 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
-import tm.Game;
 import tm.Resources;
 import tm.Tags;
-import tm.action.Action;
-import tm.action.AddTerraformingRatingAction;
 import tm.requirement.TagRequirement;
 
 public class TectonicStressPower extends Card {
@@ -25,11 +22,6 @@ public class TectonicStressPower extends Card {
     @Override
     public Resources getIncomeDelta() {
         return new Resources(0, 0, 0, 0, 3, 0);
-    }
-
-    @Override
-    public Action getInitialAction(Game game) {
-        return new AddTerraformingRatingAction();
     }
 
     @Override

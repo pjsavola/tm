@@ -11,7 +11,7 @@ import tm.requirement.TemperatureRequirement;
 public class Farming extends Card {
 
     public Farming() {
-        super("Farming", 16, Tags.MICROBE, new TemperatureRequirement(4, true));
+        super("Farming", 16, Tags.PLANT, new TemperatureRequirement(4, true));
     }
 
     @Override

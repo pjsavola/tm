@@ -16,7 +16,7 @@ public class SpaceElevator extends Card {
     private final CardAction action = new CardActionWithCost(true, ActionType.SPACE_ELEVATOR, new Resources(5, -1, 0, 0, 0, 0));
 
     public SpaceElevator() {
-        super("Space Elevator", 27, Tags.SCIENCE_BUILDING);
+        super("Space Elevator", 27, Tags.SPACE.combine(Tags.BUILDING));
     }
 
     @Override

@@ -17,7 +17,7 @@ public class Research extends Card {
 
     @Override
     public int getVPs() {
-        return 2;
+        return 1;
     }
 
     @Override

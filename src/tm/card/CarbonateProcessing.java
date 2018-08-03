@@ -11,11 +11,6 @@ public class CarbonateProcessing extends Card {
     }
 
     @Override
-    public int getVPs() {
-        return 1;
-    }
-
-    @Override
     public Resources getIncomeDelta() {
         return new Resources(0, 0, 0, 0, -1, 3);
     }

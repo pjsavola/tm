@@ -12,13 +12,13 @@ public class Tags {
         BUILDING("images/tag_building.png"),
         CITY("images/tag_city.png"),
         SPACE("images/tag_space.png"),
-        EARTH("images/tag_earth.png"),
-        JOVIAN("images/tag_jovian.png"),
-        SCIENCE("images/tag_science.png"),
         POWER("images/tag_power.png"),
         PLANT("images/tag_plant.png"),
         ANIMAL("images/tag_animal.png"),
-        MICROBE("images/tag_microbe.png");
+        MICROBE("images/tag_microbe.png"),
+        EARTH("images/tag_earth.png"),
+        JOVIAN("images/tag_jovian.png"),
+        SCIENCE("images/tag_science.png");
 
         private final String imagePath;
 

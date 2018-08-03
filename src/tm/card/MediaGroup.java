@@ -23,7 +23,7 @@ public class MediaGroup extends Card implements PlayCardEffect {
         g.setColor(new Color(0xFFFF00));
         final String str = "3";
         g.drawString(str, x + 24, y + 12);
-        Resources.MONEY.render(g, x + g.getFontMetrics().stringWidth(str) + 29, y, false);
+        Resources.MONEY_3.render(g, x + g.getFontMetrics().stringWidth(str) + 29, y, false);
     }
 
     @Override

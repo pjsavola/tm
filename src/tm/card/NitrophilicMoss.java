@@ -11,7 +11,7 @@ import tm.requirement.OceanRequirement;
 public class NitrophilicMoss extends Card {
 
     public NitrophilicMoss() {
-        super("Moss", 8, Tags.PLANT, new OceanRequirement(3, true));
+        super("Nitrophilic Moss", 8, Tags.PLANT, new OceanRequirement(3, true));
     }
 
     @Override

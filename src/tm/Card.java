@@ -221,7 +221,7 @@ public abstract class Card implements Comparable<Card>, Selectable {
 
         // Draw VPS
         final int vp = getVPs();
-        if (vp > 0) {
+        if (vp != 0) {
             Renderer.renderVPCircle(g, x + WIDTH - 28, y + CARD_HEIGHT - 28);
             g.setFont(VP_FONT);
             g.setColor(Color.BLACK);

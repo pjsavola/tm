@@ -14,6 +14,11 @@ public class DustSeals extends Card {
     }
 
     @Override
+    public int getVPs() {
+        return 1;
+    }
+
+    @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires at most 3 ocean tiles");
     }
