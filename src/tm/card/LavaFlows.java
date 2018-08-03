@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -28,7 +28,7 @@ public class LavaFlows extends Card {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Place tile on volcano", "2 temperature");
+    protected List<String> getRequirements() {
+        return Collections.singletonList("Place tile on volcano");
     }
 }

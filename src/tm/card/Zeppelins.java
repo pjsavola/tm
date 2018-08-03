@@ -36,13 +36,14 @@ public class Zeppelins extends Card {
             }
             @Override
             public Point render(Graphics g, int x, int y, Game game) {
-                g.setColor(Color.LIGHT_GRAY);
                 Point p;
                 p = Resources.EMPTY.renderMoney(g, x, y, true, false);
-                p = Renderer.renderText(g, "/", p.x + 2, y + 4, false);
-                Renderer.renderVPCircle(g, p.x + 2, y);
-                p = Renderer.renderIcon(g, Tile.Type.CITY, p.x + 2, y);
-                return p;            }
+                g.setColor(Color.LIGHT_GRAY);
+                p = Renderer.renderText(g, " x ", p.x + 2, y + 4, false);
+                g.setColor(Color.RED);
+                g.drawOval(p.x + 1, y - 1, 18, 18);
+                p = Renderer.renderSmallIcon(g, Tile.Type.CITY, p.x + 2, y);
+                return new Point(p.x + 1, p.y + 1);            }
         };
     }
 

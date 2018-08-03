@@ -5,6 +5,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 public abstract class Renderer {
     public static final Color VP_CIRCLE_COLOR = new Color(0x8B4513);
@@ -44,8 +45,20 @@ public abstract class Renderer {
         }
     }
 
+    public static Point renderImage(Graphics g, String path, int x, int y) {
+        final BufferedImage image = ImageCache.getImage(path);
+        g.drawImage(image, x, y, null);
+        return new Point(x + image.getWidth(), image.getHeight());
+    }
+
     public static Point renderIcon(Graphics g, Tile.Type type, int x, int y) {
         final Image image = type.getIcon();
+        g.drawImage(image, x, y, null);
+        return new Point(x + image.getWidth(null), y + image.getHeight(null));
+    }
+
+    public static Point renderSmallIcon(Graphics g, Tile.Type type, int x, int y) {
+        final Image image = type.getSmallIcon();
         g.drawImage(image, x, y, null);
         return new Point(x + image.getWidth(null), y + image.getHeight(null));
     }

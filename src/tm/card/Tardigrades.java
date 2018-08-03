@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,10 +37,5 @@ public class Tardigrades extends CardWithMarkers {
     @Override
     public List<CardAction> getActions() {
         return Collections.singletonList(action);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Action:", "Add 1 marker");
     }
 }

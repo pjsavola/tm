@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Tags;
@@ -21,10 +18,5 @@ public class Comet extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new ActionChain(new AddWaterAction(), new AddTemperatureAction());
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("1 water", "1 temperature");
     }
 }

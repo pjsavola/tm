@@ -34,9 +34,11 @@ public class Tile {
 
         private final BufferedImage image;
         private final Image icon;
+        private final Image smallIcon;
 
         private Type(String iconName, String imageName) {
             icon = ImageCache.getImage("images/" + iconName + ".png").getScaledInstance(24, 26, Image.SCALE_DEFAULT);
+            smallIcon = ImageCache.getImage("images/" + iconName + ".png").getScaledInstance(16, 16, Image.SCALE_DEFAULT);
             image = ImageCache.getImage("images/" + imageName + ".png");
         }
 
@@ -46,6 +48,10 @@ public class Tile {
 
         public Image getIcon() {
             return icon;
+        }
+
+        public Image getSmallIcon() {
+            return smallIcon;
         }
     }
 

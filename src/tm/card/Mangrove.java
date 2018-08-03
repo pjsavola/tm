@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,11 +35,6 @@ public class Mangrove extends Card {
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("Requires 4C or warmer");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Place greenery on ocean space", "(1 oxygen)");
+        return Collections.singletonList("Min +4C, place on ocean");
     }
 }

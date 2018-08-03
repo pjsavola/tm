@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,10 +34,5 @@ public class AquiferPumping extends Card {
     @Override
     public List<CardAction> getActions() {
         return Collections.singletonList(action);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Action:", "Pay 8 money for an ocean", "(steel may be used)");
     }
 }

@@ -27,10 +27,10 @@ public class MediaArchives extends Card {
             }
             @Override
             public Point render(Graphics g, int x, int y, Game game) {
-                g.setColor(Color.LIGHT_GRAY);
                 Point p;
                 p = Resources.EMPTY.renderMoney(g, x, y, false, false);
-                p = Renderer.renderText(g, "/", p.x + 2, y + 4, false);
+                g.setColor(Color.LIGHT_GRAY);
+                p = Renderer.renderText(g, " x ", p.x + 2, y + 4, false);
                 p = Tags.EVENT.render(g, p.x + 2, y, true);
                 return p;
             }

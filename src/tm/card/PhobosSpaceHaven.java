@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Resources;
 import tm.Tags;
@@ -21,10 +18,5 @@ public class PhobosSpaceHaven extends Card {
     @Override
     public Resources getIncomeDelta() {
         return Resources.TITANIUM;
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("City to Phobos");
     }
 }

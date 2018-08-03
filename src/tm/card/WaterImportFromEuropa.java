@@ -1,7 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,11 +37,6 @@ public class WaterImportFromEuropa extends Card implements ScoringEffect {
     @Override
     public List<CardAction> getActions() {
         return Collections.singletonList(action);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Action:", "Pay 12 money for an ocean", "(titanium may be used)");
     }
 
     @Override

@@ -39,9 +39,4 @@ public class RegolithEaters extends CardWithMarkers {
     public List<CardAction> getActions() {
         return Arrays.asList(action1, action2);
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Action 1:", "Add 1 marker", "", "Action 2:", "Remove 2 markers to raise oxygen");
-    }
 }

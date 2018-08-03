@@ -2,8 +2,6 @@ package tm.corporation;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.Collections;
-import java.util.List;
 
 import com.sun.istack.internal.Nullable;
 import tm.Corporation;
@@ -30,11 +28,6 @@ public class MiningGuild extends Corporation implements PlaceTileEffect {
     @Override
     public Resources getIncomeDelta() {
         return Resources.STEEL;
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("Get 1 steel income for covering steel or titanium");
     }
 
     @Nullable

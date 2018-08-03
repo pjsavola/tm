@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Tags;
@@ -18,10 +15,5 @@ public class InventionContest extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new DrawCardsAction(3, 1, 1, false, false);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("Draw 3 cards, keep 1 of them");
     }
 }

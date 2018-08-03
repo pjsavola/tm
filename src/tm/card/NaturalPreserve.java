@@ -35,11 +35,6 @@ public class NaturalPreserve extends Card {
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("Oxygen must be 4% or less");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("Place tile next to no other tile");
+        return Collections.singletonList("Max 4%, place tile isolated");
     }
 }

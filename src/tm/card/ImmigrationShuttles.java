@@ -1,8 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Collections;
-import java.util.List;
 
 import tm.Card;
 import tm.Cards;
@@ -20,11 +18,6 @@ public class ImmigrationShuttles extends Card implements ScoringEffect {
     @Override
     public Resources getIncomeDelta() {
         return new Resources(5);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 vp for each 3 cities");
     }
 
     @Override

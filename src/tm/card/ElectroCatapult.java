@@ -43,9 +43,4 @@ public class ElectroCatapult extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Oxygen must be 8% or less");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Action 1:", "7 money, -1 steel", "", "Action 2:", "7 money, -1 plant");
-    }
 }

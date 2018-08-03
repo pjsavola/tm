@@ -1,8 +1,6 @@
 package tm.card;
 
 import java.awt.Graphics;
-import java.util.Arrays;
-import java.util.List;
 
 import tm.Card;
 import tm.Game;
@@ -28,11 +26,6 @@ public class CommercialDistrict extends Card implements ScoringEffect {
     @Override
     public Action getInitialAction(Game game) {
         return new PlaceTileAction(Tile.Type.COMMERCIAL_DISTRICT);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Place tile", "1 vp per adjacent city tile");
     }
 
     @Override

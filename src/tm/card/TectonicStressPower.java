@@ -28,9 +28,4 @@ public class TectonicStressPower extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 2 science tags");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 TR");
-    }
 }

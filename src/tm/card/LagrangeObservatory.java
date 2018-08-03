@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Tags;
@@ -23,10 +20,5 @@ public class LagrangeObservatory extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new DrawCardsAction(1, false, false);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("Draw 1 card");
     }
 }

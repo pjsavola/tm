@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Tags;
@@ -30,10 +27,5 @@ public class NuclearZone extends Card {
             new AddTemperatureAction(),
             new AddTemperatureAction()
         );
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Place nuclear zone tile", "2 temperature");
     }
 }

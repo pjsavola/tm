@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,10 +35,5 @@ public class WaterSplittingPlant extends Card {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 2 ocean tiles");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Action:", "-3 energy", "1 oxygen");
     }
 }

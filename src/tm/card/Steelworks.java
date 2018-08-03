@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,10 +29,5 @@ public class Steelworks extends Card {
     @Override
     public List<CardAction> getActions() {
         return Collections.singletonList(action);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Action:", "-4 energy", "1 oxygen", "2 steel");
     }
 }

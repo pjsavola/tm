@@ -28,7 +28,7 @@ public class MoholeArea extends Card {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("Place tile on ocean space");
+    protected List<String> getRequirements() {
+        return Collections.singletonList("Place tile on ocean");
     }
 }

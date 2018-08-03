@@ -25,9 +25,4 @@ public class PermafrostExtraction extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires -8C or warmer");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 ocean");
-    }
 }

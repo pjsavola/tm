@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Tags;
@@ -18,10 +15,5 @@ public class BusinessContracts extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new DrawCardsAction(4, 2, 2, false, false);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Draw 4 cards", "Keep 2 of them");
     }
 }

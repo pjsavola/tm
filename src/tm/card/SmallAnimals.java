@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -45,10 +44,5 @@ public class SmallAnimals extends CardWithMarkers {
     @Override
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 6% oxygen");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Action:", "Add 1 marker");
     }
 }

@@ -32,9 +32,4 @@ public class LakeMarineris extends Card {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 0C or warmer");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("2 water");
-    }
 }

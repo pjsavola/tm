@@ -46,9 +46,4 @@ public class GHGProducingBacteria extends CardWithMarkers {
     protected List<String> getRequirements() {
         return Collections.singletonList("Requires 4% oxygen");
     }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Action 1:", "Add 1 marker", "", "Action 2:", "Remove 2 markers to raise temperature");
-    }
 }

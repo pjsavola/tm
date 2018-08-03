@@ -1,8 +1,5 @@
 package tm.card;
 
-import java.util.Collections;
-import java.util.List;
-
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -24,10 +21,5 @@ public class MagneticFieldGenerators extends Card {
     @Override
     public Action getInitialAction(Game game) {
         return new AddTerraformingRatingAction(3);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("3 TR");
     }
 }

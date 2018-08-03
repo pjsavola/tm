@@ -1,6 +1,5 @@
 package tm.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,10 +39,5 @@ public class PhysicsComplex extends CardWithMarkers {
     @Override
     public List<CardAction> getActions() {
         return Collections.singletonList(action);
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Action:", "Spend 6 energy to add a marker");
     }
 }

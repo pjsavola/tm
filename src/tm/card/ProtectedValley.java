@@ -1,6 +1,6 @@
 package tm.card;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import tm.Card;
@@ -31,7 +31,7 @@ public class ProtectedValley extends Card {
     }
 
     @Override
-    protected List<String> getContents() {
-        return Arrays.asList("Place greenery on ocean space", "(1 oxygen)");
+    protected List<String> getRequirements() {
+        return Collections.singletonList("Place greenery on ocean");
     }
 }

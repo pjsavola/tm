@@ -29,11 +29,6 @@ public class ArtificialLake extends Card {
 
     @Override
     protected List<String> getRequirements() {
-        return Collections.singletonList("Requires -6C or warmer");
-    }
-
-    @Override
-    protected List<String> getContents() {
-        return Collections.singletonList("1 ocean to non-water tile");
+        return Collections.singletonList("Min -6C, place on land");
     }
 }
