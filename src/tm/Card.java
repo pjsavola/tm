@@ -59,6 +59,10 @@ public abstract class Card implements Comparable<Card>, Selectable {
         }
     }
 
+    public boolean hasEffect() {
+        return effect;
+    }
+
     public void setOwner(@Nullable Player player) {
         owner = player;
     }

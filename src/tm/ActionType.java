@@ -14,6 +14,8 @@ public enum ActionType {
     TR,
     HEAT_TO_MONEY,
     CUSTOM,
+    VIEW_EFFECTS,
+    VIEW_MARKERS,
     SEARCH_FOR_LIFE,
     INVENTORS_GUILD,
     MARTIAN_RAIL,

@@ -20,6 +20,7 @@ import tm.action.PlayCardAction;
 import tm.action.ResourceDeltaAction;
 import tm.action.SelectActionAction;
 import tm.action.SwitchRoundAction;
+import tm.action.ViewCardsAction;
 import tm.card.StandardTechnology;
 import tm.completable.Completable;
 import tm.corporation.Credicor;
@@ -163,6 +164,30 @@ public class ActionPool {
             @Override
             public Action getInitialAction(Game game) {
                 return new SelectActionAction();
+            }
+        });
+        standardActions.add(new StandardAction("View card effects", ActionType.VIEW_EFFECTS) {
+            @Override
+            public Action getInitialAction(Game game) {
+                final List<Card> cardsWithEffect = new ArrayList<>();
+                for (Card card : game.getCurrentPlayer().getPlayedCards()) {
+                    if (card.hasEffect()) {
+                        cardsWithEffect.add(card);
+                    }
+                }
+                return new ViewCardsAction(cardsWithEffect, "Cards with effect");
+            }
+        });
+        standardActions.add(new StandardAction("View cards with markers", ActionType.VIEW_MARKERS) {
+            @Override
+            public Action getInitialAction(Game game) {
+                final List<Card> cardsWithMarkers = new ArrayList<>();
+                for (Card card : game.getCurrentPlayer().getPlayedCards()) {
+                    if (card instanceof CardWithMarkers) {
+                        cardsWithMarkers.add(card);
+                    }
+                }
+                return new ViewCardsAction(cardsWithMarkers, "Cards with markers");
             }
         });
         standardActions.add(new StandardAction("Heat", ActionType.HEAT_TO_MONEY) {

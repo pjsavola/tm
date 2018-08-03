@@ -241,6 +241,10 @@ public class Game extends JPanel {
                     }
                 } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 172) <= 8) {
                     g.getActionHandler().process(ActionType.CUSTOM);
+                } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 190) <= 8) {
+                    g.getActionHandler().process(ActionType.VIEW_EFFECTS);
+                } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 208) <= 8) {
+                    g.getActionHandler().process(ActionType.VIEW_MARKERS);
                 } else if (Math.abs(x - 350) <= 60 && Math.abs(y - 688) <= 11) {
                     g.getActionHandler().process(ActionType.PASS);
                 }

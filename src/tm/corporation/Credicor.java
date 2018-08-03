@@ -27,7 +27,7 @@ public class Credicor extends Corporation implements PlayCardEffect {
     @Override
     protected void renderEffect(Graphics g, int x, int y) {
         g.setColor(new Color(0xFFFF00));
-        final int newX = Renderer.renderText(g, ">= 20", x, y, false).x;
+        final int newX = Renderer.renderText(g, ">= 20", x, y + 4, false).x;
         Resources.MONEY_4.render(g, newX + 4, y, false);
     }
 
