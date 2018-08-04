@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import tm.Card;
 import tm.Game;
@@ -91,11 +90,6 @@ public class LandClaim extends Card {
         @Override
         public void redo() {
             targetTile.setOwner(game.getCurrentPlayer());
-        }
-
-        @Override
-        public boolean remove(Set<Completable> completedSet) {
-            return completedSet.remove(this);
         }
 
         @Override

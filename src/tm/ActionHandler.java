@@ -21,7 +21,7 @@ public class ActionHandler {
     private final Deque<Completable> redoStack = new ArrayDeque<>();
     private int pendingActionCount;
     private List<Action> pendingActions;
-    private List<Action> pendingIrreversibleActions;
+    private List<Action> redoableActions;
     private final ActionPool pool;
     private Completable current;
     private Game game;
@@ -70,42 +70,36 @@ public class ActionHandler {
                     completables[--pendingActionCount] = undoStack.pop();
                 }
                 undoStack.push(new CompletableChain(game, completables));
+                cancelEnabled = true;
                 pendingActions = null;
                 current = null;
             } else {
-                process(pendingActions.remove(0).begin(game));
-            }
-        }
-        if (current == null && pendingIrreversibleActions != null) {
-            if (pendingIrreversibleActions.isEmpty()) {
-                cancelEnabled = true;
-                pendingIrreversibleActions = null;
-            } else {
-                undoStack.clear();
-                cancelEnabled = false;
-                process(pendingIrreversibleActions.remove(0).begin(game));
+                final Action action = pendingActions.remove(0);
+                if (!action.isUndoable()) {
+                    redoableActions = new ArrayList<>(pendingActions);
+                    pendingActionCount = 0;
+                    undoStack.clear();
+                    cancelEnabled = false;
+                }
+                process(action.begin(game));
             }
         }
     }
 
     public void addPendingAction(Action action) {
-        if (action.isUndoable()) {
-            if (pendingActions == null) {
-                pendingActions = new ArrayList<>();
-                pendingActionCount = 0;
-            }
-            pendingActions.add(action);
-        } else {
-            if (pendingIrreversibleActions == null) {
-                pendingIrreversibleActions = new ArrayList<>();
-            }
-            pendingIrreversibleActions.add(action);
+        if (pendingActions == null) {
+            pendingActions = new ArrayList<>();
+            pendingActionCount = 0;
         }
+        pendingActions.add(action);
     }
 
     public void reprocess(Completable completable) {
         cancelEnabled = false;
-        pendingIrreversibleActions = new ArrayList<>(0);
+        if (redoableActions != null) {
+            pendingActions = new ArrayList<>(redoableActions);
+            pendingActionCount = 0;
+        }
         process(completable);
     }
 

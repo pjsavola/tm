@@ -178,11 +178,6 @@ public class PlaceTileAction implements Action {
         }
 
         @Override
-        public boolean remove(Set<Completable> completedSet) {
-            return completedSet.remove(this);
-        }
-
-        @Override
         public void cancel() {
             game.removeMouseListener(mouseListener);
             game.removeMouseMotionListener(mouseMotionListener);
