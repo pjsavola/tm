@@ -1,7 +1,9 @@
 package tm.card;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import tm.Card;
 import tm.Game;
@@ -24,7 +26,7 @@ public class ArtificialPhotosynthesis extends Card {
         return new Action() {
             @Override
             public Completable begin(Game game) {
-                return new SelectActionAction.SelectActionCompletable<>(game, Arrays.asList(
+                final List<CardAction> actions = Arrays.asList(
                     new CardAction(true, null) {
                         @Override
                         public String getDescription() {
@@ -45,7 +47,10 @@ public class ArtificialPhotosynthesis extends Card {
                             return new IncomeDeltaAction(new Resources(0, 0, 0, 0, 2, 0));
                         }
                     }
-                ));
+                );
+                final Map<CardAction, Card> cardMap = new HashMap<>();
+                actions.forEach(cardAction -> cardMap.put(cardAction, ArtificialPhotosynthesis.this));
+                return new SelectActionAction.SelectActionCompletable<>(game, actions, cardMap);
             }
         };
     }

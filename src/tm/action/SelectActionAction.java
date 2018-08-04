@@ -32,13 +32,8 @@ public class SelectActionAction implements Action {
 
     public static class SelectActionCompletable<T extends CardAction> extends SelectItemsCompletable<T> {
         private final Game game;
-        @Nullable
         private final Map<T, Card> cardMap;
         private T selectedAction;
-
-        public SelectActionCompletable(Game game, List<T> selectableActions) {
-            this(game, selectableActions, null);
-        }
 
         public SelectActionCompletable(Game game, List<T> selectableActions, @Nullable Map<T, Card> cardMap) {
             super(game, selectableActions, 1, 1, "Select action");

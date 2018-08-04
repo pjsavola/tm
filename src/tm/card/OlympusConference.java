@@ -2,7 +2,9 @@ package tm.card;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.sun.istack.internal.Nullable;
 import tm.Card;
@@ -51,7 +53,7 @@ public class OlympusConference extends CardWithMarkers implements PlayCardEffect
                     actions.add(new CardAction(true, null) {
                         @Override
                         public String getDescription() {
-                            return "Olympus Conference: Gain " + tagCount + " markers";
+                            return tagCount + " markers";
                         }
                         @Override
                         public Action getAction(Game game) {
@@ -63,7 +65,7 @@ public class OlympusConference extends CardWithMarkers implements PlayCardEffect
                         actions.add(new CardAction(false, null) {
                             @Override
                             public String getDescription() {
-                                return "Olympus Conference: Gain " + (tagCount - 2 * drawnCards) + " markers, draw " + drawnCards + " cards";
+                                return (tagCount - 2 * drawnCards) + " markers, " + drawnCards + " cards";
                             }
                             @Override
                             public Action getAction(Game game) {
@@ -74,7 +76,9 @@ public class OlympusConference extends CardWithMarkers implements PlayCardEffect
                             }
                         });
                     }
-                    return new SelectActionAction.SelectActionCompletable<>(game, actions);
+                    final Map<CardAction, Card> cardMap = new HashMap<>();
+                    actions.forEach(cardAction -> cardMap.put(cardAction, OlympusConference.this));
+                    return new SelectActionAction.SelectActionCompletable<>(game, actions, cardMap);
                 }
             };
         }

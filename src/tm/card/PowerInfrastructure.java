@@ -3,7 +3,9 @@ package tm.card;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import tm.ActionType;
 import tm.Card;
@@ -39,7 +41,9 @@ public class PowerInfrastructure extends Card {
                             }
                         });
                     }
-                    return new SelectActionAction.SelectActionCompletable<>(game, actions);
+                    final Map<CardAction, Card> cardMap = new HashMap<>();
+                    actions.forEach(cardAction -> cardMap.put(cardAction, PowerInfrastructure.this));
+                    return new SelectActionAction.SelectActionCompletable<>(game, actions, cardMap);
                 }
             };
         }
