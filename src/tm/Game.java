@@ -216,7 +216,7 @@ public class Game extends JPanel {
                 } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 28) <= 8) {
                     g.getActionHandler().adjustPayment(true, e.getButton() == MouseEvent.BUTTON1);
                 } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 46) <= 8) {
-                    g.getActionHandler().adjustPayment(false, e.getButton() != MouseEvent.BUTTON1);
+                    g.getActionHandler().adjustPayment(false, e.getButton() == MouseEvent.BUTTON1);
                 } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 64) <= 8) {
                     g.getActionHandler().process(ActionType.PLANT_TO_GREENERY);
                 } else if (Math.abs(x - 10) <= 8 && Math.abs(y - 82) <= 8) {

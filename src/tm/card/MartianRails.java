@@ -18,7 +18,7 @@ import tm.action.CardAction;
 import tm.action.CardActionWithCost;
 import tm.action.ResourceDeltaAction;
 
-public class MartianRail extends Card {
+public class MartianRails extends Card {
 
     private final CardAction action = new CardActionWithCost(true, ActionType.MARTIAN_RAIL, Resources.ENERGY.negate()) {
         @Override
@@ -43,8 +43,8 @@ public class MartianRail extends Card {
         }
     };
 
-    public MartianRail() {
-        super("Martian Rail", 13, Tags.BUILDING);
+    public MartianRails() {
+        super("Martian Rails", 13, Tags.BUILDING);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package tm.card;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -27,15 +28,13 @@ public class Mangrove extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(
-            new AddOxygenAction(),
-            new PlaceTileAction(Tile.Type.MANGROVE) {
-                @Override
-                public Point render(Graphics g, int x, int y, Game game) {
-                    final Point p = super.render(g, x, y, game);
-                    return Renderer.renderText(g, "on Ocean", p.x + 4, y + 4, false);
-                }
+        return new ActionChain(new AddOxygenAction(), new PlaceTileAction(Tile.Type.MANGROVE)) {
+            @Override
+            public Point render(Graphics g, int x, int y, Game game) {
+                final Point p = Renderer.renderImage(g, "images/icon_greenery.png", x, y);
+                g.setColor(Color.WHITE);
+                return Renderer.renderText(g, "on Ocean", p.x + 4, y + 4, false);
             }
-        );
+        };
     }
 }

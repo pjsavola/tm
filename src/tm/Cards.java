@@ -119,7 +119,7 @@ import tm.card.MagneticFieldDome;
 import tm.card.MagneticFieldGenerators;
 import tm.card.Mangrove;
 import tm.card.MarsUniversity;
-import tm.card.MartianRail;
+import tm.card.MartianRails;
 import tm.card.MassConverter;
 import tm.card.MediaArchives;
 import tm.card.MediaGroup;
@@ -222,7 +222,7 @@ public abstract class Cards {
     public static final Card CLOUD_SEEDING = new CloudSeeding();
     public static final Card SEARCH_FOR_LIFE = new SearchForLife();
     public static final Card INVENTORS_GUILD = new InventorsGuild();
-    public static final Card MARTIAL_RAIL = new MartianRail();
+    public static final Card MARTIAL_RAIL = new MartianRails();
     public static final Card CAPITAL = new Capital();
     public static final Card ASTEROID = new Asteroid();
     public static final Card COMET = new Comet();

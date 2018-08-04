@@ -158,14 +158,14 @@ public class PlayCardAction implements Action {
 
     public static class Payment {
         private final Player player;
-        final boolean steel;
-        final boolean titanium;
+        private final boolean steel;
+        private final boolean titanium;
         private final Resources resourceDeltaAfterDiscounts;
         private final Resources incomeDelta;
-        private final int materialValue;
-        private final int materialMax;
-        private int materialsUsed;
         private final int cost;
+        private int usedSteel;
+        private int usedTitanium;
+        private Resources usedMaterials;
 
         public Payment(Player player, boolean steel, boolean titanium, Resources resourceDelta, Resources incomeDelta, int discount) {
             this.player = player;
@@ -174,50 +174,51 @@ public class PlayCardAction implements Action {
             this.incomeDelta = incomeDelta;
             resourceDeltaAfterDiscounts = resourceDelta.combine(new Resources(discount));
             cost = Math.max(0, -resourceDeltaAfterDiscounts.getMoney());
-            if (steel) {
-                materialValue = player.getSteelValue();
-                materialsUsed = Math.min(player.getSteel(), cost / materialValue);
-                if (player.getSteel() > materialsUsed && cost % materialValue != 0) {
-                    materialMax = materialsUsed + 1;
-                } else {
-                    materialMax = materialsUsed;
-                }
-            } else if (titanium) {
-                materialValue = player.getTitaniumValue();
-                materialsUsed = Math.min(player.getTitanium(), cost / materialValue);
-                if (player.getTitanium() > materialsUsed && cost % materialValue != 0) {
-                    materialMax = materialsUsed + 1;
-                } else {
-                    materialMax = materialsUsed;
-                }
-            } else {
-                materialValue = 0;
-                materialMax = 0;
+            if (steel && !titanium) {
+                usedSteel = Math.min(player.getSteel(), cost / player.getSteelValue());
+            } else if (!steel && titanium) {
+                usedTitanium = Math.min(player.getTitanium(), cost / player.getTitaniumValue());
             }
             updateDelta();
         }
 
         public boolean adjust(boolean steel, boolean increment) {
-            if (this.steel == steel && titanium == !steel) {
+            if (this.steel && steel) {
                 if (increment) {
-                    materialsUsed = Math.min(materialsUsed + 1, materialMax);
+                    if (player.getSteel() > usedSteel && usedSteel * player.getSteelValue() < cost) {
+                        usedSteel++;
+                        updateDelta();
+                        return true;
+                    }
                 } else {
-                    materialsUsed = Math.max(0, materialsUsed - 1);
+                    if (usedSteel > 0) {
+                        usedSteel--;
+                        updateDelta();
+                        return true;
+                    }
                 }
-                updateDelta();
-                return true;
+            }
+            if (this.titanium && !steel) {
+                if (increment) {
+                    if (player.getTitanium() > usedTitanium && usedTitanium * player.getTitaniumValue() < cost) {
+                        usedTitanium++;
+                        updateDelta();
+                        return true;
+                    }
+                } else {
+                    if (usedTitanium > 0) {
+                        usedTitanium--;
+                        updateDelta();
+                        return true;
+                    }
+                }
             }
             return false;
         }
 
         public Resources getResourceDelta() {
-            if (steel) {
-                return resourceDeltaAfterDiscounts.combine(new Resources(Math.min(cost, materialsUsed * materialValue), -materialsUsed, 0, 0, 0, 0));
-            } else if (titanium) {
-                return resourceDeltaAfterDiscounts.combine(new Resources(Math.min(cost, materialsUsed * materialValue), 0, -materialsUsed, 0, 0, 0));
-            } else {
-                return resourceDeltaAfterDiscounts;
-            }
+            final int materialValue = Math.min(cost, usedSteel * player.getSteelValue() + usedTitanium * player.getTitaniumValue());
+            return resourceDeltaAfterDiscounts.combine(new Resources(materialValue, -usedSteel, -usedTitanium, 0, 0, 0));
         }
 
         public Resources getIncomeDelta() {

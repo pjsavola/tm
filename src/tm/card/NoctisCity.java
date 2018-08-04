@@ -23,7 +23,7 @@ public class NoctisCity extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new Action() {
+        return new PlaceTileAction(Tile.Type.CITY) {
             @Override
             public Completable begin(Game game) {
                 final Tile noctis = game.getNoctisTile();
