@@ -1,7 +1,11 @@
 package tm.card;
 
+import java.awt.Graphics;
+import java.awt.Point;
+
 import tm.Card;
 import tm.Game;
+import tm.Renderer;
 import tm.Tags;
 import tm.Tile;
 import tm.action.Action;
@@ -18,6 +22,11 @@ public class Plantation extends Card {
 
     @Override
     public Action getInitialAction(Game game) {
-        return new ActionChain(new PlaceTileAction(Tile.Type.GREENERY), new AddOxygenAction());
+        return new ActionChain(new PlaceTileAction(Tile.Type.GREENERY), new AddOxygenAction()) {
+            @Override
+            public Point render(Graphics g, int x, int y, Game game) {
+                return Renderer.renderImage(g, "images/icon_greenery.png", x, y);
+            }
+        };
     }
 }
