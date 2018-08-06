@@ -195,11 +195,11 @@ public class Resources {
     public List<String> getAsStrings() {
         final List<String> result = new ArrayList<>();
         result.add("Money: " + money);
-        result.add("Steel: " + money);
-        result.add("Titanium: " + money);
-        result.add("Plants: " + money);
-        result.add("Energy: " + money);
-        result.add("Heat: " + money);
+        result.add("Steel: " + steel);
+        result.add("Titanium: " + titanium);
+        result.add("Plants: " + plants);
+        result.add("Energy: " + energy);
+        result.add("Heat: " + heat);
         return result;
     }
 }
