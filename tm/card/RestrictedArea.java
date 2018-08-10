@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -17,7 +16,7 @@ import tm.action.PlaceTileAction;
 
 public class RestrictedArea extends Card {
 
-    private final CardAction action = new CardActionWithCost(false, ActionType.RESTRICTED_AREA, new Resources(-2)) {
+    private final CardAction action = new CardActionWithCost(false, "-2 money, 1 card", new Resources(-2)) {
         @Override
         protected Action getAction(Game game) {
             return new DrawCardsAction(1, false, false);

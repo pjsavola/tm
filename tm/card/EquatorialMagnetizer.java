@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -15,7 +14,7 @@ import tm.action.CardActionWithCost;
 
 public class EquatorialMagnetizer extends Card {
 
-    private final CardAction action = new CardActionWithCost(true, ActionType.EQUATORIAL_MAGNETIZER, Resources.EMPTY, Resources.ENERGY.negate()) {
+    private final CardAction action = new CardActionWithCost(true, "-1 energy inome, 1 TR", Resources.EMPTY, Resources.ENERGY.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new AddTerraformingRatingAction();

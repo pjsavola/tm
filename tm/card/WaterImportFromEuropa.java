@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Player;
@@ -18,7 +17,7 @@ import tm.effect.ScoringEffect;
 
 public class WaterImportFromEuropa extends Card implements ScoringEffect {
 
-    private final CardAction action = new CardActionWithCost(true,ActionType.WATER_IMPORT_FROM_EUROPA, new Resources(-12), Resources.EMPTY, false, true) {
+    private final CardAction action = new CardActionWithCost(true, "-12 money (titanium), 1 ocean", new Resources(-12), Resources.EMPTY, false, true) {
         @Override
         public boolean check(Game game) {
             return game.getPlanet().getWaterRemaining() > 0 && super.check(game);

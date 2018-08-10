@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
 import tm.Tags;
@@ -15,7 +14,7 @@ import tm.requirement.OxygenRequirement;
 // Removing 1 animal is done from dummy player
 public class Predators extends CardWithMarkers {
 
-    private final CardAction action = new CardAction(true, ActionType.PREDATORS) {
+    private final CardAction action = new CardAction(true, getName()) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, Predators.this);

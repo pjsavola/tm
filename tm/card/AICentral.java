@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -15,7 +14,7 @@ import tm.requirement.TagRequirement;
 
 public class AICentral extends Card {
 
-    private final CardAction action = new CardAction(false, ActionType.AI_CENTRAL) {
+    private final CardAction action = new CardAction(false, "2 cards") {
         @Override
         protected Action getAction(Game game) {
             return new DrawCardsAction(2, false, false);

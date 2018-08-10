@@ -3,7 +3,6 @@ package tm.corporation;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Corporation;
 import tm.Game;
 import tm.Resources;
@@ -15,7 +14,7 @@ import tm.action.CardActionWithCost;
 
 public class UnitedNationsMarsInitiative extends Corporation {
 
-    private final CardAction action = new CardActionWithCost(true, ActionType.TR, new Resources(-3)) {
+    private final CardAction action = new CardActionWithCost(true, "1 TR", new Resources(-3)) {
         @Override
         public boolean check(Game game) {
             return game.getCurrentPlayer().hasIncreasedRating();

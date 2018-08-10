@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-import tm.ActionType;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
@@ -22,7 +21,7 @@ import tm.requirement.TemperatureRequirement;
 
 public class ExtremeColdFungus extends Card {
 
-    private final CardAction action = new CardAction(true, ActionType.EXTREME_COLD_FUNGUS) {
+    private final CardAction action = new CardAction(true, "1 plant or 2 microbes to other card") {
         @Override
         protected Action getAction(Game game) {
             return new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {

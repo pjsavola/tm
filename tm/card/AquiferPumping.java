@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -15,7 +14,7 @@ import tm.action.CardActionWithCost;
 
 public class AquiferPumping extends Card {
 
-    private final CardAction action = new CardActionWithCost(true, ActionType.AQUIFER_PUMPING, new Resources(-8), Resources.EMPTY, true, false) {
+    private final CardAction action = new CardActionWithCost(true, "-8 money (steel), 1 ocean", new Resources(-8), Resources.EMPTY, true, false) {
         @Override
         public boolean check(Game game) {
             return game.getPlanet().getWaterRemaining() > 0 && super.check(game);

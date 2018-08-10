@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -16,7 +15,7 @@ import tm.requirement.OceanRequirement;
 
 public class WaterSplittingPlant extends Card {
 
-    private final CardAction action = new CardActionWithCost(true, ActionType.WATER_SPLITTING_PLANT, new Resources(0, 0, 0, 0, -3, 0)) {
+    private final CardAction action = new CardActionWithCost(true, "-3 energy, 1 oxygen", new Resources(0, 0, 0, 0, -3, 0)) {
         @Override
         protected Action getAction(Game game) {
             return new AddOxygenAction();

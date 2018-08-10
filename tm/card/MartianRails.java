@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Renderer;
@@ -20,7 +19,7 @@ import tm.action.ResourceDeltaAction;
 
 public class MartianRails extends Card {
 
-    private final CardAction action = new CardActionWithCost(true, ActionType.MARTIAN_RAIL, Resources.ENERGY.negate()) {
+    private final CardAction action = new CardActionWithCost(true, "1 money per city on Mars", Resources.ENERGY.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new ResourceDeltaAction(null) {

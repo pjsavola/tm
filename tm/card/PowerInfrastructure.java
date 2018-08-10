@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Renderer;
@@ -23,7 +22,7 @@ import tm.completable.Completable;
 
 public class PowerInfrastructure extends Card {
 
-    private final CardAction action = new CardAction(true, ActionType.POWER_INFRASTRUCTURE) {
+    private final CardAction action = new CardAction(true, "X money, -X energy") {
         @Override
         protected Action getAction(Game game) {
             return new Action() {

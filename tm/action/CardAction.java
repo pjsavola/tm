@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 import javax.annotation.Nullable;
-import tm.ActionType;
+
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -19,16 +19,16 @@ public abstract class CardAction implements Action, Selectable {
     private final boolean undoable;
     @Nullable
     private CardAction alternativeAction;
-    private final ActionType type;
+    private final String description;
 
-    public CardAction(boolean undoable, ActionType type) {
+    public CardAction(boolean undoable, String description) {
         this.undoable = undoable;
-        this.type = type;
+        this.description = description;
     }
 
     @Override
-    public ActionType getType() {
-        return type;
+    public String getDescription() {
+        return description;
     }
 
     @Override

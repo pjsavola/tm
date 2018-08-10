@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
@@ -23,7 +22,7 @@ import tm.requirement.OxygenRequirement;
 
 public class SearchForLife extends CardWithMarkers {
 
-    private final CardAction action = new CardActionWithCost(false, ActionType.SEARCH_FOR_LIFE, Resources.MONEY.negate()) {
+    private final CardAction action = new CardActionWithCost(false, getName(), Resources.MONEY.negate()) {
 
         @Override
         public boolean check(Game game) {

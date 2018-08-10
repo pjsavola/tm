@@ -1,7 +1,7 @@
 package tm.action;
 
 import javax.annotation.Nullable;
-import tm.ActionType;
+
 import tm.Game;
 import tm.Player;
 import tm.Resources;
@@ -16,16 +16,16 @@ public class CardActionWithCost extends CardAction {
     @Nullable
     private PlayCardAction.Payment payment;
 
-    public CardActionWithCost(boolean undoable, ActionType type, Resources resourceDelta) {
-        this(undoable, type, resourceDelta, Resources.EMPTY, false, false);
+    public CardActionWithCost(boolean undoable, String description, Resources resourceDelta) {
+        this(undoable, description, resourceDelta, Resources.EMPTY, false, false);
     }
 
-    public CardActionWithCost(boolean undoable, ActionType type, Resources resourceDelta, Resources incomeDelta) {
-        this(undoable, type, resourceDelta, incomeDelta, false, false);
+    public CardActionWithCost(boolean undoable, String description, Resources resourceDelta, Resources incomeDelta) {
+        this(undoable, description, resourceDelta, incomeDelta, false, false);
     }
 
-    public CardActionWithCost(boolean undoable, ActionType type, Resources resourceDelta, Resources incomeDelta, boolean steel, boolean titainum) {
-        super(undoable, type);
+    public CardActionWithCost(boolean undoable, String description, Resources resourceDelta, Resources incomeDelta, boolean steel, boolean titainum) {
+        super(undoable, description);
         this.resourceDelta = resourceDelta;
         this.incomeDelta = incomeDelta;
         this.steel = steel;

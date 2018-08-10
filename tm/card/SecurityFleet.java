@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
 import tm.Resources;
@@ -16,7 +15,7 @@ import tm.action.MarkerDeltaAction;
 // Removing 1 animal is done from dummy player
 public class SecurityFleet extends CardWithMarkers {
 
-    private final CardAction action = new CardActionWithCost(true, ActionType.SECURITY_FLEET, Resources.TITANIUM.negate()) {
+    private final CardAction action = new CardActionWithCost(true, getName(), Resources.TITANIUM.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, SecurityFleet.this);

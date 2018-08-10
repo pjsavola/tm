@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
 import tm.Tags;
@@ -13,7 +12,7 @@ import tm.action.MarkerDeltaAction;
 
 public class Tardigrades extends CardWithMarkers {
 
-    private final CardAction action = new CardAction(true, ActionType.TARDIGRADES) {
+    private final CardAction action = new CardAction(true, getName()) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, Tardigrades.this);

@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Renderer;
@@ -20,7 +19,7 @@ import tm.action.PlaceTileAction;
 
 public class IndustrialCenter extends Card {
 
-    private final CardAction action = new CardActionWithCost(true, ActionType.INDUSTRIAL_CENTER, new Resources(-7), Resources.STEEL);
+    private final CardAction action = new CardActionWithCost(true, "-7 money, 1 steel income", new Resources(-7), Resources.STEEL);
     public IndustrialCenter() {
         super("Industrial Center", 4, Tags.BUILDING);
     }

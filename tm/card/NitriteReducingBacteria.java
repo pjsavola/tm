@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Arrays;
 import java.util.List;
 
-import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
 import tm.Tags;
@@ -15,14 +14,14 @@ import tm.action.MarkerDeltaAction;
 
 public class NitriteReducingBacteria extends CardWithMarkers {
 
-    private final CardAction action1 = new CardAction(true, ActionType.NITRITE_REDUCING_BACTERIA_1) {
+    private final CardAction action1 = new CardAction(true, getName()) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, NitriteReducingBacteria.this);
         }
     };
 
-    private final CardAction action2 = new CardAction(true, ActionType.NITRITE_REDUCING_BACTERIA_2) {
+    private final CardAction action2 = new CardAction(true, "1 TR, -3 markers") {
         @Override
         protected Action getAction(Game game) {
             return new ActionChain(new AddTerraformingRatingAction(), new MarkerDeltaAction(-3, NitriteReducingBacteria.this));

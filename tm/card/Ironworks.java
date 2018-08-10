@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -15,7 +14,7 @@ import tm.action.CardActionWithCost;
 
 public class Ironworks extends Card {
 
-    private final CardAction action = new CardActionWithCost(true, ActionType.IRONWORKS, new Resources(0, 1, 0, 0, -4, 0)) {
+    private final CardAction action = new CardActionWithCost(true, "1 steel, -4 energy, 1 oxygen", new Resources(0, 1, 0, 0, -4, 0)) {
         @Override
         protected Action getAction(Game game) {
             return new AddOxygenAction();

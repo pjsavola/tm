@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-import tm.ActionType;
 import tm.Card;
 import tm.CardWithMarkers;
 import tm.Game;
@@ -19,7 +18,7 @@ import tm.requirement.TemperatureRequirement;
 
 public class SymbioticFungus extends Card {
 
-    private final CardAction action = new CardAction(true, ActionType.SYMBIOTIC_FUNGUS) {
+    private final CardAction action = new CardAction(true, "1 microbe to other card") {
         @Override
         protected Action getAction(Game game) {
             return new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {

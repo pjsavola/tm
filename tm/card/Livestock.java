@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
 import tm.Resources;
@@ -15,7 +14,7 @@ import tm.requirement.OxygenRequirement;
 
 public class Livestock extends CardWithMarkers {
 
-    private final CardAction action = new CardAction(true, ActionType.LIVESTOCK) {
+    private final CardAction action = new CardAction(true, getName()) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, Livestock.this);

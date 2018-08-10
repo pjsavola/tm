@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Collections;
 import java.util.List;
 
-import tm.ActionType;
 import tm.Card;
 import tm.Game;
 import tm.Resources;
@@ -16,7 +15,7 @@ import tm.requirement.TemperatureRequirement;
 
 public class CaretakerContract extends Card {
 
-    private final CardAction action = new CardActionWithCost(true, ActionType.CARETAKER_CONTRACT, new Resources(0, 0, 0, 0, 0, -8)) {
+    private final CardAction action = new CardActionWithCost(true, "-8 heat, 1 TR", new Resources(0, 0, 0, 0, 0, -8)) {
         @Override
         protected Action getAction(Game game) {
             return new AddTerraformingRatingAction();

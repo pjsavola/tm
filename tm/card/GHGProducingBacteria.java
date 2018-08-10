@@ -3,7 +3,6 @@ package tm.card;
 import java.util.Arrays;
 import java.util.List;
 
-import tm.ActionType;
 import tm.CardWithMarkers;
 import tm.Game;
 import tm.Tags;
@@ -16,14 +15,14 @@ import tm.requirement.OxygenRequirement;
 
 public class GHGProducingBacteria extends CardWithMarkers {
 
-    private final CardAction action1 = new CardAction(true, ActionType.GHG_PRODUCING_BACTERIA_1) {
+    private final CardAction action1 = new CardAction(true, getName()) {
         @Override
         protected Action getAction(Game game) {
             return new MarkerDeltaAction(1, GHGProducingBacteria.this);
         }
     };
 
-    private final CardAction action2 = new CardAction(true, ActionType.GHG_PRODUCING_BACTERIA_2) {
+    private final CardAction action2 = new CardAction(true, "1 temperature, -2 markers") {
         @Override
         protected Action getAction(Game game) {
             return new ActionChain(new AddTemperatureAction(), new MarkerDeltaAction(-2, GHGProducingBacteria.this));
