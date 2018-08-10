@@ -212,6 +212,7 @@ public class Player {
 
     public Map<String, Integer> getVPBreakdown() {
         final Map<String, Integer> map = new HashMap<>();
+        map.put("Terraforming Rating", rating);
         map.put("Cities", (int) ownedTiles
             .stream()
             .filter(Tile::isCity)
@@ -273,6 +274,9 @@ public class Player {
         renderText(g, "images/icon_tr.png", rating, 7, 0x0000FF);
         renderText(g, "images/icon_vp.png", getPoints(), 8, 0x00FFFF);
         renderText(g, "images/icon_card.png", getCards().size(), 9, 0xCCCCCC);
+        g.drawString("A", 4, 174);
+        g.drawString("E", 4, 192);
+        g.drawString("M", 4, 210);
 
         tags.renderVertical(g, 0, 700);
 
