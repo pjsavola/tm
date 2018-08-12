@@ -7,6 +7,9 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -18,11 +21,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.annotation.Nullable;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import javax.annotation.Nullable;
 import tm.corporation.Credicor;
 import tm.corporation.Ecoline;
 import tm.corporation.Helion;
@@ -205,34 +208,43 @@ public class Game extends JPanel {
 
     public void gameOver() {
         final Card corp = currentPlayer.getPlayedCards().get(0);
-        System.out.println("Corporation: " + corp.getName());
-        System.out.println("Rounds played: " + planet.getRound());
-        System.out.println("Water placed: " + planet.getWaterPlaced());
-        System.out.println("Temperature: " + planet.getTemperature());
-        System.out.println("Oxygen: " + planet.getOxygen());
+        final List<String> summary = new ArrayList<>();
+        summary.add("Corporation: " + corp.getName());
+        summary.add("Rounds played: " + planet.getRound());
+        summary.add("Water placed: " + planet.getWaterPlaced());
+        summary.add("Temperature: " + planet.getTemperature());
+        summary.add("Oxygen: " + planet.getOxygen());
         final int terraformingSteps = planet.getWaterPlaced() + (planet.getTemperature() + 30) / 2 + planet.getOxygen();
-        System.out.println("Terraforming %: " + (100 * terraformingSteps / 42.0));
-        System.out.println("Victory points: " + currentPlayer.getPoints());
+        summary.add("Terraforming %: " + (100 * terraformingSteps / 42.0));
+        summary.add("Victory points: " + currentPlayer.getPoints());
         for (Map.Entry<String, Integer> e : currentPlayer.getVPBreakdown().entrySet()) {
-            System.out.println("  " + e.getKey() + ": " + e.getValue());
+            summary.add("  " + e.getKey() + ": " + e.getValue());
         }
-        System.out.println("Resources:");
+        summary.add("Resources:");
         for (String str : currentPlayer.getResources().getAsStrings()) {
-            System.out.println("  " + str);
+            summary.add("  " + str);
         }
-        System.out.println("Income:");
+        summary.add("Income:");
         for (String str : currentPlayer.getIncome().getAsStrings()) {
-            System.out.println("  " + str);
+            summary.add("  " + str);
         }
-        System.out.println("Tags:");
+        summary.add("Tags:");
         for (Map.Entry<String, Integer> counts : currentPlayer.getTags().getCounts().entrySet()) {
-            System.out.println("  " + counts.getKey() + ": " + counts.getValue());
+            summary.add("  " + counts.getKey() + ": " + counts.getValue());
         }
-        System.out.println("Played cards:");
+        summary.add("Played cards:");
         final Set<Card> playedCards = new TreeSet<>(currentPlayer.getPlayedCards());
         playedCards.remove(corp);
         for (Card card : playedCards) {
-            System.out.println("* " + card.getName());
+            summary.add("* " + card.getName());
+        }
+        final long time = System.currentTimeMillis();
+        final String filename = "game-" + time + ".log";
+        try (PrintWriter writer = new PrintWriter(filename, "UTF-8")) {
+            summary.forEach(line -> writer.println(line));
+            System.out.println("Wrote game log to " + filename);
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            summary.forEach(line -> System.out.println(line));
         }
         System.exit(0);
     }
