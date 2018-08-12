@@ -64,6 +64,11 @@ public class ActionPool {
         });
         standardActions.add(new StandardAction("Asteroid", ActionType.TEMPERATURE) {
             @Override
+            public boolean check(Game game) {
+                return new AddTemperatureAction().check(game);
+            }
+
+            @Override
             public Action getInitialAction(Game game) {
                 int reward = 0;
                 if (game.getCurrentPlayer().getPlayedCards().stream().anyMatch(card -> card instanceof StandardTechnology)) {
@@ -77,6 +82,11 @@ public class ActionPool {
             }
         });
         standardActions.add(new StandardAction("Aquifer", ActionType.WATER) {
+            @Override
+            public boolean check(Game game) {
+                return new AddWaterAction().check(game);
+            }
+
             @Override
             public Action getInitialAction(Game game) {
                 int reward = 0;

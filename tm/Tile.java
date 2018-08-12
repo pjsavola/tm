@@ -123,6 +123,10 @@ public class Tile {
         return type == Type.GREENERY || type == Type.MANGROVE;
     }
 
+    public static boolean isOcean(Tile.Type type) {
+        return type == Type.WATER || type == Type.ARTIFICIAL_LAKE;
+    }
+
     public static boolean isPlacedOnWater(Tile.Type type) {
         return type == Type.WATER || type == Type.MANGROVE || type == Type.MOHOLE_AREA;
     }

@@ -9,6 +9,7 @@ import tm.ImageCache;
 import tm.Resources;
 import tm.completable.Completable;
 import tm.completable.InstantCompletable;
+import tm.completable.NopCompletable;
 
 public class AddTemperatureAction implements Action {
 
@@ -19,6 +20,9 @@ public class AddTemperatureAction implements Action {
 
     @Override
     public Completable begin(Game game) {
+        if (!check(game)) {
+            return new NopCompletable(game);
+        }
         return new InstantCompletable(game) {
             @Override
             public void complete() {

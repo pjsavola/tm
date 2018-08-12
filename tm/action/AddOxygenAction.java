@@ -8,6 +8,7 @@ import tm.Game;
 import tm.ImageCache;
 import tm.completable.Completable;
 import tm.completable.InstantCompletable;
+import tm.completable.NopCompletable;
 
 public class AddOxygenAction implements Action {
 
@@ -18,6 +19,9 @@ public class AddOxygenAction implements Action {
 
     @Override
     public Completable begin(Game game) {
+        if (!check(game)) {
+            return new NopCompletable(game);
+        }
         return new InstantCompletable(game) {
             @Override
             public void complete() {

@@ -1,5 +1,6 @@
 package tm.card;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -29,6 +30,7 @@ public class UrbanizedArea extends Card {
             @Override
             public Point render(Graphics g, int x, int y, Game game) {
                 final Point p = super.render(g, x, y, game);
+                g.setColor(Color.WHITE);
                 return Renderer.renderText(g, "adjacent to 2 cities", p.x + 4, y + 4, false);
             }
         };

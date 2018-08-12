@@ -15,11 +15,10 @@ public class IncomeDeltaAction implements Action {
     @Nullable
     final Resources delta;
 
-    public IncomeDeltaAction(Resources delta) {
+    public IncomeDeltaAction(@Nullable Resources delta) {
         this.delta = delta;
     }
 
-    @Nullable
     public Resources getDelta(Game game) {
         return delta;
     }
@@ -27,33 +26,32 @@ public class IncomeDeltaAction implements Action {
     @Override
     public boolean check(Game game) {
         final Player targetPlayer = game.getCurrentPlayer();
-        return targetPlayer.canAdjustIncome(delta);
+        return targetPlayer.canAdjustIncome(getDelta(game));
     }
 
     @Override
     public Completable begin(Game game) {
         final Player targetPlayer = game.getCurrentPlayer();
-        final Resources delta = getDelta(game);
         return new InstantCompletable(game) {
             @Override
             public void complete() {
-                targetPlayer.adjustIncome(delta);
+                targetPlayer.adjustIncome(getDelta(game));
             }
 
             @Override
             public void undo() {
-                targetPlayer.adjustIncome(delta.negate());
+                targetPlayer.adjustIncome(getDelta(game).negate());
             }
 
             @Override
             public void redo() {
-                targetPlayer.adjustIncome(delta);
+                targetPlayer.adjustIncome(getDelta(game));
             }
         };
     }
 
     @Override
     public Point render(Graphics g, int x, int y, Game game) {
-        return delta.render(g, x, y, true);
+        return getDelta(game).render(g, x, y, true);
     }
 }

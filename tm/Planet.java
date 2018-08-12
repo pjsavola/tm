@@ -62,7 +62,13 @@ public class Planet {
         g.drawImage(ImageCache.getImage("images/icon_oxygen.png"), 650, 34, null);
         g.drawImage(Tile.Type.WATER.getIcon(), 650, 60, null);
         g.setColor(getColor(-30, temperature, 8, new Color(0x6666FF), new Color(0xFF3300)));
-        g.drawString(Integer.toString(temperature), 670, 20);
+        String temperatureString = " " + Math.abs(temperature);
+        if (temperature > 0) {
+            temperatureString = "+" + temperatureString;
+        } else if (temperature < 0) {
+            temperatureString = "-" + temperatureString;
+        }
+        g.drawString(temperatureString, 670, 20);
         g.setColor(getColor(0, oxygen, 14, new Color(0x8B4513), new Color(0xBBBBFF)));
         g.drawString(Integer.toString(oxygen), 680, 52);
         g.setColor(new Color(0x4444FF));

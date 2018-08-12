@@ -34,7 +34,7 @@ public class ArtificialPhotosynthesis extends Card {
                     new CardAction(true, null) {
                         @Override
                         public String getDescription() {
-                            return "Gain 1 plant";
+                            return "Gain 1 plant income";
                         }
                         @Override
                         public Action getAction(Game game) {
@@ -44,7 +44,7 @@ public class ArtificialPhotosynthesis extends Card {
                     new CardAction(true, null) {
                         @Override
                         public String getDescription() {
-                            return "Gain 2 energy";
+                            return "Gain 2 energy income";
                         }
                         @Override
                         public Action getAction(Game game) {

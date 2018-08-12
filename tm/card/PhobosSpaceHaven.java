@@ -8,7 +8,7 @@ import tm.Tile;
 import tm.action.Action;
 import tm.action.PlaceTileAction;
 import tm.completable.Completable;
-import tm.completable.InstantCompletable;
+import tm.completable.NopCompletable;
 
 public class PhobosSpaceHaven extends Card {
 
@@ -31,17 +31,7 @@ public class PhobosSpaceHaven extends Card {
         return new PlaceTileAction(Tile.Type.CITY) {
             @Override
             public Completable begin(Game game) {
-                return new InstantCompletable(game) {
-                    @Override
-                    public void complete() {
-                    }
-                    @Override
-                    public void undo() {
-                    }
-                    @Override
-                    public void redo() {
-                    }
-                };
+                return new NopCompletable(game);
             }
         };
     }

@@ -211,7 +211,7 @@ public class Game extends JPanel {
         System.out.println("Temperature: " + planet.getTemperature());
         System.out.println("Oxygen: " + planet.getOxygen());
         final int terraformingSteps = planet.getWaterPlaced() + (planet.getTemperature() + 30) / 2 + planet.getOxygen();
-        System.out.println("Terraforming %: " + (terraformingSteps / 42.0));
+        System.out.println("Terraforming %: " + (100 * terraformingSteps / 42.0));
         System.out.println("Victory points: " + currentPlayer.getPoints());
         for (Map.Entry<String, Integer> e : currentPlayer.getVPBreakdown().entrySet()) {
             System.out.println("  " + e.getKey() + ": " + e.getValue());

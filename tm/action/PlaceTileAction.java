@@ -202,7 +202,7 @@ public class PlaceTileAction implements Action {
         @Override
         public void redo() {
             targetTile.setType(type);
-            if (type != Tile.Type.WATER) {
+            if (!Tile.isOcean(type)) {
                 targetTile.setOwner(game.getCurrentPlayer());
             }
             game.repaint();
@@ -228,12 +228,12 @@ public class PlaceTileAction implements Action {
 
     public static void placeTile(Game game, Tile targetTile, Tile.Type type) {
         targetTile.setType(type);
-        if (type != Tile.Type.WATER) {
+        if (!Tile.isOcean(type)) {
             targetTile.setOwner(game.getCurrentPlayer());
         }
         int sum = 0;
         for (Tile tile : targetTile.getNeighbors()) {
-            if (tile.getType() == Tile.Type.WATER || tile.getType() == Tile.Type.ARTIFICIAL_LAKE) {
+            if (Tile.isOcean(tile.getType())) {
                 sum += 2;
             }
         }

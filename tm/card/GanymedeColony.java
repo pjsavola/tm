@@ -10,7 +10,7 @@ import tm.Tile;
 import tm.action.Action;
 import tm.action.PlaceTileAction;
 import tm.completable.Completable;
-import tm.completable.InstantCompletable;
+import tm.completable.NopCompletable;
 import tm.effect.ScoringEffect;
 
 public class GanymedeColony extends Card implements ScoringEffect {
@@ -35,17 +35,7 @@ public class GanymedeColony extends Card implements ScoringEffect {
         return new PlaceTileAction(Tile.Type.CITY) {
             @Override
             public Completable begin(Game game) {
-                return new InstantCompletable(game) {
-                    @Override
-                    public void complete() {
-                    }
-                    @Override
-                    public void undo() {
-                    }
-                    @Override
-                    public void redo() {
-                    }
-                };
+                return new NopCompletable(game);
             }
         };
     }

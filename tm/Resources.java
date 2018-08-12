@@ -63,7 +63,7 @@ public class Resources {
     }
 
     public Resources getTurnIncome(int terraformingRating, Resources leftOverResources) {
-        return new Resources(money + terraformingRating, steel, titanium, plants, energy, heat + leftOverResources.energy);
+        return new Resources(money + terraformingRating, steel, titanium, plants, energy - leftOverResources.energy, heat + leftOverResources.energy);
     }
 
     public int getMoney() {
