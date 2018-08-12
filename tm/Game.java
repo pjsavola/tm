@@ -221,7 +221,7 @@ public class Game extends JPanel {
             System.out.println("  " + str);
         }
         System.out.println("Income:");
-        for (String str : currentPlayer.getResources().getAsStrings()) {
+        for (String str : currentPlayer.getIncome().getAsStrings()) {
             System.out.println("  " + str);
         }
         System.out.println("Tags:");
