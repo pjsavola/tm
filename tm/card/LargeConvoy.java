@@ -35,7 +35,7 @@ public class LargeConvoy extends Card {
             new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {
                 @Override
                 protected String getTitle() {
-                    return "Get 5 plants or add 4 animasl to card...";
+                    return "Get 5 plants or add 4 animals to card...";
                 }
 
                 @Override

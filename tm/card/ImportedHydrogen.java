@@ -30,7 +30,7 @@ public class ImportedHydrogen extends Card {
             new AddMarkerAction(game.getCurrentPlayer().getPlayedCards()) {
                 @Override
                 protected String getTitle() {
-                    return "Select microbe or animal card, or nothing to get 3 plants";
+                    return "Place 3 microbes, 2 animals or select nothing to get 3 plants";
                 }
 
                 @Override

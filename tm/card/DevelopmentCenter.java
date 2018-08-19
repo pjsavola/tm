@@ -14,7 +14,7 @@ import tm.action.DrawCardsAction;
 
 public class DevelopmentCenter extends Card {
 
-    private final CardAction action = new CardActionWithCost(false, "1 card", Resources.ENERGY.negate()) {
+    private final CardAction action = new CardActionWithCost(false, "-1 energy, 1 card", Resources.ENERGY.negate()) {
         @Override
         protected Action getAction(Game game) {
             return new DrawCardsAction(1, false, false);
